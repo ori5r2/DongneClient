@@ -2,7 +2,21 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../styles/pallete';
 
+const StyledImg = styled.img`
+  width: 2rem;
+  margin: 0.5rem;
+`;
+const StyledDiv = styled.div`
+  font-family: 'Pretendard Bold';
+  font-size: 1rem;
+  color: ${palette[0]};
+`;
+
 const StyledButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   border: none;
   border-radius: 10px;
   outline: none;
@@ -26,7 +40,7 @@ const StyledButton = styled.button`
     `}
 `;
 
-const Button = ({ text, to, history, ...rest }) => {
+const Button = ({ text, img_src, to, history, ...rest }) => {
   const onClick = (e) => {
     if (to) {
       history.push(to);
@@ -34,9 +48,11 @@ const Button = ({ text, to, history, ...rest }) => {
       history.push('/');
     }
   };
+
   return (
     <StyledButton {...rest} onClick={onClick}>
-      {text}
+      {img_src ? <StyledImg src={img_src} /> : <div />}
+      <StyledDiv>{text}</StyledDiv>
     </StyledButton>
   );
 };

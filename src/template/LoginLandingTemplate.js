@@ -5,6 +5,9 @@ import Button from '../components/Button';
 import palette from '../styles/pallete';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+// img
+import userLoginIcon from '../styles/imgs/icon/login_user_icon.png';
+import adminLoginIcon from '../styles/imgs/icon/login_admin_icon.png';
 
 const WhiteBox = styled.div`
   position: relative;
@@ -46,6 +49,7 @@ const LoginLandingTemplate = () => {
         </div>
         <Button
           text="일반 회원 로그인"
+          img_src={userLoginIcon}
           fullWidth
           history={history}
           to="/user/login"
@@ -53,6 +57,7 @@ const LoginLandingTemplate = () => {
         />
         <Button
           text="단체 회원 로그인"
+          img_src={adminLoginIcon}
           fullWidth
           history={history}
           to="admin/login"

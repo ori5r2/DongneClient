@@ -23,14 +23,12 @@ const BackgroundImg = styled.div`
 
 const BackgroundTemplate = ({ children }) => {
   return (
-    <wrap>
-      <BackgroundImg>
-        {children}
-        <footer style={{ position: 'absolute', bottom: '0' }}>
-          <StyledImg src={vector} />
-        </footer>
-      </BackgroundImg>
-    </wrap>
+    <BackgroundImg>
+      {children}
+      <footer style={{ position: 'absolute', bottom: '0' }}>
+        <StyledImg src={vector} />
+      </footer>
+    </BackgroundImg>
   );
 };
 
