@@ -55,7 +55,7 @@ const UserLoginPage = () => {
             동아리 관리를 더욱 간편하게, 동네
           </div>
           <div className="ExtraBold" style={{ marginBottom: '2rem' }}>
-            LOG-IN
+            USER-LOG-IN
           </div>
           <div>
             <form className="styledForm">
@@ -71,10 +71,10 @@ const UserLoginPage = () => {
               />
             </form>
             <div>
-              <Link to="/admin/login" className="Link">
+              <Link to="/user/login" className="Link">
                 회원가입
               </Link>
-              <Link to="/admin/login" className="Link">
+              <Link to="/user/login" className="Link">
                 비밀번호 찾기
               </Link>
             </div>
