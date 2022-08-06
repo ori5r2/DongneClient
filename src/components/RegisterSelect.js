@@ -51,7 +51,7 @@ const RegisterSelect = () => {
             <span>⦁ 출결관리</span><br />
             <span>⦁ 회계관리</span><br />
             <span>⦁ 동아리 홍보</span><br />
-            <span>.</span><br /><span>.</span><br /><span>.</span><br />
+            <span>⋮</span><br />
             <div className='explain'>일정 관리 및 다양한 동아리 활동들을<br /></div>    
             <div className='explain'>편리하게 관리하세요!</div>
         </div>
