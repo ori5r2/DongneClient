@@ -16,7 +16,7 @@ const palette = {
   6: '#222A3F',
   7: '#171C27',
   8: '#FF6363',
-  CACACA: 'CACACA',
+  CACACA: '#CACACA',
   background: "'#E5E5E5'",
 };
 export default palette;
