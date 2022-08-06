@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import palette from '../styles/pallete';
 import login_bell from '../styles/imgs/icon/nav_bell.png';
 import user from '../styles/imgs/icon/nav_user.png';
@@ -72,8 +71,6 @@ const StyledNav = styled.nav`
   }
 `;
 
-const StyledList = styled.li``;
-
 const Navigator = ({ location }) => {
   return (
     <StyledNav>
@@ -99,7 +96,7 @@ const Navigator = ({ location }) => {
           </Link>
         </li>
         <li>
-          <Link to="admin/home" className={location === 3 ? 'selected' : null}>
+          <Link to="/admin/home" className={location === 3 ? 'selected' : null}>
             커뮤니티
           </Link>
         </li>

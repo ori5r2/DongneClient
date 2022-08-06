@@ -38,7 +38,7 @@ const LoginLandingTemplate = () => {
   const history = useHistory();
 
   return (
-    <BackgroundTemplate style={{ zindex: 0 }}>
+    <BackgroundTemplate style={{ zIndex: 0 }}>
       <WhiteBox style={{ zIndex: 1 }}>
         <div className="Logo">LOGO</div>
         <div style={{ marginBottom: '2rem' }}>

@@ -5,7 +5,7 @@ import palette from '../styles/pallete';
 
 const StyledBody = styled.div`
   width: 100%;
-  height: 200vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;

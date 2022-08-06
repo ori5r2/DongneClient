@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import { Reset } from 'styled-reset';
 
 //import page
 import LoginLandingPage from './pages/LoginLandingPage';
@@ -10,6 +11,7 @@ import AdminHomePage from './pages/admin/AdminHomePage';
 const App = () => {
   return (
     <>
+      <Reset />
       <Route component={LoginLandingPage} path="/" exact />
       <Route component={AdminLoginPage} path="/admin/login" />
       <Route component={AdminHomePage} path="/admin/home" exact />
