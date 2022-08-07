@@ -47,8 +47,18 @@ const AdminRegisterPage = () => {
           회원 가입
         </div>
         <div className='Square'>
-            <RegisterSelect style={{ zindex: 1 }}/>
-            <RegisterSelect style={{ zindex: 1 }}/>
+            <RegisterSelect style={{ zindex: 1 }}>
+                <span>⦁ 회원 관리</span><br />
+                <span>⦁ 출결 관리</span><br />
+                <span>⦁ 회계 관리</span><br />
+                <span>⦁ 동아리 홍보</span><br />
+            </RegisterSelect>
+            <RegisterSelect style={{ zindex: 1 }}>
+                <span>⦁ 친목 도모</span><br />
+                <span>⦁ 자기 개발</span><br />
+                <span>⦁ 출석 체크</span><br />
+                <span>⦁ 동아리 홍보</span><br />
+            </RegisterSelect>
         </div>
         </WhiteBox>
     </BackgroundTemplate>

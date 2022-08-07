@@ -11,6 +11,7 @@ const RegisterSelect = () => {
     const RegisterSelectBtn = styled.div`
         width: 250px;
         height: 15rem;
+        backgruond-color: #ffffff;
 
         .title{
             font-family: 'Pretendard ExtraBold';
@@ -20,13 +21,7 @@ const RegisterSelect = () => {
         .subtitle{
             font-size: 1 rem;
             font-weight: lighter;
-        }
-
-        span{
-            color: ${palette[4]};
-            font-size: 1rem;
-            font-weight: lighter;
-            padding-bottom: 10px;
+            color: ${palette[2]};
         }
 
         .explain{
@@ -38,23 +33,30 @@ const RegisterSelect = () => {
     width: 2rem;
     margin: 0.5rem;
   `;
+
+    const StlyedList = styled.span`
+    color: ${palette[4]};
+    font-size: 1rem;
+    font-weight: lighter;
+    padding-bottom: 10px;
+    `
     
+
     return (
     <div>
         <RegisterSelectBtn>
         <div>
-            <img src={userLoginIcon} alt="userLoginIcon" />
+            {/* {img_src ? <StyledImg src={img_src} /> : <div />} */}
             {/* todo:icon */}
             <div className='title'>단체회원</div>
             <div className='subtitle' style={{ marginBottom: '2rem' }}>(그룹 운영자 및 임원진)</div>
-            <span>⦁ 회원관리</span><br />
-            <span>⦁ 출결관리</span><br />
-            <span>⦁ 회계관리</span><br />
-            <span>⦁ 동아리 홍보</span><br />
+            {/* <StlyedList>{text}</StlyedList> */}
             <span>⋮</span><br />
             <div className='explain'>일정 관리 및 다양한 동아리 활동들을<br /></div>    
             <div className='explain'>편리하게 관리하세요!</div>
         </div>
+
+        </RegisterSelectBtn>
         
         <Button
           text="가입하기"
@@ -63,7 +65,6 @@ const RegisterSelect = () => {
           to="admin/login"
         />
 
-        </RegisterSelectBtn>
     </div>
     );
   };
