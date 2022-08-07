@@ -62,7 +62,7 @@ const RegisterSelect = () => {
           text="가입하기"
           fullWidth
           history={history}
-          to="admin/login"
+          to="/admin/register/check1"
         />
 
     </div>

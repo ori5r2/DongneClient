@@ -6,6 +6,7 @@ import LoginLandingPage from './pages/LoginLandingPage';
 import AdminLoginPage from './pages/admin/AdminLoginPage';
 import UserLoginPage from './pages/user/UserLoginPage';
 import AdminRegisterPage from './pages/admin/AdminRegisterPage';
+import AdminRegisterCheck1 from './pages/admin/AdminRegisterCheck1';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <Route component={AdminLoginPage} path="/admin/login" />
       <Route component={UserLoginPage} path="/user/login" exact />
       <Route component={AdminRegisterPage} path="/admin/register" />
+      <Route component={AdminRegisterCheck1} path="/admin/register/check1" />
     </>
   );
 };
