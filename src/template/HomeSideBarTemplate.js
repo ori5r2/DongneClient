@@ -33,9 +33,8 @@ const StyledAvatar = styled.div`
 
 const StyledSideBar = styled.div`
   margin-left: 2.5vw;
-  margin-top: 4.7rem;
-  padding-top: 5rem;
-  border-right: 1px solid black;
+  margin-top: 9.7rem;
+  border-right: 0.01px solid ${palette[1][3]};
   position: fixed;
   left: 0;
   top: 0;

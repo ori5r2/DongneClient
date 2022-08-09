@@ -19,7 +19,6 @@ const StyledBox = styled.div`
   position: absolute;
   top: 4.6rem;
   left: 26rem;
-  border: black solid 1px;
 `;
 
 const HomePageTemplate = ({ location, children }) => {
