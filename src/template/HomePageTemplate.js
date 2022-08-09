@@ -4,18 +4,32 @@ import Navigator from '../components/Navigator';
 import palette from '../styles/pallete';
 
 const StyledBody = styled.div`
+  position: relative;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
+const StyledBox = styled.div`
+  width: max-content;
+  height: auto;
+  position: absolute;
+  top: 4.6rem;
+  left: 26rem;
+  border: black solid 1px;
+`;
+
 const HomePageTemplate = ({ location, children }) => {
   return (
     <StyledBody>
-      <Navigator location={location}></Navigator>
-      {children}
+      <Navigator
+        location={location}
+        style={{ position: 'relative', zIndex: 1 }}
+      ></Navigator>
+      <StyledBox>{children}</StyledBox>
       {/* <footer style={{ position: 'absolute', bottom: '0' }}>
         <StyledImg src={vector} />
       </footer> */}

@@ -19,6 +19,7 @@ const StyledNav = styled.nav`
     font-size: 1.2rem;
   }
   position: fixed;
+  z-index: 1000;
   top: 0;
   /* width: 100% */
 

@@ -29,17 +29,75 @@ const BackgroundImg = styled.div`
     -o-user-drag: none;
     user-drag: none;
   }
+
+  .homeFlex {
+    display: flex;
+    justify-content: space-around;
+  }
 `;
+
+const StyledMiddleBox = styled.div`
+  width: 25rem;
+  .header {
+    display: flex;
+    justify-content: space-between;
+  }
+`;
+
+const Calendar = () => {
+  return (
+    <StyledMiddleBox>
+      <div className="header">
+        <div>
+          <icon></icon>
+          <title></title>
+          <subtitle>sd</subtitle>
+        </div>
+
+        <div>
+          <chevronRight></chevronRight>
+          <span>2022.07</span>
+          <chevronLeft></chevronLeft>
+        </div>
+      </div>
+    </StyledMiddleBox>
+  );
+};
+
+const Memo = () => {
+  return (
+    <div>
+      <span>HI</span>
+    </div>
+  );
+};
+
+const Photo = () => {
+  return (
+    <div>
+      <span>Photo</span>
+    </div>
+  );
+};
 
 const AdminHomePage = () => {
   return (
     <div>
-      <BackgroundImg style={{ zIndex: 0 }}>
-        <HomePageTemplate location={0} style={{ zIndex: 0 }}>
-          <HomeSideBarTemplate></HomeSideBarTemplate>
+      <BackgroundImg>
+        <HomePageTemplate location={0}>
+          <HomeSideBarTemplate>
+            <div className="homeFlex">
+              <Calendar />
+              <div>
+                <button onClick={() => console.log('hi')}>Hi</button>
+                <Memo />
+                <Photo />
+              </div>
+            </div>
+          </HomeSideBarTemplate>
         </HomePageTemplate>
         <footer
-          style={{ position: 'absolute', bottom: '0', right: 0, zIndex: -1 }}
+          style={{ position: 'absolute', bottom: '0', right: 0, zIndex: -1000 }}
         >
           <StyledImg src={vector} />
         </footer>

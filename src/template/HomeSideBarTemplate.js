@@ -14,7 +14,8 @@ const StyledTag = styled.div`
 
 const StyledDiv = styled.div`
   position: relative;
-  margin-left: 2.5vw;
+  width: auto;
+  height: 100%;
 `;
 
 const StyledAvatar = styled.div`
@@ -32,12 +33,15 @@ const StyledAvatar = styled.div`
 
 const StyledSideBar = styled.div`
   margin-left: 2.5vw;
+  margin-top: 4.7rem;
+  padding-top: 5rem;
+  border-right: 1px solid black;
   position: fixed;
   left: 0;
   top: 0;
   width: 23rem;
   height: 100vh;
-  margin-top: 10rem;
+
   font-size: 1.4rem;
   font-family: 'Pretendard Regular';
 
@@ -69,6 +73,8 @@ const StyledSideBar = styled.div`
     border: none;
     background-color: #11ffee00;
     cursor: pointer;
+  }
+  .body {
   }
 `;
 
@@ -128,8 +134,7 @@ const HomeSideBarTemplate = ({ children }) => {
           </footer>
         </div>
       </StyledSideBar>
-      {children}
-      asdnaslkdn
+      <div className="body">{children}</div>
     </StyledDiv>
   );
 };
