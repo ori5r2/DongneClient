@@ -10,6 +10,8 @@ const RegisterSelect = (props) => {
         width: 250px;
         height: 18rem;
         background-color: #ffffff;
+        border-radius: 10px;
+        outline: none;
 
         .title{
             font-family: 'Pretendard ExtraBold';
@@ -60,7 +62,6 @@ const RegisterSelect = (props) => {
             <div className='explain'>일정 관리 및 다양한 동아리 활동들을<br /></div>    
             <div className='explain'>편리하게 관리하세요!</div>
         </div>
-
         </RegisterSelectBtn>
         
         <Button
