@@ -3,6 +3,9 @@ import BackgroundTemplate from '../../template/BackgroundTemplate';
 import styled from 'styled-components';
 import palette from '../../styles/pallete';
 import RegisterSelect from '../../components/RegisterSelect';
+import userLoginIcon from '../../styles/imgs/icon/login_user_icon.png';
+import adminLoginIcon from '../../styles/imgs/icon/login_admin_icon.png';
+
 // import Button from '../components/Button';
 
 
@@ -47,18 +50,26 @@ const AdminRegisterPage = () => {
           회원 가입
         </div>
         <div className='Square'>
-            <RegisterSelect style={{ zindex: 1 }} to="/admin/register/check1">
-                <span>⦁ 회원 관리</span><br />
-                <span>⦁ 출결 관리</span><br />
-                <span>⦁ 회계 관리</span><br />
-                <span>⦁ 동아리 홍보</span><br />
-            </RegisterSelect>
-            <RegisterSelect style={{ zindex: 1 }} to="/admin/register/check1">
-                <span>⦁ 친목 도모</span><br />
-                <span>⦁ 자기 개발</span><br />
-                <span>⦁ 출석 체크</span><br />
-                <span>⦁ 동아리 홍보</span><br />
-            </RegisterSelect>
+            <RegisterSelect 
+              style={{ zindex: 1 }} 
+              title="단체 회원"
+              subtitle="그룹 운영자 및 임원진"
+              img_src={adminLoginIcon}
+              text1="⦁ 회원 관리"
+              text2="⦁ 출결 관리"
+              text3="⦁ 회계 관리"
+              text4="⦁ 동아리 홍보"
+              to="/admin/register/check1" />
+            <RegisterSelect 
+              style={{ zindex: 1 }}
+              title="일반 회원"
+              subtitle="대학생, 취준생, 직장인 등"
+              img_src={userLoginIcon} 
+              text1="⦁ 친목 도모"
+              text2="⦁ 자기 개발"
+              text3="⦁ 출석 체크"
+              text4="⦁ 동아리 홍보"
+              to="/admin/register/check1" />
         </div>
         </WhiteBox>
     </BackgroundTemplate>
