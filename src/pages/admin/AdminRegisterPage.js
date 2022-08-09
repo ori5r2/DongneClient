@@ -5,6 +5,7 @@ import palette from '../../styles/pallete';
 import RegisterSelect from '../../components/RegisterSelect';
 import userLoginIcon from '../../styles/imgs/icon/User_blue.png';
 import adminLoginIcon from '../../styles/imgs/icon/Admin_blue.png';
+import Button from '../../components/Button';
 
 // import Button from '../components/Button';
 
@@ -43,8 +44,8 @@ const WhiteBox = styled.div`
 
 const AdminRegisterPage = () => {
   return (
-    <BackgroundTemplate style={{ zindex: 0 }}>
-        <WhiteBox style={{ zindex: 1 }}>
+    <BackgroundTemplate style={{ zIndex: 0 }}>
+        <WhiteBox style={{ zIndex: 1 }}>
         <div className="Logo">LOGO</div>
         <div className="ExtraBold" style={{ marginBottom: '2rem' }}>
           회원 가입
