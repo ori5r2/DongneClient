@@ -8,30 +8,35 @@ const RegisterSelect = (props) => {
     const history = useHistory();
     const RegisterSelectBtn = styled.div`
         width: 250px;
-        height: 18rem;
+        height: 19rem;
         background-color: #ffffff;
         border-radius: 10px;
         outline: none;
+        margin-bottom: 10px;
+        margin-top: -10px;
+        
 
         .title{
             font-family: 'Pretendard ExtraBold';
-            font-size: 1.5rem;
+            font-size: 1.2rem;
         }
 
         .subtitle{
-            font-size: 1 rem;
+            font-size: 0.7 rem;
             font-weight: lighter;
+            margin-top: 0.2rem;
             color: ${palette[2]};
         }
 
         .explain{
             color: ${palette[4]};
-            font-size: 0.8rem;
+            font-size: 0.5rem;
         }
     `;
     const StyledImg = styled.img`
-    width: 2rem;
-    margin: 0.5rem;
+    width: 4rem;
+    margin-top: 1rem;
+    margin-bottom: -0.5rem;
     color: ${palette[1]};
   `;
 
@@ -49,9 +54,11 @@ const RegisterSelect = (props) => {
     const text2 = props.text2;
     const text3 = props.text3;
     const text4 = props.text4;
+    const explain = props.explain;
+    const nextlink=props.nextlink;
     
     return (
-    <div>
+    <div className='RegisterSelectBtnTemplate' style={{margin:"10px"}}>
         <RegisterSelectBtn>
         <div>
             {img_src ? <StyledImg src={img_src} /> : <div />}
@@ -59,8 +66,7 @@ const RegisterSelect = (props) => {
             <div className='subtitle' style={{ marginBottom: '2rem' }}>({subtitle})</div>
             <StlyedList>{text1}<br />{text2}<br />{text3}<br />{text4}<br /></StlyedList>
             <span>⋮</span><br />
-            <div className='explain'>일정 관리 및 다양한 동아리 활동들을<br /></div>    
-            <div className='explain'>편리하게 관리하세요!</div>
+            <div className='explain'>{explain}</div>
         </div>
         </RegisterSelectBtn>
         
@@ -68,7 +74,7 @@ const RegisterSelect = (props) => {
           text="가입하기"
           fullWidth
           history={history}
-          to="/admin/register/check1"
+          to={nextlink}
         />
 
     </div>
