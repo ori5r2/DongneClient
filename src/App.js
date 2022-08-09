@@ -14,7 +14,7 @@ const App = () => {
       <Route component={LoginLandingPage} path="/" exact />
       <Route component={AdminLoginPage} path="/admin/login" />
       <Route component={UserLoginPage} path="/user/login" exact />
-      <Route component={AdminRegisterPage} path="/admin/register" />
+      <Route component={AdminRegisterPage} path="/admin/register" exact />
       <Route component={AdminRegisterCheck1} path="/admin/register/check1" />
     </>
   );

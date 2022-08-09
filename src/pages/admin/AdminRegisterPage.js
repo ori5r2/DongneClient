@@ -3,8 +3,8 @@ import BackgroundTemplate from '../../template/BackgroundTemplate';
 import styled from 'styled-components';
 import palette from '../../styles/pallete';
 import RegisterSelect from '../../components/RegisterSelect';
-import userLoginIcon from '../../styles/imgs/icon/login_user_icon.png';
-import adminLoginIcon from '../../styles/imgs/icon/login_admin_icon.png';
+import userLoginIcon from '../../styles/imgs/icon/User_blue.png';
+import adminLoginIcon from '../../styles/imgs/icon/Admin_blue.png';
 
 // import Button from '../components/Button';
 
