@@ -32,8 +32,8 @@ const BackgroundImg = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  //padding-top: 10%;
   background: ${palette.background};
+
   h1 {
     color: ${palette[5]};
     font-size: 1.3rem;
@@ -52,8 +52,41 @@ const BackgroundImg = styled.div`
   }
 
   .homeFlex {
+    margin-top: 3.125rem;
     display: flex;
     justify-content: space-around;
+  }
+  .sideBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 33.75rem;
+    margin-left: 3.1rem;
+  }
+
+  .header {
+    width: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    color: ${palette[5]};
+  }
+  .header__title__group {
+    font-size: 1rem;
+    margin-left: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+  }
+  .header__title__group > img {
+    position: relative;
+    bottom: 0.3rem;
+  }
+  .header__title__write {
+    margin-left: 0.6rem;
+  }
+  .header__title__write > h4 {
+    margin-top: 0.3rem;
   }
 `;
 
@@ -61,27 +94,14 @@ const StyledMiddleBox = styled.div`
   font-family: 'Pretendard Regular';
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  width: auto;
-  margin-top: 4rem;
-  margin-left: 3rem;
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    color: ${palette[5]};
-  }
-  .headerTitle {
-    font-size: 1rem;
-    margin-left: 1.5rem;
-  }
-  .headerTitle > h4 {
-    margin-top: 0.3rem;
-  }
+  width: 45rem;
+  margin-left: 3.75rem;
+
   .headerDate {
     position: relative;
-    bottom: 0.5rem;
+    bottom: 1rem;
     display: flex;
     align-items: center;
     margin-left: 2.4rem;
@@ -108,27 +128,7 @@ const StyledMemo = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 35rem;
-  padding: 0rem 0rem;
-  margin-left: 7rem;
-  margin-top: 4rem;
-  .memo_header {
-    display: flex;
-    width: inherit;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .memo_header__left {
-    display: flex;
-    align-items: center;
-  }
-  .memo_header__title {
-    margin-left: 1rem;
-  }
-  .memo_header__title > h4 {
-    margin-top: 0.3rem;
-  }
+  width: inherit;
   .li_header__title {
     font-size: 1.1rem;
     color: ${palette[4]};
@@ -138,7 +138,7 @@ const StyledMemo = styled.div`
     margin-top: 0.3rem;
   }
   .memo_body {
-    margin-top: 3rem;
+    margin-top: 1.5rem;
     width: inherit;
     padding: 1.4rem 0rem;
     border-radius: 1rem;
@@ -150,7 +150,7 @@ const StyledMemo = styled.div`
     backdrop-filter: blur(10rem);
   }
   .memo_body__li {
-    padding: 15px;
+    padding: 1rem;
     display: flex;
     justify-content: space-between;
   }
@@ -159,8 +159,47 @@ const StyledMemo = styled.div`
     width: 50%;
   }
   .memoBtn {
-    margin-top: 1.4rem;
+    margin-top: 1.3rem;
     width: inherit;
+  }
+`;
+
+const StyledGalary = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: inherit;
+  margin-top: 1.1rem;
+
+  .galary__group {
+    margin-top: 1.1rem;
+    width: 33rem;
+    height: 20rem;
+    background-color: wheat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    background: linear-gradient(
+      180deg,
+      #fbfbfb 0%,
+      rgba(251, 251, 251, 0) 100%
+    );
+    backdrop-filter: blur(10rem);
+  }
+  .galary__box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 14.125rem;
+    height: 17.75rem;
+    background: #f7f7f7;
+    opacity: 0.6;
+    border-radius: 0.7rem;
+  }
+  .galary__box:first-child {
+    margin-right: 1.125rem;
   }
 `;
 
@@ -174,10 +213,12 @@ const CalendarBox = () => {
   return (
     <StyledMiddleBox>
       <div className="header">
-        <img src={importImg.calenderIcon}></img>
-        <div className="headerTitle">
-          <h1>동네 7월 공식 일정</h1>
-          <h4>날짜를 클릭하여 동아리 일정을 편리하게 추가하고 수정하세요!</h4>
+        <div className="header__title__group">
+          <img src={importImg.calenderIcon}></img>
+          <div className="header__title__write">
+            <h1>동네 7월 공식 일정</h1>
+            <h4>날짜를 클릭하여 동아리 일정을 편리하게 추가하고 수정하세요!</h4>
+          </div>
         </div>
 
         <div className="headerDate">
@@ -203,10 +244,10 @@ const CalendarBox = () => {
 const Memo = () => {
   return (
     <StyledMemo>
-      <div className="memo_header">
-        <div className="memo_header__left">
+      <div className="header">
+        <div className="header__title__group">
           <img src={importImg.homeMemo} />
-          <div className="memo_header__title">
+          <div className="header__title__write">
             <h1>동네 관리 메모장</h1>
             <h4>잊을 법한 내용을 정리하고 기억하세요.</h4>
           </div>
@@ -258,34 +299,46 @@ const Memo = () => {
 
 const Photo = () => {
   return (
-    <div>
-      <span>Photo</span>
-    </div>
+    <StyledGalary>
+      <div className="header">
+        <div className="header__title__group">
+          <img src={importImg.calenderIcon}></img>
+          <div className="header__title__write">
+            <h1>동네 7월 공식 일정</h1>
+            <h4>날짜를 클릭하여 동아리 일정을 편리하게 추가하고 수정하세요!</h4>
+          </div>
+        </div>
+
+        <img src={importImg.chevronRight}></img>
+      </div>
+      <div className="galary__group">
+        <div className="galary__box">갤러리 사진1 영역</div>
+        <div className="galary__box">갤러리 사진2 영역</div>
+      </div>
+    </StyledGalary>
   );
 };
 
 const AdminHomePage = () => {
   return (
-    <div>
-      <BackgroundImg>
-        <HomePageTemplate location={0}>
-          <HomeSideBarTemplate>
-            <div className="homeFlex">
-              <CalendarBox />
-              <div>
-                <Memo />
-                <Photo />
-              </div>
+    <BackgroundImg>
+      <HomePageTemplate location={0}>
+        <HomeSideBarTemplate>
+          <div className="homeFlex">
+            <CalendarBox />
+            <div className="sideBox">
+              <Memo />
+              <Photo />
             </div>
-          </HomeSideBarTemplate>
-        </HomePageTemplate>
-        <footer
-          style={{ position: 'absolute', bottom: '0', right: 0, zIndex: -1000 }}
-        >
-          <StyledImg src={vector} />
-        </footer>
-      </BackgroundImg>
-    </div>
+          </div>
+        </HomeSideBarTemplate>
+      </HomePageTemplate>
+      <footer
+        style={{ position: 'absolute', bottom: '0', right: 0, zIndex: -1000 }}
+      >
+        <StyledImg src={vector} />
+      </footer>
+    </BackgroundImg>
   );
 };
 

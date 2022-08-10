@@ -16,6 +16,11 @@ const StyledDiv = styled.div`
   position: relative;
   width: auto;
   height: 100%;
+
+  .side__home__body {
+    position: relative;
+    left: 30.68rem;
+  }
 `;
 
 const StyledAvatar = styled.div`
@@ -33,12 +38,12 @@ const StyledAvatar = styled.div`
 
 const StyledSideBar = styled.div`
   margin-left: 2.5vw;
-  margin-top: 9.7rem;
+  margin-top: 8.8125rem;
   border-right: 0.01px solid ${palette[1][3]};
   position: fixed;
   left: 0;
   top: 0;
-  width: 23rem;
+  width: 30.6875rem;
   height: 100vh;
 
   font-size: 1.4rem;
@@ -72,8 +77,6 @@ const StyledSideBar = styled.div`
     border: none;
     background-color: #11ffee00;
     cursor: pointer;
-  }
-  .body {
   }
 `;
 
@@ -133,7 +136,7 @@ const HomeSideBarTemplate = ({ children }) => {
           </footer>
         </div>
       </StyledSideBar>
-      <div className="body">{children}</div>
+      <div className="side__home__body">{children}</div>
     </StyledDiv>
   );
 };

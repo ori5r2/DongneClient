@@ -16,9 +16,10 @@ const StyledBody = styled.div`
 const StyledBox = styled.div`
   width: max-content;
   height: auto;
+  width: auto;
   position: absolute;
   top: 4.6rem;
-  left: 26rem;
+  left: 0;
 `;
 
 const HomePageTemplate = ({ location, children }) => {
