@@ -37,7 +37,7 @@ const StyledAvatar = styled.div`
 `;
 
 const StyledSideBar = styled.div`
-  margin-left: 2.5vw;
+  margin-left: 3.93rem;
   margin-top: 8.8125rem;
   border-right: 0.01px solid ${palette[1][3]};
   position: fixed;
@@ -74,7 +74,7 @@ const StyledSideBar = styled.div`
   .properties {
     margin-top: 4rem;
   }
-  .imageBtn {
+  .imageBtn2 {
     border: none;
     background-color: #11ffee00;
     cursor: pointer;
@@ -111,7 +111,7 @@ const HomeSideBarTemplate = ({ children }) => {
             <div className="invite">
               <span className="name">초대코드: </span>
               <span>{data}</span>
-              <button className="imageBtn" onClick={handleClick}>
+              <button className="imageBtn2" onClick={handleClick}>
                 <img src={copy}></img>
               </button>
             </div>
