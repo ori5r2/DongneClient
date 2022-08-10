@@ -48,9 +48,13 @@ const BackgroundImg = styled.div`
     -khtml-user-drag: none;
     -moz-user-drag: none;
     -o-user-drag: none;
-    user-drag: none;
   }
-
+  .imageBtn {
+    border: none;
+    background-color: #11ffee00;
+    cursor: pointer;
+    padding: 0;
+  }
   .homeFlex {
     margin-top: 3.125rem;
     display: flex;
@@ -104,7 +108,6 @@ const StyledMiddleBox = styled.div`
     bottom: 1rem;
     display: flex;
     align-items: center;
-    margin-left: 2.4rem;
   }
 
   .headerDate > h1 {
@@ -161,6 +164,9 @@ const StyledMemo = styled.div`
   .memoBtn {
     margin-top: 1.3rem;
     width: inherit;
+  }
+  .memo__header__icons > button:first-child {
+    margin-right: 1rem;
   }
 `;
 
@@ -222,9 +228,13 @@ const CalendarBox = () => {
         </div>
 
         <div className="headerDate">
-          <img src={importImg.chevronLeft}></img>
+          <button className="imageBtn">
+            <img src={importImg.chevronLeft}></img>
+          </button>
           <h1>2022.07</h1>
-          <img src={importImg.chevronRight}></img>
+          <button className="imageBtn">
+            <img src={importImg.chevronRight}></img>
+          </button>
         </div>
       </div>
       <div className="DayPicker">
@@ -252,9 +262,14 @@ const Memo = () => {
             <h4>잊을 법한 내용을 정리하고 기억하세요.</h4>
           </div>
         </div>
-        <div>
-          <img src={importImg.homeCreate} />
-          <img src={importImg.homeSetting} />
+        <div className="memo__header__icons">
+          <button className="imageBtn">
+            <img src={importImg.homeCreate} />
+          </button>
+
+          <button className="imageBtn">
+            <img src={importImg.homeSetting} />
+          </button>
         </div>
       </div>
       <ul className="memo_body">
@@ -308,8 +323,9 @@ const Photo = () => {
             <h4>날짜를 클릭하여 동아리 일정을 편리하게 추가하고 수정하세요!</h4>
           </div>
         </div>
-
-        <img src={importImg.chevronRight}></img>
+        <button className="imageBtn">
+          <img src={importImg.chevronRight}></img>
+        </button>
       </div>
       <div className="galary__group">
         <div className="galary__box">갤러리 사진1 영역</div>

@@ -7,6 +7,7 @@ import LoginLandingPage from './pages/LoginLandingPage';
 import AdminLoginPage from './pages/admin/AdminLoginPage';
 import UserLoginPage from './pages/user/UserLoginPage';
 import AdminHomePage from './pages/admin/AdminHomePage';
+import AdminAttendPage from './pages/admin/AdminAttendPage';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <Route component={LoginLandingPage} path="/" exact />
       <Route component={AdminLoginPage} path="/admin/login" />
       <Route component={AdminHomePage} path="/admin/home" exact />
+      <Route component={AdminAttendPage} path="/admin/attendance" />
       <Route component={UserLoginPage} path="/user/login" exact />
     </>
   );

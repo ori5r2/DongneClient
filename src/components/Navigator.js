@@ -82,22 +82,31 @@ const Navigator = ({ location }) => {
 
         <li>
           <Link to="/admin/home" className={location === 0 ? 'selected' : null}>
-            동아리 홈
+            홈
           </Link>
         </li>
 
         <li>
-          <Link to="/admin/home" className={location === 1 ? 'selected' : null}>
+          <Link
+            to="/admin/attendance"
+            className={location === 1 ? 'selected' : null}
+          >
+            회원 관리
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/admin/home" className={location === 2 ? 'selected' : null}>
             활동 관리
           </Link>
         </li>
         <li>
-          <Link to="/admin/home" className={location === 2 ? 'selected' : null}>
+          <Link to="/admin/home" className={location === 3 ? 'selected' : null}>
             회계 관리
           </Link>
         </li>
         <li>
-          <Link to="/admin/home" className={location === 3 ? 'selected' : null}>
+          <Link to="/admin/home" className={location === 4 ? 'selected' : null}>
             커뮤니티
           </Link>
         </li>

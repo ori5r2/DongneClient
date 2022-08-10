@@ -49,8 +49,9 @@ const StyledSideBar = styled.div`
   font-size: 1.4rem;
   font-family: 'Pretendard Regular';
 
-  .Hi {
-    font-size: 50px;
+  .greeting {
+    font-family: 'Pretendard Medium';
+    font-size: 3.25rem;
     margin-top: 3rem;
   }
   .name {
@@ -78,10 +79,13 @@ const StyledSideBar = styled.div`
     background-color: #11ffee00;
     cursor: pointer;
   }
+  .sidebar__contentArea {
+    width: 21.25rem;
+  }
 `;
 
 const HomeSideBarTemplate = ({ children }) => {
-  const [data, setData] = useState('asdlkln123135487asd686846');
+  const [data, setData] = useState('asdlkln123135487as86846');
   const handleClick = (e) => {
     navigator.clipboard.writeText(data);
     console.log(data);
@@ -89,51 +93,53 @@ const HomeSideBarTemplate = ({ children }) => {
   return (
     <StyledDiv>
       <StyledSideBar>
-        <StyledAvatar>
-          {/* todo: 프로필 사진 */}
-          프로필 사진 영역
-        </StyledAvatar>
-        <div>
-          <div className="Hi">
-            <h1>안녕하세요,</h1>
-            <span className="name">동네</span>
-            <span> 님!</span>
+        <div className="sidebar__contentArea">
+          <StyledAvatar>
+            {/* todo: 프로필 사진 */}
+            프로필 사진 영역
+          </StyledAvatar>
+          <div>
+            <div className="greeting">
+              <div>안녕하세요,</div>
+              <span className="name">동네</span>
+              <span> 님!</span>
+            </div>
+            <h4 className="description">
+              University MakeUs Challenge(이하 UMC)는 앱 런칭에 도전하는 대학생
+              IT 연합동아리입니다.
+            </h4>
+            <div className="invite">
+              <span className="name">초대코드: </span>
+              <span>{data}</span>
+              <button className="imageBtn" onClick={handleClick}>
+                <img src={copy}></img>
+              </button>
+            </div>
+            <footer>
+              <ul className="tags">
+                <StyledTag>#IT</StyledTag>
+                <StyledTag>#연합동아리</StyledTag>
+              </ul>
+              <ul className="properties">
+                <li>
+                  {/* todo: icon */}
+                  동네 (총 인원 40명)
+                </li>
+                <li>
+                  {/* todo: icon */}
+                  동네 (총 인원 40명)
+                </li>{' '}
+                <li>
+                  {/* todo: icon */}
+                  동네 (총 인원 40명)
+                </li>{' '}
+                <li>
+                  {/* todo: icon */}
+                  동네 (총 인원 40명)
+                </li>
+              </ul>
+            </footer>
           </div>
-          <h4 className="description">
-            University MakeUs Challenge(이하 UMC)는 앱 런칭에 도전하는 대학생 IT
-            연합동아리입니다.
-          </h4>
-          <div className="invite">
-            <span className="name">초대코드: </span>
-            <span>{data}</span>
-            <button className="imageBtn" onClick={handleClick}>
-              <img src={copy}></img>
-            </button>
-          </div>
-          <footer>
-            <ul className="tags">
-              <StyledTag>#IT</StyledTag>
-              <StyledTag>#연합동아리</StyledTag>
-            </ul>
-            <ul className="properties">
-              <li>
-                {/* todo: icon */}
-                동네 (총 인원 40명)
-              </li>
-              <li>
-                {/* todo: icon */}
-                동네 (총 인원 40명)
-              </li>{' '}
-              <li>
-                {/* todo: icon */}
-                동네 (총 인원 40명)
-              </li>{' '}
-              <li>
-                {/* todo: icon */}
-                동네 (총 인원 40명)
-              </li>
-            </ul>
-          </footer>
         </div>
       </StyledSideBar>
       <div className="side__home__body">{children}</div>
