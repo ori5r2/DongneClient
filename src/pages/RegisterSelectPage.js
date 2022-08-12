@@ -6,6 +6,7 @@ import RegisterSelect from '../components/RegisterSelect';
 import userLoginIcon from '../styles/imgs/icon/Admin_blue.png';
 import adminLoginIcon from '../styles/imgs/icon/User_blue.png';
 import ArrowBackIcon from '../styles/imgs/icon/Arrow_back.png';
+import Logo from '../styles/imgs/icon/Logo.png';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 
@@ -14,7 +15,7 @@ import Button from '../components/Button';
 
 const WhiteBox = styled.div`
   position: relative;
-
+  margin-top: -1rem;
   text-align: center;
   font-family: 'Pretendard Regular';
   font-size: 1rem;
@@ -22,21 +23,20 @@ const WhiteBox = styled.div`
 
   .arrowIcon {
     position: absolute;
-    left:10px;
-    top: 68px;
-    width:40px;
-    height:40px;
+    left: 0.625rem;
+    top: 5.3rem;
+    width:2.5rem;
+    height:2.5rem;
   } 
 
   .Logo {
-    font-family: 'Pretendard Medium';
-    color: #3333;
+    width: 10rem;
     margin-bottom: 2rem;
   }
 
   .ExtraBold {
     font-family: 'Pretendard ExtraBold';
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   .Square{
@@ -55,7 +55,7 @@ const AdminRegisterPage = () => {
     <BackgroundTemplate style={{ zIndex: 0 }}>
         <WhiteBox style={{ zIndex: 1 }}>
           <Link to="/"><img src={ArrowBackIcon} alt='' className='arrowIcon' /></Link>
-        <div className="Logo">LO<br/>GO</div>
+        <img src={Logo} className="Logo" />
         <div className="ExtraBold" style={{ marginBottom: '2rem' }}>
           회원 가입
         </div>

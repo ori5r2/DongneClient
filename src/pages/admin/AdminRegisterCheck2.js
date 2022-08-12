@@ -2,11 +2,11 @@ import React from 'react';
 import BackgroundTemplate from '../../template/BackgroundTemplate';
 import styled from 'styled-components';
 import palette from '../../styles/pallete';
-import Agreement from '../../components/Agreement';
 
 const WhiteBox = styled.div`
   position: relative;
   width: 50vh;
+  padding-bottom: 10rem;
 
   text-align: center;
   font-family: 'Pretendard Regular';
@@ -30,14 +30,12 @@ const WhiteBox = styled.div`
 
 const AdminRegisterCheck1 = () => {
   return (
-    <BackgroundTemplate style={{ zIndex: 0 }}>
-        <WhiteBox style={{ zIndex: 1 }}>
+    <BackgroundTemplate style={{ zindex: 0 }}>
+        <WhiteBox style={{ zindex: 1 }}>
+        <div className="Logo">LOGO</div>
         <div className="ExtraBold" style={{ marginBottom: '2rem' }}>
-         단체 회원 가입
+         단체 회원 가입 2
         </div>
-        <Agreement
-          Nextpage="/admin/register/check2"
-        />
         </WhiteBox>
     </BackgroundTemplate>
   );
