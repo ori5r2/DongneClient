@@ -24,19 +24,19 @@ const WhiteBox = styled.div`
   .arrowIcon {
     position: absolute;
     left: 0.625rem;
-    top: 5.3rem;
+    top: 5.8rem;
     width:2.5rem;
     height:2.5rem;
   } 
 
   .Logo {
-    width: 10rem;
+    width: 12rem;
     margin-bottom: 2rem;
   }
 
   .ExtraBold {
     font-family: 'Pretendard ExtraBold';
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 
   .Square{

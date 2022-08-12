@@ -7,8 +7,8 @@ import { useHistory } from 'react-router-dom';
 const RegisterSelect = (props) => {
     const history = useHistory();
     const RegisterSelectBtn = styled.div`
-        width: 14rem;
-        height: 16rem;
+        width: 17rem;
+        height: 21rem;
         background-color: #ffffff;
         border-radius: 10px;
         outline: none;
@@ -18,23 +18,28 @@ const RegisterSelect = (props) => {
 
         .title{
             font-family: 'Pretendard ExtraBold';
-            font-size: 1rem;
+            font-size: 1.5rem;
         }
 
         .subtitle{
-            font-size: 0.7rem;
+            padding-top: 0.2rem;
+            font-size: 1rem;
             font-weight: lighter;
-            margin-top: 0.2rem;
             color: ${palette[2]};
         }
 
         .explain{
+            padding-top: 0.5rem;
             color: ${palette[4]};
-            font-size: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .points{
+            color: ${palette[4]};
         }
     `;
     const StyledImg = styled.img`
-    width: 2.5rem;
+    width: 3.5rem;
     margin-top: 1rem;
     margin-bottom: -0.5rem;
     color: ${palette[1]};
@@ -42,9 +47,13 @@ const RegisterSelect = (props) => {
 
     const StlyedList = styled.span`
     color: ${palette[4]};
-    font-size: 0.7rem;
+    font-size: 1rem;
     font-weight: lighter;
-    padding-bottom: 1.25rem;
+    padding-bottom: 2rem;
+
+    .list{
+        padding-bottom: 0.5rem;
+    }
     `
 
     const title=props.title;
@@ -64,8 +73,13 @@ const RegisterSelect = (props) => {
             {img_src ? <StyledImg src={img_src} /> : <div />}
             <div className='title'>{title}</div>
             <div className='subtitle' style={{ marginBottom: '1rem' }}>({subtitle})</div>
-            <StlyedList>{text1}<br />{text2}<br />{text3}<br />{text4}<br /></StlyedList>
-            <span>⋮</span><br />
+            <StlyedList>
+                <div className='list'>{text1}<br /></div>
+                <div className='list'>{text2}<br /></div>
+                <div className='list'>{text3}<br /></div>
+                <div className='list'>{text4}<br /></div>    
+            </StlyedList>
+            <span className='points'>⋮</span><br />
             <div className='explain'>{explain}</div>
         </div>
         </RegisterSelectBtn>
