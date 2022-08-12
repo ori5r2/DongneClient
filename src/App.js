@@ -10,6 +10,7 @@ import AdminRegisterCheck1 from './pages/admin/AdminRegisterCheck1';
 import AdminRegisterCheck2 from './pages/admin/AdminRegisterCheck2';
 import AdminRegisterCheck3 from './pages/admin/AdminRegisterCheck3';
 import UserRegisterCheck1 from './pages/user/UserRegisterCheck1';
+import UserRegisterCheck2 from './pages/user/UserRegisterCheck2'; 
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
       <Route component={AdminRegisterCheck2} path="/admin/register/check2" />
       <Route component={AdminRegisterCheck3} path="/admin/register/check3" />
       <Route component={UserRegisterCheck1} path="/user/register/check1" />
+      <Route component={UserRegisterCheck2} path="/user/register/check2" />
     </>
   );
 };

@@ -31,8 +31,9 @@ const WhiteBox = styled.div`
 
   .ExtraBold {
     font-family: 'Pretendard ExtraBold';
-    font-size: 1.5rem;
+    font-size: 2rem;
     text-align: center;
+    padding-bottom: 1rem;
   }
 
 `;
@@ -49,6 +50,7 @@ const AdminRegisterCheck1 = () => {
         </div>
         <Agreement
           Nextpage="/admin/register/check2"
+          Presentpage="/admin/register/check1"
         />
         </WhiteBox>
     </BackgroundTemplate>

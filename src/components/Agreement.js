@@ -7,15 +7,16 @@ import { useHistory } from 'react-router-dom';
 
 const WhiteBox = styled.div`
     width: 35rem;
-    height: 25rem;
+    height: 28rem;
     background-color: #ffffff;
+    /* filter: blur(10px); */
     border-radius: 10px;
     /* display: flex;
     flex-direction: column;
     justify-content: center; */
     padding-left: 3rem;
     padding-right: 3rem;
-    font-size: 0.8rem;
+    font-size: 1rem;
 
     color: #000000;  
 
@@ -33,7 +34,7 @@ const WhiteBox = styled.div`
     }
 
     .outline{
-        padding: 0.5rem
+        padding-top: 1.5rem;
     }
     
     .Agreementbtn{
@@ -54,25 +55,22 @@ const WhiteBox = styled.div`
 
     .in{
         overflow-y: scroll;
+        overflow-x: hidden;
         scrollbar-width: none;
         width: 35rem;
-        height: 14.5rem;
+        height: 15rem;
     }
 
 `
 
 const InnerBox = styled.div`
-    width: 31.5rem;
-    height: 3rem;
+    width: 36.5rem;
+    height: 4rem;
     border-radius: 3px;
-    font-size: 0.5rem;
-    /* padding-left: 7rem; */
-    /* padding-bottom: 1rem; */
+    font-size: 0.7rem;
     background-color: #EFEFEF;
     overflow-y: scroll;
-    /* scrollbar-width: none; */
-
-    
+    padding: 0.3rem;
         -ms-overflow-style: none; /* IE and Edge */
         scrollbar-width: none; /* Firefox */
        & ::-webkit-scrollbar {
@@ -106,10 +104,10 @@ function Agreement(props) {
     useEffect(() => {
       if (selectFirst && selectSecond && selectOption) {
         setSelectAll(true);
-        // setOk(true);
+        setOk(true);
       } else {
         setSelectAll(false);
-        // setOk(false);
+        setOk(false);
       }
       if (selectFirst && selectSecond) {
         setOk(true);
@@ -119,6 +117,7 @@ function Agreement(props) {
     }, [selectFirst, selectSecond, selectOption]);
 
     const Nextpage = props.Nextpage;
+    const Presentpage = props.Presentpage;
 
     return (
         <WhiteBox>
@@ -202,17 +201,27 @@ function Agreement(props) {
                     </div>
                 </div>
             </div>
-            
-            
+
+            {Ok ? (
                 <Button
                 className="Agreementbtn"
                 text="확인"
                 fullWidth
                 history={history}
                 to={Nextpage}
-                style={{ marginBottom: '1rem'}}
-                />
-            </div>
+                style={{ marginTop:"1rem"}}>
+                </Button>
+            ) : ( 
+                <Button
+                className="Agreementbtn"
+                text="확인"
+                fullWidth
+                history={history}
+                to={Presentpage}
+                style={{ marginTop:"1rem"}}>
+                </Button>
+            ) }
+        </div>
         
     </WhiteBox>
     );
