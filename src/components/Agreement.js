@@ -9,11 +9,7 @@ const WhiteBox = styled.div`
     width: 35rem;
     height: 28rem;
     background-color: #ffffff;
-    /* filter: blur(10px); */
     border-radius: 10px;
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center; */
     padding-left: 3rem;
     padding-right: 3rem;
     font-size: 1rem;
@@ -34,7 +30,7 @@ const WhiteBox = styled.div`
     }
 
     .outline{
-        padding-top: 1.5rem;
+        padding-top: 1rem;
     }
     
     .Agreementbtn{

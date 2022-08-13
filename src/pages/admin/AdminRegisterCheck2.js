@@ -37,7 +37,7 @@ const WhiteBox = styled.div`
 
 
 
-const AdminRegisterCheck1 = () => {
+const AdminRegisterCheck2 = () => {
   return (
     <BackgroundTemplate style={{ zIndex: 0 }}>
         <WhiteBox style={{ zIndex: 1 }}>
@@ -45,10 +45,13 @@ const AdminRegisterCheck1 = () => {
         <div className="ExtraBold" style={{ marginBottom: '0.5rem' }}>
          단체 회원 가입
         </div>
-        <Register1 />
+        <Register1 
+          presentpage="/admin/register/check2"
+          nextpage="/admin/register/check3"
+        />
         </WhiteBox>
     </BackgroundTemplate>
   );
 };
 
-export default AdminRegisterCheck1;
+export default AdminRegisterCheck2;

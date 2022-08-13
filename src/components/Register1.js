@@ -11,12 +11,11 @@ const WhiteBox = styled.div`
     height: 28rem;
     background-color: #ffffff;
     border-radius: 10px;
-    padding-top: 3rem;
     padding-left: 3rem;
     padding-right: 3rem;
     font-size: 1rem;
 
-    color: #000000; 
+    color: #2D3B5C; 
 
     & img {
         padding-right: 0.5rem;
@@ -49,10 +48,14 @@ const WhiteBox = styled.div`
     .idcheck{
         padding-left: 1rem;
     }
+    
+    .bigoutline{
+        padding-top: 1.5rem;
+    }
 `
 
 
-function Agreement(props) {
+function Register1(props) {
     const history  = useHistory();
     const nextlink = props.nextlink;
 
@@ -65,110 +68,159 @@ function Agreement(props) {
 
     useEffect(() => {
         if (id && pw && pwcheck && email) {
-          setOk(true);
-        } if (id && pw && pwcheck) {
-          setOk(true);
+            if ( pw === pwcheck) {
+                setOk(true);
+            } else {
+                setOk(false);
+            }
+        } else {
+          setOk(false);
+        }
+        
+        if (id && pw && pwcheck) {
+            if ( pw === pwcheck) {
+                setOk(true);
+            } else {
+                setOk(false);
+            }
         } else {
           setOk(false);
         }
       }, [id, pw, pwcheck, email]);
 
+    const nextpage = props.nextpage;
+    const presentpage = props.presentpage;
+
+
     return (
         <WhiteBox> 
-            <div className='outline'>
-                <div className='inputInformation'>
-                    <img src={Email} alt="" /> 아이디 &nbsp; <span style={{ color: palette[3] }}>(필수)</span>
+            <div className='bigoutline'>
+                <div className='outline'>
+                    <div className='inputInformation'>
+                        <img src={Email} alt=""/> 
+                            아이디 &nbsp; <span style={{ color: palette[3] }}>(필수)</span>
+                    </div>
+                    <div className='check'>
+                        <input 
+                            onChange={(e)=>{
+                                setId(e.target.value);
+                            }}
+
+                            value={id}
+                            type={"text"} 
+                            className="information" 
+                            placeholder="ex) abcdefg@naver.com"
+                            style={{width: "29rem", 
+                                    height: "2rem",
+                                    backgroundColor:"#F3F3F3",
+                                    border: "none",
+                                    borderRadius: "3px",
+                            }}
+                        />
+                        <div className='idcheck'>
+                        <Button
+                            text="중복확인"
+                            fullWidth
+                            history={history}
+                            to={nextlink}
+                            style={{height: "2.2rem", width: "6rem", borderRadius: "3px"}}
+                            />
+                        </div>
+                    </div>
                 </div>
-                <div className='check'>
-                    <input 
-                        type={"text"} 
-                        className="information" 
-                        placeholder="ex) abcdefg@naver.com"
-                        style={{width: "29rem", 
-                                height: "2rem",
-                                backgroundColor:"#F3F3F3",
-                                border: "none",
-                                borderRadius: "3px",
-                        }}
-                    />
-                    <div className='idcheck'>
-                     <Button
-                        text="중복확인"
-                        fullWidth
-                        history={history}
-                        to={nextlink}
-                        style={{height: "2.2rem", width: "6rem", borderRadius: "3px"}}
+
+                <div className='outline'>
+                    <div className='inputInformation'>
+                        <img src={Lock} alt="" /> 비밀번호 &nbsp; <span style={{ color: palette[3] }}>(필수)</span>
+                    </div>
+                    <div>
+                        <input 
+                            onChange={(e)=>{
+                                setPw(e.target.value);
+                            }}
+
+                            value={pw}
+                            type={"password"} 
+                            className="information"  
+                            placeholder="8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요." 
+                            style={{width: "34.8rem", 
+                                    height: "2rem",
+                                    backgroundColor:"#F3F3F3",
+                                    border: "none",
+                                    borderRadius: "3px"
+                            }}
                         />
                     </div>
                 </div>
-            </div>
 
-            <div className='outline'>
-                <div className='inputInformation'>
-                    <img src={Lock} alt="" /> 비밀번호 &nbsp; <span style={{ color: palette[3] }}>(필수)</span>
+                <div className='outline'>
+                    <div className='inputInformation'>
+                        <img src={Lock} alt="" /> 비밀번호 확인 &nbsp; <span style={{ color: palette[3] }}>(필수)</span>
+                    </div>
+                    <div>
+                        <input 
+                            onChange={(e)=>{
+                                setPwcheck(e.target.value);
+                            }}
+
+                            value={pwcheck}
+                            type={"password"} 
+                            style={{width: "34.8rem", 
+                                    height: "2rem",
+                                    backgroundColor: "#F3F3F3",
+                                    border: "none",
+                                    borderRadius: "3px"
+                            }}
+                        />
+                    </div>
                 </div>
-                <div>
-                    <input 
-                        type={"password"} 
-                        className="information"  
-                        placeholder="8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요." 
-                        style={{width: "34.8rem", 
-                                height: "2rem",
-                                backgroundColor:"#F3F3F3",
-                                border: "none",
-                                borderRadius: "3px"
-                        }}
+
+                <hr style={{color: "#EFEFEF", width:"100%"}}/>
+
+                <div className='outline'>
+                    <div className='inputInformation'>
+                        <div> 본인 확인 메일 &nbsp;<span  style={{ color: palette[3] }}>(선택)</span></div>
+                    </div>
+                    <div>
+                        <input  
+                            onChange={(e)=>{
+                                setEmail(e.target.value);
+                            }}
+
+                            value={email}
+                            type={"text"} 
+                            style={{width: "34.8rem", 
+                                    height: "2rem",
+                                    backgroundColor:"#F3F3F3",
+                                    border: "none",
+                                    borderRadius: "3px"
+                            }}
+                        />
+                    </div>
+                </div>
+    
+
+            {Ok ? (
+                    <Button
+                        text="다음으로"
+                        fullWidth
+                        history={history}
+                        to={nextpage}
+                        style={{height: "2.5rem", borderRadius: "3px"}}
                     />
-                </div>
-            </div>
-
-            <div className='outline'>
-                <div className='inputInformation'>
-                    <img src={Lock} alt="" /> 비밀번호 확인 &nbsp; <span style={{ color: palette[3] }}>(필수)</span>
-                </div>
-                <div>
-                    <input 
-                        type={"password"} 
-                        style={{width: "34.8rem", 
-                                height: "2rem",
-                                backgroundColor: "#F3F3F3",
-                                border: "none",
-                                borderRadius: "3px"
-                        }}
+                ) : ( 
+                    <Button
+                        text="다음으로"
+                        fullWidth
+                        history={history}
+                        to={presentpage}
+                        style={{height: "2.5rem", borderRadius: "3px"}}
                     />
-                </div>
-            </div>
-
-            <hr style={{color: "#EFEFEF", width:"100%"}}/>
-
-            <div className='outline'>
-                <div className='inputInformation'>
-                    <div> 본인 확인 메일 &nbsp;<span  style={{ color: palette[3] }}>(선택)</span></div>
-                </div>
-                <div>
-                    <input
-                        type={"text"} 
-                        style={{width: "34.8rem", 
-                                height: "2rem",
-                                backgroundColor:"#F3F3F3",
-                                border: "none",
-                                borderRadius: "3px"
-                        }}
-                    />
-                </div>
-            </div>
- 
-
-        <Button
-          text="다음으로"
-          fullWidth
-          history={history}
-          to={nextlink}
-          style={{height: "2.5rem", borderRadius: "3px"}}
-        />
+            ) }
+        </div>
         </WhiteBox>
     );
   }
   
-  export default Agreement;
+  export default Register1;
   

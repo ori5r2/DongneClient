@@ -2,7 +2,7 @@ import React from 'react';
 import BackgroundTemplate from '../../template/BackgroundTemplate';
 import styled from 'styled-components';
 import palette from '../../styles/pallete';
-import Register1 from '../../components/Register1';
+import Register2 from '../../components/Register2';
 import ArrowBackIcon from '../../styles/imgs/icon/Arrow_back.png';
 import { Link } from 'react-router-dom';
 
@@ -35,18 +35,16 @@ const WhiteBox = styled.div`
 
 `;
 
-
-
-const UserRegisterCheck2 = () => {
+const UserRegisterCheck3 = () => {
   return (
     <BackgroundTemplate style={{ zIndex: 0 }}>
         <WhiteBox style={{ zIndex: 1 }}>
-        <Link to="/user/register/check1"><img src={ArrowBackIcon} alt='' className='arrowIcon' /></Link>
+        <Link to="/user/register/check2"><img src={ArrowBackIcon} alt='' className='arrowIcon' /></Link>
         <div className="ExtraBold" style={{ marginBottom: '0.5rem' }}>
          일반 회원 가입
         </div>
-        <Register1 
-          presentpage="/user/register/check2"
+        <Register2
+          presentpage="/user/register/check3"
           nextpage="/user/register/check3"
         />
         </WhiteBox>
@@ -54,4 +52,4 @@ const UserRegisterCheck2 = () => {
   );
 };
 
-export default UserRegisterCheck2;
+export default UserRegisterCheck3;

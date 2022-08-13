@@ -37,13 +37,13 @@ const WhiteBox = styled.div`
 
 
 
-const AdminRegisterCheck1 = () => {
+const UserRegisterCheck1 = () => {
   return (
     <BackgroundTemplate style={{ zIndex: 0 }}>
         <WhiteBox style={{ zIndex: 1 }}>
         <Link to="/admin/register"><img src={ArrowBackIcon} alt='' className='arrowIcon' /></Link>
         <div className="ExtraBold" style={{ marginBottom: '0.5rem' }}>
-         개인 회원 가입
+         일반 회원 가입
         </div>
         <Agreement
           Nextpage="/user/register/check2"
@@ -54,4 +54,4 @@ const AdminRegisterCheck1 = () => {
   );
 };
 
-export default AdminRegisterCheck1;
+export default UserRegisterCheck1;
