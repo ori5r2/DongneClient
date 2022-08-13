@@ -18,7 +18,7 @@ const WhiteBox = styled.div`
     padding-right: 3rem;
     font-size: 1rem;
 
-    color: #000000;  
+    color: #2D3B5C;  
 
     & > div{
         display: flex;
@@ -68,7 +68,7 @@ const InnerBox = styled.div`
     height: 4rem;
     border-radius: 3px;
     font-size: 0.7rem;
-    background-color: #EFEFEF;
+    background-color: #F3F3F3;
     overflow-y: scroll;
     padding: 0.3rem;
         -ms-overflow-style: none; /* IE and Edge */
@@ -87,8 +87,6 @@ function Agreement(props) {
     const [selectSecond, setSelectSecond] = useState(false);
     const [selectOption, setSelectOption] = useState(false);
     const [Ok, setOk] = useState(false);
-  
-
     
     useEffect(() => {
       if (selectAll) {
@@ -152,7 +150,7 @@ function Agreement(props) {
                             ) : (
                                 <img src={Off} alt='' onClick={() => setSelectFirst(!selectFirst)} />
                                 )}
-                        서비스 이용 약관 <span style={{color: "blue"}}>(필수)</span>
+                        서비스 이용 약관 <span style={{color:"#2B78FF"}}>(필수)</span>
                     </div>
                     <div className='explain'>
                         <InnerBox className='innerText'>
@@ -172,7 +170,7 @@ function Agreement(props) {
                                 onClick={() => setSelectSecond(!selectSecond)}
                                 />
                                 )}
-                        개인정보 처리 방침 <span style={{color: "blue"}}>(필수)</span>
+                        개인정보 처리 방침 <span style={{color: "#2B78FF"}}>(필수)</span>
                     </div>
                     <div className='explain'>
                         <InnerBox className='innerText'>
@@ -192,7 +190,7 @@ function Agreement(props) {
                                 onClick={() => setSelectOption(!selectOption)}
                                 />
                                 )}
-                        이벤트/마케팅 수신동의 <span style={{color: '#D5D5D5' }}>(선택)</span>
+                        이벤트/마케팅 수신동의 <span style={{color: '#AAAAAA' }}>(선택)</span>
                     </div>
                     <div className='explain'>
                         <InnerBox className='innerText'>
@@ -209,7 +207,7 @@ function Agreement(props) {
                 fullWidth
                 history={history}
                 to={Nextpage}
-                style={{ marginTop:"1rem"}}>
+                style={{ marginTop:"1rem", height: "2.5rem"}}>
                 </Button>
             ) : ( 
                 <Button
@@ -218,7 +216,7 @@ function Agreement(props) {
                 fullWidth
                 history={history}
                 to={Presentpage}
-                style={{ marginTop:"1rem"}}>
+                style={{ marginTop:"1rem", height: "2.5rem"}}>
                 </Button>
             ) }
         </div>
