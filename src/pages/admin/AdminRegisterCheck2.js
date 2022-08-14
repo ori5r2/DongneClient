@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import palette from '../../styles/pallete';
 import Register1 from '../../components/Register1';
 import ArrowBackIcon from '../../styles/imgs/icon/Arrow_back.png';
+import register2 from '../../styles/imgs/icon/2.png';
 import { Link } from 'react-router-dom';
 
 const WhiteBox = styled.div`
@@ -18,6 +19,14 @@ const WhiteBox = styled.div`
     top: 0.5rem;
     width:2.5rem;
     height:2.5rem;
+  } 
+
+  .pagenumber {
+    position: absolute;
+    left: 36rem;
+    top: 0.6rem;
+    width: 2.3rem;
+    height:1.5rem;
   } 
 
   .Logo {
@@ -42,6 +51,7 @@ const AdminRegisterCheck2 = () => {
     <BackgroundTemplate style={{ zIndex: 0 }}>
         <WhiteBox style={{ zIndex: 1 }}>
         <Link to="/admin/register/check1"><img src={ArrowBackIcon} alt='' className='arrowIcon' /></Link>
+        <img src={register2} alt='' className='pagenumber' />
         <div className="ExtraBold" style={{ marginBottom: '0.5rem' }}>
          단체 회원 가입
         </div>
