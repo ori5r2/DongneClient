@@ -2,9 +2,9 @@ import React from 'react';
 import BackgroundTemplate from '../../template/BackgroundTemplate';
 import styled from 'styled-components';
 import palette from '../../styles/pallete';
+import AdminRegister2 from '../../components/AdminRegister2';
 import ArrowBackIcon from '../../styles/imgs/icon/Arrow_back.png';
 import { Link } from 'react-router-dom';
-import Register2 from '../../components/Register2';
 
 const WhiteBox = styled.div`
   position: relative;
@@ -43,7 +43,7 @@ const AdminRegisterCheck3 = () => {
         <div className="ExtraBold" style={{ marginBottom: '0.5rem' }}>
          단체 회원 가입
         </div>
-        <Register2 
+        <AdminRegister2 
           presentpage="/admin/register/check3"
           nextpage="/admin/register/check3"
         />

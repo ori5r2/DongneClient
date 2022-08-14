@@ -2,7 +2,7 @@ import React from 'react';
 import BackgroundTemplate from '../../template/BackgroundTemplate';
 import styled from 'styled-components';
 import palette from '../../styles/pallete';
-import Register2 from '../../components/Register2';
+import UserRegister2 from '../../components/UserRegister2';
 import ArrowBackIcon from '../../styles/imgs/icon/Arrow_back.png';
 import { Link } from 'react-router-dom';
 
@@ -43,7 +43,7 @@ const UserRegisterCheck3 = () => {
         <div className="ExtraBold" style={{ marginBottom: '0.5rem' }}>
          일반 회원 가입
         </div>
-        <Register2
+        <UserRegister2
           presentpage="/user/register/check3"
           nextpage="/user/register/check3"
         />

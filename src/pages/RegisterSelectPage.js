@@ -8,7 +8,6 @@ import adminLoginIcon from '../styles/imgs/icon/User_blue.png';
 import ArrowBackIcon from '../styles/imgs/icon/Arrow_back.png';
 import Logo from '../styles/imgs/icon/Logo.png';
 import { Link } from 'react-router-dom';
-import Button from '../components/Button';
 
 // import Button from '../components/Button';
 

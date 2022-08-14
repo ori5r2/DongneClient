@@ -179,7 +179,7 @@ function Register1(props) {
 
                 <div className='outline'>
                     <div className='inputInformation'>
-                        <div> 본인 확인 메일 &nbsp;<span  style={{ color: palette[3] }}>(선택)</span></div>
+                        <div> 본인 확인 메일 &nbsp;<span  style={{ color: "#AAAAAA" }}>(선택)</span></div>
                     </div>
                     <div>
                         <input  
