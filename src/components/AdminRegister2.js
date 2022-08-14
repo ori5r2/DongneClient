@@ -2,7 +2,7 @@ import React, {useState, useEffect}  from 'react';
 import category from '../styles/imgs/icon/category_add.png';
 import Button from './Button';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import palette from '../styles/pallete';
 
 const WhiteBox = styled.div`
@@ -63,6 +63,8 @@ const WhiteBox = styled.div`
 function AdminRegister2(props) {
     const history  = useHistory();
     const nextlink = props.nextlink;
+    const location = useLocation();
+    console.log(location);
 
     const [year, setYear] = useState("");
     const [area, setArea] = useState("");
@@ -143,18 +145,18 @@ function AdminRegister2(props) {
                         <div>단체 소개 &nbsp; <span style={{ color: palette[3] }}>(필수)</span></div>
                     </div>
                     <div>
-                        <input 
+                        <textarea 
                             onChange={(e)=>{
                                 setIntroduce(e.target.value);
                             }}
-
                             value={introduce}
                             type={"text"} 
                             style={{width: "34.8rem", 
                                     height: "5rem",
                                     backgroundColor: "#F3F3F3",
                                     border: "none",
-                                    borderRadius: "3px"
+                                    borderRadius: "3px",
+                                    resize: "none"
                             }}
                         />
                     </div>

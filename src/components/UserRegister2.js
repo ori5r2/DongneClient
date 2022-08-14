@@ -243,7 +243,7 @@ function AdminRegister2(props) {
                         <div>한 줄 소개 &nbsp; <span style={{ color: "#AAAAAA" }}>(선택)</span></div>
                     </div>
                     <div>
-                        <input 
+                        <textarea 
                             onChange={(e)=>{
                                 setSelfintro(e.target.value);
                             }}
@@ -254,7 +254,8 @@ function AdminRegister2(props) {
                                     height: "3.5rem",
                                     backgroundColor: "#F3F3F3",
                                     border: "none",
-                                    borderRadius: "3px"
+                                    borderRadius: "3px",
+                                    resize: "none"
                             }}
                         />
                     </div>

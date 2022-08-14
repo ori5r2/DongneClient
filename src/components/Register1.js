@@ -206,6 +206,7 @@ function Register1(props) {
                         fullWidth
                         history={history}
                         to={nextpage}
+                        props={{id: id,pw: pw,email: email}}
                         style={{height: "2.5rem", borderRadius: "3px"}}
                     />
                 ) : ( 
