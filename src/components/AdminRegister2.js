@@ -4,6 +4,7 @@ import Button from './Button';
 import styled from 'styled-components';
 import { useHistory, useLocation } from 'react-router-dom';
 import palette from '../styles/pallete';
+import { Axios } from '../../node_modules/axios/index';
 
 const WhiteBox = styled.div`
     width: 35rem;
@@ -64,7 +65,6 @@ function AdminRegister2(props) {
     const history  = useHistory();
     const nextlink = props.nextlink;
     const location = useLocation();
-    console.log(location);
 
     const [year, setYear] = useState("");
     const [area, setArea] = useState("");
@@ -75,6 +75,14 @@ function AdminRegister2(props) {
     const nextpage = props.nextpage;
     const presentpage = props.presentpage;
 
+
+
+    // const handleApi= async() =>{
+    //     console.log("jepp");
+    //     const res  = await  Axios.post({
+    //         url: {"http://3.38.55.57:3000"}
+    //     })
+    // }
 
     return (
         <WhiteBox> 
@@ -184,14 +192,17 @@ function AdminRegister2(props) {
                         />
                     </div>
                 </div>
-    
-
-            {Ok ? (
+                {/* <div onClick={()=>{
+                    handleApi();
+                }}>가입 완료하기</div> */}
+                
+                 {Ok ? (
                     <Button
                         text="가입 완료하기"
                         fullWidth
                         history={history}
                         to={nextpage}
+                        props={{id: id,pw: pw,email: email}}
                         style={{height: "2.5rem", borderRadius: "3px"}}
                     />
                 ) : ( 
@@ -202,7 +213,7 @@ function AdminRegister2(props) {
                         to={presentpage}
                         style={{height: "2.5rem", borderRadius: "3px"}}
                     />
-            ) }
+                ) }
         </div>
         </WhiteBox>
     );

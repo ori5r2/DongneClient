@@ -3,7 +3,7 @@ import Email from '../styles/imgs/icon/Email.png';
 import Lock from '../styles/imgs/icon/Lock.png';
 import Button from './Button';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import palette from '../styles/pallete';
 
 const WhiteBox = styled.div`
@@ -26,7 +26,7 @@ const WhiteBox = styled.div`
         display: flex;
         align-items: center;
         font-weight: bold;
-        padding-bottom: 0.5rem;
+        padding-bottom: 0.3rem;
     }
 
     .information{
@@ -61,9 +61,10 @@ const WhiteBox = styled.div`
 `
 
 
-function AdminRegister2(props) {
+function UserRegister2(props) {
     const history  = useHistory();
     const nextlink = props.nextlink;
+    const location = useLocation();
 
     const [name, setName] = useState("");
     const [birth, setBirth] = useState("");
@@ -255,7 +256,7 @@ function AdminRegister2(props) {
                                     backgroundColor: "#F3F3F3",
                                     border: "none",
                                     borderRadius: "3px",
-                                    resize: "none"
+                                    resize: "none" 
                             }}
                         />
                     </div>
@@ -283,5 +284,5 @@ function AdminRegister2(props) {
     );
   }
   
-  export default AdminRegister2;
+  export default UserRegister2;
   

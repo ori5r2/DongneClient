@@ -55,7 +55,7 @@ const UserRegisterCheck3 = () => {
         </div>
         <UserRegister2
           presentpage="/user/register/check3"
-          nextpage="/user/register/check3"
+          nextpage="/"
         />
         </WhiteBox>
     </BackgroundTemplate>
