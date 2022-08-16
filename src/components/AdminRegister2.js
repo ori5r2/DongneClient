@@ -18,7 +18,7 @@ const WhiteBox = styled.div`
     border: 2px solid rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(40px);
     /* Note: backdrop-filter has minimal browser support */
-    
+
     color: #2D3B5C; 
 
     & img {
@@ -66,6 +66,8 @@ const WhiteBox = styled.div`
 
 
 function AdminRegister2(props) {
+    
+
     const history  = useHistory();
     const nextlink = props.nextlink;
     const location = useLocation();
@@ -80,14 +82,12 @@ function AdminRegister2(props) {
     const presentpage = props.presentpage;
 
 
-
     // const handleApi= async() =>{
     //     console.log("jepp");
     //     const res  = await  Axios.post({
     //         url: {"http://3.38.55.57:3000"}
     //     })
     // }
-
     return (
         <WhiteBox> 
             <div className='bigoutline'>

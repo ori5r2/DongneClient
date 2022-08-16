@@ -95,7 +95,6 @@ function Register1(props) {
     const nextpage = props.nextpage;
     const presentpage = props.presentpage;
 
-
     return (
         <WhiteBox> 
             <div className='bigoutline'>
@@ -180,10 +179,11 @@ function Register1(props) {
                 </div>
 
                 <hr style={{color: "#EFEFEF", width:"100%"}}/>
+                {/* <hr style={{border: "1.25px", solid:" #EFEFEF"}}/> */}
 
                 <div className='outline'>
                     <div className='inputInformation'>
-                        <div> 본인 확인 메일 &nbsp;<span  style={{ color: "#AAAAAA" }}>(선택)</span></div>
+                        <div> 본인 확인 이메일 &nbsp;<span  style={{ color: "#AAAAAA" }}>(선택)</span></div>
                     </div>
                     <div>
                         <input  
@@ -212,7 +212,7 @@ function Register1(props) {
                         to={nextpage}
                         props={{id: id,pw: pw,email: email}}
                         style={{height: "2.5rem", borderRadius: "3px"}}
-                    />
+                    /> 
                 ) : ( 
                     <Button
                         text="다음으로"
