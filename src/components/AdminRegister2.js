@@ -9,12 +9,16 @@ import { Axios } from '../../node_modules/axios/index';
 const WhiteBox = styled.div`
     width: 35rem;
     height: 28rem;
-    background-color: #ffffff;
     border-radius: 10px;
     padding-left: 3rem;
     padding-right: 3rem;
     font-size: 1rem;
 
+    background: linear-gradient(180deg, #FFFFFF 0%, rgba(251, 251, 251, 0) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(40px);
+    /* Note: backdrop-filter has minimal browser support */
+    
     color: #2D3B5C; 
 
     & img {
@@ -202,7 +206,6 @@ function AdminRegister2(props) {
                         fullWidth
                         history={history}
                         to={nextpage}
-                        props={{id: id,pw: pw,email: email}}
                         style={{height: "2.5rem", borderRadius: "3px"}}
                     />
                 ) : ( 

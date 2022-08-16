@@ -8,11 +8,15 @@ import { useHistory } from 'react-router-dom';
 const WhiteBox = styled.div`
     width: 35rem;
     height: 28rem;
-    background-color: #ffffff;
     border-radius: 10px;
     padding-left: 3rem;
     padding-right: 3rem;
     font-size: 1rem;
+
+    background: linear-gradient(180deg, #FFFFFF 0%, rgba(251, 251, 251, 0) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(40px);
+    /* Note: backdrop-filter has minimal browser support */
 
     color: #2D3B5C;  
 
@@ -61,18 +65,21 @@ const WhiteBox = styled.div`
 
 const InnerBox = styled.div`
     width: 36.5rem;
-    height: 4rem;
+    height: 2rem;
     border-radius: 3px;
     font-size: 0.7rem;
     background-color: #F3F3F3;
     overflow-y: scroll;
     padding: 0.3rem;
-        -ms-overflow-style: none; /* IE and Edge */
-        scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
        & ::-webkit-scrollbar {
         display: none; /* Chrome, Safari, Opera*/
     }
     
+    .content{
+        padding: 0.3rem;
+    }
 `
 
 function Agreement(props) {
@@ -150,7 +157,13 @@ function Agreement(props) {
                     </div>
                     <div className='explain'>
                         <InnerBox className='innerText'>
-                            aa<br /> bb <br /> cc <br /> dd <br /> ee <br /> ff <br /> gg <br />
+                        <div className='content'>
+                            <p style={{fontWeight: "bold"}}>동네에 오신 것을 환영합니다! </p>
+                        서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 
+                        본 약관은 다양한 서비스의 이용과 관련하여 서비스를 제공하는 주식
+                        회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 
+                        아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
+                        </div>
                         </InnerBox>
                     </div>
                 </div>
@@ -170,7 +183,10 @@ function Agreement(props) {
                     </div>
                     <div className='explain'>
                         <InnerBox className='innerText'>
-                            aa<br /> bb <br /> cc <br /> dd <br /> ee <br /> ff <br /> gg <br />
+                        <div className='content'>
+                        개인정보보호법에 따라 네이버에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 
+                        개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
+                        </div>
                         </InnerBox>
                     </div>
                 </div>
@@ -190,7 +206,9 @@ function Agreement(props) {
                     </div>
                     <div className='explain'>
                         <InnerBox className='innerText'>
-                            aa<br /> bb <br /> cc <br /> dd <br /> ee <br /> ff <br /> gg <br />
+                        <div className='content'>
+                        이벤트 및 마케팅 안내에 관한 내용을 자세히 읽은 후 동의하여 주시기 바랍니다.
+                        </div>
                         </InnerBox>
                     </div>
                 </div>
