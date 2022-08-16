@@ -81,6 +81,20 @@ function AdminRegister2(props) {
     const nextpage = props.nextpage;
     const presentpage = props.presentpage;
 
+    useEffect(() => {
+        if (year && area && introduce && url) {
+            setOk(true);
+        } else {
+          setOk(false);
+        }
+        
+        if (year && area && introduce) {
+            setOk(true);
+        } else {
+          setOk(false);
+        }
+      }, [year, area, introduce, url]);
+
 
     // const handleApi= async() =>{
     //     console.log("jepp");
@@ -206,6 +220,7 @@ function AdminRegister2(props) {
                         fullWidth
                         history={history}
                         to={nextpage}
+                        props={{year: year, area: area, introduce: introduce, url:url}}
                         style={{height: "2.5rem", borderRadius: "3px"}}
                     />
                 ) : ( 

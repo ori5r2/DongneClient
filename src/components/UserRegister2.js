@@ -271,6 +271,7 @@ function UserRegister2(props) {
                         fullWidth
                         history={history}
                         to={nextpage}
+                        props={{name: name, birth: birth, school: school, phone:phone, address:address, selfintro:selfintro}}
                         style={{height: "2.5rem", borderRadius: "3px"}}
                     />
                 ) : ( 
