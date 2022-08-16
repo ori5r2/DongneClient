@@ -5,10 +5,6 @@ import vector from '../../styles/imgs/background/VectorHome.png';
 import HomeSideBarTemplate from '../../template/HomeSideBarTemplate';
 import palette from '../../styles/pallete';
 
-import calenderIcon from '../../styles/imgs/icon/home_calender.png';
-import chevronRight from '../../styles/imgs/icon/chevron_right.png';
-import chevronLeft from '../../styles/imgs/icon/chevron_left.png';
-
 import importImg from '../../styles/importImg';
 
 import Button from '../../components/Button';

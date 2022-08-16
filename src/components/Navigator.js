@@ -21,7 +21,7 @@ const StyledNav = styled.nav`
   position: fixed;
   z-index: 1000;
   top: 0;
-  /* width: 100% */
+  left: 3.75rem;
 
   display: flex;
   justify-content: space-between;
@@ -30,11 +30,8 @@ const StyledNav = styled.nav`
   border-bottom-right-radius: 23px;
   border-bottom-left-radius: 23px;
   padding: 0.6rem 0.8rem;
-  /* width: 100%; */
-  /* font-family: 'Pretendard-Regular'; */
-
   margin-bottom: 1rem;
-  width: 95vw;
+  width: 111.4rem;
   height: 3.4rem;
 
   font-family: 'Pretendard Regular';

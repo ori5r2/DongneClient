@@ -20,7 +20,7 @@ const StyledDiv = styled.div`
   height: 100%;
 
   .side__home__body {
-    width: 98.25rem;
+    width: 90rem;
     height: inherit;
     position: relative;
     margin-left: 21.75rem;

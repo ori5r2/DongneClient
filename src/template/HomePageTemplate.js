@@ -27,7 +27,7 @@ const HomePageTemplate = ({ location, children }) => {
     <StyledBody>
       <Navigator
         location={location}
-        style={{ position: 'relative', zIndex: 1 }}
+        style={{ position: 'absolute', zIndex: 1 }}
       ></Navigator>
       <StyledBox>{children}</StyledBox>
       {/* <footer style={{ position: 'absolute', bottom: '0' }}>
