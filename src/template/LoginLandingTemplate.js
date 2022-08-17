@@ -62,7 +62,7 @@ const LoginLandingTemplate = () => {
           history={history}
           to="admin/login"
         />
-        <Link to="/admin/login" className="Link">
+        <Link to="/admin/register" className="Link">
           회원이 아니신가요? 회원가입
         </Link>
       </WhiteBox>
