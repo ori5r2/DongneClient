@@ -32,17 +32,17 @@ const StyledCard = styled.div`
     height: 40%;
     position: absolute;
     bottom: 0;
-  }
-  .card__body:hover {
-    background: linear-gradient(0deg, #2b78ff 0%, rgba(43, 120, 255, 0) 100%);
+    border-radius: inherit;
   }
   .card__button {
     font-family: 'Pretendard Medium';
     font-size: 1.125rem;
     border: none;
     background: transparent;
-    color: transparent;
+    color: inherit;
+    background: none;
     width: 50%;
+    border-radius: inherit;
   }
   .card__button:hover {
     transition: all 0.4s ease-in-out;
@@ -50,26 +50,38 @@ const StyledCard = styled.div`
     cursor: pointer;
     color: #ffffff;
   }
+  .card__body {
+    color: transparent;
+  }
+  .card__body:hover {
+    transition: all 0.4s ease-in-out;
+    color: #ffffff;
+    background: linear-gradient(0deg, #2b78ff 0%, rgba(43, 120, 255, 0) 50%);
+  }
 `;
 
-const Card = ({ subTitle, title, img_src, to, history, ...rest }) => {
-  const onClick = (e) => {
-    if (to) {
-      history.push(to);
-    } else {
-      history.push('/');
-    }
-  };
+const Card = ({ subTitle, onClick, title, img_src, to, history, ...rest }) => {
+  // const onClick = (e) => {
+  //   if (to) {
+  //     history.push(to);
+  //   } else {
+  //     history.push('/');
+  //   }
+  // };
 
   return (
-    <StyledCard {...rest} onClick={onClick}>
+    <StyledCard {...rest}>
       <div className="card__header">
         <div className="subTitle">{subTitle}</div>
         <div className="title">{title}</div>
       </div>
       <div className="card__body">
-        <button className="card__button">자세히 보기</button>
-        <button className="card__button">출결 현황 보기</button>
+        <button className="card__button" onClick={onClick}>
+          자세히 보기
+        </button>
+        <button className="card__button" onClick={onClick}>
+          출결 현황 보기
+        </button>
       </div>
     </StyledCard>
   );

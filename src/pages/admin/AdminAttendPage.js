@@ -6,6 +6,8 @@ import importImg from '../../styles/importImg';
 import palette from '../../styles/pallete';
 import Card from '../../components/Card';
 import data from '../../data';
+import { useState } from 'react';
+import AttendModal from '../../components/AttendModal';
 
 const StyledAttendanceBody = styled.div`
   /* position: relative; */
@@ -52,6 +54,10 @@ const StyledAttendanceBody = styled.div`
 `;
 
 const AdminAttendPage = () => {
+  const [modal, setModal] = useState(true);
+  const onClickForModal = () => {
+    setModal((current) => !current);
+  };
   return (
     <SidebarTemplate isAttendance={true}>
       <StyledAttendanceBody>
@@ -70,10 +76,18 @@ const AdminAttendPage = () => {
         <div className="attend_body">
           {data.attendData.map((elem) => (
             <div className="eachCard">
-              <Card subTitle={elem.subTitle} title={elem.title} />
+              <Card
+                subTitle={elem.subTitle}
+                title={elem.title}
+                onClick={onClickForModal}
+              />
             </div>
           ))}
         </div>
+
+        {
+          modal == true ? <AttendModal onClick={onClickForModal} /> : null //기계역할
+        }
       </StyledAttendanceBody>
     </SidebarTemplate>
   );
