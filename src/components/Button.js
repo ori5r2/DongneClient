@@ -12,6 +12,7 @@ const StyledDiv = styled.div`
   color: ${palette[0]};
 `;
 
+
 const StyledButton = styled.button`
   display: flex;
   justify-content: center;

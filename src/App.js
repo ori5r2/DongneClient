@@ -15,6 +15,7 @@ import UserRegisterCheck2 from './pages/user/UserRegisterCheck2';
 import UserRegisterCheck3 from './pages/user/UserRegisterCheck3';
 import AdminHomePage from './pages/admin/AdminHomePage';
 import AdminAttendPage from './pages/admin/AdminAttendPage';
+import AdminMembersPage from './pages/admin/AdminMembersPage';
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
       <Route component={UserRegisterCheck1} path="/user/register/check1" />
       <Route component={UserRegisterCheck2} path="/user/register/check2" />
       <Route component={UserRegisterCheck3} path="/user/register/check3" />
+      <Route component={AdminMembersPage} path="/admin/members" />
     </>
   );
 };
