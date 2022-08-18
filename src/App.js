@@ -12,6 +12,7 @@ import AdminRegisterCheck3 from './pages/admin/AdminRegisterCheck3';
 import UserRegisterCheck1 from './pages/user/UserRegisterCheck1';
 import UserRegisterCheck2 from './pages/user/UserRegisterCheck2'; 
 import UserRegisterCheck3 from './pages/user/UserRegisterCheck3'; 
+import UserMainPage from './pages/user/UserMainPage';
 
 const App = () => {
   return (
@@ -26,6 +27,8 @@ const App = () => {
       <Route component={UserRegisterCheck1} path="/user/register/check1" />
       <Route component={UserRegisterCheck2} path="/user/register/check2" />
       <Route component={UserRegisterCheck3} path="/user/register/check3" />
+      <Route component={UserMainPage} path="/user/usermain" exact />
+
     </>
   );
 };
