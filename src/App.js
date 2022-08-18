@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-//import { Reset } from 'styled-reset';
+import { Reset } from 'styled-reset';
 
-//import page
+// import page
 import LoginLandingPage from './pages/LoginLandingPage';
 import AdminLoginPage from './pages/admin/AdminLoginPage';
 import UserLoginPage from './pages/user/UserLoginPage';

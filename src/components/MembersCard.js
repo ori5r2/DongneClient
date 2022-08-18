@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../styles/pallete';
+import importImg from '../styles/importImg';
 
 const StyledCard = styled.button`
   display: flex;
@@ -8,58 +9,64 @@ const StyledCard = styled.button`
   align-items: center;
 
   border: none;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   outline: none;
   cursor: pointer;
 
-  margin-bottom: 2rem;
-  margin-right: 1rem;
+  margin-bottom: 1.75rem;
+  margin-right: 0.875rem;
 
-  width: 10.625rem;
+  width: 10.5rem;
   height: 12.5rem;
 
   font-family: 'Pretendard';
-  font-size: 1rem;
+  // font-size: 1rem;
   color: ${palette[5]};
 
+  font-style: normal;
+  font-weight: 300;
+  font-size: 0.9375rem;
+  line-height: 1.125rem;
+
   background: linear-gradient(180deg, #FAFAFA 0%, rgba(250, 250, 250, 0) 100%);
-  box-shadow: inset 0px 0px 10px rgba(200, 200, 200, 0.1);
+  box-shadow: inset 0rem 0rem 0.625rem rgba(200, 200, 200, 0.1);
   
-  .title {
-    font-size: 1.5rem;
-    margin-top: 0.625rem;
-  }
-  .card__header {
+  .UserImg{
     box-sizing: border-box;
-    padding-top: 1.75rem;
-    padding-left: 1.75rem;
+    position: relative;
+    width: 4.25rem;
+    height: 4.25rem;
+    left: 2.5rem;
+    top: -2.5rem;
+  } 
+  
+  .card__body {
+    position: relative;
+    box-sizing: border-box;
+    top: 2.5rem;
+    left: -2rem;
   }
 
-  // .UserImg{
-  //   position: relative;
-
-  // } 
-  
   .UserName{
     position: relative;
-
     font-style: normal;
     font-weight: 700;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
     display: flex;
-    flex-wrap: nowrap;
+    justify-content: center;
+    // 아래 여백 필요
   }
 
   .UserCode {
     position: relative;
-
-    font-style: normal;
-    font-weight: 300;
-    font-size: 15px;
-    line-height: 18px;
     display: flex;
-    flex-wrap: nowrap;
+    justify-content: center;
+  }
+  .UserTeam {
+    position: relative;
+    display: flex;
+    justify-content: center;
   }
 
   ${(props) =>
@@ -74,7 +81,10 @@ const MembersCard = ({ UserName, onClick, UserCode, UserTeam, img_src, to, histo
 
   return (
     <StyledCard {...rest}>
-      <div className="card__header">
+      <div className="UserImg">
+        <img src={importImg.membersProfile} />
+      </div>
+      <div className="card__body">
         <div className="UserName">{UserName}</div>
         <div className="UserCode">{UserCode}</div>
         <div className="UserTeam">{UserTeam}</div>

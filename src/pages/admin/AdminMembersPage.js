@@ -3,16 +3,17 @@ import styled from 'styled-components';
 import MembersCard from '../../components/MembersCard';
 import palette from '../../styles/pallete';
 import SidebarTemplate from '../../template/SidebarTemplate';
-import data from '../../membersData';
+import membersData from '../../membersData';
 import { useState } from 'react';
 import MembersModal from '../../components/MembersModal';
+import importImg from '../../styles/importImg';
 
 const StyleldMembersBody = styled.div`
   position: relative;
   width: inherit;
   margin-top: 3.75rem;
   margin-left: 3.25rem;
-  margin-right: 3rem;
+  // margin-right: 3rem;
   font-family: 'Pretendard Regular';
   .members_header {
     display: flex;
@@ -40,14 +41,14 @@ const StyleldMembersBody = styled.div`
     flex-wrap: wrap;
   }
   .eachCard {
-    margin-right: 1rem;
-    margin-top: 2.25rem;
+    margin-right: 0rem;
+    margin-top: 0rem;
   }
-  .eachCard:nth-child(-n + 7) {
+  .eachCard:nth-child(-n + 8) {
     margin-top: 0rem;
   }
   .eachCard:nth-child(8n) {
-    margin-right: 0rem;
+    margin-right: -1rem;
   }
 `;
 
@@ -58,8 +59,7 @@ const AdminMembersPage = () => {
   };
   return (
     <SidebarTemplate isMembers={true}>
-      <StyleldMembersBody
-    >
+      <StyleldMembersBody>
         <div className="members_header">
           <div className="members_header__left">
             {/* <img src={importImg.} /> */}
@@ -73,7 +73,7 @@ const AdminMembersPage = () => {
           </div>
         </div>
         <div className="members_body">
-          {data.membersData.map((elem) => (
+          {membersData.Data.map((elem) => (
             <div className="eachCard">
               <MembersCard
                 UserName={elem.UserName}

@@ -1,5 +1,5 @@
 const membersData = {
-    attendData: [
+    Data: [
         { UserName: '한동네', UserCode: '#A8302', UserTeam:'1조/Node.js' },
         { UserName: '이동네', UserCode: '#C8294', UserTeam:'2조/Spring' },
         { UserName: '한동네', UserCode: '#A8302', UserTeam:'1조/Node.js' },

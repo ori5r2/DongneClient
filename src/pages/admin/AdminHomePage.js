@@ -9,9 +9,9 @@ import importImg from '../../styles/importImg';
 
 import Button from '../../components/Button';
 
-//import { Calendar, momentLocalizer } from 'react-big-calendar';
-//import moment from 'moment';
-//import 'react-big-calendar/lib/css/react-big-calendar.css';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
+import moment from 'moment';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 const StyledImg = styled.img`
   position: fixed;
@@ -206,8 +206,8 @@ const StyledGalary = styled.div`
 `;
 
 const CalendarBox = () => {
-  // moment.locale('ko-KR');
-  // const localizer = momentLocalizer(moment);
+  moment.locale('ko-KR');
+  const localizer = momentLocalizer(moment);
   const myEventsList = [
     { start: new Date(), end: new Date(), title: 'special event' },
   ];
@@ -234,11 +234,11 @@ const CalendarBox = () => {
         </div>
       </div>
       <div className="DayPicker">
-        {/* <Calendar
+        <Calendar
           localizer={localizer}
           events={myEventsList}
           style={{ height: 500 }}
-        /> */}
+        />
       </div>
       <div className="button">
         <Button text={'수정'}></Button>

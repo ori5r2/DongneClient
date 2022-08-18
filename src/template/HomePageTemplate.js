@@ -30,9 +30,9 @@ const HomePageTemplate = ({ location, children }) => {
         style={{ position: 'absolute', zIndex: 1 }}
       ></Navigator>
       <StyledBox>{children}</StyledBox>
-      {/* <footer style={{ position: 'absolute', bottom: '0' }}>
-        <StyledImg src={vector} />
-      </footer> */}
+      <footer style={{ position: 'absolute', bottom: '0' }}>
+        {/* <StyledImg src={vector} /> */}
+      </footer>
     </StyledBody>
   );
 };
