@@ -25,6 +25,16 @@ const StyledCard = styled.button`
   background: linear-gradient(180deg, #FAFAFA 0%, rgba(250, 250, 250, 0) 100%);
   box-shadow: inset 0px 0px 10px rgba(200, 200, 200, 0.1);
   
+  .title {
+    font-size: 1.5rem;
+    margin-top: 0.625rem;
+  }
+  .card__header {
+    box-sizing: border-box;
+    padding-top: 1.75rem;
+    padding-left: 1.75rem;
+  }
+
   // .UserImg{
   //   position: relative;
 
@@ -41,7 +51,7 @@ const StyledCard = styled.button`
     flex-wrap: nowrap;
   }
 
-  .Description {
+  .UserCode {
     position: relative;
 
     font-style: normal;
@@ -59,25 +69,18 @@ const StyledCard = styled.button`
     `}
 `;
 
-const MemberCard = ({ arr, to, history, ...rest }) => {
-    const onClick = (e) => {
-      if (to) {
-        history.push(to);
-      } else {
-        history.push('/');
-      }
-    };
+const MembersCard = ({ UserName, onClick, UserCode, UserTeam, img_src, to, history, ...rest }) => {
+
 
   return (
-    <StyledCard onClick={onClick}>
-      {/* todo: <Avatar/> */}
-      <div className="UserName">{arr[0]}</div>
-      <div className="Description">
-        <div>{arr[1]}</div>
-        <div>{arr[2]}</div>
+    <StyledCard {...rest}>
+      <div className="card__header">
+        <div className="UserName">{UserName}</div>
+        <div className="UserCode">{UserCode}</div>
+        <div className="UserTeam">{UserTeam}</div>
       </div>
     </StyledCard>
   );
 };
 
-export default MemberCard;
+export default MembersCard;

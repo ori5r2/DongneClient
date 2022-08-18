@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { Reset } from 'styled-reset';
+//import { Reset } from 'styled-reset';
 
 //import page
 import LoginLandingPage from './pages/LoginLandingPage';
@@ -20,7 +20,7 @@ import AdminMembersPage from './pages/admin/AdminMembersPage';
 const App = () => {
   return (
     <>
-      <Reset />
+      {/* <Reset /> */}
       <Route component={LoginLandingPage} path="/" exact />
       <Route component={AdminLoginPage} path="/admin/login" />
       <Route component={AdminHomePage} path="/admin/home" exact />

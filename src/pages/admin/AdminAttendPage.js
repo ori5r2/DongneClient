@@ -7,7 +7,7 @@ import palette from '../../styles/pallete';
 import Card from '../../components/Card';
 import data from '../../data';
 import { useState } from 'react';
-import AttendModal from '../../components/AttendModal';
+
 
 const StyledAttendanceBody = styled.div`
   /* position: relative; */
@@ -77,8 +77,9 @@ const AdminAttendPage = () => {
           {data.attendData.map((elem) => (
             <div className="eachCard">
               <Card
-                subTitle={elem.subTitle}
-                title={elem.title}
+                UserName={elem.UserName}
+                UserCode={elem.UserCode}
+                UserTeam={elem.UserCode}
                 onClick={onClickForModal}
               />
             </div>
