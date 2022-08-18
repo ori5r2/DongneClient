@@ -55,7 +55,7 @@ const StyledCard = styled.button`
     line-height: 1.5rem;
     display: flex;
     justify-content: center;
-    // 아래 여백 필요
+    margin-bottom:0.5rem;// 아래 여백 필요
   }
 
   .UserCode {
