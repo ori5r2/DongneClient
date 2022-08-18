@@ -140,7 +140,7 @@ function Agreement(props) {
                         ) : (
                             <img src={Off} alt='' onClick={() => setSelectAll(!selectAll)} />
                             )}
-                    branch test전체 약관에 동의합니다.
+                     전체 약관에 동의합니다.
                 </div>
             </div>
             <hr style={{color: "#EFEFEF", width:"100%"}}/>
