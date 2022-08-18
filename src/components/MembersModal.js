@@ -13,20 +13,23 @@ const StyledModal = styled.div`
     transform: translate(-50%, -50%);
 
     background: #FFFFFF;
-    box-shadow: 0px 0px 15px rgba(34, 42, 63, 0.6);
-    border-radius: 10px;
+    box-shadow: 0rem 0rem 0.9375rem rgba(34, 42, 63, 0.6);
+    border-radius: 0.625rem;
 
   .content-area {
     color: ${palette[5]};
-    margin: 2.625rem;
+    margin: 3rem 3.875rem;
+    // margin: 2.625rem;
   }
   .header {
     font-size: 1.75rem;
-    font-family: 'Pretendard Bold';
+    line-height: 160%;
+    font-weight: 800;
+    font-family: 'Pretendard';
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin_bottom:31px;
+    margin-bottom: 36px;
   }
   .body {
     font-family: 'Pretendard';
@@ -34,7 +37,7 @@ const StyledModal = styled.div`
     font-weight: 500;
     font-size: 1.125rem;
     line-height: 160%;
-    margin-top: 1.9rem;
+    // margin_top:1.9375rem;
     display: flex;
     align-items: center;
     // position: relative;
@@ -46,53 +49,97 @@ const StyledModal = styled.div`
     justify-content: center;
     width: 50%;
   }
+
+  .button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top:-0.75rem;
+  }
   .modalBtn {
-    width: inherit;
+    // width: inherit;
     width: 20.625rem;
     height: 3.5rem;
+// font-weight: 700;
+// font-size: 22px;
+  }
+
+  .body__left {
+    width: 16.5rem;
+    height: 12.25rem;
+    // left: 39.1875rem;
+    // top: 22.125rem;
   }
   .body__left__elem {
-    width: 3.9375rem;
     font-size: 1.125rem;
     display: flex;
     align-items: center;
-    margin-right:1.375rem;
+    // margin-right:2rem;
+    margin-bottom:0.75rem;
+  }
+  .body__left__elem > div {
+    width: 3.9375rem;
+    height: 1.8125rem;
   }
   .body__left__elem > input {
     background: #f3f3f3;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     width: 11.25rem;
     height: 2.5rem;
     border: none;
-    margin-right:2rem;
+    margin-left:1.375rem;
+  }
+
+  .body__right {
+    width: 23.8125rem;
+    height: 11.9375rem;
+    // left: 57.6875rem;
+    // top: 22.4375rem;
   }
   .body__right__elem {
-    width: 6.4375rem;
     font-size: 1.125rem;
     display: flex;
     align-items: center;
-    margin-right:1.375rem;
+    margin-left:-2.9375rem;
+    margin-bottom:0.75rem;
+  }
+  .body__right__elem > div {
+    width: 6.4375rem;
+    height: 1.8125rem;
   }
   .body__right__elem > input {
     background: #f3f3f3;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     width: 16rem;
     height: 2.5rem;
     border: none;
+    margin-left:1.375rem;
+  }
+
+  .body__bottom {
+    width: 42.375rem;
+    height: 13.5625rem;
+    // left: 39.125rem;
+    // top: 36.5625rem;
+    margin-top:-0.8rem;
   }
   .body__bottom__elem {
-    width: 4.1875rem;
     font-size: 1.125rem;
     display: flex;
     align-items: center;
-    margin-right:1.125rem;
+    margin-bottom:0.75rem;
+  }
+  .body__bottom__elem > div {
+    width: 4.1875rem;
+    height: 1.8125rem;
   }
   .body__bottom__elem > input {
     background: #f3f3f3;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     border: none;
     width: 37.0625rem;
     height: 2.5rem;
+    margin-left:1.125rem;
   }
 `;
 
@@ -129,7 +176,7 @@ const MembersModal = ({ onClick }) => {
               <input type="text"></input>
             </div>
             <div className="body__right__elem">
-              <div></div>
+              <div style={{height: 2.5+'rem'}}></div>
             </div>
             <div className="body__right__elem">
               <div>학교/소속</div>
@@ -142,23 +189,27 @@ const MembersModal = ({ onClick }) => {
           </form>
         </div>
         <div className="body">
-        <form className="body__bottom">
-            <div className="body__bottom__elem">
-              <div>한줄 소개</div>
-              <input type="text"></input>
-            </div>
-            <div className="body__bottom__elem">
-              <div>비고</div>
-              <input type="text"></input>
-            </div>
-            <Button text={'수정하기'} className="modalBtn"></Button>
-            <Button text={'삭제하기'} className="modalBtn"></Button>
+          <form className="body__bottom">
+              <div className="body__bottom__elem">
+                <div>한줄 소개</div>
+                <input type="text"></input>
+              </div>
+              <div className="body__bottom__elem">
+                <div>비고</div>
+                <input type="text" style={{height: 80+'px'}}></input>
+              </div>
+              
           </form>
+        </div>
+        <div className="button">
+          <Button text={'수정하기'} className="modalBtn"></Button>
+          <Button text={'삭제하기'} className="modalBtn"></Button>
         </div>
       </div>
     </StyledModal>
   );
 };
+
 
 
 
