@@ -4,7 +4,7 @@ import person from '../styles/imgs/icon/person.png';
 import profile from '../styles/imgs/icon/profile.png';
 import Button from './Button';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import line from '../styles/imgs/icon/line.png'
 
 
@@ -132,9 +132,10 @@ function Mypage(props) {
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [pw, setPw] = useState("");
-    const [year, setYear] = useState("");
+    const [school, setSchool] = useState("");
+    const [number, setNumber] = useState("");
     const [area, setArea] = useState("");
-    const [url, setUrl] = useState("");
+    const [address, setAddress] = useState("");
     const [intro, setIntro] = useState("");
 
     // useEffect(() => {
@@ -145,9 +146,10 @@ function Mypage(props) {
             "email: " + email, 
             "name: " + name, 
             "pw: " + pw, 
-            "year: " + year,
+            "school: " + school,
+            "number: " + number,
             "area: " + area,
-            "url: " + url, 
+            "address: " + address, 
             "intro: " + intro);
     }
 
@@ -201,7 +203,7 @@ function Mypage(props) {
                         </div>
 
                         <div className='Basic'>
-                            <span  className="category"> <img src={profile} alt="" className='icon' />단체명</span>
+                            <span  className="category"> <img src={profile} alt="" className='icon' />이름</span>
                             <div className='between'>
                                 <input 
                                     onChange={(e)=>{
@@ -261,26 +263,19 @@ function Mypage(props) {
                         </div>
                         
                         
-                        <img src={line} alt="" style={{width:"50rem", height:"0.3rem", paddingTop:"1rem", paddingBottom:"1rem"}}/>
-
-
-                        <div className='Basic'>
-                            <span className="category">단체 카테고리</span>
-                            <div className='categoryItem'>#IT</div>
-                            <div className='categoryItem'>연합동아리</div>
-                        </div>
+                        <img src={line} alt="" style={{width:"50rem", height:"0.3rem", paddingTop:"1rem", paddingBottom:"2rem"}}/>
 
                         <div className='twin'>
                             < div className='Basic' style={{paddingRight:"1.5rem"}}>
-                                <span className="category">단체 설립 년도</span>
+                                <span className="category">학교</span>
                                 <div className='check'>
                                     <input 
                                         onChange={(e)=>{
-                                            setYear(e.target.value);
+                                            setSchool(e.target.value);
                                         }}
 
-                                        value={year}
-                                        type={"number"} 
+                                        value={school}
+                                        type={"text"} 
                                         className="information" 
                                         style={{width: "14rem", 
                                                 height: "2.5rem",
@@ -293,14 +288,14 @@ function Mypage(props) {
                             </div>
 
                             <div className='Basic'>
-                                <span className="category">단체 설립 년도</span>
+                                <span className="category">전화번호</span>
                                 <div className='check'>
                                     <input 
                                         onChange={(e)=>{
-                                            setYear(e.target.value);
+                                            setNumber(e.target.value);
                                         }}
 
-                                        value={year}
+                                        value={number}
                                         type={"number"} 
                                         className="information" 
                                         style={{width: "14rem", 
@@ -333,12 +328,12 @@ function Mypage(props) {
                         </div>
 
                         <div className='Basic'>
-                            <span className="category">단체 URL</span>
+                            <span className="category">주소</span>
                             <input 
                                 onChange={(e)=>{
-                                    setUrl(e.target.value);
+                                    setAddress(e.target.value);
                                 }}
-                                value={url}
+                                value={address}
                                 type={"text"} 
                                 className="information" 
                                 style={{width: "41.5rem", 
@@ -351,7 +346,7 @@ function Mypage(props) {
                         </div>
 
                         <div className='Basic'>
-                            <span className="category">단체 소개</span>
+                            <span className="category">한줄 소개</span>
                             <textarea 
                                 onChange={(e)=>{
                                     setIntro(e.target.value);
@@ -360,7 +355,7 @@ function Mypage(props) {
                                 value={intro}
                                 type={"text"} 
                                 style={{width: "41.5rem", 
-                                        height: "5rem",
+                                        height: "7rem",
                                         paddingRight:' 1rem',
                                         backgroundColor: "#F3F3F3",
                                         border: "none",
@@ -376,7 +371,7 @@ function Mypage(props) {
                             handleApi();
                         }}>
                             <Button 
-                                text="단체 정보 수정하기"
+                                text="개인 정보 수정하기"
                                 style={{
                                     borderRadius:"4px",
                                     width:"50.1rem",
