@@ -105,7 +105,6 @@ function UserRegister2(props) {
         console.log(
             "id: " + location.state.props.id ,
             "pw: " + location.state.props.pw, 
-            "email: " + location.state.props.email, 
             "name: " + name, 
             "birth: " + birth, 
             "school: " + school,

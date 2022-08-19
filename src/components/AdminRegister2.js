@@ -65,6 +65,7 @@ function AdminRegister2(props) {
   const nextlink = props.nextlink;
   const location = useLocation();
 
+  const [group, setGroup] = useState('')
   const [year, setYear] = useState('');
   const [area, setArea] = useState('');
   const [introduce, setIntroduce] = useState('');
@@ -75,24 +76,24 @@ function AdminRegister2(props) {
   const presentpage = props.presentpage;
 
   useEffect(() => {
-    if (year && area && introduce && url) {
+    if (group && year && area && introduce && url) {
       setOk(true);
     } else {
       setOk(false);
     }
 
-    if (year && area && introduce) {
+    if (group && year && area && introduce) {
       setOk(true);
     } else {
       setOk(false);
     }
-  }, [year, area, introduce, url]);
+  }, [group, year, area, introduce, url]);
 
   const handleApi = async () => {
     console.log(
       'id: ' + location.state.props.id,
       'pw: ' + location.state.props.pw,
-      'email: ' + location.state.props.email,
+      'group: ' + group,
       'year: ' + year,
       'area: ' + area,
       'introduce: ' + introduce,
@@ -106,15 +107,44 @@ function AdminRegister2(props) {
   return (
     <WhiteBox>
       <div className="bigoutline">
-        <div className="outline">
-          <div className="inputInformation">
-            <div>
-              단체 카테고리 &nbsp;{' '}
-              <span style={{ color: palette[3] }}>(필수)</span>
+        <div className="twin">
+          <div className="outline">
+            <div className="inputInformation">
+              <div>
+                단체 이름 &nbsp;{' '}
+                <span style={{ color: palette[3] }}>(필수)</span>
+              </div>
+            </div>
+            <div className="check">
+              <input
+                onChange={(e) => {
+                  setGroup(e.target.value);
+                }}
+                value={group}
+                type={'text'}
+                className="information"
+                placeholder="이름을 입력하세요."
+                style={{
+                  width: '21.2rem',
+                  height: '2.5rem',
+                  backgroundColor: '#F3F3F3',
+                  border: 'none',
+                  borderRadius: '3px',
+                }}
+              />
             </div>
           </div>
-          <div>
-            <img src={category} alt="" style={{ width: '5rem', paddingBottom:"1rem"}} />
+
+          <div className="outline">
+            <div className="inputInformation">
+              <div>
+                단체 카테고리&nbsp;{' '}
+                <span style={{ color: palette[3] }}>(필수)</span>{' '}
+              </div>
+            </div>
+            <div>
+              <img src={category} alt="" style={{ width: '5rem', paddingBottom:"1rem"}} />
+            </div>
           </div>
         </div>
 

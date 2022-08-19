@@ -58,8 +58,7 @@ const WhiteBox = styled.div`
     
     .bigoutline{ padding-top: 1.5rem; }
 
-    .lineUp{ padding-bottom: 0.5rem; }
-    .lineDown{ padding-top: 0.5rem; }
+    .lineUp{ padding-bottom: 8rem; }
 
 `
 
@@ -71,20 +70,10 @@ function Register1(props) {
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
     const [pwcheck, setPwcheck] = useState("");
-    const [email, setEmail] = useState("");
     const [Ok, setOk] = useState(false);
 
 
     useEffect(() => {
-        if (id && pw && pwcheck && email) {
-            if ( pw === pwcheck) {
-                setOk(true);
-            } else {
-                setOk(false);
-            }
-        } else {
-          setOk(false);
-        }
         
         if (id && pw && pwcheck) {
             if ( pw === pwcheck) {
@@ -95,7 +84,7 @@ function Register1(props) {
         } else {
           setOk(false);
         }
-      }, [id, pw, pwcheck, email]);
+      }, [id, pw, pwcheck]);
 
     const nextpage = props.nextpage;
     const presentpage = props.presentpage;
@@ -185,31 +174,7 @@ function Register1(props) {
                     </div>
                 </div>
 
-                <img src={line} alt="" style={{width: "45em"}}/>
-
-                <div className='lineDown'>
-                    <div className='outline'>
-                        <div className='inputInformation'>
-                            <div> 본인 확인 이메일 &nbsp;<span  style={{ color: "#AAAAAA" }}>(선택)</span></div>
-                        </div>
-                        <div>
-                            <input  
-                                onChange={(e)=>{
-                                    setEmail(e.target.value);
-                                }}
-
-                                value={email}
-                                type={"text"} 
-                                style={{width: "44.7rem", 
-                                        height: "2.5rem",
-                                        backgroundColor:"#F3F3F3",
-                                        border: "none",
-                                        borderRadius: "3px"
-                                }}
-                            />
-                        </div>
-                    </div>
-                </div>
+        
     
                 <div style={{paddingTop: "1rem"}}>
                     {Ok ? (
@@ -218,7 +183,7 @@ function Register1(props) {
                                 fullWidth
                                 history={history}
                                 to={nextpage}
-                                props={{id: id,pw: pw,email: email}}
+                                props={{id: id,pw: pw}}
                                 style={{height: "2.7rem", borderRadius: "3px"}}
                             /> 
                         ) : ( 
