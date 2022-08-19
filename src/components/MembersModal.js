@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../styles/pallete';
 import Button from './Button';
+import PropTypes from 'prop-types'
 
 const StyledModal = styled.div`
     position: fixed;
@@ -29,7 +30,7 @@ const StyledModal = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 36px;
+    margin-bottom: 2.25rem;
   }
   .body {
     font-family: 'Pretendard';
@@ -61,7 +62,7 @@ const StyledModal = styled.div`
     width: 20.625rem;
     height: 3.5rem;
 // font-weight: 700;
-// font-size: 22px;
+// font-size: 1.375rem;
   }
 
   .body__left {
@@ -142,71 +143,85 @@ const StyledModal = styled.div`
     margin-left:1.125rem;
   }
 `;
+const ModalOverlay = styled.div`
+  box-sizing: border-box;
+  display: ${(props) => (props.visible ? 'block' : 'none')};
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+`
 
-const MembersModal = ({ onClick }) => {
+const MembersModal = ({ visible, onClick }) => {
   return (
-    <StyledModal>
-      <div className="content-area">
-        <div className="header">
-          <div>회원 정보</div>
-          <button onClick={onClick}>x</button>
-        </div>
-        <div className="body">
-          <form className="body__left">
-            <div className="body__left__elem">
-              <div>이름</div>
-              <input type="text"></input>
-            </div>
-            <div className="body__left__elem">
-              <div>팀/조</div>
-              <input type="text"></input>
-            </div>
-            <div className="body__left__elem">
-              <div>전화번호</div>
-              <input type="text"></input>
-            </div>
-            <div className="body__left__elem">
-              <div>생년월일</div>
-              <input type="text"></input>
-            </div>
-          </form>
-          <form className="body__right">
-            <div className="body__right__elem">
-              <div>개인 식별 코드</div>
-              <input type="text"></input>
-            </div>
-            <div className="body__right__elem">
-              <div style={{height: 2.5+'rem'}}></div>
-            </div>
-            <div className="body__right__elem">
-              <div>학교/소속</div>
-              <input type="text"></input>
-            </div>
-            <div className="body__right__elem">
-              <div>주소</div>
-              <input type="text"></input>
-            </div>
-          </form>
-        </div>
-        <div className="body">
-          <form className="body__bottom">
-              <div className="body__bottom__elem">
-                <div>한줄 소개</div>
+    <>
+    <ModalOverlay visible={visible} />
+      <StyledModal>
+        <div className="content-area">
+          <div className="header">
+            <div>회원 정보</div>
+            <button onClick={onClick}>x</button>
+          </div>
+          <div className="body">
+            <form className="body__left">
+              <div className="body__left__elem">
+                <div>이름</div>
                 <input type="text"></input>
               </div>
-              <div className="body__bottom__elem">
-                <div>비고</div>
-                <input type="text" style={{height: 80+'px'}}></input>
+              <div className="body__left__elem">
+                <div>팀/조</div>
+                <input type="text"></input>
               </div>
-              
-          </form>
+              <div className="body__left__elem">
+                <div>전화번호</div>
+                <input type="text"></input>
+              </div>
+              <div className="body__left__elem">
+                <div>생년월일</div>
+                <input type="text"></input>
+              </div>
+            </form>
+            <form className="body__right">
+              <div className="body__right__elem">
+                <div>개인 식별 코드</div>
+                <input type="text"></input>
+              </div>
+              <div className="body__right__elem">
+                <div style={{height: 2.5+'rem'}}></div>
+              </div>
+              <div className="body__right__elem">
+                <div>학교/소속</div>
+                <input type="text"></input>
+              </div>
+              <div className="body__right__elem">
+                <div>주소</div>
+                <input type="text"></input>
+              </div>
+            </form>
+          </div>
+          <div className="body">
+            <form className="body__bottom">
+                <div className="body__bottom__elem">
+                  <div>한줄 소개</div>
+                  <input type="text"></input>
+                </div>
+                <div className="body__bottom__elem">
+                  <div>비고</div>
+                  <input type="text" style={{height: 5+'rem'}}></input>
+                </div>
+                
+            </form>
+          </div>
+          <div className="button">
+            <Button text={'수정하기'} className="modalBtn"></Button>
+            <Button text={'삭제하기'} className="modalBtn"></Button>
+          </div>
         </div>
-        <div className="button">
-          <Button text={'수정하기'} className="modalBtn"></Button>
-          <Button text={'삭제하기'} className="modalBtn"></Button>
-        </div>
-      </div>
-    </StyledModal>
+      </StyledModal>
+    </>
   );
 };
 
