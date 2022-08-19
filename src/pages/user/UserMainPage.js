@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import Logo from '../../styles/imgs/icon/Logo.png';
 import Enterlist from "../../components/Enterlist";
+import blueline from "../../styles/imgs/icon/blueline.png";
 
 const WhiteBox = styled.div`
   position: relative;
@@ -64,7 +65,7 @@ const UserMainPage = () => {
           <div>단체 코드를 받으셨나요?</div>
           <div style={{ fontWeight:"bold"}}>가입하기</div>
         </div>
-        <hr style={{backgroundColor: "#2B78FF"}}/>
+        <img src={blueline} alt="" style={{width:"34rem"}} />
       </WhiteBox>
     </BackgroundTemplate>
   );
