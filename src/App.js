@@ -1,6 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
-import { Reset } from 'styled-reset';
+import { Route, Switch } from 'react-router-dom';
 
 //import page
 import LoginLandingPage from './pages/LoginLandingPage';
@@ -16,25 +15,49 @@ import UserRegisterCheck3 from './pages/user/UserRegisterCheck3';
 import AdminHomePage from './pages/admin/AdminHomePage';
 import AdminAttendPage from './pages/admin/AdminAttendPage';
 import AdminMembersPage from './pages/admin/AdminMembersPage';
+import GroupDetail from './components/GroupDetail';
 
 const App = () => {
   return (
-    <>
-      <Reset />
+    <Switch>
       <Route component={LoginLandingPage} path="/" exact />
-      <Route component={AdminLoginPage} path="/admin/login" />
+      <Route component={AdminLoginPage} path="/admin/login" exact />
       <Route component={AdminHomePage} path="/admin/home" exact />
       <Route component={AdminAttendPage} path="/admin/attendance" />
       <Route component={UserLoginPage} path="/user/login" exact />
       <Route component={AdminRegisterPage} path="/admin/register" exact />
-      <Route component={AdminRegisterCheck1} path="/admin/register/check1" />
-      <Route component={AdminRegisterCheck2} path="/admin/register/check2" />
-      <Route component={AdminRegisterCheck3} path="/admin/register/check3" />
-      <Route component={UserRegisterCheck1} path="/user/register/check1" />
-      <Route component={UserRegisterCheck2} path="/user/register/check2" />
-      <Route component={UserRegisterCheck3} path="/user/register/check3" />
-      <Route component={AdminMembersPage} path="/admin/members" />
-    </>
+      <Route
+        component={AdminRegisterCheck1}
+        path="/admin/register/check1"
+        exact
+      />
+      <Route
+        component={AdminRegisterCheck2}
+        path="/admin/register/check2"
+        exact
+      />
+      <Route
+        component={AdminRegisterCheck3}
+        path="/admin/register/check3"
+        exact
+      />
+      <Route
+        component={UserRegisterCheck1}
+        path="/user/register/check1"
+        exact
+      />
+      <Route
+        component={UserRegisterCheck2}
+        path="/user/register/check2"
+        exact
+      />
+      <Route
+        component={UserRegisterCheck3}
+        path="/user/register/check3"
+        exact
+      />
+      <Route component={AdminMembersPage} path="/admin/members" exact />
+    </Switch>
   );
 };
 

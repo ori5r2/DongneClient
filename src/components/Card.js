@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../styles/pallete';
 import importImg from '../styles/importImg';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const StyledCard = styled.div`
   position: relative;
@@ -60,14 +61,25 @@ const StyledCard = styled.div`
   }
 `;
 
-const Card = ({ subTitle, onClick, title, img_src, to, history, ...rest }) => {
-  // const onClick = (e) => {
-  //   if (to) {
-  //     history.push(to);
-  //   } else {
-  //     history.push('/');
-  //   }
-  // };
+const Card = ({
+  subTitle,
+  onClickForDetail,
+  onClickForGroup,
+  title,
+  img_src,
+  groupId,
+  to,
+  ...rest
+}) => {
+  const location = useLocation();
+  const history = useHistory();
+  const onClickCard = (e) => {
+    if (groupId) {
+      history.push(`${to}`);
+    } else {
+      history.push(location);
+    }
+  };
 
   return (
     <StyledCard {...rest}>
@@ -76,10 +88,10 @@ const Card = ({ subTitle, onClick, title, img_src, to, history, ...rest }) => {
         <div className="title">{title}</div>
       </div>
       <div className="card__body">
-        <button className="card__button" onClick={onClick}>
+        <button className="card__button" onClick={onClickForDetail}>
           자세히 보기
         </button>
-        <button className="card__button" onClick={onClick}>
+        <button className="card__button" onClick={onClickCard}>
           출결 현황 보기
         </button>
       </div>

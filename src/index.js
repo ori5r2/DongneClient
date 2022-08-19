@@ -6,10 +6,12 @@ import reportWebVitals from './reportWebVitals';
 
 // router
 import { BrowserRouter } from 'react-router-dom';
+import { Reset } from '../node_modules/styled-reset/lib/index';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
+    <Reset />
     <App />
   </BrowserRouter>,
 );

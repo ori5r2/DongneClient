@@ -4,6 +4,7 @@ import palette from '../styles/pallete';
 import styled from 'styled-components';
 import copy from '../styles/imgs/icon/home_file-copy.png';
 import importImg from '../styles/importImg';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const StyledTag = styled.div`
   background-color: #2b78ff;
@@ -64,9 +65,18 @@ const StyledButton = styled.button`
     color: #cccccc;
   }
 `;
-const TokenImageButton = ({ isOn, text, img_src }) => {
+const TokenImageButton = ({ isOn, text, img_src, to }) => {
+  const history = useHistory();
+  const location = useLocation();
+  const onClickTogle = () => {
+    if (to) {
+      history.push(`admin/${to}`);
+    } else {
+      history.push(location);
+    }
+  };
   return (
-    <StyledButton>
+    <StyledButton onClick={onClickTogle}>
       <div className="buttonLeft">
         <img src={img_src} />
         <div className={isOn ? 'on' : 'off'}>{text}</div>
@@ -159,6 +169,7 @@ const SidebarTemplate = ({ isAttendance, children }) => {
                       ? importImg.attendIdentityOff
                       : importImg.attendIdentityOn
                   }
+                  // to={'members'}
                 />
                 <TokenImageButton
                   isOn={isAttendance}
@@ -168,6 +179,7 @@ const SidebarTemplate = ({ isAttendance, children }) => {
                       ? importImg.attendAssignmentOn
                       : importImg.attendAssignmentOff
                   }
+                  // to={'attendance'}
                 />
               </div>
             </footer>
