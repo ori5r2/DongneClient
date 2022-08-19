@@ -7,29 +7,32 @@ import { useHistory } from 'react-router-dom';
 const RegisterSelect = (props) => {
     const history = useHistory();
     const RegisterSelectBtn = styled.div`
-        width: 17rem;
-        height: 21rem;
+        width: 20rem;
+        height: 22rem;
         background-color: #ffffff;
         border-radius: 10px;
         outline: none;
-        margin-bottom: 0.625rem;
+        margin-bottom: 1rem;
         margin-top: -0.625rem;
-        
+        padding-top: 2rem;
+        padding-bottom: 2rem;
 
         .title{
             font-family: 'Pretendard ExtraBold';
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            padding-bottom: 0.3rem;
         }
 
         .subtitle{
             padding-top: 0.2rem;
-            font-size: 1rem;
+            padding-bottom: 0.5rem;
+            font-size: 1.2rem;
             font-weight: lighter;
             color: ${palette[2]};
         }
 
         .explain{
-            padding-top: 0.5rem;
+            padding-top: 1rem;
             color: ${palette[4]};
             font-size: 0.8rem;
         }
@@ -39,9 +42,9 @@ const RegisterSelect = (props) => {
         }
     `;
     const StyledImg = styled.img`
-    width: 3.5rem;
+    width: 4rem;
     margin-top: 1rem;
-    margin-bottom: -0.5rem;
+    margin-bottom: 0.5rem;
     color: ${palette[1]};
   `;
 
@@ -89,6 +92,7 @@ const RegisterSelect = (props) => {
           fullWidth
           history={history}
           to={nextlink}
+          style={{height:"3rem"}}
         />
 
     </div>

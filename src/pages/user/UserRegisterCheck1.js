@@ -23,7 +23,7 @@ const WhiteBox = styled.div`
 
   .pagenumber {
     position: absolute;
-    left: 36rem;
+    left: 48rem;
     top: 0.6rem;
     width: 2.3rem;
     height:1.5rem;

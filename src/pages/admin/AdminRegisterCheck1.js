@@ -9,9 +9,6 @@ import { Link } from 'react-router-dom';
 
 const WhiteBox = styled.div`
   position: relative;
-  /* width: 50vh; */
-  
-  /* text-align: center; */
   font-family: 'Pretendard Regular';
   font-size: 1rem;
   color: ${palette[3]};
@@ -26,7 +23,7 @@ const WhiteBox = styled.div`
 
   .pagenumber {
     position: absolute;
-    left: 36rem;
+    left: 48rem;
     top: 0.6rem;
     width: 2.3rem;
     height:1.5rem;

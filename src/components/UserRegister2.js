@@ -7,8 +7,8 @@ import { useHistory, useLocation } from 'react-router-dom';
 import palette from '../styles/pallete';
 
 const WhiteBox = styled.div`
-    width: 35rem;
-    height: 28rem;
+    width: 45rem;
+    height: 35rem;
     border-radius: 10px;
     padding-left: 3rem;
     padding-right: 3rem;
@@ -33,9 +33,10 @@ const WhiteBox = styled.div`
     }
 
     .information{
-        font-size: 0.7rem;
+        font-size: 0.8rem;
         ::placeholder{
-            color: #AAAAAA;
+          padding: 0.3rem;
+          color: #AAAAAA;
         }
     }
 
@@ -60,6 +61,10 @@ const WhiteBox = styled.div`
     .twin{
         display: flex;
         flex-direction: row;
+    }
+
+    .list{
+        padding-bottom: 1rem;
     }
 `
 
@@ -112,118 +117,124 @@ function UserRegister2(props) {
     return (
         <WhiteBox> 
             <div className='bigoutline'>
-                <div className='twin'>
-                    <div className='outline'>
-                        <div className='inputInformation'>
-                            <img src={Email} alt=""/> 
-                                이름&nbsp; <span style={{ color: palette[3] }}>(필수)</span>
-                        </div>
-                        <div className='check'>
-                            <input 
-                                onChange={(e)=>{
-                                    setName(e.target.value);
-                                }}
+                <div className='list'>
+                    <div className='twin'>
+                        <div className='outline'>
+                            <div className='inputInformation'>
+                                <img src={Email} alt=""/> 
+                                    이름&nbsp; <span style={{ color: palette[3] }}>(필수)</span>
+                            </div>
+                            <div className='check'>
+                                <input 
+                                    onChange={(e)=>{
+                                        setName(e.target.value);
+                                    }}
 
-                                value={name}
-                                type={"text"} 
-                                className="information" 
-                                placeholder="예) 김동네"
-                                style={{width: "16.4rem", 
-                                        height: "2rem",
-                                        backgroundColor:"#F3F3F3",
-                                        border: "none",
-                                        borderRadius: "3px",
-                                }}
-                            />
+                                    value={name}
+                                    type={"text"} 
+                                    className="information" 
+                                    placeholder="예) 김동네"
+                                    style={{width: '21.2rem',
+                                            height: '2.5rem',
+                                            backgroundColor:"#F3F3F3",
+                                            border: "none",
+                                            borderRadius: "3px",
+                                    }}
+                                />
+                            </div>
+                        </div>
+
+                        <div className='outline'>
+                            <div className='inputInformation'>
+                                <img src={Email} alt=""/> 
+                                    생년월일&nbsp; <span style={{ color: palette[3] }}>(필수)</span>
+                            </div>
+                            <div className='check'>
+                                <input 
+                                    onChange={(e)=>{
+                                        setBirth(e.target.value);
+                                    }}
+
+                                    value={birth}
+                                    type={"number"} 
+                                    className="information" 
+                                    placeholder="ex) 2001.01.01"
+                                    style={{width: '21.2rem',
+                                            height: '2.5rem',
+                                            backgroundColor:"#F3F3F3",
+                                            border: "none",
+                                            borderRadius: "3px",
+                                    }}
+                                />
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <div className='outline'>
-                        <div className='inputInformation'>
-                            <img src={Email} alt=""/> 
-                                생년월일&nbsp; <span style={{ color: palette[3] }}>(필수)</span>
+                <div className='list'>
+                    <div className='twin'>
+                        <div className='outline'>
+                            <div className='inputInformation'>
+                                <img src={Lock} alt=""/> 
+                                    학교&nbsp; <span style={{ color: palette[3] }}>(필수)</span>
+                            </div>
+                            <div className='check'>
+                                <input 
+                                    onChange={(e)=>{
+                                        setSchool(e.target.value);
+                                    }}
+
+                                    value={school}
+                                    type={"text"} 
+                                    className="information" 
+                                    placeholder="재학중인 학교를 입력해주세요."
+                                    style={{width: "15.7rem", 
+                                            height: "2.5rem",
+                                            backgroundColor:"#F3F3F3",
+                                            border: "none",
+                                            borderRadius: "3px",
+                                    }}
+                                />
+                                <div className='search'>
+                                <Button
+                                    text="학교검색"
+                                    fullWidth
+                                    history={history}
+                                    to={nextlink}
+                                    style={{height: "2.5rem", width: "5rem", borderRadius: "3px"}}
+                                />
+                            </div>
+                            </div>
                         </div>
-                        <div className='check'>
-                            <input 
-                                onChange={(e)=>{
-                                    setBirth(e.target.value);
-                                }}
+                        <div className='outline'>
+                            <div className='inputInformation'>
+                                <img src={Email} alt=""/> 
+                                    전화번호&nbsp; <span style={{ color: palette[3] }}>(필수)</span>
+                            </div>
+                            <div className='check'>
+                                <input 
+                                    onChange={(e)=>{
+                                        setPhone(e.target.value);
+                                    }}
 
-                                value={birth}
-                                type={"number"} 
-                                className="information" 
-                                placeholder="ex) 2001.01.01"
-                                style={{width: "16.4rem", 
-                                        height: "2rem",
-                                        backgroundColor:"#F3F3F3",
-                                        border: "none",
-                                        borderRadius: "3px",
-                                }}
-                            />
+                                    value={phone}
+                                    type={"number"} 
+                                    className="information" 
+                                    placeholder="ex) 010-xxxx-xxxx"
+                                    style={{width: '21.2rem',
+                                    height: '2.5rem',
+                                            backgroundColor:"#F3F3F3",
+                                            border: "none",
+                                            borderRadius: "3px",
+                                    }}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div className='twin'>
-                    <div className='outline'>
-                        <div className='inputInformation'>
-                            <img src={Lock} alt=""/> 
-                                학교&nbsp; <span style={{ color: palette[3] }}>(필수)</span>
-                        </div>
-                        <div className='check'>
-                            <input 
-                                onChange={(e)=>{
-                                    setSchool(e.target.value);
-                                }}
-
-                                value={school}
-                                type={"text"} 
-                                className="information" 
-                                placeholder="재학중인 학교를 입력해주세요."
-                                style={{width: "11rem", 
-                                        height: "2rem",
-                                        backgroundColor:"#F3F3F3",
-                                        border: "none",
-                                        borderRadius: "3px",
-                                }}
-                            />
-                            <div className='search'>
-                            <Button
-                                text="학교검색"
-                                fullWidth
-                                history={history}
-                                to={nextlink}
-                                style={{height: "2.2rem", width: "5rem", borderRadius: "3px"}}
-                            />
-                        </div>
-                        </div>
-                    </div>
-                    <div className='outline'>
-                        <div className='inputInformation'>
-                            <img src={Email} alt=""/> 
-                                전화번호&nbsp; <span style={{ color: palette[3] }}>(필수)</span>
-                        </div>
-                        <div className='check'>
-                            <input 
-                                onChange={(e)=>{
-                                    setPhone(e.target.value);
-                                }}
-
-                                value={phone}
-                                type={"number"} 
-                                className="information" 
-                                placeholder="ex) 010-xxxx-xxxx"
-                                style={{width: "16.4rem", 
-                                        height: "2rem",
-                                        backgroundColor:"#F3F3F3",
-                                        border: "none",
-                                        borderRadius: "3px",
-                                }}
-                            />
-                        </div>
-                    </div>
-                </div>
-                     <div className='inputInformation'>
+                <div className='list'>
+                    <div className='inputInformation'>
                         <img src={Lock} alt=""/> 
                             주소&nbsp; <span style={{ color: palette[3] }}>(필수)</span>
                     </div>
@@ -235,8 +246,8 @@ function UserRegister2(props) {
                             value={address}
                             type={"text"} 
                             className="information" 
-                            style={{width: "29rem", 
-                                    height: "2rem",
+                            style={{width: "38rem", 
+                                    height: "2.5rem",
                                     backgroundColor:"#F3F3F3",
                                     border: "none",
                                     borderRadius: "3px",
@@ -248,39 +259,41 @@ function UserRegister2(props) {
                                 fullWidth
                                 history={history}
                                 to={nextlink}
-                                style={{height: "2.2rem", width: "6rem", borderRadius: "3px"}}
+                                style={{height: "2.5rem", width: "6rem", borderRadius: "3px"}}
                             />
                         </div>
                     </div>
-                    
+                </div>
                 
+                <div className='list'>
+                    <div className='outline'>
+                        <div className='inputInformation'>
+                            <div>한 줄 소개 &nbsp; <span style={{ color: "#AAAAAA" }}>(선택)</span></div>
+                        </div>
+                        <div>
+                            <textarea 
+                                onChange={(e)=>{
+                                    setSelfintro(e.target.value);
+                                }}
 
-                <div className='outline'>
-                    <div className='inputInformation'>
-                        <div>한 줄 소개 &nbsp; <span style={{ color: "#AAAAAA" }}>(선택)</span></div>
-                    </div>
-                    <div>
-                        <textarea 
-                            onChange={(e)=>{
-                                setSelfintro(e.target.value);
-                            }}
-
-                            value={selfintro}
-                            type={"text"} 
-                            style={{width: "34.8rem", 
-                                    height: "3.5rem",
-                                    backgroundColor: "#F3F3F3",
-                                    border: "none",
-                                    borderRadius: "3px",
-                                    resize: "none" 
-                            }}
-                        />
+                                value={selfintro}
+                                type={"text"} 
+                                style={{width: "44.7rem", 
+                                        height: "3.5rem",
+                                        backgroundColor: "#F3F3F3",
+                                        border: "none",
+                                        borderRadius: "3px",
+                                        resize: "none" 
+                                }}
+                            />
+                        </div>
                     </div>
                 </div>
 
             <div onClick={()=>{
                 handleApi();
-            }}>
+            }} style={{paddingTop: "1rem"}}
+            >
                 {Ok ? (
                     <Button
                         text="가입 완료하기"
@@ -288,7 +301,7 @@ function UserRegister2(props) {
                         history={history}
                         to={nextpage}
                         props={{name: name, birth: birth, school: school, phone:phone, address:address, selfintro:selfintro}}
-                        style={{height: "2.5rem", borderRadius: "3px"}}
+                        style={{height: "2.7rem", borderRadius: "3px"}}
                     />
                 ) : ( 
                     <Button
@@ -296,7 +309,7 @@ function UserRegister2(props) {
                         fullWidth
                         history={history}
                         to={presentpage}
-                        style={{height: "2.5rem", borderRadius: "3px"}}
+                        style={{height: "2.7rem", borderRadius: "3px"}}
                     />
             ) }
             </div>

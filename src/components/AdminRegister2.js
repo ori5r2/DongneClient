@@ -7,8 +7,8 @@ import palette from '../styles/pallete';
 import { Axios } from '../../node_modules/axios/index';
 
 const WhiteBox = styled.div`
-  width: 35rem;
-  height: 28rem;
+  width: 45rem;
+  height: 35rem;
   border-radius: 10px;
   padding-left: 3rem;
   padding-right: 3rem;
@@ -29,18 +29,19 @@ const WhiteBox = styled.div`
     display: flex;
     align-items: center;
     font-weight: bold;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.8rem;
   }
 
-  .information {
-    font-size: 0.7rem;
-    ::placeholder {
-      color: #aaaaaa;
-    }
+  .information{
+    font-size: 0.8rem;
+      ::placeholder{
+          padding: 0.3rem;
+          color: #AAAAAA;
+      }
   }
 
   .outline {
-    padding-bottom: 1rem;
+    padding-bottom: 1.2rem;
     padding-right: 1.8rem;
   }
 
@@ -49,12 +50,8 @@ const WhiteBox = styled.div`
     flex-direction: row;
   }
 
-  .idcheck {
-    padding-left: 1rem;
-  }
-
   .bigoutline {
-    padding-top: 1.5rem;
+    padding-top: 2rem;
   }
 
   .twin {
@@ -117,7 +114,7 @@ function AdminRegister2(props) {
             </div>
           </div>
           <div>
-            <img src={category} alt="" style={{ width: '5rem' }} />
+            <img src={category} alt="" style={{ width: '5rem', paddingBottom:"1rem"}} />
           </div>
         </div>
 
@@ -139,8 +136,8 @@ function AdminRegister2(props) {
                 className="information"
                 placeholder="날짜를 입력하세요."
                 style={{
-                  width: '16.4rem',
-                  height: '2rem',
+                  width: '21.2rem',
+                  height: '2.5rem',
                   backgroundColor: '#F3F3F3',
                   border: 'none',
                   borderRadius: '3px',
@@ -166,8 +163,8 @@ function AdminRegister2(props) {
                 className="information"
                 placeholder="지역을 입력하세요."
                 style={{
-                  width: '16.4rem',
-                  height: '2rem',
+                  width: '21.2rem',
+                  height: '2.5rem',
                   backgroundColor: '#F3F3F3',
                   border: 'none',
                   borderRadius: '3px',
@@ -191,8 +188,8 @@ function AdminRegister2(props) {
               value={introduce}
               type={'text'}
               style={{
-                width: '34.8rem',
-                height: '5rem',
+                width: '44.7rem',
+                height: '6rem',
                 backgroundColor: '#F3F3F3',
                 border: 'none',
                 borderRadius: '3px',
@@ -220,8 +217,8 @@ function AdminRegister2(props) {
               type={'text'}
               className="information"
               style={{
-                width: '34.8rem',
-                height: '2rem',
+                width: "44.7rem", 
+                height: "2.5rem",
                 backgroundColor: '#F3F3F3',
                 border: 'none',
                 borderRadius: '3px',
@@ -236,7 +233,7 @@ function AdminRegister2(props) {
         <div
           onClick={() => {
             handleApi();
-          }}
+          }} style={{paddingTop: "1rem"}}
         >
           {Ok ? (
             <Button
@@ -246,7 +243,7 @@ function AdminRegister2(props) {
               history={history}
               to={nextpage}
               props={{ year: year, area: area, introduce: introduce, url: url }}
-              style={{ height: '2.5rem', borderRadius: '3px' }}
+              style={{ height: '2.7rem', borderRadius: '3px' }}
             />
           ) : (
             <Button
@@ -254,30 +251,10 @@ function AdminRegister2(props) {
               fullWidth
               history={history}
               to={presentpage}
-              style={{ height: '2.5rem', borderRadius: '3px' }}
+              style={{ height: '2.7rem', borderRadius: '3px' }}
             />
           )}
         </div>
-
-        {/* {Ok ? (
-                    <Button
-                        onClick={handleApi}
-                        text="가입 완료하기"
-                        fullWidth
-                        history={history}
-                        to={nextpage}
-                        props={{year: year, area: area, introduce: introduce, url:url}}
-                        style={{height: "2.5rem", borderRadius: "3px"}}
-                    />
-                ) : ( 
-                    <Button
-                        text="가입 완료하기"
-                        fullWidth
-                        history={history}
-                        to={presentpage}
-                        style={{height: "2.5rem", borderRadius: "3px"}}
-                    />
-                ) } */}
       </div>
     </WhiteBox>
   );
