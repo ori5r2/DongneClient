@@ -1,7 +1,7 @@
 import React from 'react';
 import BackgroundTemplate from '../../template/BackgroundTemplate';
 import styled from 'styled-components';
-import AdminMypage from '../../components/AdminMypage';
+import AdminMypageComponent from '../../components/AdminMypageComponent';
 import { Link } from 'react-router-dom';
 import HomePageTemplate from '../../template/HomePageTemplate';
 
@@ -32,7 +32,7 @@ const UserRegisterCheck3 = () => {
     <BackgroundTemplate style={{ zIndex: 0 }}>
     <HomePageTemplate style={{ zIndex: 1 }}>
         <WhitBox style={{ zIndex: 2 }}>
-            <AdminMypage />
+            <AdminMypageComponent />
      </WhitBox>
     </HomePageTemplate>
     </BackgroundTemplate>
