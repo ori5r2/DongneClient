@@ -13,13 +13,15 @@ const WhiteBox = styled.div`
     }
     .Clubname{
         display: flex;
-        flex-direction: column;
-        justify-content: center;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
         width: 25rem;
         height: 3rem;
         border: 1px solid #2B78FF;
         border-radius: 10px 0 0 10px;
-        font-weight: 900;
+        font-family: 'Pretendard Bold';
+        font-size: 1.2rem;
     }
 
     .btn{
@@ -33,10 +35,14 @@ const WhiteBox = styled.div`
 
 function Enterlist(props) {
     const name = props.name;
+    const img = props.img;
     return (
         <WhiteBox> 
             <div className='list'>
-            <div className='Clubname'> {/* <img /> */} {name} </div>
+            <div className='Clubname'> 
+                <img src={img} alt="" style={{padding:"0.5rem", height:"2.5rem"}} /> 
+                {name}
+            </div>
             <Button 
               className="btn"
               text={"입장하기"}

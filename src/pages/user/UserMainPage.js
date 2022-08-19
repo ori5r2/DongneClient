@@ -8,6 +8,8 @@ import { useHistory } from 'react-router-dom';
 import Logo from '../../styles/imgs/icon/Logo.png';
 import Enterlist from "../../components/Enterlist";
 import blueline from "../../styles/imgs/icon/blueline.png";
+import umcLogo from '../../styles/imgs/icon/umcLogo.png';
+import cluvmLogo from '../../styles/imgs/icon/cluvmLogo.png';
 
 const WhiteBox = styled.div`
   position: relative;
@@ -56,9 +58,9 @@ const UserMainPage = () => {
           Dongne 님의 워크스페이스
         </div>
         <div className='outline'>
-          <Enterlist name="UMC" />
-          <Enterlist name="Dongne" />
-          <Enterlist name="CluvM" />
+          <Enterlist img={umcLogo} name="UMC" />
+          <Enterlist img={Logo} name="Dongne" />
+          <Enterlist img={cluvmLogo} name="CluvM" />
         </div>
 
         <div className='ClubCode'>
