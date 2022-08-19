@@ -13,6 +13,7 @@ import attendIdentityOff from './imgs/icon/attend_identity_off.png';
 import attendCheck from './imgs/icon/attend_check.png';
 import cardBack from './imgs/background/card_background.jpeg';
 import attendBackChevron from './imgs/icon/attend_back_chevron.png';
+import membersProfile from './imgs/icon/members_profile.png';
 
 export const importImg = {
   calenderIcon,
@@ -30,6 +31,7 @@ export const importImg = {
   attendCheck,
   cardBack,
   attendBackChevron,
+  membersProfile,
 };
 
 export default importImg;
