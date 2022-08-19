@@ -1,44 +1,51 @@
 import React, {useState, useEffect}  from 'react';
-import Email from '../styles/imgs/icon/Email.png';
 import Lock from '../styles/imgs/icon/Lock.png';
 import person from '../styles/imgs/icon/person.png';
 import profile from '../styles/imgs/icon/profile.png';
 import Button from './Button';
 import styled from 'styled-components';
 import { useHistory, useLocation } from 'react-router-dom';
-import palette from '../styles/pallete';
-import Register1 from './Register1';
+import line from '../styles/imgs/icon/line.png'
+
 
 const WhiteBox = styled.div`
-    width: 85rem;
-    height: 38rem;
+    width: 65rem;
+    height: 42rem;
     border-radius: 28px;
-    padding-left: 3rem;
-    padding-right: 3rem;
     font-size: 1rem;
-    background: linear-gradient(180deg, #FFFFFF 0%, rgba(251, 251, 251, 0) 100%);
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(40px);
-    /* Note: backdrop-filter has minimal browser support */
+    
 
-    color: #333333; 
+    .frame{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 
-    .ExtraBold {
-    font-weight: bold;
-    font-size: 2rem;
-    text-align: center;
-    padding-bottom: 1rem;
+    .text{
+        font-size: 2rem;
+        text-align: center;
+        font-family: 'Pretendard Regular';
+        display: flex;
+        justify-content: flex-start;
+        padding-bottom: 2rem;
+    }
+
+    .name{
+        font-family: 'Pretendard Bold';
+        color: #2B78FF;
     }
 
     .content{
         display: flex;
         flex-direction: row;
+        justify-content: center;
     }
 
     .part1{
         display: flex;
         flex-direction: column;
         padding-right: 5rem;
+        line-height: 200%;
     }
     .part2{
         width: 50rem;
@@ -46,24 +53,46 @@ const WhiteBox = styled.div`
         flex-direction: column;
     }
 
-    & img {
-        padding-right: 1rem;
-        width: 1.5rem;
+    .icon{
+        padding-right: 0.5rem;
+        width:2rem;
     }
 
+    .between{
+        padding-right: 1rem;
+    }
     .Basic{
+        display: flex;
+        align-items: center;
+        padding-bottom: 0.8rem;
+    }
+
+    .category{
+        width: 7rem;
+        font-family: 'Pretendard ExtraBold';
+        padding-right: 3rem;
         display: flex;
         align-items: center;
         padding-bottom: 0.5rem;
     }
 
-    .category{
-        width: 6rem;
-        font-family: 'Pretendard ExtraBold';
-        padding-right: 3rem;
+    .categoryItem{
+        height: 2rem;
+        background: #2B78FF;
+        border-radius: 40px;
+        font-family: 'Pretendard';
+        font-size: 1rem;
+        color: #CEE7F6;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 0 1rem;
+        margin-right: 0.5rem;
     }
+
     .information{
-        font-size: 0.7rem;
+        font-size: 0.9rem;
         ::placeholder{
             color: #2D3B5C;
             padding: 0.5rem 0.8rem;
@@ -84,6 +113,17 @@ const WhiteBox = styled.div`
         flex-direction: row;
     }
 `
+const StyledAvatar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10rem;
+  width: 10rem;
+  background-color: #f7f7f7;
+  border: 0.4rem solid white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 50% 50% 50% 0%;
+`;
 
 function Mypage(props) {
     const history  = useHistory();
@@ -98,21 +138,25 @@ function Mypage(props) {
     const [intro, setIntro] = useState("");
 
     return (
-        <WhiteBox> 
+        <WhiteBox>
             <div className='frame'>
-                <div className="ExtraBold" style={{ marginBottom: '0.5rem' }}>
-                    <span style={{color: "#2B78FF", fontWeight: "bold"}}>가나다</span>님의 마이페이지
+                <div className="text"style={{ marginBottom: '0.5rem' }}>
+                    <span className='name'>가나다</span>님의 마이페이지
                 </div>
 
                 <div className='content'>
                     <div className='part1'>
-                        프로필
+                        <StyledAvatar style={{color:"#2B78FF", fontSize:"1.5rem", textAlign:"center"}}>
+                            {/* todo: 프로필 사진 */}
+                            프로필<br />사진영역
+                        </StyledAvatar>
                     </div>
 
                     <div className='part2'>
                         <div className='Basic'>
-                            <span  className="category"> <img src={person} /> 이메일</span>
-                            <input 
+                            <span  className="category"> <img src={person} alt="" className='icon' /> 이메일</span>
+                            <div className='between'>
+                                <input 
                                         onChange={(e)=>{
                                             setEmail(e.target.value);
                                         }}
@@ -122,83 +166,96 @@ function Mypage(props) {
                                         className="information" 
                                         placeholder="abcdef@naver.com"
                                         style={{width: "33.5rem", 
-                                                height: "2rem",
+                                                height: "2.5rem",
                                                 backgroundColor:"#F3F3F3",
                                                 border: "none",
                                                 borderRadius: "3px",
-                                        }}
+                                            }}
                                     />
+                            </div>
                             <div className='btnstyle'>
                                 <Button
-                                            text="수정하기"
-                                            fullWidth
-                                            history={history}
-                                            // to={nextlink}
-                                            style={{height: "2rem", width: "5rem", borderRadius: "3px", margin:"0"}}
-                                        />
+                                        text="수정하기"
+                                        fullWidth
+                                        history={history}
+                                        // to={nextlink}
+                                        style={{height: "2.5rem", width: "5rem", borderRadius: "3px", margin:"0"}}
+                                    />
                             </div>
                         </div>
 
                         <div className='Basic'>
-                            <span  className="category"> <img src={profile} />이름</span>
-                            <input 
-                                        onChange={(e)=>{
-                                            setName(e.target.value);
-                                        }}
+                            <span  className="category"> <img src={profile} alt="" className='icon' />이름</span>
+                            <div className='between'>
+                                <input 
+                                    onChange={(e)=>{
+                                        setName(e.target.value);
+                                    }}
 
-                                        value={name}
-                                        type={"text"} 
-                                        className="information" 
-                                        placeholder="동네"
-                                        style={{width: "33.5rem", 
-                                                height: "2rem",
-                                                backgroundColor:"#F3F3F3",
-                                                border: "none",
-                                                borderRadius: "3px",
-                                        }}
-                                    />
+                                    value={name}
+                                    type={"text"} 
+                                    className="information" 
+                                    placeholder="동네"
+                                    style={{width: "33.5rem", 
+                                            height: "2.5rem",
+                                            backgroundColor:"#F3F3F3",
+                                            border: "none",
+                                            borderRadius: "3px",
+                                    }}
+                                />
+                            </div>
                 
                             <Button
-                                        text="수정하기"
-                                        fullWidth
-                                        history={history}
-                                        // to={nextlink}
-                                        style={{height: "2rem", width: "5rem", borderRadius: "3px", margin:"0"}}
-                                    />
+                                    text="수정하기"
+                                    fullWidth
+                                    history={history}
+                                    // to={nextlink}
+                                    style={{height: "2.5rem", width: "5rem", borderRadius: "3px", margin:"0"}}
+                            />
                         </div>
 
                         <div className='Basic'>
-                            <span  className="category"> <img src={Lock} />비밀번호</span>
-                            <input 
-                                        onChange={(e)=>{
-                                            setPw(e.target.value);
-                                        }}
+                            <span  className="category"> <img src={Lock} alt="" className='icon' />비밀번호</span>
+                            <div className='between'>
+                                <input 
+                                    onChange={(e)=>{
+                                        setPw(e.target.value);
+                                    }}
 
-                                        value={pw}
-                                        type={"password"} 
-                                        className="information" 
-                                        placeholder="******"
-                                        style={{width: "33.5rem", 
-                                                height: "2rem",
-                                                backgroundColor:"#F3F3F3",
-                                                border: "none",
-                                                borderRadius: "3px",
-                                        }}
-                                    />
-                
+                                    value={pw}
+                                    type={"password"} 
+                                    className="information" 
+                                    placeholder="******"
+                                    style={{width: "33.5rem", 
+                                            height: "2.5rem",
+                                            backgroundColor:"#F3F3F3",
+                                            border: "none",
+                                            borderRadius: "3px",
+                                    }}
+                                />
+                            </div>
+
                             <Button
                                         text="수정하기"
                                         fullWidth
                                         history={history}
                                         // to={nextlink}
-                                        style={{height: "2rem", width: "5rem", borderRadius: "3px", margin:"0"}}
+                                        style={{height: "2.5rem", width: "5rem", borderRadius: "3px", margin:"0"}}
                                     />
                         </div>
+                        
+                        
+                        <img src={line} alt="" style={{width:"50rem", height:"0.3rem", paddingTop:"1rem", paddingBottom:"1rem"}}/>
 
-                        <hr />
+
+                        <div className='Basic'>
+                            <span className="category">단체 카테고리</span>
+                            <div className='categoryItem'>#IT</div>
+                            <div className='categoryItem'>연합동아리</div>
+                        </div>
 
                         <div className='twin'>
-                            < div className='Basic' style={{paddingRight:"3rem"}}>
+                            < div className='Basic' style={{paddingRight:"1.5rem"}}>
                                 <span className="category">학교</span>
                                 <div className='check'>
                                     <input 
@@ -209,8 +266,8 @@ function Mypage(props) {
                                         value={school}
                                         type={"text"} 
                                         className="information" 
-                                        style={{width: "13rem", 
-                                                height: "2rem",
+                                        style={{width: "14rem", 
+                                                height: "2.5rem",
                                                 backgroundColor:"#F3F3F3",
                                                 border: "none",
                                                 borderRadius: "3px",
@@ -230,8 +287,8 @@ function Mypage(props) {
                                         value={number}
                                         type={"number"} 
                                         className="information" 
-                                        style={{width: "13rem", 
-                                                height: "2rem",
+                                        style={{width: "14rem", 
+                                                height: "2.5rem",
                                                 backgroundColor:"#F3F3F3",
                                                 border: "none",
                                                 borderRadius: "3px",
@@ -250,8 +307,8 @@ function Mypage(props) {
                                 value={area}
                                 type={"text"} 
                                 className="information" 
-                                style={{width: "13rem", 
-                                        height: "2rem",
+                                style={{width: "14rem", 
+                                        height: "2.5rem",
                                         backgroundColor:"#F3F3F3",
                                         border: "none",
                                         borderRadius: "3px",
@@ -268,8 +325,8 @@ function Mypage(props) {
                                 value={address}
                                 type={"text"} 
                                 className="information" 
-                                style={{width: "38.5rem", 
-                                        height: "2rem",
+                                style={{width: "41.5rem", 
+                                        height: "2.5rem",
                                         backgroundColor:"#F3F3F3",
                                         border: "none",
                                         borderRadius: "3px",
@@ -286,8 +343,8 @@ function Mypage(props) {
 
                                 value={intro}
                                 type={"text"} 
-                                style={{width: "38.5rem", 
-                                        height: "7rem",
+                                style={{width: "41.5rem", 
+                                        height: "5rem",
                                         backgroundColor: "#F3F3F3",
                                         border: "none",
                                         borderRadius: "3px",
@@ -295,9 +352,14 @@ function Mypage(props) {
                                 }}
                             />
                         </div>
-
+                         
                         <Button 
-                            text="개인 정보 수정하기"
+                            text="단체 정보 수정하기"
+                            style={{
+                                borderRadius:"4px",
+                                width:"50.1rem",
+                                marginTop:"1.5rem"
+                            }}
                         />
                     </div>
                 </div> 
