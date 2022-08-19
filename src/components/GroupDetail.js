@@ -6,6 +6,8 @@ import data from '../data';
 import { useState } from 'react';
 import AttendModal from './AttendModal';
 import { Route, useLocation, useRouteMatch } from 'react-router-dom';
+import Button from './Button';
+import EventButton from './EventButton';
 const StyledAttendanceBody = styled.div`
   /* position: relative; */
   width: inherit;
@@ -33,6 +35,10 @@ const StyledAttendanceBody = styled.div`
     align-items: center;
     font-size: 1.25rem;
   }
+  .attend_header_textBtn_bar {
+    margin: 0rem 1.25rem;
+  }
+
   .attend_body {
     margin-top: 2.3rem;
     display: flex;
@@ -48,11 +54,29 @@ const StyledAttendanceBody = styled.div`
   .eachCard:nth-child(4n) {
     margin-right: 0rem;
   }
+  .textBtn_off {
+    color: ${palette[1][2]};
+    font-family: 'Pretendard Regular';
+  }
+  .addBtn {
+    margin-left: 1.25rem;
+    width: 10.4375rem;
+    height: 3rem;
+  }
+`;
+
+const TextBtn = styled.button`
+  border: none;
+  background-color: #11ffee00;
+  cursor: pointer;
+  padding: 0;
+  font-family: 'Pretendard Bold';
+  color: ${palette[3]};
+  font-size: 1.25rem;
 `;
 
 const GroupDetail = () => {
   const location = useLocation();
-  console.log(location.pathname);
   const [modal, setModal] = useState(false);
   const onClickForModal = () => {
     setModal((current) => !current);
@@ -65,23 +89,26 @@ const GroupDetail = () => {
           <div>출결관리</div>
         </div>
         <div className="attend_header__right">
-          <div>카드로 보기</div>
-          <div> | </div>
-          <div>표로 보기</div>
-          <button>항목추가하기</button>
+          <TextBtn>카드로 보기</TextBtn>
+          <div className="attend_header_textBtn_bar">|</div>
+          <TextBtn className="textBtn_off">표로 보기</TextBtn>
+          <div className="addBtn">
+            <EventButton text={'항목 추가하기 +'} />
+          </div>
         </div>
       </div>
       <div className="attend_body">
         {data.attendData.map((elem) => (
-          <div className="eachCard">
+          <div key={elem.id} className="eachCard">
             <Card
               subTitle={elem.subTitle}
               title={elem.title}
               onClickForDetail={onClickForModal}
               onClickForGroup={null}
-              key={elem.idx}
-              groupId={elem.idx}
-              to={`/admin/attendance/${elem.idx}`}
+              key={elem.id}
+              groupId={elem.id}
+              isGroupDetail={true}
+              to={`/admin/attendance/${elem.id}`}
             />
           </div>
         ))}

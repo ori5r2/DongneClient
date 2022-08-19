@@ -42,7 +42,7 @@ const StyledCard = styled.div`
     background: transparent;
     color: inherit;
     background: none;
-    width: 50%;
+    width: 100%;
     border-radius: inherit;
   }
   .card__button:hover {
@@ -68,6 +68,7 @@ const Card = ({
   title,
   img_src,
   groupId,
+  isGroupDetail,
   to,
   ...rest
 }) => {
@@ -91,9 +92,11 @@ const Card = ({
         <button className="card__button" onClick={onClickForDetail}>
           자세히 보기
         </button>
-        <button className="card__button" onClick={onClickCard}>
-          출결 현황 보기
-        </button>
+        {isGroupDetail ? (
+          <button className="card__button" onClick={onClickCard}>
+            출결 현황 보기
+          </button>
+        ) : null}
       </div>
     </StyledCard>
   );

@@ -8,12 +8,11 @@ import GroupCollection from '../../components/GroupsCollection';
 
 const AdminAttendPage = () => {
   const match = useRouteMatch();
-  console.log(match.path);
   return (
     <SidebarTemplate isAttendance={true}>
       <Switch>
-        <Route path={`${match.path}/:id`} component={GroupCollection} />
         <Route path={match.path} component={GroupDetail} exact />
+        <Route path={`${match.path}/:id`} component={GroupCollection} />
       </Switch>
     </SidebarTemplate>
   );
