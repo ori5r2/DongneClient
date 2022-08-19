@@ -15,7 +15,6 @@ import UserRegisterCheck3 from './pages/user/UserRegisterCheck3';
 import AdminHomePage from './pages/admin/AdminHomePage';
 import AdminAttendPage from './pages/admin/AdminAttendPage';
 import AdminMembersPage from './pages/admin/AdminMembersPage';
-import GroupDetail from './components/GroupDetail';
 
 const App = () => {
   return (

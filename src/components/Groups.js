@@ -6,6 +6,7 @@ import data from '../data';
 import { useState } from 'react';
 import AttendModal from './AttendModal';
 import { Route, useLocation, useRouteMatch } from 'react-router-dom';
+import Button from './Button';
 import EventButton from './EventButton';
 const StyledAttendanceBody = styled.div`
   /* position: relative; */
@@ -34,6 +35,10 @@ const StyledAttendanceBody = styled.div`
     align-items: center;
     font-size: 1.25rem;
   }
+  .attend_header_textBtn_bar {
+    margin: 0rem 1.25rem;
+  }
+
   .attend_body {
     margin-top: 2.3rem;
     display: flex;
@@ -69,14 +74,17 @@ const TextBtn = styled.button`
   color: ${palette[3]};
   font-size: 1.25rem;
 `;
-
-const GroupCollection = () => {
-  const match = useRouteMatch();
-  const id = match.params.id;
+const Groups = () => {
+  const [groupTitle, setGroupTitle] = useState('');
   const location = useLocation();
   const [modal, setModal] = useState(false);
-  const onClickForModal = () => {
+
+  const onClickForModal = (idx) => {
     setModal((current) => !current);
+    if (!modal) {
+      setGroupTitle(data.attendData[idx - 1].title);
+      console.log(idx);
+    }
   };
   return (
     <StyledAttendanceBody>
@@ -95,25 +103,31 @@ const GroupCollection = () => {
         </div>
       </div>
       <div className="attend_body">
-        {data.groupData[id].map((elem) => (
-          <div key={elem.id} className="eachCard">
-            <Card
-              key={elem.id}
-              subTitle={elem.subTitle}
-              title={elem.title}
-              onClickForDetail={onClickForModal}
-              isGroupDetail={false}
-              onClickForGroup={null}
-            />
-          </div>
-        ))}
+        {data.attendData.map((elem) => {
+          return (
+            <div key={elem.id} className="eachCard">
+              <Card
+                subTitle={elem.subTitle}
+                title={elem.title}
+                onClickForDetail={() => onClickForModal(elem.id)}
+                onClickForGroup={null}
+                key={elem.id}
+                groupId={elem.id}
+                isGroupDetail={true}
+                to={`/admin/attendance/${elem.id}`}
+              />
+            </div>
+          );
+        })}
       </div>
 
       {
-        modal === true ? <AttendModal onClick={onClickForModal} /> : null //기계역할
+        modal === true ? (
+          <AttendModal title={groupTitle} onClick={onClickForModal} />
+        ) : null //기계역할
       }
     </StyledAttendanceBody>
   );
 };
 
-export default GroupCollection;
+export default Groups;

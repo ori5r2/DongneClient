@@ -5,8 +5,12 @@ import Card from './Card';
 import data from '../data';
 import { useState } from 'react';
 import AttendModal from './AttendModal';
-import { Route, useLocation, useRouteMatch } from 'react-router-dom';
-import Button from './Button';
+import {
+  Route,
+  useHistory,
+  useLocation,
+  useRouteMatch,
+} from 'react-router-dom';
 import EventButton from './EventButton';
 const StyledAttendanceBody = styled.div`
   /* position: relative; */
@@ -35,10 +39,6 @@ const StyledAttendanceBody = styled.div`
     align-items: center;
     font-size: 1.25rem;
   }
-  .attend_header_textBtn_bar {
-    margin: 0rem 1.25rem;
-  }
-
   .attend_body {
     margin-top: 2.3rem;
     display: flex;
@@ -63,6 +63,9 @@ const StyledAttendanceBody = styled.div`
     width: 10.4375rem;
     height: 3rem;
   }
+  .back_arrow {
+    margin-right: 1rem;
+  }
 `;
 
 const TextBtn = styled.button`
@@ -75,9 +78,15 @@ const TextBtn = styled.button`
   font-size: 1.25rem;
 `;
 
-const GroupDetail = () => {
+const GroupSchedules = () => {
+  const match = useRouteMatch();
+  const history = useHistory();
+  const id = match.params.id;
   const location = useLocation();
   const [modal, setModal] = useState(false);
+  const onClickBack = () => {
+    history.goBack();
+  };
   const onClickForModal = () => {
     setModal((current) => !current);
   };
@@ -85,8 +94,11 @@ const GroupDetail = () => {
     <StyledAttendanceBody>
       <div className="attend_header">
         <div className="attend_header__left">
+          <TextBtn onClick={onClickBack} className="back_arrow">
+            <img src={importImg.attendBackChevron}></img>
+          </TextBtn>
           <img src={importImg.attendCheck} />
-          <div>출결관리</div>
+          <div>{`${data.attendData[id - 1].title} - 출결관리`}</div>
         </div>
         <div className="attend_header__right">
           <TextBtn>카드로 보기</TextBtn>
@@ -98,17 +110,15 @@ const GroupDetail = () => {
         </div>
       </div>
       <div className="attend_body">
-        {data.attendData.map((elem) => (
+        {data.groupData[id].map((elem) => (
           <div key={elem.id} className="eachCard">
             <Card
+              key={elem.id}
               subTitle={elem.subTitle}
               title={elem.title}
               onClickForDetail={onClickForModal}
+              isGroupDetail={false}
               onClickForGroup={null}
-              key={elem.id}
-              groupId={elem.id}
-              isGroupDetail={true}
-              to={`/admin/attendance/${elem.id}`}
             />
           </div>
         ))}
@@ -121,4 +131,4 @@ const GroupDetail = () => {
   );
 };
 
-export default GroupDetail;
+export default GroupSchedules;

@@ -1,11 +1,11 @@
 const data = {
   attendData: [
     { id: '1', title: '핀테크 역기획 스터디', subTitle: '#스터디' },
-    { id: '2', title: '핀테크 역기획 스터디', subTitle: '#스터디' },
-    { id: '3', title: '핀테크 역기획 스터디', subTitle: '#스터디' },
-    { id: '4', title: '핀테크 역기획 스터디', subTitle: '#스터디' },
-    { id: '5', title: '핀테크 역기획 스터디', subTitle: '#스터디' },
-    { id: '6', title: '핀테크 역기획 스터디', subTitle: '#스터디' },
+    { id: '2', title: '디자이너 초청 세션', subTitle: '#교육세션' },
+    { id: '3', title: 'React Native 스터디', subTitle: '#스터디' },
+    { id: '4', title: 'Google PM 스터디', subTitle: '#스터디' },
+    { id: '5', title: 'UI/UX 스터디', subTitle: '#스터디' },
+    { id: '6', title: '스타트업 CEO 초청 세션', subTitle: '#스터디' },
     { id: '7', title: '핀테크 역기획 스터디', subTitle: '#스터디' },
     { id: '8', title: '핀테크 역기획 스터디', subTitle: '#스터디' },
     { id: '9', title: '핀테크 역기획 스터디', subTitle: '#스터디' },

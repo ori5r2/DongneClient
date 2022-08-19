@@ -50,12 +50,12 @@ const StyledModal = styled.div`
   }
 `;
 
-const AttendModal = ({ onClick }) => {
+const AttendModal = ({ title, onClick }) => {
   return (
     <StyledModal>
       <div className="content-area">
         <div className="header">
-          <div>핀테크 역기획 스터디</div>
+          <div>{title}</div>
           <button onClick={onClick}>x</button>
         </div>
         <div className="body">
