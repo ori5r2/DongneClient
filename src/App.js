@@ -26,39 +26,15 @@ const App = () => {
       <Route component={AdminAttendPage} path="/admin/attendance" />
       <Route component={UserLoginPage} path="/user/login" exact />
       <Route component={AdminRegisterPage} path="/admin/register" exact />
-      <Route
-        component={AdminRegisterCheck1}
-        path="/admin/register/check1"
-        exact
-      />
-      <Route
-        component={AdminRegisterCheck2}
-        path="/admin/register/check2"
-        exact
-      />
-      <Route
-        component={AdminRegisterCheck3}
-        path="/admin/register/check3"
-        exact
-      />
-      <Route
-        component={UserRegisterCheck1}
-        path="/user/register/check1"
-        exact
-      />
-      <Route
-        component={UserRegisterCheck2}
-        path="/user/register/check2"
-        exact
-      />
-      <Route
-        component={UserRegisterCheck3}
-        path="/user/register/check3"
-        exact
-      />
+      <Route component={AdminRegisterCheck1} path="/admin/register/check1" exact />
+      <Route component={AdminRegisterCheck2} path="/admin/register/check2" exact />
+      <Route component={AdminRegisterCheck3} path="/admin/register/check3" exact />
+      <Route component={UserRegisterCheck1} path="/user/register/check1" exact />
+      <Route component={UserRegisterCheck2} path="/user/register/check2" exact />
+      <Route component={UserRegisterCheck3}  path="/user/register/check3" exact />
       <Route component={AdminMembersPage} path="/admin/members" exact />
-      <Route component={UserMainPage} path="/user/usermain" exact />
-      <Route component={UserMyPage} path="/user/mypage" exact />
+      <Route component={UserMainPage} path="/user/main" exact />
+      <Route component={UserMyPage} path="/user/myPage" exact />
     </Switch>
   );
 };
