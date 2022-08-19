@@ -17,7 +17,7 @@ import AdminHomePage from './pages/admin/AdminHomePage';
 import AdminAttendPage from './pages/admin/AdminAttendPage';
 import AdminMembersPage from './pages/admin/AdminMembersPage';
 import UserMainPage from './pages/user/UserMainPage';
-
+import UserMyPage from './pages/user/UserMyPage';
 const App = () => {
   return (
     <>
@@ -35,8 +35,9 @@ const App = () => {
       <Route component={UserRegisterCheck2} path="/user/register/check2" />
       <Route component={UserRegisterCheck3} path="/user/register/check3" />
       <Route component={UserMainPage} path="/user/usermain" exact />
-
+      <Route component={UserMyPage} path="/user/mypage" />
       <Route component={AdminMembersPage} path="/admin/members" />
+      
     </>
   );
 };
