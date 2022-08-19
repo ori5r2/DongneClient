@@ -2,20 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../styles/pallete';
 import Button from './Button';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 const StyledModal = styled.div`
-    position: fixed;
-    width: 50.75rem;
-    height: 38.75rem;
-    top: 50%;
-    left: 50%;
+  position: fixed;
+  width: 50.75rem;
+  height: 38.75rem;
+  top: 50%;
+  left: 50%;
 
-    transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 
-    background: #FFFFFF;
-    box-shadow: 0rem 0rem 0.9375rem rgba(34, 42, 63, 0.6);
-    border-radius: 0.625rem;
+  background: #ffffff;
+  box-shadow: 0rem 0rem 0.9375rem rgba(34, 42, 63, 0.6);
+  border-radius: 0.625rem;
 
   .content-area {
     color: ${palette[5]};
@@ -26,14 +26,14 @@ const StyledModal = styled.div`
     font-size: 1.75rem;
     line-height: 160%;
     font-weight: 800;
-    font-family: 'Pretendard';
+    font-family: 'Pretendard Bold';
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2.25rem;
   }
   .body {
-    font-family: 'Pretendard';
+    font-family: 'Pretendard Bold';
     font-style: normal;
     font-weight: 500;
     font-size: 1.125rem;
@@ -55,14 +55,14 @@ const StyledModal = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top:-0.75rem;
+    margin-top: -0.75rem;
   }
   .modalBtn {
     // width: inherit;
     width: 20.625rem;
     height: 3.5rem;
-// font-weight: 700;
-// font-size: 1.375rem;
+    // font-weight: 700;
+    // font-size: 1.375rem;
   }
 
   .body__left {
@@ -76,7 +76,7 @@ const StyledModal = styled.div`
     display: flex;
     align-items: center;
     // margin-right:2rem;
-    margin-bottom:0.75rem;
+    margin-bottom: 0.75rem;
   }
   .body__left__elem > div {
     width: 3.9375rem;
@@ -88,7 +88,7 @@ const StyledModal = styled.div`
     width: 11.25rem;
     height: 2.5rem;
     border: none;
-    margin-left:1.375rem;
+    margin-left: 1.375rem;
   }
 
   .body__right {
@@ -101,8 +101,8 @@ const StyledModal = styled.div`
     font-size: 1.125rem;
     display: flex;
     align-items: center;
-    margin-left:-2.9375rem;
-    margin-bottom:0.75rem;
+    margin-left: -2.9375rem;
+    margin-bottom: 0.75rem;
   }
   .body__right__elem > div {
     width: 6.4375rem;
@@ -114,7 +114,7 @@ const StyledModal = styled.div`
     width: 16rem;
     height: 2.5rem;
     border: none;
-    margin-left:1.375rem;
+    margin-left: 1.375rem;
   }
 
   .body__bottom {
@@ -122,13 +122,13 @@ const StyledModal = styled.div`
     height: 13.5625rem;
     // left: 39.125rem;
     // top: 36.5625rem;
-    margin-top:-0.8rem;
+    margin-top: -0.8rem;
   }
   .body__bottom__elem {
     font-size: 1.125rem;
     display: flex;
     align-items: center;
-    margin-bottom:0.75rem;
+    margin-bottom: 0.75rem;
   }
   .body__bottom__elem > div {
     width: 4.1875rem;
@@ -140,7 +140,7 @@ const StyledModal = styled.div`
     border: none;
     width: 37.0625rem;
     height: 2.5rem;
-    margin-left:1.125rem;
+    margin-left: 1.125rem;
   }
 `;
 const ModalOverlay = styled.div`
@@ -153,12 +153,12 @@ const ModalOverlay = styled.div`
   right: 0;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 999;
-`
+`;
 
 const MembersModal = ({ visible, onClick }) => {
   return (
     <>
-    <ModalOverlay visible={visible} />
+      <ModalOverlay visible={visible} />
       <StyledModal>
         <div className="content-area">
           <div className="header">
@@ -190,7 +190,7 @@ const MembersModal = ({ visible, onClick }) => {
                 <input type="text"></input>
               </div>
               <div className="body__right__elem">
-                <div style={{height: 2.5+'rem'}}></div>
+                <div style={{ height: 2.5 + 'rem' }}></div>
               </div>
               <div className="body__right__elem">
                 <div>학교/소속</div>
@@ -204,15 +204,14 @@ const MembersModal = ({ visible, onClick }) => {
           </div>
           <div className="body">
             <form className="body__bottom">
-                <div className="body__bottom__elem">
-                  <div>한줄 소개</div>
-                  <input type="text"></input>
-                </div>
-                <div className="body__bottom__elem">
-                  <div>비고</div>
-                  <input type="text" style={{height: 5+'rem'}}></input>
-                </div>
-                
+              <div className="body__bottom__elem">
+                <div>한줄 소개</div>
+                <input type="text"></input>
+              </div>
+              <div className="body__bottom__elem">
+                <div>비고</div>
+                <input type="text" style={{ height: 5 + 'rem' }}></input>
+              </div>
             </form>
           </div>
           <div className="button">
@@ -224,9 +223,6 @@ const MembersModal = ({ visible, onClick }) => {
     </>
   );
 };
-
-
-
 
 // const MembersModal = (props) => {
 //     const { open, close, header } = props;
