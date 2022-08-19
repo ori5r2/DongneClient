@@ -70,7 +70,7 @@ const TokenImageButton = ({ isOn, text, img_src, to }) => {
   const location = useLocation();
   const onClickTogle = () => {
     if (to) {
-      history.push(`admin/${to}`);
+      history.push(`/admin/${to}`);
     } else {
       history.push(location);
     }
@@ -169,7 +169,7 @@ const SidebarTemplate = ({ isAttendance, children }) => {
                       ? importImg.attendIdentityOff
                       : importImg.attendIdentityOn
                   }
-                  // to={'members'}
+                  to={'members'}
                 />
                 <TokenImageButton
                   isOn={isAttendance}
@@ -179,7 +179,7 @@ const SidebarTemplate = ({ isAttendance, children }) => {
                       ? importImg.attendAssignmentOn
                       : importImg.attendAssignmentOff
                   }
-                  // to={'attendance'}
+                  to={'attendance'}
                 />
               </div>
             </footer>

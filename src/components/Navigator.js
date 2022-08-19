@@ -85,7 +85,7 @@ const Navigator = ({ location }) => {
 
         <li>
           <Link
-            to="/admin/attendance"
+            to="/admin/members"
             className={location === 1 ? 'selected' : null}
           >
             회원 관리

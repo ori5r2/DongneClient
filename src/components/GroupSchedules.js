@@ -110,7 +110,7 @@ const GroupSchedules = () => {
         </div>
       </div>
       <div className="attend_body">
-        {data.groupData[id].map((elem) => (
+        {data.groupData[id - 1].map((elem) => (
           <div key={elem.id} className="eachCard">
             <Card
               key={elem.id}

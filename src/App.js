@@ -58,7 +58,7 @@ const App = () => {
       />
       <Route component={AdminMembersPage} path="/admin/members" exact />
       <Route component={UserMainPage} path="/user/usermain" exact />
-      <Route component={UserMyPage} path="/user/mypage" />
+      <Route component={UserMyPage} path="/user/mypage" exact />
     </Switch>
   );
 };
