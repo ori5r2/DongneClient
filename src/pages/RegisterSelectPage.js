@@ -29,8 +29,7 @@ const WhiteBox = styled.div`
   } 
 
   .Logo {
-    width: 12rem;
-    margin-bottom: 2rem;
+    width: 2rem;
   }
 
   .ExtraBold {
@@ -55,6 +54,9 @@ const AdminRegisterPage = () => {
         <WhiteBox style={{ zIndex: 1 }}>
           <Link to="/"><img src={ArrowBackIcon} alt='' className='arrowIcon' /></Link>
         <img src={Logo} className="Logo" />
+        <div style={{ marginBottom: '2rem', color: "#2B78FF"}}>
+        동아리 관리를 더욱 간편하게, 동네
+        </div>
         <div className="ExtraBold" style={{ marginBottom: '2rem' }}>
           회원 가입
         </div>

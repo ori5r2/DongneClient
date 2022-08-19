@@ -15,7 +15,8 @@ import UserRegisterCheck3 from './pages/user/UserRegisterCheck3';
 import AdminHomePage from './pages/admin/AdminHomePage';
 import AdminAttendPage from './pages/admin/AdminAttendPage';
 import AdminMembersPage from './pages/admin/AdminMembersPage';
-
+import UserMainPage from './pages/user/UserMainPage';
+import UserMyPage from './pages/user/UserMyPage';
 const App = () => {
   return (
     <Switch>
@@ -56,6 +57,8 @@ const App = () => {
         exact
       />
       <Route component={AdminMembersPage} path="/admin/members" exact />
+      <Route component={UserMainPage} path="/user/usermain" exact />
+      <Route component={UserMyPage} path="/user/mypage" />
     </Switch>
   );
 };
