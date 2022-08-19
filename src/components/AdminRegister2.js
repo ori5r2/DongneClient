@@ -17,7 +17,6 @@ const WhiteBox = styled.div`
     background: linear-gradient(180deg, #FFFFFF 0%, rgba(251, 251, 251, 0) 100%);
     border: 2px solid rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(40px);
-    /* Note: backdrop-filter has minimal browser support */
 
     color: #2D3B5C; 
 
@@ -72,6 +71,8 @@ function AdminRegister2(props) {
     const nextlink = props.nextlink;
     const location = useLocation();
 
+    console.log(location);
+
     const [year, setYear] = useState("");
     const [area, setArea] = useState("");
     const [introduce, setIntroduce] = useState("");
@@ -96,12 +97,20 @@ function AdminRegister2(props) {
       }, [year, area, introduce, url]);
 
 
-    // const handleApi= async() =>{
-    //     console.log("jepp");
-    //     const res  = await  Axios.post({
-    //         url: {"http://3.38.55.57:3000"}
-    //     })
-    // }
+    const handleApi= async() =>{
+        console.log(
+            "id: " + location.state.props.id ,
+            "pw: " + location.state.props.pw, 
+            "email: " + location.state.props.email, 
+            "year: " + year, 
+            "area: " + area, 
+            "introduce: " + introduce, 
+            "url: " + url);
+        // const res  = await  Axios.post({
+        //     url: {"http://3.38.55.57:3000"}
+        // })
+    }
+    
     return (
         <WhiteBox> 
             <div className='bigoutline'>
@@ -213,9 +222,34 @@ function AdminRegister2(props) {
                 {/* <div onClick={()=>{
                     handleApi();
                 }}>가입 완료하기</div> */}
+
+                <div onClick={()=>{
+                    handleApi();
+                }}>
+                    {Ok ? (
+                        <Button
+                            onClick={handleApi}
+                            text="가입 완료하기"
+                            fullWidth
+                            history={history}
+                            to={nextpage}
+                            props={{year: year, area: area, introduce: introduce, url:url}}
+                            style={{height: "2.5rem", borderRadius: "3px"}}
+                        />
+                    ) : ( 
+                        <Button
+                            text="가입 완료하기"
+                            fullWidth
+                            history={history}
+                            to={presentpage}
+                            style={{height: "2.5rem", borderRadius: "3px"}}
+                        />
+                    ) }
+                </div>
                 
-                 {Ok ? (
+                 {/* {Ok ? (
                     <Button
+                        onClick={handleApi}
                         text="가입 완료하기"
                         fullWidth
                         history={history}
@@ -231,7 +265,7 @@ function AdminRegister2(props) {
                         to={presentpage}
                         style={{height: "2.5rem", borderRadius: "3px"}}
                     />
-                ) }
+                ) } */}
         </div>
         </WhiteBox>
     );

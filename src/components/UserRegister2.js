@@ -96,6 +96,19 @@ function UserRegister2(props) {
     const presentpage = props.presentpage;
 
 
+    const handleApi= async() =>{
+        console.log(
+            "id: " + location.state.props.id ,
+            "pw: " + location.state.props.pw, 
+            "email: " + location.state.props.email, 
+            "name: " + name, 
+            "birth: " + birth, 
+            "school: " + school,
+            "phone: " + phone,
+            "address: " + address, 
+            "selfintro: " + selfintro);
+    }
+
     return (
         <WhiteBox> 
             <div className='bigoutline'>
@@ -265,7 +278,10 @@ function UserRegister2(props) {
                     </div>
                 </div>
 
-            {Ok ? (
+            <div onClick={()=>{
+                handleApi();
+            }}>
+                {Ok ? (
                     <Button
                         text="가입 완료하기"
                         fullWidth
@@ -283,6 +299,8 @@ function UserRegister2(props) {
                         style={{height: "2.5rem", borderRadius: "3px"}}
                     />
             ) }
+            </div>
+            
         </div>
         </WhiteBox>
     );
