@@ -66,6 +66,7 @@ const StyledNav = styled.nav`
     align-items: center;
     justify-content: center;
     font-size: 1rem;
+    color: ${palette[5]};
   }
 `;
 
@@ -98,12 +99,15 @@ const Navigator = ({ location }) => {
           </Link>
         </li>
         <li>
-          <Link to="/admin/home" className={location === 3 ? 'selected' : null}>
+          <Link
+            to="/admin/finance"
+            className={location === 3 ? 'selected' : null}
+          >
             회계 관리
           </Link>
         </li>
         <li>
-          <Link to="/admin/home" className={location === 4 ? 'selected' : null}>
+          <Link to="/community" className={location === 4 ? 'selected' : null}>
             커뮤니티
           </Link>
         </li>
@@ -117,7 +121,7 @@ const Navigator = ({ location }) => {
         </li>
         <li>
           {/* {todo: human icon} */}
-          <Link to="/admin/home" className="Link">
+          <Link to="/admin/myPage" className="Link">
             <StyledImg src={user}></StyledImg>
             마이페이지
           </Link>

@@ -52,7 +52,7 @@ const StyleldMembersBody = styled.div`
     margin-left: 2.5rem;
     width: 8rem;
     height: 3rem;
-    font-weight:: 600;
+    font-weight: 600;
   }
 
   .members_body {
@@ -87,7 +87,7 @@ const AdminMembersPage = () => {
     setModal((current) => !current);
   };
   return (
-    <SidebarTemplate isMembers={true}>
+    <SidebarTemplate pageNum={1} isMembers={true}>
       <StyleldMembersBody>
         <div className="members_header">
           <div className="members_header__left">

@@ -62,9 +62,10 @@ const StyledAttendanceBody = styled.div`
     font-family: 'Pretendard Regular';
   }
   .addBtn {
-    margin-left: 1.25rem;
-    width: 10.4375rem;
+    margin-left: 2.5rem;
+    width: 8rem;
     height: 3rem;
+    font-weight: 600;
   }
   .back_arrow {
     margin-right: 1rem;
@@ -108,7 +109,7 @@ const GroupSchedules = () => {
           <div className="attend_header_textBtn_bar">|</div>
           <TextBtn className="textBtn_off">표로 보기</TextBtn>
           <div className="addBtn">
-            <EventButton text={'항목 추가하기 +'} />
+            <EventButton text={'추가하기 +'} />
           </div>
         </div>
       </div>

@@ -10,7 +10,6 @@ import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import MembersModal from '../../components/MembersModal';
 
-
 const StyleldFinanceBody = styled.div`
   position: relative;
   width: 91.0625rem;
@@ -18,7 +17,7 @@ const StyleldFinanceBody = styled.div`
   margin-top: 3.625rem;
   margin-left: 3.25rem;
   margin-right: 4.1875rem;
-  margin-bottom:60px;
+  margin-bottom: 60px;
   font-family: 'Pretendard Regular';
 
   h1 {
@@ -38,7 +37,7 @@ const StyleldFinanceBody = styled.div`
     color: ${palette[5]};
   }
   .finance_header_group {
-    width:44.6875rem;
+    width: 44.6875rem;
     font-size: 1rem;
     // margin-left: 1.5rem;
     display: flex;
@@ -63,13 +62,13 @@ const StyleldFinanceBody = styled.div`
     align-items: center;
     width: 11.4375rem;
     height: 3rem;
-    margin-left:220px;
+    margin-left: 220px;
   }
   .finance_header_date > h1 {
     width: 5rem;
     height: 1.6875rem;
     font-size: 1.1rem;
-    text-align:center;
+    text-align: center;
     line-height: 1.6875rem;
   }
 
@@ -115,7 +114,7 @@ const StyledLeftBox = styled.div`
   .DayPicker {
     display: inline-block;
     font-size: 1rem;
-    width: 44.6875rem;    
+    width: 44.6875rem;
   }
   .button {
     display: flex;
@@ -194,7 +193,6 @@ const CalendarBox = () => {
 
   return (
     <StyledLeftBox>
-      
       <div className="DayPicker">
         <Calendar
           localizer={localizer}
@@ -203,8 +201,8 @@ const CalendarBox = () => {
         />
       </div>
       <div className="button">
-        <EventButton text={'+ 더하기'}className="addBtn"></EventButton>
-        <EventButton text={'- 빼기'}className="subtractBtn"></EventButton>
+        <EventButton text={'+ 더하기'} className="addBtn"></EventButton>
+        <EventButton text={'- 빼기'} className="subtractBtn"></EventButton>
       </div>
     </StyledLeftBox>
   );
@@ -232,7 +230,7 @@ const AdminFinancePage = () => {
     setModal((current) => !current);
   };
   return (
-    <SidebarTemplate>
+    <SidebarTemplate pageNum={3}>
       <StyleldFinanceBody>
         <div className="finance_header">
           <div className="finance_header_group">
@@ -250,8 +248,8 @@ const AdminFinancePage = () => {
               <button className="imageBtn">
                 <img src={importImg.chevronRight}></img>
               </button>
-            </div>    
-          </div>    
+            </div>
+          </div>
           <div className="finance_header_right">
             <TextBtn>달력으로 보기</TextBtn>
             <div className="finance_header_textBtn_bar">|</div>
@@ -261,8 +259,7 @@ const AdminFinancePage = () => {
         <div className="finance_body">
           <CalendarBox />
           <div className="sideBox">
-          <Sum />
-
+            <Sum />
           </div>
         </div>
 

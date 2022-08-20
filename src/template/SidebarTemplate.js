@@ -141,9 +141,9 @@ const StyledSideBar = styled.div`
   }
 `;
 
-const SidebarTemplate = ({ isAttendance, children }) => {
+const SidebarTemplate = ({ isAttendance, pageNum, children }) => {
   return (
-    <HomePageTemplate location={1}>
+    <HomePageTemplate location={pageNum}>
       <StyledDiv>
         <StyledSideBar>
           <div className="sidebar__contentArea">
