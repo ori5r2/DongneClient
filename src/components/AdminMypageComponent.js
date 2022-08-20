@@ -5,8 +5,8 @@ import profile from '../styles/imgs/icon/profile.png';
 import Button from './Button';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import line from '../styles/imgs/icon/line.png'
-
+import line from '../styles/imgs/icon/line.png';
+import setting from '../styles/imgs/icon/setting.png';
 
 const WhiteBox = styled.div`
     width: 65rem;
@@ -53,6 +53,12 @@ const WhiteBox = styled.div`
         flex-direction: column;
     }
 
+    .settingIcon{
+        position: absolute;
+        width: 2.8rem;
+        top:14rem;
+        left:30rem;
+    }
     .icon{
         padding-right: 0.5rem;
         width:2rem;
@@ -102,16 +108,6 @@ const WhiteBox = styled.div`
 
     .btnStlye{
         padding-left: 5rem;
-    }
-
-    .check{
-        display: flex;
-        flex-direction: row;
-    }
-
-    .twin{
-        display: flex;
-        flex-direction: row;
     }
 `
 const StyledAvatar = styled.div`
@@ -166,6 +162,7 @@ function Mypage(props) {
                             {/* todo: 프로필 사진 */}
                             프로필<br />사진영역
                         </StyledAvatar>
+                        <img className="settingIcon" src={setting} alt="" />
                     </div>
 
                     <div className='part2'>
@@ -270,48 +267,22 @@ function Mypage(props) {
                             <div className='categoryItem'>연합동아리</div>
                         </div>
 
-                        <div className='twin'>
-                            < div className='Basic' style={{paddingRight:"1.5rem"}}>
-                                <span className="category">단체 설립 년도</span>
-                                <div className='check'>
-                                    <input 
-                                        onChange={(e)=>{
-                                            setYear(e.target.value);
-                                        }}
-
-                                        value={year}
-                                        type={"number"} 
-                                        className="information" 
-                                        style={{width: "14rem", 
-                                                height: "2.5rem",
-                                                backgroundColor:"#F3F3F3",
-                                                border: "none",
-                                                borderRadius: "3px",
-                                        }}
-                                    />
-                                </div>
-                            </div>
-
-                            <div className='Basic'>
-                                <span className="category">단체 설립 년도</span>
-                                <div className='check'>
-                                    <input 
-                                        onChange={(e)=>{
-                                            setYear(e.target.value);
-                                        }}
-
-                                        value={year}
-                                        type={"number"} 
-                                        className="information" 
-                                        style={{width: "14rem", 
-                                                height: "2.5rem",
-                                                backgroundColor:"#F3F3F3",
-                                                border: "none",
-                                                borderRadius: "3px",
-                                        }}
-                                    />
-                                </div>
-                            </div>
+                        < div className='Basic'>
+                            <span className="category">단체 설립 년도</span>
+                            <input 
+                                onChange={(e)=>{
+                                    setYear(e.target.value);
+                                }}
+                                value={year}
+                                type={"number"} 
+                                className="information" 
+                                style={{width: "41.5rem", 
+                                        height: "2.5rem",
+                                        backgroundColor:"#F3F3F3",
+                                        border: "none",
+                                        borderRadius: "3px",
+                                }}
+                            /> 
                         </div>
 
                         <div className='Basic'>
@@ -323,7 +294,7 @@ function Mypage(props) {
                                 value={area}
                                 type={"text"} 
                                 className="information" 
-                                style={{width: "14rem", 
+                                style={{width: "41.5rem", 
                                         height: "2.5rem",
                                         backgroundColor:"#F3F3F3",
                                         border: "none",

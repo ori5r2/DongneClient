@@ -5,7 +5,8 @@ import profile from '../styles/imgs/icon/profile.png';
 import Button from './Button';
 import styled from 'styled-components';
 import { useHistory, useLocation } from 'react-router-dom';
-import line from '../styles/imgs/icon/line.png'
+import line from '../styles/imgs/icon/line.png';
+import setting from '../styles/imgs/icon/setting.png';
 
 
 const WhiteBox = styled.div`
@@ -51,6 +52,13 @@ const WhiteBox = styled.div`
         width: 50rem;
         display: flex;
         flex-direction: column;
+    }
+
+    .settingIcon{
+        position: absolute;
+        width: 2.8rem;
+        top:14rem;
+        left:30rem;
     }
 
     .icon{
@@ -168,6 +176,7 @@ function Mypage(props) {
                             {/* todo: 프로필 사진 */}
                             프로필<br />사진영역
                         </StyledAvatar>
+                        <img className="settingIcon" src={setting} alt="" />
                     </div>
 
                     <div className='part2'>

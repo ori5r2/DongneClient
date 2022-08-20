@@ -7,6 +7,8 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import Button from '../../components/Button';
 import vertical_line from '../../styles/imgs/icon/vertical_line.png';
 import stand_person from '../../styles/imgs/icon/stand_person.png';
+import point from '../../styles/imgs/icon/point.png';
+import CommunityMembers from '../../components/CommunityMembers';
 
 const StyledImg = styled.img`
   position: fixed;
@@ -86,6 +88,7 @@ const BackgroundImg = styled.div`
 `;
 
 const WhitBox = styled.div`
+    margin-top: -2rem;
     width:100rem;
     padding-top: 5rem;
 
@@ -105,8 +108,10 @@ const WhitBox = styled.div`
     }
     .second{
         box-sizing: border-box;
+        width: 30rem;
         display: flex;
         flex-direction: column;
+        padding: 1rem 3rem;
     }
     .third{
         box-sizing: border-box;
@@ -118,11 +123,17 @@ const WhitBox = styled.div`
         font-family: "Pretendard Bold";
         display: flex;
         align-items: center;
+        padding-bottom: 1rem;
     }
     .list{
         font-size: 1rem;
         color: #AAAAAA;
         padding-bottom: 1.5rem;
+    }
+
+    .clublist{
+        display: flex;
+        flex-wrap: wrap;
     }
 `
 
@@ -150,16 +161,28 @@ const Community = () => {
                     </div>
                 </div>
 
-                <img src={vertical_line} alt="" style={{height: "40rem"}}/>
+                <img src={vertical_line} alt="" style={{height: "45rem"}}/>
                 
                 <div className='second'>
                     <div className='subtitle'>
                         <img src={stand_person} alt="" style={{paddingRight:"1rem"}} /> 활동 중인 단체 목록
                     </div>
+                    <div className='clublist'>
+                        <CommunityMembers name="UMC" explain="#IT #연합동아리" people="82" />
+                        <CommunityMembers name="Cluv M" explain="#정동아리" people="49" />
+                        <CommunityMembers name="우리동네" explain="#개발동아리 #FE" people="29" />
+                        <CommunityMembers name="Cluving" explain="#스포츠동아리" people="46" />
+                        <CommunityMembers name="아리랑" explain="#댄스동아리" people="72" />
+                        <CommunityMembers name="동동" explain="#IT #연합동아리" people="41" />
+                        <CommunityMembers name="블레" explain="#사진동아리" people="50" />
+                        <CommunityMembers name="하루살이" explain="#창업동아리" people="69" />
+                    </div>
                 </div>
 
                 <div className='third'>
-                    <div>third</div>
+                    <div className='subtitle'>
+                        <img src={point} alt="" style={{paddingRight:"1rem"}} /> 인기 게시글
+                    </div>
                 </div>
             </div>
         </WhitBox>
