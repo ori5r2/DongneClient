@@ -18,17 +18,17 @@ const WhiteBox = styled.div`
         align-items: center;
         width: 25rem;
         height: 3rem;
-        border: 1px solid #2B78FF;
-        border-radius: 10px 0 0 10px;
+        border: 0.0625rem solid #2B78FF;
+        border-radius: 0.625rem 0 0 0.625rem;
         font-family: 'Pretendard Bold';
         font-size: 1.2rem;
     }
 
     .btn{
-        border-top-left-radius: 0px;
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 10px;
-        border-bottom-left-radius: 0px;
+        border-top-left-radius: 0rem;
+        border-top-right-radius: 0.625rem;
+        border-bottom-right-radius: 0.625rem;
+        border-bottom-left-radius: 0rem;
     }
 `
 

@@ -33,7 +33,7 @@ const StyledCard = styled.button`
   }
 
   .UserName {
-    font-family: 'Pretendard Regular';
+    font-family: 'Pretendard Medium';
     width: inherit;
     font-style: normal;
     font-weight: 700;

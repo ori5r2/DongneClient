@@ -16,10 +16,11 @@ const StyledDiv = styled.div`
   position: relative;
   width: auto;
   height: 100%;
+  background-color: ${palette[0]};
 
   .side__home__body {
     position: relative;
-    left: 30.68rem;
+    margin-left: 33.8125rem;
   }
 `;
 
@@ -31,7 +32,7 @@ const StyledAvatar = styled.div`
   width: 10rem;
   background-color: #f7f7f7;
   border: 0.4rem solid white;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0rem 0.4375rem 1.8125rem 0rem;
   border-radius: 50% 50% 50% 0%;
   /* display: inline-block; */
 `;
@@ -39,7 +40,7 @@ const StyledAvatar = styled.div`
 const StyledSideBar = styled.div`
   margin-left: 3.93rem;
   margin-top: 8.8125rem;
-  border-right: 0.01px solid ${palette[1][3]};
+  border-right: 0.0006rem solid ${palette[1][3]};
   position: fixed;
   left: 0;
   top: 0;
@@ -47,7 +48,7 @@ const StyledSideBar = styled.div`
   height: 100vh;
 
   font-size: 1.4rem;
-  font-family: 'Pretendard Regular';
+  font-family: 'Pretendard Medium';
 
   .greeting {
     font-family: 'Pretendard Medium';
@@ -59,11 +60,11 @@ const StyledSideBar = styled.div`
     color: ${palette[3]};
   }
   .description {
-    font-size: 18px;
+    font-size: 1.125rem;
     margin-top: 2rem;
   }
   .invite {
-    font-size: 18px;
+    font-size: 1.125rem;
     margin-top: 2rem;
     color: ${palette[3]};
   }

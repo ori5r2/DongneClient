@@ -15,9 +15,9 @@ const WhitBox = styled.div`
     top: 3rem;
 
     background: linear-gradient(180deg, #FFFFFF 0%, rgba(251, 251, 251, 0) 100%);
-    border: 2px solid rgba(255, 255, 255, 0.6); 
-    border-radius: 28px;
-    backdrop-filter: blur(40px);
+    border: 0.125rem solid rgba(255, 255, 255, 0.6); 
+    border-radius: 1.75rem;
+    backdrop-filter: blur(2.5rem);
 /* Note: backdrop-filter has minimal browser support */
 
     display: flex;

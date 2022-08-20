@@ -14,7 +14,7 @@ const StyledAttendanceBody = styled.div`
   margin-top: 3.75rem;
   margin-left: 3.25rem;
   margin-right: 3rem;
-  font-family: 'Pretendard Regular';
+  font-family: 'Pretendard Medium';
   .attend_header {
     display: flex;
     align-items: center;
@@ -45,7 +45,7 @@ const StyledAttendanceBody = styled.div`
     flex-wrap: wrap;
   }
   .eachCard {
-    margin-right: 3rem;
+    margin-right: 3.3rem;
     margin-top: 2.25rem;
   }
   .eachCard:nth-child(-n + 4) {
@@ -56,7 +56,7 @@ const StyledAttendanceBody = styled.div`
   }
   .textBtn_off {
     color: ${palette[1][2]};
-    font-family: 'Pretendard Regular';
+    font-family: 'Pretendard Medium';
   }
   .addBtn {
     margin-left: 2.5rem;

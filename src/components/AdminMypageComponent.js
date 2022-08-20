@@ -11,7 +11,7 @@ import setting from '../styles/imgs/icon/setting.png';
 const WhiteBox = styled.div`
     width: 65rem;
     height: 42rem;
-    border-radius: 28px;
+    border-radius: 1.75rem;
     font-size: 1rem;
     
 
@@ -24,7 +24,7 @@ const WhiteBox = styled.div`
     .text{
         font-size: 2rem;
         text-align: center;
-        font-family: 'Pretendard Regular';
+        font-family: 'Pretendard Medium';
         display: flex;
         justify-content: flex-start;
         padding-bottom: 2rem;
@@ -85,7 +85,7 @@ const WhiteBox = styled.div`
     .categoryItem{
         height: 2rem;
         background: #2B78FF;
-        border-radius: 40px;
+        border-radius: 2.5rem;
         font-family: 'Pretendard';
         font-size: 1rem;
         color: #CEE7F6;
@@ -118,7 +118,7 @@ const StyledAvatar = styled.div`
   width: 10rem;
   background-color: #f7f7f7;
   border: 0.4rem solid white;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0rem 0.4375rem 1.8125rem 0rem;
   border-radius: 50% 50% 50% 0%;
 `;
 
@@ -182,7 +182,7 @@ function Mypage(props) {
                                                 height: "2.5rem",
                                                 backgroundColor:"#F3F3F3",
                                                 border: "none",
-                                                borderRadius: "3px",
+                                                borderRadius: "0.1875rem",
                                             }}
                                     />
                             </div>
@@ -192,7 +192,7 @@ function Mypage(props) {
                                         fullWidth
                                         history={history}
                                         // to={nextlink}
-                                        style={{height: "2.5rem", width: "5rem", borderRadius: "3px", margin:"0"}}
+                                        style={{height: "2.5rem", width: "5rem", borderRadius: "0.1875rem", margin:"0"}}
                                     />
                             </div>
                         </div>
@@ -213,7 +213,7 @@ function Mypage(props) {
                                             height: "2.5rem",
                                             backgroundColor:"#F3F3F3",
                                             border: "none",
-                                            borderRadius: "3px",
+                                            borderRadius: "0.1875rem",
                                     }}
                                 />
                             </div>
@@ -223,7 +223,7 @@ function Mypage(props) {
                                     fullWidth
                                     history={history}
                                     // to={nextlink}
-                                    style={{height: "2.5rem", width: "5rem", borderRadius: "3px", margin:"0"}}
+                                    style={{height: "2.5rem", width: "5rem", borderRadius: "0.1875rem", margin:"0"}}
                             />
                         </div>
 
@@ -243,7 +243,7 @@ function Mypage(props) {
                                             height: "2.5rem",
                                             backgroundColor:"#F3F3F3",
                                             border: "none",
-                                            borderRadius: "3px",
+                                            borderRadius: "0.1875rem",
                                     }}
                                 />
                             </div>
@@ -253,7 +253,7 @@ function Mypage(props) {
                                         fullWidth
                                         history={history}
                                         // to={nextlink}
-                                        style={{height: "2.5rem", width: "5rem", borderRadius: "3px", margin:"0"}}
+                                        style={{height: "2.5rem", width: "5rem", borderRadius: "0.1875rem", margin:"0"}}
                                     />
                         </div>
                         
@@ -280,7 +280,7 @@ function Mypage(props) {
                                         height: "2.5rem",
                                         backgroundColor:"#F3F3F3",
                                         border: "none",
-                                        borderRadius: "3px",
+                                        borderRadius: "0.1875rem",
                                 }}
                             /> 
                         </div>
@@ -298,7 +298,7 @@ function Mypage(props) {
                                         height: "2.5rem",
                                         backgroundColor:"#F3F3F3",
                                         border: "none",
-                                        borderRadius: "3px",
+                                        borderRadius: "0.1875rem",
                                 }}
                             />
                         </div>
@@ -316,7 +316,7 @@ function Mypage(props) {
                                         height: "2.5rem",
                                         backgroundColor:"#F3F3F3",
                                         border: "none",
-                                        borderRadius: "3px",
+                                        borderRadius: "0.1875rem",
                                 }}
                             />
                         </div>
@@ -335,8 +335,8 @@ function Mypage(props) {
                                         paddingRight:' 1rem',
                                         backgroundColor: "#F3F3F3",
                                         border: "none",
-                                        borderRadius: "3px",
-                                        fontFamily: "Pretendard Regular",
+                                        borderRadius: "0.1875rem",
+                                        fontFamily: "Pretendard Medium",
                                         fontSize: "0.9rem",
                                         resize: "none"
                                 }}
@@ -349,7 +349,7 @@ function Mypage(props) {
                             <Button 
                                 text="단체 정보 수정하기"
                                 style={{
-                                    borderRadius:"4px",
+                                    borderRadius:"0.25rem",
                                     width:"50.1rem",
                                     marginTop:"1.5rem"
                                 }}

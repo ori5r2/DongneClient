@@ -10,14 +10,14 @@ import palette from '../styles/pallete';
 const WhiteBox = styled.div`
   width: 45rem;
   height: 35rem;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   padding-left: 3rem;
   padding-right: 3rem;
   font-size: 1rem;
 
   background: linear-gradient(180deg, #ffffff 0%, rgba(251, 251, 251, 0) 100%);
-  border: 2px solid rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(40px);
+  border: 0.125rem solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(2.5rem);
   /* Note: backdrop-filter has minimal browser support */
 
   color: #2d3b5c;
@@ -112,7 +112,7 @@ function Register1(props) {
                   height: '2.5rem',
                   backgroundColor: '#F3F3F3',
                   border: 'none',
-                  borderRadius: '3px',
+                  borderRadius: '0.1875rem',
                 }}
               />
               <div className="idcheck">
@@ -124,7 +124,7 @@ function Register1(props) {
                   style={{
                     height: '2.5rem',
                     width: '6rem',
-                    borderRadius: '3px',
+                    borderRadius: '0.1875rem',
                   }}
                 />
               </div>
@@ -150,7 +150,7 @@ function Register1(props) {
                   height: '2.5rem',
                   backgroundColor: '#F3F3F3',
                   border: 'none',
-                  borderRadius: '3px',
+                  borderRadius: '0.1875rem',
                 }}
               />
             </div>
@@ -173,7 +173,7 @@ function Register1(props) {
                   height: '2.5rem',
                   backgroundColor: '#F3F3F3',
                   border: 'none',
-                  borderRadius: '3px',
+                  borderRadius: '0.1875rem',
                 }}
               />
             </div>
@@ -188,7 +188,7 @@ function Register1(props) {
               history={history}
               to={nextpage}
               props={{ id: id, pw: pw }}
-              style={{ height: '2.7rem', borderRadius: '3px' }}
+              style={{ height: '2.7rem', borderRadius: '0.1875rem' }}
             />
           ) : (
             <Button
@@ -196,7 +196,7 @@ function Register1(props) {
               fullWidth
               history={history}
               to={presentpage}
-              style={{ height: '2.7rem', borderRadius: '3px' }}
+              style={{ height: '2.7rem', borderRadius: '0.1875rem' }}
             />
           )}
         </div>

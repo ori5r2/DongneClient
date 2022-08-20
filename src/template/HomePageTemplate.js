@@ -11,6 +11,7 @@ const StyledBody = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${palette[0]};
 `;
 
 const StyledBox = styled.div`

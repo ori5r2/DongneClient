@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom';
 const WhiteBox = styled.div`
     width: 45rem;
     height: 35rem;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     padding-left: 3rem;
     padding-right: 3rem;
     font-size: 1rem;
@@ -18,8 +18,8 @@ const WhiteBox = styled.div`
     justify-content: center;
 
     background: linear-gradient(180deg, #FFFFFF 0%, rgba(251, 251, 251, 0) 100%);
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(40px);
+    border: 0.125rem solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(2.5rem);
     /* Note: backdrop-filter has minimal browser support */
 
     color: #2D3B5C;  
@@ -48,7 +48,7 @@ const WhiteBox = styled.div`
     
     .Agreementbtn{
         height: 2rem;
-        border-radius: 3px;
+        border-radius: 0.1875rem;
     }
 
     .content{
@@ -84,7 +84,7 @@ const WhiteBox = styled.div`
 const InnerBox = styled.div`
     width: 40rem;
     height: 3rem;
-    border-radius: 3px;
+    border-radius: 0.1875rem;
     font-size: 0.9rem;
     background-color: #F3F3F3;
     overflow-y: scroll;

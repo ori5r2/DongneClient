@@ -19,7 +19,7 @@ const StyledCard = styled.button`
   width: 10.5rem;
   height: 12.5rem;
 
-  font-family: 'Pretendard Regular';
+  font-family: 'Pretendard Medium';
   // font-size: 1rem;
   color: ${palette[5]};
 
@@ -31,6 +31,13 @@ const StyledCard = styled.button`
   background: linear-gradient(180deg, #fafafa 0%, rgba(250, 250, 250, 0) 100%);
   box-shadow: inset 0rem 0rem 0.625rem rgba(200, 200, 200, 0.1);
 
+  .card__body {
+    position: relative;
+    box-sizing: border-box;
+    top: 2.5rem;
+    left: -2rem;
+  }
+
   .UserImg {
     box-sizing: border-box;
     position: relative;
@@ -39,14 +46,6 @@ const StyledCard = styled.button`
     left: 2.5rem;
     top: -2.5rem;
   }
-
-  .card__body {
-    position: relative;
-    box-sizing: border-box;
-    top: 2.5rem;
-    left: -2rem;
-  }
-
   .UserName {
     position: relative;
     font-style: normal;
@@ -55,14 +54,13 @@ const StyledCard = styled.button`
     line-height: 1.5rem;
     display: flex;
     justify-content: center;
-    margin-bottom: 0.5rem; // 아래 여백 필요
+    margin-bottom: 1rem; 
   }
-
-  .UserCode {
-    position: relative;
-    display: flex;
-    justify-content: center;
-  }
+  // .UserCode {
+  //   position: relative;
+  //   display: flex;
+  //   justify-content: center;
+  // }
   .UserTeam {
     position: relative;
     display: flex;
@@ -93,7 +91,7 @@ const MembersCard = ({
       </div>
       <div className="card__body">
         <div className="UserName">{UserName}</div>
-        <div className="UserCode">{UserCode}</div>
+        {/* <div className="UserCode">{UserCode}</div> */}
         <div className="UserTeam">{UserTeam}</div>
       </div>
     </StyledCard>

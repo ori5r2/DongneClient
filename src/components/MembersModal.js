@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import palette from '../styles/pallete';
 import EventButton from './EventButton';
 import PropTypes from 'prop-types';
+import importImg from '../styles/importImg';
 
 const StyledModal = styled.div`
   position: fixed;
@@ -55,7 +56,7 @@ const StyledModal = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: -0.75rem;
+    // margin-top: -0.75rem;
   }
   .modalBtn {
     // width: inherit;
@@ -122,7 +123,7 @@ const StyledModal = styled.div`
     height: 13.5625rem;
     // left: 39.125rem;
     // top: 36.5625rem;
-    margin-top: -0.8rem;
+    margin-top: -2.5rem;
   }
   .body__bottom__elem {
     font-size: 1.125rem;
@@ -143,6 +144,17 @@ const StyledModal = styled.div`
     margin-left: 1.125rem;
   }
 `;
+
+const TextBtn = styled.button`
+  border: none;
+  background-color: #11ffee00;
+  cursor: pointer;
+  padding: 0;
+  font-family: 'Pretendard Bold';
+  color: ${palette[3]};
+  font-size: 1.25rem;
+`;
+
 const ModalOverlay = styled.div`
   box-sizing: border-box;
   display: ${(props) => (props.visible ? 'block' : 'none')};
@@ -163,16 +175,14 @@ const MembersModal = ({ visible, onClick }) => {
         <div className="content-area">
           <div className="header">
             <div>회원 정보</div>
-            <button onClick={onClick}>x</button>
+            <TextBtn onClick={onClick}>
+              <img src={importImg.modalClose} />
+            </TextBtn>
           </div>
           <div className="body">
             <form className="body__left">
               <div className="body__left__elem">
                 <div>이름</div>
-                <input type="text"></input>
-              </div>
-              <div className="body__left__elem">
-                <div>팀/조</div>
                 <input type="text"></input>
               </div>
               <div className="body__left__elem">
@@ -186,11 +196,8 @@ const MembersModal = ({ visible, onClick }) => {
             </form>
             <form className="body__right">
               <div className="body__right__elem">
-                <div>개인 식별 코드</div>
+                <div>팀/조</div>
                 <input type="text"></input>
-              </div>
-              <div className="body__right__elem">
-                <div style={{ height: 2.5 + 'rem' }}></div>
               </div>
               <div className="body__right__elem">
                 <div>학교/소속</div>

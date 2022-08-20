@@ -8,7 +8,6 @@ import Logo from '../styles/imgs/icon/Logo.png';
 
 const StyledImg = styled.img`
   width: 1.7rem;
-  margin: 0px;
 `;
 
 const StyledNav = styled.nav`
@@ -16,7 +15,9 @@ const StyledNav = styled.nav`
     color: ${palette.CACACA};
     text-decoration: none;
     outline: none;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.5rem;
   }
   position: fixed;
   z-index: 1000;
@@ -26,41 +27,50 @@ const StyledNav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0px 1rem 1.5rem -0.8rem rgba(0, 0, 0, 0.1);
-  border-bottom-right-radius: 23px;
-  border-bottom-left-radius: 23px;
+  box-shadow: 0rem 1rem 1.5rem -0.8rem rgba(0, 0, 0, 0.1);
+  border-bottom-right-radius: 1.4375rem;
+  border-bottom-left-radius: 1.4375rem;
   padding: 0.6rem 0.8rem;
   margin-bottom: 1rem;
-  width: 111.4rem;
-  height: 3.4rem;
+  width: 1755px;
+  height: 70px;
 
-  font-family: 'Pretendard Regular';
-  font-size: 1.2rem;
+  font-family: 'Pretendard Medium';
+  
   background-color: ${palette[0]};
   color: ${palette.CACACA};
   /* background: ${palette[3]}; */
 
+  .logo {
+    width: 35px;
+    height: 35.21px;
+    margin-left: 3rem;
+  }
   .menus,
   .icons {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin-right: 3rem;
   }
   .menus > li {
-    padding: 0px 1.5rem;
-    margin-right: 2rem;
+    padding: 0rem 1.5rem;
+    margin-right: 3rem;
     list-style: none;
   }
   .icons > li {
-    padding: 0px 1rem;
+    padding: 0rem 1rem;
     list-style: none;
   }
   .selected {
     color: ${palette[3]};
-    font-family: 'Pretendard Bold';
+    font-weight: 800;
   }
 
   .Link {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 35px;
     display: flex;
     flex-direction: column;
     align-items: center;

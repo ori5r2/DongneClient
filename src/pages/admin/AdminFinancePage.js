@@ -17,7 +17,7 @@ const StyleldFinanceBody = styled.div`
   margin-top: 3.625rem;
   margin-left: 3.25rem;
   margin-right: 4.1875rem;
-  margin-bottom: 60px;
+  margin-bottom: 3.75rem;
   font-family: 'Pretendard Regular';
 
   h1 {
@@ -52,7 +52,7 @@ const StyleldFinanceBody = styled.div`
   }
   .finance_header_title > h4 {
     margin-top: 0.9375rem;
-    width: 287px;
+    width: 17.9375rem;
   }
 
   .finance_header_date {
@@ -62,7 +62,7 @@ const StyleldFinanceBody = styled.div`
     align-items: center;
     width: 11.4375rem;
     height: 3rem;
-    margin-left: 220px;
+    margin-left: 13.75rem;
   }
   .finance_header_date > h1 {
     width: 5rem;
@@ -121,7 +121,7 @@ const StyledLeftBox = styled.div`
     flex-direction: row;
     margin-top: 1.25rem;
     justify-content: space-between;
-    width: 714px;
+    width: 44.625rem;
   }
   .addBtn {
     width: 21.6875rem;
@@ -142,34 +142,46 @@ const StyledLeftBox = styled.div`
 const StyledSum = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 672px;
-  height: 340px;
+  // align-items: center;
+  // justify-content: center;
+  width: 42rem;
+  height: 21.25rem;
+  margin-left:3.9375rem;
+
   .sum_title {
     font-size: 1.1rem;
     color: ${palette[4]};
+    display: flex;
+    flex-direction: row;
+    width: 14.1875rem;
+    height: 2rem;
+    align-items:center;
   }
+  .sum_title > h1 {
+    margin-left: 0.875rem;
+  }
+
+
   .sum_body {
-    margin-top: 1.5rem;
-    width: inherit;
+    margin-top: 2.25rem;
+    width: 41.75rem;
+    height: 17rem;
     padding: 1.4rem 0rem;
-    border-radius: 1rem;
-    background: linear-gradient(
-      180deg,
-      #fbfbfb 0%,
-      rgba(251, 251, 251, 0) 100%
-    );
-    backdrop-filter: blur(10rem);
+    align-items:center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
   .sum_body_left {
-    padding: 1rem;
+    width: 13rem;
+    height: 16.6875rem;
+    // padding: 1rem;
     display: flex;
     justify-content: space-between;
   }
   .sum_body_right {
-    margin-left: 1rem;
-    width: 50%;
+    width: 18.5rem;
+    height: 16.6875rem;
   }
 `;
 
@@ -211,13 +223,17 @@ const CalendarBox = () => {
 const Sum = () => {
   return (
     <StyledSum>
-      <div className="header">
-        <div className="header__title__group">
+      <div className="sum_title">
           <img src={importImg.homeMemo} />
-          <div className="header__title__write">
-            <h1>동네 관리 메모장</h1>
-            <h4>잊을 법한 내용을 정리하고 기억하세요.</h4>
-          </div>
+          <h1>동네 회계 8월 요약</h1>
+      </div>
+      <div className="sum_body">
+        <div className="sum_left">
+            <h1>동네 회계 8월 요약</h1>
+        </div>
+        <img src={importImg.line} />
+        <div className="sum_right">
+            <h1>동네 회계 8월 요약</h1>
         </div>
       </div>
     </StyledSum>

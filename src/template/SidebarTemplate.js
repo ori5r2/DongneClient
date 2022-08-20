@@ -36,7 +36,7 @@ const StyledAvatar = styled.div`
   width: 10rem;
   background-color: #f7f7f7;
   border: 0.4rem solid white;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0rem 0.4375rem 1.8125rem 0rem;
   border-radius: 50% 50% 50% 0%;
   /* display: inline-block; */
 `;
@@ -52,12 +52,15 @@ const StyledButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  margin-bottom: 1.5rem;
   .buttonLeft {
     display: flex;
     align-items: center;
+    
   }
-
+  .buttonLeft >img {
+    margin-right:0.75rem;
+  }
   .on {
     color: ${palette[3]};
   }
@@ -91,15 +94,16 @@ const TokenImageButton = ({ isOn, text, img_src, to }) => {
 const StyledSideBar = styled.div`
   margin-left: 3.93rem;
   margin-top: 8.8125rem;
-  border-right: 0.01px solid ${palette[1][3]};
+  border-right: 0.0006rem solid ${palette[1][3]};
   position: fixed;
   left: 0;
   top: 0;
+  
   width: 17.8125rem;
   height: 100vh;
 
   font-size: 1.4rem;
-  font-family: 'Pretendard Regular';
+  font-family: 'Pretendard Medium';
 
   .greeting {
     font-family: 'Pretendard Medium';
@@ -109,13 +113,15 @@ const StyledSideBar = styled.div`
   .name {
     font-family: 'Pretendard Bold';
     color: ${palette[3]};
+    margin-bottom:1rem;
   }
   .description {
-    font-size: 18px;
-    margin-top: 2rem;
+    font-size: 1.125rem;
+    margin-top: 2.5rem;
+    margin-left:0.1875rem;
   }
   .invite {
-    font-size: 18px;
+    font-size: 1.125rem;
     margin-top: 2rem;
     color: ${palette[3]};
   }
@@ -137,7 +143,7 @@ const StyledSideBar = styled.div`
   }
   footer {
     position: absolute;
-    bottom: 14.125rem;
+    bottom: 10.75rem;
   }
 `;
 
@@ -149,7 +155,8 @@ const SidebarTemplate = ({ isAttendance, pageNum, children }) => {
           <div className="sidebar__contentArea">
             <StyledAvatar>
               {/* todo: 프로필 사진 */}
-              프로필 사진 영역
+              <img src={importImg.dongne} />
+              {/* 프로필<br></br>사진 영역 */}
             </StyledAvatar>
             <div>
               <div className="greeting">
@@ -161,7 +168,7 @@ const SidebarTemplate = ({ isAttendance, pageNum, children }) => {
 
             <footer>
               <div className="buttons">
-                <TokenImageButton
+                <TokenImageButton className="upsidebtn"
                   isOn={!isAttendance}
                   text={'회원 명단'}
                   img_src={
