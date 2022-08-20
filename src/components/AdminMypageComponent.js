@@ -100,6 +100,7 @@ const WhiteBox = styled.div`
     .information{
         font-size: 0.9rem;
         padding-right: 0.5rem;
+        outline: none;
         ::placeholder{
             color: #2D3B5C;
             padding: 0.5rem 0.8rem;
@@ -313,7 +314,8 @@ function Mypage(props) {
                                         borderRadius: "3px",
                                         fontFamily: "Pretendard Regular",
                                         fontSize: "0.9rem",
-                                        resize: "none"
+                                        resize: "none",
+                                        outline: "none"
                                 }}
                             />
                         </div>
