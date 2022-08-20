@@ -4,7 +4,8 @@ import Button from './Button';
 import styled from 'styled-components';
 import { useHistory, useLocation } from 'react-router-dom';
 import palette from '../styles/pallete';
-import { Axios } from '../../node_modules/axios/index';
+import axios from 'axios';
+import { API } from '../axiosConfig';
 
 const WhiteBox = styled.div`
   width: 45rem;
@@ -90,15 +91,23 @@ function AdminRegister2(props) {
   }, [group, year, area, introduce, url]);
 
   const handleApi = async () => {
-    console.log(
-      'id: ' + location.state.props.id,
-      'pw: ' + location.state.props.pw,
-      'group: ' + group,
-      'year: ' + year,
-      'area: ' + area,
-      'introduce: ' + introduce,
-      'url: ' + url,
-    );
+    const result = await axios.post(`${API}/admin/auth/register`,{
+      clubName: group,
+      adminEmail: location.state.props.id,
+      adminPwd: location.state.props.pw,
+      establishmentYear: year,
+      clubRegion: area,
+      clubIntroduction: introduce,
+      clubWebLink: url,
+      clubImgUrl: null
+    })
+    console.log(result);
+    const value = result.data;
+    if(value.isSuccess){
+      console.log("페이지가 이동해야함");
+    }else{
+      alert(value.message);
+    }
     // const res  = await  Axios.post({
     //     url: {"http://3.38.55.57:3000"}
     // })
@@ -261,29 +270,20 @@ function AdminRegister2(props) {
                 }}>가입 완료하기</div> */}
 
         <div
-          onClick={() => {
-            handleApi();
-          }} style={{paddingTop: "1rem"}}
+          style={{paddingTop: "1rem"}}
+          onClick={handleApi}
         >
-          {Ok ? (
-            <Button
-              onClick={handleApi}
-              text="가입 완료하기"
-              fullWidth
-              history={history}
-              to={nextpage}
-              props={{ year: year, area: area, introduce: introduce, url: url }}
-              style={{ height: '2.7rem', borderRadius: '3px' }}
-            />
-          ) : (
+ 
             <Button
               text="가입 완료하기"
               fullWidth
               history={history}
               to={presentpage}
+              props={{ id: location.state.props.id, pw: location.state.props.pw }}
               style={{ height: '2.7rem', borderRadius: '3px' }}
+              
             />
-          )}
+          
         </div>
       </div>
     </WhiteBox>
