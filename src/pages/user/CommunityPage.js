@@ -9,6 +9,7 @@ import vertical_line from '../../styles/imgs/icon/vertical_line.png';
 import stand_person from '../../styles/imgs/icon/stand_person.png';
 import point from '../../styles/imgs/icon/point.png';
 import CommunityMembers from '../../components/CommunityMembers';
+import CommunityPosts from '../../components/CommunityPosts';
 
 const StyledImg = styled.img`
   position: fixed;
@@ -88,10 +89,8 @@ const BackgroundImg = styled.div`
 `;
 
 const WhitBox = styled.div`
-    margin-top: -2rem;
-    width:100rem;
-    padding-top: 5rem;
-
+    margin-top: 3rem;
+    margin-left:5rem;
     .all{
         display: flex;
         flex-direction: row;
@@ -134,6 +133,11 @@ const WhitBox = styled.div`
     .clublist{
         display: flex;
         flex-wrap: wrap;
+    }
+
+    .postlist{
+        display: flex;
+        flex-direction: column;
     }
 `
 
@@ -183,6 +187,17 @@ const Community = () => {
                     <div className='subtitle'>
                         <img src={point} alt="" style={{paddingRight:"1rem"}} /> 인기 게시글
                     </div>
+                    <div className='postlist'>
+                            <CommunityPosts type="후기" title="Cluving 스포츠 활동 후기" goodPoint="123" chatPoint="222" tagPoint="36"/>
+                        <CommunityPosts type="취준" title="효과적인 동아리 운영 방법 및 정보 인수인계 팁!" goodPoint="123" chatPoint="222" tagPoint="36"/>
+                        <CommunityPosts type="정보" title="UMV 2기 Designer 활동 후기" goodPoint="123" chatPoint="222" tagPoint="36"/>
+                        <CommunityPosts type="후기" title="아리랑 댄스 동아리 6기 회원 모집! 지금 바로 신청하세요!" goodPoint="123" chatPoint="222" tagPoint="36"/>
+                        <CommunityPosts type="모집" title="블레 - 개발 동아리 12기 (Front End) 회원 모집" goodPoint="123" chatPoint="222" tagPoint="36"/>
+                        <CommunityPosts type="후기" title="블레 11기 개발자 사이드 프로젝트 후기" goodPoint="123" chatPoint="222" tagPoint="36"/>
+                        <CommunityPosts type="모집" title="UMC 3기 - IT 연합 동아리 회원 모집 (!22.08.26)" goodPoint="123" chatPoint="222" tagPoint="36"/>
+                        <CommunityPosts type="정보" title="동네 회계 장부 정리 꿀팁" goodPoint="123" chatPoint="222" tagPoint="36"/>
+                    </div>
+                    <Button text="더보기" style={{width: "58rem", height:"2.5rem", borderRadius:"4px", marginTop: "1rem"}} />
                 </div>
             </div>
         </WhitBox>

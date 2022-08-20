@@ -14,9 +14,6 @@ const StyledCard = styled.button`
   outline: none;
   cursor: pointer;
 
-  margin-bottom: 0.5rem;
-  margin-right: 0.875rem;
-
   width: 10.5rem;
   height: 12.5rem;
 
