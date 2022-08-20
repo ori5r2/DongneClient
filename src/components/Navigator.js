@@ -71,6 +71,11 @@ const StyledNav = styled.nav`
 `;
 
 const Navigator = ({ location }) => {
+  const onLogout = () => {
+    sessionStorage.removeItem('jwtToken');
+    sessionStorage.removeItem('adminIdx');
+  };
+
   return (
     <StyledNav>
       <ul className="menus icons">
@@ -128,7 +133,7 @@ const Navigator = ({ location }) => {
         </li>
         <li>
           {/* {todo: logout icon} */}
-          <Link to="/admin/home" className="Link">
+          <Link onClick={onLogout} to="/" className="Link">
             <StyledImg src={logIn}></StyledImg>
             로그아웃
           </Link>
