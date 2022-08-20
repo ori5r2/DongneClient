@@ -8,7 +8,8 @@ const StyledImg = styled.img`
 `;
 const StyledDiv = styled.div`
   font-family: 'Pretendard Bold';
-  font-size: 1rem;
+  font-size: inherit;
+  font-weight: inherit;
   color: ${palette[0]};
 `;
 
@@ -18,7 +19,7 @@ const StyledButton = styled.button`
   align-items: center;
 
   border: none;
-  border-radius: 0.25rem;
+  border-radius: 0.625rem;
   outline: none;
   cursor: pointer;
 

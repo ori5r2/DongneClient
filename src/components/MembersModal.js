@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import palette from '../styles/pallete';
-import Button from './Button';
+import EventButton from './EventButton';
 import PropTypes from 'prop-types';
 
 const StyledModal = styled.div`
@@ -61,8 +61,8 @@ const StyledModal = styled.div`
     // width: inherit;
     width: 20.625rem;
     height: 3.5rem;
-    // font-weight: 700;
-    // font-size: 1.375rem;
+    font-weight: 700;
+    font-size: 1.375rem;
   }
 
   .body__left {
@@ -215,8 +215,8 @@ const MembersModal = ({ visible, onClick }) => {
             </form>
           </div>
           <div className="button">
-            <Button text={'수정하기'} className="modalBtn"></Button>
-            <Button text={'삭제하기'} className="modalBtn"></Button>
+            <EventButton text={'수정하기'} className="modalBtn"></EventButton>
+            <EventButton text={'삭제하기'} className="modalBtn"></EventButton>
           </div>
         </div>
       </StyledModal>
@@ -224,29 +224,5 @@ const MembersModal = ({ visible, onClick }) => {
   );
 };
 
-// const MembersModal = (props) => {
-//     const { open, close, header } = props;
-
-//     return (
-//         <div className={open ? 'openModal modal' : 'modal'}>
-//             {open ? (
-//                 <section>
-//                     <header>
-//                         {header}
-//                         <button className="close" onClick={close}>
-//                         &times;
-//                         </button>
-//                     </header>
-//                     <main>{props.children}</main>
-//                     <footer>
-//                         <button className="close" onClick={close}>
-//                         close
-//                         </button>
-//                     </footer>
-//                 </section>
-//             ) : null}
-//         </div>
-//     );
-// };
 
 export default MembersModal;
