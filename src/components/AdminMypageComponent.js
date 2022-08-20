@@ -57,7 +57,7 @@ const WhiteBox = styled.div`
     .settingIcon{
         position: absolute;
         width: 2.8rem;
-        top:14rem;
+        top:15rem;
         left:30rem;
     }
     .icon{

@@ -59,7 +59,7 @@ const WhiteBox = styled.div`
     .settingIcon{
         position: absolute;
         width: 2.8rem;
-        top:14rem;
+        top:15rem;
         left:30rem;
     }
 
@@ -143,7 +143,7 @@ function Mypage(props) {
     const [pw, setPw] = useState("");
     const [school, setSchool] = useState("");
     const [number, setNumber] = useState("");
-    const [area, setArea] = useState("");
+    const [birth, setBirth] = useState("");
     const [address, setAddress] = useState("");
     const [intro, setIntro] = useState("");
 
@@ -157,7 +157,7 @@ function Mypage(props) {
             "pw: " + pw, 
             "school: " + school,
             "number: " + number,
-            "area: " + area,
+            "birth: " + birth,
             "address: " + address, 
             "intro: " + intro);
     }
@@ -295,13 +295,13 @@ function Mypage(props) {
                         </div>
 
                         <div className='Basic'>
-                            <span className="category">단체 활동 지역</span>
+                            <span className="category">생년월일</span>
                             <input 
                                 onChange={(e)=>{
-                                    setArea(e.target.value);
+                                    setBirth(e.target.value);
                                 }}
-                                value={area}
-                                type={"text"} 
+                                value={birth}
+                                type={"number"} 
                                 className="information" 
                                 style={{width: "16rem", 
                                         height: "2.5rem",
