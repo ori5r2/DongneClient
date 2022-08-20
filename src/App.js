@@ -19,6 +19,9 @@ import UserMainPage from './pages/user/UserMainPage';
 import UserMyPage from './pages/user/UserMyPage';
 import AdminFinancePage from './pages/admin/AdminFinancePage';
 
+import AdminMyPage from './pages/admin/AdminMyPage';
+import CommunityPage from './pages/user/CommunityPage';
+
 const App = () => {
   return (
     <Switch>
@@ -59,8 +62,10 @@ const App = () => {
         exact
       />
       <Route component={AdminMembersPage} path="/admin/members" exact />
-      <Route component={UserMainPage} path="/user/usermain" exact />
-      <Route component={UserMyPage} path="/user/mypage" exact />
+      <Route component={UserMainPage} path="/user/main" exact />
+      <Route component={UserMyPage} path="/user/myPage" exact />
+      <Route component={AdminMyPage} path="/admin/myPage" exact />
+      <Route component={CommunityPage} path="/user/community" exact />
       <Route component={AdminFinancePage} path="/admin/finance" exact />
     </Switch>
   );
