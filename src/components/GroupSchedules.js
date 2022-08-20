@@ -39,6 +39,9 @@ const StyledAttendanceBody = styled.div`
     align-items: center;
     font-size: 1.25rem;
   }
+  .attend_header_textBtn_bar {
+    margin: 0rem 1.25rem;
+  }
   .attend_body {
     margin-top: 2.3rem;
     display: flex;
@@ -110,22 +113,28 @@ const GroupSchedules = () => {
         </div>
       </div>
       <div className="attend_body">
-        {data.groupData[id - 1].map((elem) => (
-          <div key={elem.id} className="eachCard">
-            <Card
-              key={elem.id}
-              subTitle={elem.subTitle}
-              title={elem.title}
-              onClickForDetail={onClickForModal}
-              isGroupDetail={false}
-              onClickForGroup={null}
-            />
-          </div>
-        ))}
+        {data.groupData[id - 1] ? (
+          data.groupData[id - 1].map((elem) => (
+            <div key={elem.id} className="eachCard">
+              <Card
+                key={elem.id}
+                subTitle={elem.subTitle}
+                title={elem.title}
+                onClickForDetail={onClickForModal}
+                isGroupDetail={false}
+                onClickForGroup={null}
+              />
+            </div>
+          ))
+        ) : (
+          <div>출결 목록이 존재하지 않습니다.</div>
+        )}
       </div>
 
       {
-        modal === true ? <AttendModal onClick={onClickForModal} /> : null //기계역할
+        modal === true ? (
+          <AttendModal groupIdx={null} onClick={onClickForModal} />
+        ) : null //기계역할
       }
     </StyledAttendanceBody>
   );

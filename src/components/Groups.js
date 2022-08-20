@@ -82,7 +82,7 @@ const Groups = () => {
   const onClickForModal = (idx) => {
     setModal((current) => !current);
     if (!modal) {
-      setGroupTitle(data.attendData[idx - 1].title);
+      setGroupTitle(idx);
       console.log(idx);
     }
   };
@@ -123,7 +123,7 @@ const Groups = () => {
 
       {
         modal === true ? (
-          <AttendModal title={groupTitle} onClick={onClickForModal} />
+          <AttendModal groupIdx={groupTitle} onClick={onClickForModal} />
         ) : null //기계역할
       }
     </StyledAttendanceBody>

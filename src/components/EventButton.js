@@ -42,7 +42,7 @@ const StyledButton = styled.button`
 
 const EventButton = ({ text, img_src, onClick, props, ...rest }) => {
   return (
-    <StyledButton {...rest} onClick={onClick}>
+    <StyledButton type="button" {...rest} onClick={onClick}>
       {img_src ? <StyledImg src={img_src} /> : <div />}
       <StyledDiv>{text}</StyledDiv>
     </StyledButton>
