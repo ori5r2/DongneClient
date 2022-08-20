@@ -13,6 +13,7 @@ const WhiteBox = styled.div`
     height: 42rem;
     border-radius: 28px;
     font-size: 1rem;
+    padding-top:3rem;
     
 
     .frame{
@@ -76,7 +77,6 @@ const WhiteBox = styled.div`
     .category{
         width: 7rem;
         font-family: 'Pretendard ExtraBold';
-        padding-right: 3rem;
         display: flex;
         align-items: center;
         padding-bottom: 0.5rem;
@@ -147,13 +147,13 @@ function Mypage(props) {
             "intro: " + intro);
     }
 
-   
+   const memberName = props.memberName;
 
     return (
         <WhiteBox>
             <div className='frame'>
                 <div className="text"style={{ marginBottom: '0.5rem' }}>
-                    <span className='name'>가나다</span>님의 마이페이지
+                    <span className='name'>{memberName}</span>님의 마이페이지
                 </div>
 
                 <div className='content'>
@@ -178,21 +178,12 @@ function Mypage(props) {
                                         type={"text"} 
                                         className="information" 
                                         placeholder="abcdef@naver.com"
-                                        style={{width: "33.5rem", 
+                                        style={{width: "41.5rem", 
                                                 height: "2.5rem",
                                                 backgroundColor:"#F3F3F3",
                                                 border: "none",
-                                                borderRadius: "3px",
+                                                borderRadius: "3px"
                                             }}
-                                    />
-                            </div>
-                            <div className='btnstyle'>
-                                <Button
-                                        text="수정하기"
-                                        fullWidth
-                                        history={history}
-                                        // to={nextlink}
-                                        style={{height: "2.5rem", width: "5rem", borderRadius: "3px", margin:"0"}}
                                     />
                             </div>
                         </div>
@@ -209,7 +200,7 @@ function Mypage(props) {
                                     type={"text"} 
                                     className="information" 
                                     placeholder="동네"
-                                    style={{width: "33.5rem", 
+                                    style={{width: "41.5rem", 
                                             height: "2.5rem",
                                             backgroundColor:"#F3F3F3",
                                             border: "none",
@@ -217,14 +208,6 @@ function Mypage(props) {
                                     }}
                                 />
                             </div>
-                
-                            <Button
-                                    text="수정하기"
-                                    fullWidth
-                                    history={history}
-                                    // to={nextlink}
-                                    style={{height: "2.5rem", width: "5rem", borderRadius: "3px", margin:"0"}}
-                            />
                         </div>
 
                         <div className='Basic'>
@@ -239,7 +222,7 @@ function Mypage(props) {
                                     type={"password"} 
                                     className="information" 
                                     placeholder="******"
-                                    style={{width: "33.5rem", 
+                                    style={{width: "41.5rem", 
                                             height: "2.5rem",
                                             backgroundColor:"#F3F3F3",
                                             border: "none",
@@ -247,14 +230,6 @@ function Mypage(props) {
                                     }}
                                 />
                             </div>
-
-                            <Button
-                                        text="수정하기"
-                                        fullWidth
-                                        history={history}
-                                        // to={nextlink}
-                                        style={{height: "2.5rem", width: "5rem", borderRadius: "3px", margin:"0"}}
-                                    />
                         </div>
                         
                         
@@ -330,7 +305,7 @@ function Mypage(props) {
 
                                 value={intro}
                                 type={"text"} 
-                                style={{width: "41.5rem", 
+                                style={{width: "41rem", 
                                         height: "5rem",
                                         paddingRight:' 1rem',
                                         backgroundColor: "#F3F3F3",
@@ -350,7 +325,7 @@ function Mypage(props) {
                                 text="단체 정보 수정하기"
                                 style={{
                                     borderRadius:"4px",
-                                    width:"50.1rem",
+                                    width:"49.3rem",
                                     marginTop:"1.5rem"
                                 }}
                             />
