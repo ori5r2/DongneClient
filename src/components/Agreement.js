@@ -1,17 +1,21 @@
 import React, {useState, useEffect}  from 'react';
 import Off from '../styles/imgs/icon/off.png';
 import On from '../styles/imgs/icon/On.png';
+import line from '../styles/imgs/icon/line.png';
 import Button from '../components/Button';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
 const WhiteBox = styled.div`
-    width: 35rem;
-    height: 28rem;
+    width: 45rem;
+    height: 35rem;
     border-radius: 10px;
     padding-left: 3rem;
     padding-right: 3rem;
     font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     background: linear-gradient(180deg, #FFFFFF 0%, rgba(251, 251, 251, 0) 100%);
     border: 2px solid rgba(255, 255, 255, 0.6);
@@ -20,6 +24,11 @@ const WhiteBox = styled.div`
 
     color: #2D3B5C;  
 
+    .bold{
+        font-family: 'Pretendard Bold';
+        padding-bottom: 1rem;
+        font-size: 1.2rem;
+    }
     & > div{
         display: flex;
         align-items: flex-start;
@@ -27,10 +36,10 @@ const WhiteBox = styled.div`
         /* text-align: center; */
     }
     
-    & img{
+    .img{
         padding-right: 1rem;
-        width: 1.5rem;
-        height: 1.5rem;
+        width: 1.8rem;
+        height: 1.8rem;
     }
 
     .outline{
@@ -42,10 +51,16 @@ const WhiteBox = styled.div`
         border-radius: 3px;
     }
 
+    .content{
+        padding-top: 0.5rem;
+        padding-bottom: 1rem;
+    }
     .class {
         display: flex;
         align-items: center;
         padding-bottom: 0.5rem;
+        font-family: 'Pretendard Bold';
+        font-size: 1rem;
     }
 
     .explain{
@@ -54,20 +69,23 @@ const WhiteBox = styled.div`
     }
 
     .in{
+        width: 45rem;
+        height: 19rem;
         overflow-y: scroll;
-        overflow-x: hidden;
-        scrollbar-width: none;
-        width: 35rem;
-        height: 15rem;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+       & ::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera*/
+        }
     }
 
 `
 
 const InnerBox = styled.div`
-    width: 36.5rem;
-    height: 2rem;
+    width: 40rem;
+    height: 3rem;
     border-radius: 3px;
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     background-color: #F3F3F3;
     overflow-y: scroll;
     padding: 0.3rem;
@@ -77,8 +95,9 @@ const InnerBox = styled.div`
         display: none; /* Chrome, Safari, Opera*/
     }
     
-    .content{
+    .textcontent{
         padding: 0.3rem;
+        line-height: 1.3rem;
     }
 `
 
@@ -123,41 +142,44 @@ function Agreement(props) {
     return (
         <WhiteBox>
         <div className='outline'>
-            <h3>약관동의</h3>
-            <div>
-                <div className='class'>
-                    {selectAll ? (
-                        <img
-                        src={On}
-                        alt=''
-                        onClick={() => {
-                            setSelectAll(false);
-                            setSelectFirst(false);
-                            setSelectSecond(false);
-                            setSelectOption(false);
-                        }}
-                        />
-                        ) : (
-                            <img src={Off} alt='' onClick={() => setSelectAll(!selectAll)} />
-                            )}
-                     전체 약관에 동의합니다.
+            <div className='bold'>약관동의</div>
+            <div className="square">
+                <div className='content'>
+                    <div className='class'>
+                        {selectAll ? (
+                            <img
+                            className='img'
+                            src={On}
+                            alt=''
+                            onClick={() => {
+                                setSelectAll(false);
+                                setSelectFirst(false);
+                                setSelectSecond(false);
+                                setSelectOption(false);
+                            }}
+                            />
+                            ) : (
+                                <img className='img' src={Off} alt='' onClick={() => setSelectAll(!selectAll)} />
+                                )}
+                        전체 약관에 동의합니다.
+                    </div>
                 </div>
             </div>
-            <hr style={{color: "#EFEFEF", width:"100%"}}/>
+            <img src={line} alt="" style={{width: "45em"}}/>
             
             <div className='in'>
-                <div>
+                <div className='content'>
                     <div className='class'>
                         {selectFirst ? (
-                            <img src={On} alt='' onClick={() => setSelectFirst(!selectFirst)} />
+                            <img className='img' src={On} alt='' onClick={() => setSelectFirst(!selectFirst)} />
                             ) : (
-                                <img src={Off} alt='' onClick={() => setSelectFirst(!selectFirst)} />
+                                <img className='img' src={Off} alt='' onClick={() => setSelectFirst(!selectFirst)} />
                                 )}
                         서비스 이용 약관 <span style={{color:"#2B78FF"}}>(필수)</span>
                     </div>
                     <div className='explain'>
                         <InnerBox className='innerText'>
-                        <div className='content'>
+                        <div className='textcontent'>
                             <p style={{fontWeight: "bold"}}>동네에 오신 것을 환영합니다! </p>
                         서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 
                         본 약관은 다양한 서비스의 이용과 관련하여 서비스를 제공하는 주식
@@ -168,12 +190,13 @@ function Agreement(props) {
                     </div>
                 </div>
 
-                <div>
+                <div className='content'>
                     <div className='class'>
                         {selectSecond ? (
-                            <img src={On} alt='' onClick={() => setSelectSecond(!selectSecond)} />
+                            <img className='img' src={On} alt='' onClick={() => setSelectSecond(!selectSecond)} />
                             ) : (
                                 <img
+                                className='img'
                                 src={Off}
                                 alt=''
                                 onClick={() => setSelectSecond(!selectSecond)}
@@ -183,7 +206,7 @@ function Agreement(props) {
                     </div>
                     <div className='explain'>
                         <InnerBox className='innerText'>
-                        <div className='content'>
+                        <div className='textcontent'>
                         개인정보보호법에 따라 네이버에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 
                         개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
                         </div>
@@ -191,12 +214,13 @@ function Agreement(props) {
                     </div>
                 </div>
 
-                <div>
+                <div className='content'>
                     <div className='class'>
                         {selectOption ? (
-                            <img src={On} alt='' onClick={() => setSelectOption(!selectOption)} />
+                            <img className='img' src={On} alt='' onClick={() => setSelectOption(!selectOption)} />
                             ) : (
                                 <img
+                                className='img'
                                 src={Off}
                                 alt=''
                                 onClick={() => setSelectOption(!selectOption)}
@@ -206,7 +230,7 @@ function Agreement(props) {
                     </div>
                     <div className='explain'>
                         <InnerBox className='innerText'>
-                        <div className='content'>
+                        <div className='textcontent'>
                         이벤트 및 마케팅 안내에 관한 내용을 자세히 읽은 후 동의하여 주시기 바랍니다.
                         </div>
                         </InnerBox>
