@@ -16,39 +16,45 @@ const StyleldMembersBody = styled.div`
   margin-left: 3.25rem;
   // margin-right: 3rem;
   font-family: 'Pretendard Regular';
-  .attend_header {
+
+  .members_header {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  .attend_header__left {
+  .members_header__left {
     display: flex;
     align-items: center;
     font-size: 1.5rem;
     color: ${palette[5]};
     font-family: 'Pretendard Bold';
   }
-  .attend_header__left > div {
+  .members_header__left > div {
     margin-left: 1rem;
   }
-  .attend_header__right {
+  .members_header__right {
     display: flex;
     align-items: center;
     font-size: 1.25rem;
+    font-size: 20px;
+    line-height: 24px;
   }
-  .attend_header_textBtn_bar {
+  .members_header_textBtn_bar {
     margin: 0rem 1.25rem;
   }
 
   .textBtn_off {
     color: ${palette[1][2]};
     font-family: 'Pretendard Regular';
+    font-weight: 400;
   }
   .addBtn {
-    margin-left: 1.25rem;
-    width: 10.4375rem;
+    margin-left: 2.5rem;
+    width: 8rem;
     height: 3rem;
+    font-weight:: 600;
   }
+
   .members_body {
     margin-top: 2.3rem;
     display: flex;
@@ -73,6 +79,7 @@ const TextBtn = styled.button`
   font-family: 'Pretendard Bold';
   color: ${palette[3]};
   font-size: 1.25rem;
+  font-weight: 800;
 `;
 const AdminMembersPage = () => {
   const [modal, setModal] = useState(false);
@@ -82,17 +89,17 @@ const AdminMembersPage = () => {
   return (
     <SidebarTemplate isMembers={true}>
       <StyleldMembersBody>
-        <div className="attend_header">
-          <div className="attend_header__left">
-            <img src={importImg.attendCheck} />
-            <div>출결관리</div>
+        <div className="members_header">
+          <div className="members_header__left">
+            <img src={importImg.event} />
+            <div>현재 활동 회원 명단</div>
           </div>
-          <div className="attend_header__right">
+          <div className="members_header__right">
             <TextBtn>카드로 보기</TextBtn>
-            <div className="attend_header_textBtn_bar">|</div>
+            <div className="members_header_textBtn_bar">|</div>
             <TextBtn className="textBtn_off">표로 보기</TextBtn>
             <div className="addBtn">
-              <EventButton text={'항목 추가하기 +'} />
+              <EventButton text={'추가하기 +'} />
             </div>
           </div>
         </div>
