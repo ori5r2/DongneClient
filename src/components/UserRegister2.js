@@ -169,7 +169,7 @@ function UserRegister2(props) {
                                     value={birth}
                                     type={"number"} 
                                     className="information" 
-                                    placeholder="ex) 2001.01.01"
+                                    placeholder="ex) 20010101"
                                     style={{width: '21.2rem',
                                             height: '2.5rem',
                                             backgroundColor:"#F3F3F3",
@@ -231,7 +231,7 @@ function UserRegister2(props) {
                                     value={phone}
                                     type={"number"} 
                                     className="information" 
-                                    placeholder="ex) 010-xxxx-xxxx"
+                                    placeholder="ex) 010xxxxxxxx"
                                     style={{width: '21.2rem',
                                     height: '2.5rem',
                                             backgroundColor:"#F3F3F3",
