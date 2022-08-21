@@ -36,6 +36,7 @@ const WhiteBox = styled.div`
 
   .information {
     font-size: 0.8rem;
+    outline: none;
     ::placeholder {
       padding: 0.3rem;
       color: #aaaaaa;

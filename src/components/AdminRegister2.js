@@ -35,6 +35,7 @@ const WhiteBox = styled.div`
 
   .information{
     font-size: 0.8rem;
+    outline: none;
       ::placeholder{
           padding: 0.3rem;
           color: #AAAAAA;
@@ -233,6 +234,7 @@ function AdminRegister2(props) {
                 border: 'none',
                 borderRadius: '3px',
                 resize: 'none',
+                outline: 'none',
               }}
             />
           </div>
