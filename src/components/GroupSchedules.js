@@ -3,7 +3,7 @@ import importImg from '../styles/importImg';
 import palette from '../styles/pallete';
 import Card from './Card';
 import data from '../data';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AttendModal from './AttendModal';
 import {
   Route,
@@ -12,6 +12,7 @@ import {
   useRouteMatch,
 } from 'react-router-dom';
 import EventButton from './EventButton';
+import client from '../axiosConfig';
 const StyledAttendanceBody = styled.div`
   /* position: relative; */
   width: inherit;
@@ -85,15 +86,48 @@ const TextBtn = styled.button`
 const GroupSchedules = () => {
   const match = useRouteMatch();
   const history = useHistory();
-  const id = match.params.id;
+  const groupIdx = match.params.id;
   const location = useLocation();
   const [modal, setModal] = useState(false);
+  const jwtToken = sessionStorage.getItem('jwtToken');
+  const adminIdx2 = sessionStorage.getItem('adminIdx');
+  const [success, setSuccess] = useState(false);
+  const [schedules, setSchedules] = useState([]);
+
   const onClickBack = () => {
     history.goBack();
   };
   const onClickForModal = () => {
     setModal((current) => !current);
   };
+  useEffect(() => {
+    const fetchSchedule = async (jwt, adminIdx) => {
+      await client
+        .get('/admin/schedule/list', {
+          headers: {
+            'x-access-token': jwt,
+          },
+          params: {
+            adminIdx: adminIdx,
+            groupIdx: groupIdx,
+            curPage: 1,
+          },
+        })
+        .then(function (response) {
+          setSchedules(response.data.result);
+          setSuccess(true);
+          if (!response.data.isSuccess) {
+            alert(response.data.message);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    };
+    fetchSchedule(jwtToken, adminIdx2);
+  }, []);
+  console.log('hi', schedules);
+
   return (
     <StyledAttendanceBody>
       <div className="attend_header">
@@ -102,7 +136,9 @@ const GroupSchedules = () => {
             <img src={importImg.attendBackChevron}></img>
           </TextBtn>
           <img src={importImg.attendCheck} />
-          <div>{`${data.attendData[id - 1].title} - 출결관리`}</div>
+          <div>
+            {success ? `${schedules.schedule[0].groupName} - 출결관리` : null}
+          </div>
         </div>
         <div className="attend_header__right">
           <TextBtn>카드로 보기</TextBtn>
@@ -114,19 +150,16 @@ const GroupSchedules = () => {
         </div>
       </div>
       <div className="attend_body">
-        {data.groupData[id - 1] ? (
-          data.groupData[id - 1].map((elem) => (
-            <div key={elem.id} className="eachCard">
-              <Card
-                key={elem.id}
-                subTitle={elem.subTitle}
-                title={elem.title}
-                onClickForDetail={onClickForModal}
-                isGroupDetail={false}
-                onClickForGroup={null}
-              />
-            </div>
-          ))
+        {success ? (
+          <Card
+            key={schedules.schedule[0].scheduleIdx}
+            className="eachCard"
+            subTitle={schedules.schedule[0].scheduleDate}
+            title={schedules.schedule[0].scheduleName}
+            onClickForDetail={onClickForModal}
+            isGroupDetail={false}
+            onClickForGroup={null}
+          />
         ) : (
           <div>출결 목록이 존재하지 않습니다.</div>
         )}

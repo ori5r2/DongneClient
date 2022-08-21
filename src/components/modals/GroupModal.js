@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import palette from '../styles/pallete';
-import data from '../data';
-import EventButton from './EventButton';
-import importImg from '../styles/importImg';
-import membersData from '../../src/membersData';
-import MembersCard from './MembersCard';
-import Avatar from './modals/Avatar';
-import client from '../axiosConfig';
+import palette from '../../styles/pallete';
+// import data from '../data';
+import EventButton from '../EventButton';
+import importImg from '../../styles/importImg';
+import membersData from '../../membersData';
+import Avatar from './Avatar';
+import client from '../../axiosConfig';
+// import membersData from '../../src/membersData';
+// import MembersCard from './MembersCard';
+// import Avatar from '../../modals/Avatar';
+// import client from '../axiosConfig';
 
 const StyledModal = styled.div`
   position: fixed;
@@ -40,7 +43,7 @@ const StyledModal = styled.div`
     align-items: center;
   }
   .body {
-    margin-top: 2rem;
+    margin-top: 1rem;
     font-family: 'Pretendard Medium';
     font-style: normal;
     font-weight: 500;
@@ -48,7 +51,7 @@ const StyledModal = styled.div`
     line-height: 160%;
     // margin_top:1.9375rem;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     // position: relative;
   }
 
@@ -62,10 +65,10 @@ const StyledModal = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: flex-start;
     width: 100%;
     font-size: 1.125rem;
-    margin-bottom: 0.75rem;
+    /* margin-bottom: 0.75rem; */
     margin-right: 2.5rem;
   }
   .body__right {
@@ -84,7 +87,7 @@ const StyledModal = styled.div`
   .name_input_form {
     width: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     margin-top: 0.75rem;
   }
@@ -92,7 +95,7 @@ const StyledModal = styled.div`
     width: 4.1875rem;
     white-space: nowrap;
   }
-  .attended_members > span {
+  .attended_members > .span {
     width: 4.1875rem;
     white-space: nowrap;
   }
@@ -109,7 +112,7 @@ const StyledModal = styled.div`
     background: #f3f3f3;
     border-radius: 0.25rem;
     width: auto;
-    height: 2.5rem;
+    height: 16.6875rem;
     border: none;
     margin-left: 1.375rem;
     resize: none;
@@ -146,12 +149,12 @@ const StyledModal = styled.div`
   }
   .long_long_input {
     width: 27.75rem;
-    height: 5.6875rem;
+    height: 16.6875rem;
   }
   .members_body {
     width: 28rem;
     gap: 1px;
-    height: 10.625rem;
+    height: 23.1875rem;
     margin-left: 1.125rem;
     display: flex;
     flex-wrap: wrap;
@@ -227,13 +230,21 @@ const ModalOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 999;
 `;
-const AttendModal = ({ groupIdx, visible, onClick }) => {
-  console.log('Hello');
+const GroupModal = ({ groupIdx, visible, onClick }) => {
   const [success, setSuccess] = useState(false);
   const jwtToken = sessionStorage.getItem('jwtToken');
   const adminIdx2 = sessionStorage.getItem('adminIdx');
+  const [groupTitle, setGroupTitle] = useState('');
+  const [groupCategory, setGroupCategory] = useState('');
+  const [groupIntroduction, setGroupIntroduction] = useState('');
   console.log(jwtToken, adminIdx2);
   const [groupDetail, setgroupDetail] = useState({});
+
+  const onChangeIntroduction = (e) => {
+    setGroupIntroduction(e.target.value);
+  };
+  const onChangeCategory = (e) => setGroupCategory(e.target.value);
+  const onChangeName = (e) => setGroupTitle(e.target.value);
 
   useEffect(() => {
     const fetchGroupDetail = async (jwt, adminIdx) => {
@@ -247,19 +258,30 @@ const AttendModal = ({ groupIdx, visible, onClick }) => {
             groupIdx: groupIdx,
           },
         })
-        .then(function (response) {
+        .then((response) => {
+          console.log(response);
+          console.log(response.data.result);
           setgroupDetail(response.data.result);
-          setSuccess(true);
+          console.log(success, groupIntroduction, groupCategory, groupTitle);
           if (!response.data.isSuccess) {
             alert(response.data.message);
           }
         })
         .catch(function (error) {
-          console.log(error);
+          alert(error);
         });
     };
-    fetchGroupDetail(jwtToken, adminIdx2);
-  }, []);
+    if (success) {
+      setGroupIntroduction(groupDetail[0].groupIntroduction);
+      setGroupCategory(groupDetail[0].groupCategory);
+      setGroupTitle(groupDetail[0].groupName);
+      console.log('tlqkf');
+    } else {
+      fetchGroupDetail(jwtToken, adminIdx2);
+      setSuccess(true);
+      console.log('tlqkf');
+    }
+  }, [groupDetail]);
 
   return (
     <>
@@ -267,7 +289,7 @@ const AttendModal = ({ groupIdx, visible, onClick }) => {
       <StyledModal>
         <div className="content-area">
           <div className="header">
-            <div>{success ? groupDetail[0].groupName : null}</div>
+            <div>{success ? groupTitle : ''}</div>
             <TextBtn onClick={onClick}>
               <img src={importImg.modalClose} />
             </TextBtn>
@@ -275,43 +297,31 @@ const AttendModal = ({ groupIdx, visible, onClick }) => {
           <div className="body">
             <form className="body__left">
               <div className="name_input_form">
-                <span>출결 코드</span>
-                <input type="text" className="code__input" />
-                <button className="codeButton" type="button">
-                  코드 복사
-                </button>
+                <span>카테고리</span>
+                <input
+                  type="text"
+                  onChange={onChangeCategory}
+                  value={success ? groupCategory : ''}
+                  className="long__input"
+                />
               </div>
-              <div className="name_input_formGroup">
-                <div className="name_input_form">
-                  <span>일자</span>
-                  <input type="text" />
-                </div>
-                <div className="name_input_form ">
-                  <span>항목</span>
-                  <input type="text" />
-                </div>
-              </div>
-              <div className="name_input_formGroup">
-                <div className="name_input_form">
-                  <span>시작 시간</span>
-                  <input type="text" />
-                </div>
-                <div className="name_input_form">
-                  <span>종료 시간</span>
-                  <input type="text" />
-                </div>
+              <div className="name_input_form">
+                <span>항목</span>
+                <input
+                  type="text"
+                  onChange={onChangeName}
+                  value={success ? groupTitle : ''}
+                  className="long__input"
+                />
               </div>
               <div className="name_input_form">
                 <span>내용</span>
-                <input type="text" className="long__input" />
-              </div>
-              <div className="name_input_form">
-                <span>장소</span>
-                <input type="text" className="long__input" />
-              </div>
-              <div className="name_input_form">
-                <span>비고</span>
-                <textarea maxLength="300" className="long_long_input" />
+                <textarea
+                  maxLength="300"
+                  onChange={onChangeIntroduction}
+                  value={success ? groupIntroduction : ''}
+                  className="long_long_input"
+                />
               </div>
               <div className="eventButton">
                 <EventButton text={'수정하기'} />
@@ -319,24 +329,7 @@ const AttendModal = ({ groupIdx, visible, onClick }) => {
             </form>
             <form className="body__right">
               <div className="attended_members">
-                <span>출석 회원</span>
-                <div className="members_body">
-                  {membersData.Data.map((elem) => (
-                    <div className="eachCard">
-                      <Avatar
-                        UserName={elem.UserName}
-                        UserCode={elem.UserCode}
-                        UserTeam={elem.UserTeam}
-                        // onClick={onClickForModal}
-                      />
-                    </div>
-                  ))}
-                </div>
-                <SmokeBar></SmokeBar>
-              </div>
-
-              <div className="not_attended attended_members">
-                <span>결석 회원</span>
+                <div className="span">참여 회원</div>
                 <div className="members_body">
                   {membersData.Data.map((elem) => (
                     <div className="eachCard">
@@ -363,4 +356,4 @@ const AttendModal = ({ groupIdx, visible, onClick }) => {
   );
 };
 
-export default AttendModal;
+export default GroupModal;

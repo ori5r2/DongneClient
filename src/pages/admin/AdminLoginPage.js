@@ -89,17 +89,19 @@ const AdminLoginPage = () => {
     setInputPw(e.target.value);
   };
 
-  const onClickLogin = async (to) => {
+  const onClickLogin = async () => {
     await fetchData();
     console.log(isLogin);
-    if (isLogin) {
-      history.push({
-        pathname: to,
-      });
-    }
     return;
   };
 
+  useEffect(() => {
+    if (isLogin) {
+      history.push({
+        pathname: '/admin/home',
+      });
+    }
+  }, [isLogin]);
   return (
     <div>
       <BackgroundTemplate style={{ zIndex: 0 }}>
@@ -131,7 +133,7 @@ const AdminLoginPage = () => {
                 <EventButton
                   text="로그인"
                   type="button"
-                  onClick={() => onClickLogin('/admin/home')}
+                  onClick={() => onClickLogin()}
                   img_src={null}
                   fullWidth
                   history={history}

@@ -3,11 +3,13 @@ import importImg from '../styles/importImg';
 import palette from '../styles/pallete';
 import Card from './Card';
 import data from '../data';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AttendModal from './AttendModal';
 import { Route, useLocation, useRouteMatch } from 'react-router-dom';
 import Button from './Button';
 import EventButton from './EventButton';
+import client from '../axiosConfig';
+import GroupModal from './modals/GroupModal';
 const StyledAttendanceBody = styled.div`
   /* position: relative; */
   width: inherit;
@@ -76,14 +78,46 @@ const TextBtn = styled.button`
   font-size: 1.25rem;
 `;
 const Groups = () => {
-  const [groupTitle, setGroupTitle] = useState('');
+  const [groupId, setgroupId] = useState('');
   const location = useLocation();
   const [modal, setModal] = useState(false);
+  const jwtToken = sessionStorage.getItem('jwtToken');
+  const adminIdx = sessionStorage.getItem('adminIdx');
+  const [groupData, setGroupData] = useState([]);
+
+  const fetchGroups = async (jwt, adminIdx, page, pageSize) => {
+    await client
+      .get('/admin/group', {
+        headers: {
+          'x-access-token': jwt,
+        },
+        params: {
+          adminIdx: adminIdx,
+          page: page,
+          pageSize: pageSize,
+        },
+      })
+      .then(function (response) {
+        console.log(response.data);
+        setGroupData(response.data.result);
+        if (!response.data.isSuccess) {
+          alert(response.data.message);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchGroups(jwtToken, adminIdx, 1, 10);
+  }, []);
 
   const onClickForModal = (idx) => {
     setModal((current) => !current);
+    console.log(idx);
     if (!modal) {
-      setGroupTitle(idx);
+      setgroupId(idx);
       console.log(idx);
     }
   };
@@ -104,18 +138,21 @@ const Groups = () => {
         </div>
       </div>
       <div className="attend_body">
-        {data.attendData.map((elem) => {
+        {groupData.map((elem) => {
           return (
-            <div key={elem.id} className="eachCard">
+            <div key={elem.groupIdx} className="eachCard">
               <Card
-                subTitle={elem.subTitle}
-                title={elem.title}
-                onClickForDetail={() => onClickForModal(elem.id)}
+                subTitle={elem.groupCategory}
+                title={elem.groupName}
+                onClickForDetail={() => {
+                  console.log('ho');
+                  return onClickForModal(elem.groupIdx);
+                }}
                 onClickForGroup={null}
-                key={elem.id}
-                groupId={elem.id}
+                key={elem.groupIdx}
+                groupId={elem.groupIdx}
                 isGroupDetail={true}
-                to={`/admin/attendance/${elem.id}`}
+                to={`/admin/attendance/${elem.groupIdx}`}
               />
             </div>
           );
@@ -123,9 +160,10 @@ const Groups = () => {
       </div>
 
       {
-        modal === true ? (
-          <AttendModal groupIdx={groupTitle} onClick={onClickForModal} />
-        ) : null //기계역할
+        modal && (
+          // <div>Hi</div>
+          <GroupModal groupIdx={groupId} onClick={onClickForModal} />
+        ) //기계역할
       }
     </StyledAttendanceBody>
   );
