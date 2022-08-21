@@ -99,7 +99,7 @@ function AdminRegister2(props) {
       clubRegion: area,
       clubIntroduction: introduce,
       clubWebLink: url,
-      clubImgUrl: null
+      clubImgUrl: "img"
     })
     console.log(result);
     const value = result.data;

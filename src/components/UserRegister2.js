@@ -5,6 +5,8 @@ import Button from './Button';
 import styled from 'styled-components';
 import { useHistory, useLocation } from 'react-router-dom';
 import palette from '../styles/pallete';
+import axios from 'axios';
+import { API } from '../axiosConfig';
 
 const WhiteBox = styled.div`
     width: 45rem;
@@ -101,17 +103,26 @@ function UserRegister2(props) {
     const presentpage = props.presentpage;
 
 
-    const handleApi= async() =>{
-        console.log(
-            "id: " + location.state.props.id ,
-            "pw: " + location.state.props.pw, 
-            "name: " + name, 
-            "birth: " + birth, 
-            "school: " + school,
-            "phone: " + phone,
-            "address: " + address, 
-            "selfintro: " + selfintro);
-    }
+    const handleApi= async() => {
+        const result = await axios.post(`${API}/user/auth/register`,{
+            name: name,
+            userEmail: location.state.props.id,
+            password: location.state.props.pw,
+            phoneNum: phone,
+            school: school,
+            birth: birth,
+            address: address,
+            introduction: selfintro,
+            userImgUrl: "Image"
+    })
+        console.log(result);
+        const value = result.data;
+        if(value.isSuccess){
+            console.log("페이지가 이동해야함");
+        } else {
+            alert(value.message);
+        }
+    };
 
     return (
         <WhiteBox> 
@@ -293,7 +304,15 @@ function UserRegister2(props) {
                 handleApi();
             }} style={{paddingTop: "1rem"}}
             >
-                {Ok ? (
+                <Button
+                        text="가입 완료하기"
+                        fullWidth
+                        history={history}
+                        to={presentpage}
+                        props={{id: location.state.props.id, pw: location.state.props.pw}}
+                        style={{height: "2.7rem", borderRadius: "3px"}}
+                    />
+                {/* {Ok ? (
                     <Button
                         text="가입 완료하기"
                         fullWidth
@@ -310,7 +329,7 @@ function UserRegister2(props) {
                         to={presentpage}
                         style={{height: "2.7rem", borderRadius: "3px"}}
                     />
-            ) }
+                ) } */}
             </div>
             
         </div>
