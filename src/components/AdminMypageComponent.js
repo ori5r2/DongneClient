@@ -13,6 +13,7 @@ const WhiteBox = styled.div`
     height: 42rem;
     border-radius: 28px;
     font-size: 1rem;
+    padding-top:3rem;
     
 
     .frame{
@@ -56,7 +57,7 @@ const WhiteBox = styled.div`
     .settingIcon{
         position: absolute;
         width: 2.8rem;
-        top:14rem;
+        top:15rem;
         left:30rem;
     }
     .icon{
@@ -76,7 +77,6 @@ const WhiteBox = styled.div`
     .category{
         width: 7rem;
         font-family: 'Pretendard ExtraBold';
-        padding-right: 3rem;
         display: flex;
         align-items: center;
         padding-bottom: 0.5rem;
@@ -100,6 +100,7 @@ const WhiteBox = styled.div`
     .information{
         font-size: 0.9rem;
         padding-right: 0.5rem;
+        outline: none;
         ::placeholder{
             color: #2D3B5C;
             padding: 0.5rem 0.8rem;
@@ -132,6 +133,7 @@ function Mypage(props) {
     const [area, setArea] = useState("");
     const [url, setUrl] = useState("");
     const [intro, setIntro] = useState("");
+    const[change, setChange] = useState(false);
 
     // useEffect(() => {
     // }, [name, birth, school, phone, address, selfintro]);
@@ -145,15 +147,25 @@ function Mypage(props) {
             "area: " + area,
             "url: " + url, 
             "intro: " + intro);
+            
+            if(change){
+                // 수정하기 api가 작동되야돼
+                
+                setChange(false);
+            } else {
+                // api가 작동 안 함
+                setChange(true);
+            }
     }
 
-   
+
+   const memberName = props.memberName;
 
     return (
         <WhiteBox>
             <div className='frame'>
                 <div className="text"style={{ marginBottom: '0.5rem' }}>
-                    <span className='name'>가나다</span>님의 마이페이지
+                    <span className='name'>{memberName}</span>님의 마이페이지
                 </div>
 
                 <div className='content'>
@@ -174,25 +186,17 @@ function Mypage(props) {
                                             setEmail(e.target.value);
                                         }}
 
+                                        disabled
                                         value={email}
                                         type={"text"} 
                                         className="information" 
                                         placeholder="abcdef@naver.com"
-                                        style={{width: "33.5rem", 
+                                        style={{width: "41.5rem", 
                                                 height: "2.5rem",
                                                 backgroundColor:"#F3F3F3",
                                                 border: "none",
-                                                borderRadius: "3px",
+                                                borderRadius: "3px"
                                             }}
-                                    />
-                            </div>
-                            <div className='btnstyle'>
-                                <Button
-                                        text="수정하기"
-                                        fullWidth
-                                        history={history}
-                                        // to={nextlink}
-                                        style={{height: "2.5rem", width: "5rem", borderRadius: "3px", margin:"0"}}
                                     />
                             </div>
                         </div>
@@ -205,11 +209,12 @@ function Mypage(props) {
                                         setName(e.target.value);
                                     }}
 
+                                    disabled={!change}
                                     value={name}
                                     type={"text"} 
                                     className="information" 
                                     placeholder="동네"
-                                    style={{width: "33.5rem", 
+                                    style={{width: "41.5rem", 
                                             height: "2.5rem",
                                             backgroundColor:"#F3F3F3",
                                             border: "none",
@@ -217,14 +222,6 @@ function Mypage(props) {
                                     }}
                                 />
                             </div>
-                
-                            <Button
-                                    text="수정하기"
-                                    fullWidth
-                                    history={history}
-                                    // to={nextlink}
-                                    style={{height: "2.5rem", width: "5rem", borderRadius: "3px", margin:"0"}}
-                            />
                         </div>
 
                         <div className='Basic'>
@@ -235,11 +232,12 @@ function Mypage(props) {
                                         setPw(e.target.value);
                                     }}
 
+                                    disabled
                                     value={pw}
                                     type={"password"} 
                                     className="information" 
                                     placeholder="******"
-                                    style={{width: "33.5rem", 
+                                    style={{width: "41.5rem", 
                                             height: "2.5rem",
                                             backgroundColor:"#F3F3F3",
                                             border: "none",
@@ -247,14 +245,6 @@ function Mypage(props) {
                                     }}
                                 />
                             </div>
-
-                            <Button
-                                        text="수정하기"
-                                        fullWidth
-                                        history={history}
-                                        // to={nextlink}
-                                        style={{height: "2.5rem", width: "5rem", borderRadius: "3px", margin:"0"}}
-                                    />
                         </div>
                         
                         
@@ -273,6 +263,8 @@ function Mypage(props) {
                                 onChange={(e)=>{
                                     setYear(e.target.value);
                                 }}
+
+                                disabled={!change}
                                 value={year}
                                 type={"number"} 
                                 className="information" 
@@ -291,6 +283,8 @@ function Mypage(props) {
                                 onChange={(e)=>{
                                     setArea(e.target.value);
                                 }}
+
+                                disabled={!change}
                                 value={area}
                                 type={"text"} 
                                 className="information" 
@@ -309,6 +303,8 @@ function Mypage(props) {
                                 onChange={(e)=>{
                                     setUrl(e.target.value);
                                 }}
+
+                                disabled={!change}
                                 value={url}
                                 type={"text"} 
                                 className="information" 
@@ -328,9 +324,10 @@ function Mypage(props) {
                                     setIntro(e.target.value);
                                 }}
 
+                                disabled={!change}
                                 value={intro}
                                 type={"text"} 
-                                style={{width: "41.5rem", 
+                                style={{width: "41rem", 
                                         height: "5rem",
                                         paddingRight:' 1rem',
                                         backgroundColor: "#F3F3F3",
@@ -338,7 +335,8 @@ function Mypage(props) {
                                         borderRadius: "3px",
                                         fontFamily: "Pretendard Regular",
                                         fontSize: "0.9rem",
-                                        resize: "none"
+                                        resize: "none",
+                                        outline: "none"
                                 }}
                             />
                         </div>
@@ -347,10 +345,10 @@ function Mypage(props) {
                             handleApi();
                         }}>
                             <Button 
-                                text="단체 정보 수정하기"
+                                text={change? "저장하기" : "개인 정보 수정하기"}
                                 style={{
                                     borderRadius:"4px",
-                                    width:"50.1rem",
+                                    width:"49.3rem",
                                     marginTop:"1.5rem"
                                 }}
                             />

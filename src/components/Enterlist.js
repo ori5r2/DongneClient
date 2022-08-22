@@ -1,6 +1,7 @@
 import React, {useState, useEffect}  from 'react';
 import Button from '../components/Button';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 
 
 const WhiteBox = styled.div`
@@ -36,6 +37,8 @@ const WhiteBox = styled.div`
 function Enterlist(props) {
     const name = props.name;
     const img = props.img;
+    const link = props.link;
+    
     return (
         <WhiteBox> 
             <div className='list'>
@@ -46,6 +49,7 @@ function Enterlist(props) {
             <Button 
               className="btn"
               text={"입장하기"}
+              to={link}
               style={{height: "3.14rem", width: "7rem"}}
               // 왜3rem은 안되지
             />

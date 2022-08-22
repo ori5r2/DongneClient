@@ -43,20 +43,21 @@ const StyledButton = styled.button`
 
 const Button = ({ text, img_src, to, history, props, ...rest }) => {
   const onClick = (e) => {
-    if (to) {
-      if(props){
-        history.push({
-          pathname: to, 
-          state: {props}
-        });
-        return ;
-      }
-      history.push(to);
+      if (to) {
+        if(props){
+          history.push({
+            pathname: to, 
+            state: {props}
+          });
+          return ;
+        }
+        history.push(to);
 
-    } else {
-      history.push('/');
-    }
-  };
+      } else {
+        history.push('/');
+      }
+  
+  }
 
   return (
     <StyledButton {...rest} onClick={onClick}>

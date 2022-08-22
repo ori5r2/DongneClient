@@ -32,7 +32,7 @@ const UserRegisterCheck3 = () => {
     <BackgroundTemplate style={{ zIndex: 0 }}>
     <HomePageTemplate style={{ zIndex: 1 }}>
         <WhitBox style={{ zIndex: 2 }}>
-            <AdminMypageComponent />
+            <AdminMypageComponent memberName="가나다" />
      </WhitBox>
     </HomePageTemplate>
     </BackgroundTemplate>

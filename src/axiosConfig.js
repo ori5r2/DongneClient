@@ -5,3 +5,5 @@ const client = axios.create({
 });
 
 export default client;
+
+export const API = "http://3.38.55.57:3000";
