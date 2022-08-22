@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import BackgroundTemplate from '../../template/BackgroundTemplate';
 import Button from '../../components/Button';
 import styled from 'styled-components';
 import palette from '../../styles/pallete';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import client from '../../axiosConfig';
+import EventButton from '../../components/EventButton';
 
 const WhiteBox = styled.div`
   position: relative;
@@ -36,16 +38,73 @@ const WhiteBox = styled.div`
   }
   .styledForm > input {
     margin-bottom: 1rem;
-
+    background-color: transparent;
     border: none;
-    border-bottom: 0.01rem gray solid;
+    border-bottom: 0.001rem ${palette[3]} solid;
     box-sizing: border-box;
     outline: none;
-    height: 3rem;
+    height: 4.5rem;
+  }
+  .eventButton {
+    width: inherit;
+    height: 4.5rem;
+  }
+  .links {
+    margin-top: 1.2344rem;
   }
 `;
 
 const UserLoginPage = () => {
+  const [inputId, setInputId] = useState('');
+  const history = useHistory();
+  const [inputPw, setInputPw] = useState('');
+  const [isLogin, setIsLogin] = useState(false);
+
+  const fetchData = async () => {
+    console.log(inputId, inputPw);
+    await client
+      .post('/user/auth/login', {
+        userEmail: inputId,
+        password: inputPw,
+      })
+      .then(function (response) {
+        console.log(response.data);
+        if (!response.data.isSuccess) {
+          alert(response.data.message);
+          return setIsLogin(false);
+        }
+        sessionStorage.setItem('jwtToken', response.data.result.jwt);
+        sessionStorage.setItem('userIdx', response.data.result.userId);
+        return setIsLogin(true);
+      })
+      .catch(function (error) {
+        alert(error);
+        return setIsLogin(false);
+      });
+  };
+
+  const handleInputId = (e) => {
+    setInputId(e.target.value);
+  };
+
+  const handleInputPw = (e) => {
+    setInputPw(e.target.value);
+  };
+
+  const onClickLogin = async () => {
+    await fetchData();
+    console.log(isLogin);
+    return;
+  };
+
+  useEffect(() => {
+    if (isLogin) {
+      history.push({
+        pathname: '/user/home',
+      });
+    }
+  }, [isLogin]);
+
   return (
     <div>
       <BackgroundTemplate style={{ zIndex: 0 }}>
@@ -59,19 +118,35 @@ const UserLoginPage = () => {
           </div>
           <div>
             <form className="styledForm">
-              <input type="text" placeholder="이메일"></input>
-              <input type="text" placeholder="비밀번호"></input>
-              <Button
-                text="로그인"
-                img_src={null}
-                fullWidth
-                history={null}
-                to="/user/login"
-                style={{ marginBottom: '1rem' }}
-              />
+              <input
+                type="text"
+                name="input_id"
+                value={inputId}
+                onChange={handleInputId}
+                placeholder="이메일"
+              ></input>
+              <input
+                type="password"
+                name="input_pw"
+                value={inputPw}
+                onChange={handleInputPw}
+                placeholder="비밀번호"
+              ></input>
+              <div className="eventButton">
+                <EventButton
+                  text="로그인"
+                  type="button"
+                  onClick={() => onClickLogin()}
+                  img_src={null}
+                  fullWidth
+                  history={history}
+                  to="/admin/home"
+                  style={{ marginBottom: '1rem' }}
+                />
+              </div>
             </form>
-            <div>
-              <Link to="/user/login" className="Link">
+            <div className="links">
+              <Link to="/admin/register" className="Link">
                 회원가입
               </Link>
               <Link to="/user/login" className="Link">

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import BackgroundTemplate from '../../template/BackgroundTemplate';
-import Button from '../../components/Button';
 import styled from 'styled-components';
 import palette from '../../styles/pallete';
 import { Link, useHistory } from 'react-router-dom';
