@@ -10,6 +10,7 @@ import Enterlist from "./Enterlist";
 import blueline from "../styles/imgs/icon/blueline.png";
 import umcLogo from '../styles/imgs/icon/umcLogo.png';
 import cluvmLogo from '../styles/imgs/icon/cluvmLogo.png';
+import clubsData from '../clubsData';
 
 const WhiteBox = styled.div`
   position: relative;
@@ -59,9 +60,15 @@ const UserMainPageComponent = (props) => {
           {name} 님의 워크스페이스
         </div>
         <div className='outline'>
-          <Enterlist img={umcLogo} name="UMC" />
-          <Enterlist img={Logo} name="Dongne" />
-          <Enterlist img={cluvmLogo} name="CluvM" />
+          {clubsData.Data.map((elem) => (
+            <div>
+              <Enterlist
+                img={elem.img}
+                name={elem.name}
+                link={elem.link}
+              />
+            </div>
+          ))}
         </div>
 
         <div className='ClubCode'>

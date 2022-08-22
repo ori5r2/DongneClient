@@ -41,22 +41,29 @@ const StyledButton = styled.button`
     `}
 `;
 
-const Button = ({ text, img_src, to, history, props, ...rest }) => {
+const Button = ({ text, img_src, to, history, props, href, ...rest }) => {
   const onClick = (e) => {
-    if (to) {
-      if(props){
-        history.push({
-          pathname: to, 
-          state: {props}
-        });
-        return ;
-      }
-      history.push(to);
-
-    } else {
-      history.push('/');
+    console.log(href);
+    if(href){
+      window.open(href);
+      return;
     }
-  };
+    else{
+      if (to) {
+        if(props){
+          history.push({
+            pathname: to, 
+            state: {props}
+          });
+          return ;
+        }
+        history.push(to);
+
+      } else {
+        history.push('/');
+      }
+    };
+  }
 
   return (
     <StyledButton {...rest} onClick={onClick}>
