@@ -142,7 +142,7 @@ const AdminLoginPage = () => {
               </div>
             </form>
             <div className="links">
-              <Link to="/admin/register" className="Link">
+              <Link to="/register" className="Link">
                 회원가입
               </Link>
               <Link to="/admin/login" className="Link">
