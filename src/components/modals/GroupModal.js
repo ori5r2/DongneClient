@@ -232,6 +232,7 @@ const ModalOverlay = styled.div`
 `;
 const GroupModal = ({ groupIdx, visible, onClick }) => {
   const [success, setSuccess] = useState(false);
+  const [memberSuccess, setMemberSuccess] = useState(false);
   const jwtToken = sessionStorage.getItem('jwtToken');
   const adminIdx2 = sessionStorage.getItem('adminIdx');
   const [groupTitle, setGroupTitle] = useState('');
@@ -245,6 +246,39 @@ const GroupModal = ({ groupIdx, visible, onClick }) => {
   };
   const onChangeCategory = (e) => setGroupCategory(e.target.value);
   const onChangeName = (e) => setGroupTitle(e.target.value);
+
+  useEffect(() => {
+    const fetchGroupMembers = async (jwt, adminIdx) => {
+      await client
+        .get('/admin/group/members', {
+          headers: {
+            'x-access-token': jwt,
+          },
+          params: {
+            adminIdx: adminIdx,
+            groupIdx: groupIdx,
+            page: 1,
+            pageSize: 10,
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          console.log(response.data.result);
+
+          if (!response.data.isSuccess) {
+            alert(response.data.message);
+          }
+        })
+        .catch(function (error) {
+          alert(error);
+        });
+    };
+    if (memberSuccess) {
+    } else {
+      fetchGroupMembers(jwtToken, adminIdx2);
+      setMemberSuccess(true);
+    }
+  }, [groupDetail]);
 
   useEffect(() => {
     const fetchGroupDetail = async (jwt, adminIdx) => {
@@ -275,11 +309,9 @@ const GroupModal = ({ groupIdx, visible, onClick }) => {
       setGroupIntroduction(groupDetail[0].groupIntroduction);
       setGroupCategory(groupDetail[0].groupCategory);
       setGroupTitle(groupDetail[0].groupName);
-      console.log('tlqkf');
     } else {
       fetchGroupDetail(jwtToken, adminIdx2);
       setSuccess(true);
-      console.log('tlqkf');
     }
   }, [groupDetail]);
 

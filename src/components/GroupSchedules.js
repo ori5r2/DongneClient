@@ -92,16 +92,19 @@ const GroupSchedules = () => {
   const jwtToken = sessionStorage.getItem('jwtToken');
   const adminIdx2 = sessionStorage.getItem('adminIdx');
   const [success, setSuccess] = useState(false);
+  const [empty, setEmpty] = useState(false);
   const [grouoSuccess, setgrouoSuccess] = useState(false);
   const [schedules, setSchedules] = useState(false);
+  const [scheduleIdx, setScheduleIdx] = useState(false);
   const [groupTitle, setGroupTitle] = useState('');
   const [groupDetail, setgroupDetail] = useState({});
 
   const onClickBack = () => {
     history.goBack();
   };
-  const onClickForModal = () => {
+  const onClickForModal = (idx) => {
     setModal((current) => !current);
+    setScheduleIdx(idx);
   };
 
   useEffect(() => {
@@ -163,14 +166,14 @@ const GroupSchedules = () => {
       console.log(schedules);
     } else {
       fetchSchedule(jwtToken, adminIdx2);
+
       if (!schedules.schedule) {
         setSuccess(false);
       } else {
-        console.log('hi world');
         if (schedules.schedule.length === 0) {
-          setSuccess(false);
+          setSuccess(true);
+          setEmpty(true);
         } else {
-          console.log('hi world');
           setSuccess(true);
         }
       }
@@ -196,14 +199,14 @@ const GroupSchedules = () => {
         </div>
       </div>
       <div className="attend_body">
-        {success ? (
+        {!empty && success ? (
           schedules.schedule.map((elem) => (
             <Card
               key={elem.scheduleIdx}
               className="eachCard"
               subTitle={elem.scheduleDate}
               title={elem.scheduleName}
-              onClickForDetail={onClickForModal}
+              onClickForDetail={() => onClickForModal(elem.scheduleIdx)}
               isGroupDetail={false}
               onClickForGroup={null}
             />
@@ -215,7 +218,7 @@ const GroupSchedules = () => {
 
       {
         modal === true ? (
-          <AttendModal groupIdx={null} onClick={onClickForModal} />
+          <AttendModal groupIdx={scheduleIdx} onClick={onClickForModal} />
         ) : null //기계역할
       }
     </StyledAttendanceBody>
