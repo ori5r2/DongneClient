@@ -169,7 +169,7 @@ function UserRegister2(props) {
                                     value={birth}
                                     type={"number"} 
                                     className="information" 
-                                    placeholder="ex) 20010101"
+                                    placeholder="ex) 2001-01-01"
                                     style={{width: '21.2rem',
                                             height: '2.5rem',
                                             backgroundColor:"#F3F3F3",
@@ -210,8 +210,8 @@ function UserRegister2(props) {
                                 <Button
                                     text="학교검색"
                                     fullWidth
-                                    history={history}
-                                    to={nextlink}
+                                    // history={history}
+                                    // to={nextlink}
                                     style={{height: "2.5rem", width: "5rem", borderRadius: "3px"}}
                                 />
                             </div>
@@ -268,8 +268,8 @@ function UserRegister2(props) {
                             <Button
                                 text="주소검색"
                                 fullWidth
-                                history={history}
-                                to={nextlink}
+                                // history={history}
+                                // to={nextlink}
                                 style={{height: "2.5rem", width: "6rem", borderRadius: "3px"}}
                             />
                         </div>

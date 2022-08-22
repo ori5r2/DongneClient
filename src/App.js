@@ -20,7 +20,8 @@ import UserMyPage from './pages/user/UserMyPage';
 import AdminFinancePage from './pages/admin/AdminFinancePage';
 
 import AdminMyPage from './pages/admin/AdminMyPage';
-import CommunityPage from './pages/user/CommunityPage';
+import UserCommunityPage from './pages/user/UserCommunityPage';
+import AdminCommunityPage from './pages/admin/AdminCommunityPage';
 import UserHomePage from './pages/user/UserHomePage';
 import UserAttendPage from './pages/user/UserAttendPage';
 
@@ -67,7 +68,8 @@ const App = () => {
       <Route component={UserMainPage} path="/user/main" exact />
       <Route component={UserMyPage} path="/user/myPage" exact />
       <Route component={AdminMyPage} path="/admin/myPage" exact />
-      <Route component={CommunityPage} path="/community" exact />
+      <Route component={UserCommunityPage} path="/user/community" exact />
+      <Route component={AdminCommunityPage} path="/admin/community" exact />
       <Route component={AdminFinancePage} path="/admin/finance" exact />
       <Route component={UserHomePage} path="/user/home" exact />
       <Route component={UserAttendPage} path="/user/attendance" exact />

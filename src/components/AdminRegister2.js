@@ -174,7 +174,7 @@ function AdminRegister2(props) {
                 value={year}
                 type={'number'}
                 className="information"
-                placeholder="날짜를 입력하세요."
+                placeholder="ex) 2022-02-02"
                 style={{
                   width: '21.2rem',
                   height: '2.5rem',

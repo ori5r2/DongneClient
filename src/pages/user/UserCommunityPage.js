@@ -10,6 +10,7 @@ import stand_person from '../../styles/imgs/icon/stand_person.png';
 import point from '../../styles/imgs/icon/point.png';
 import CommunityMembers from '../../components/CommunityMembers';
 import CommunityPosts from '../../components/CommunityPosts';
+import UserNavigator from '../../components/user/UserNavigator';
 
 const StyledImg = styled.img`
   position: fixed;
@@ -89,7 +90,7 @@ const BackgroundImg = styled.div`
 `;
 
 const WhitBox = styled.div`
-    margin-top: 3rem;
+    margin-top: 8rem;
     margin-left:5rem;
     .all{
         display: flex;
@@ -100,7 +101,7 @@ const WhitBox = styled.div`
     .first{
         box-sizing: border-box;
         width: 18rem;
-        height: 45rem;
+        height: 47rem;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -145,7 +146,7 @@ const WhitBox = styled.div`
 const Community = () => {
   return (
     <BackgroundImg style={{ zIndex: 0 }}>
-      <HomePageTemplate location={4} style={{ zIndex: 1 }}>
+      <UserNavigator location={3} style={{ zIndex: 1 }} />
         <WhitBox style={{ zIndex: 2 }}>
             <div className='all'>
                 <div className='first'>
@@ -197,11 +198,10 @@ const Community = () => {
                         <CommunityPosts type="모집" title="UMC 3기 - IT 연합 동아리 회원 모집 (!22.08.26)" goodPoint="123" chatPoint="222" tagPoint="36"/>
                         <CommunityPosts type="정보" title="동네 회계 장부 정리 꿀팁" goodPoint="123" chatPoint="222" tagPoint="36"/>
                     </div>
-                    <Button text="더보기" style={{width: "58rem", height:"2.5rem", borderRadius:"4px", marginTop: "1rem"}} />
+                    <Button text="더보기" style={{width: "58rem", borderRadius:"4px"}} />
                 </div>
             </div>
         </WhitBox>
-      </HomePageTemplate>
       <footer
         style={{ position: 'absolute', bottom: '0', right: 0, zIndex: -1000 }}
       >
