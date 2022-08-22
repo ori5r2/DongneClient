@@ -238,6 +238,7 @@ const GroupModal = ({ groupIdx, visible, onClick }) => {
   const [groupTitle, setGroupTitle] = useState('');
   const [groupCategory, setGroupCategory] = useState('');
   const [groupIntroduction, setGroupIntroduction] = useState('');
+  const [groupMembers, setGroupMembers] = useState([]);
   console.log(jwtToken, adminIdx2);
   const [groupDetail, setgroupDetail] = useState({});
 
@@ -264,7 +265,9 @@ const GroupModal = ({ groupIdx, visible, onClick }) => {
         .then((response) => {
           console.log(response);
           console.log(response.data.result);
-
+          setGroupMembers(
+            response.data.result.pagingRetrieveGroupMembersResult,
+          );
           if (!response.data.isSuccess) {
             alert(response.data.message);
           }
@@ -293,8 +296,8 @@ const GroupModal = ({ groupIdx, visible, onClick }) => {
           },
         })
         .then((response) => {
-          console.log(response);
-          console.log(response.data.result);
+          console.log('asdkn', response);
+          console.log('two', response.data.result);
           setgroupDetail(response.data.result);
           console.log(success, groupIntroduction, groupCategory, groupTitle);
           if (!response.data.isSuccess) {
@@ -363,12 +366,12 @@ const GroupModal = ({ groupIdx, visible, onClick }) => {
               <div className="attended_members">
                 <div className="span">참여 회원</div>
                 <div className="members_body">
-                  {membersData.Data.map((elem) => (
-                    <div className="eachCard">
+                  {groupMembers.map((elem) => (
+                    <div key={elem.userIdx} className="eachCard">
                       <Avatar
-                        UserName={elem.UserName}
-                        UserCode={elem.UserCode}
-                        UserTeam={elem.UserTeam}
+                        UserName={elem.name}
+                        UserCode={elem.school}
+                        UserTeam={elem.teamName}
                         // onClick={onClickForModal}
                       />
                     </div>

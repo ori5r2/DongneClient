@@ -99,7 +99,7 @@ const Groups = () => {
       })
       .then(function (response) {
         console.log(response.data);
-        setGroupData(response.data.result);
+        setGroupData(response.data.result.pagingRetrieveGroupListResult);
         if (!response.data.isSuccess) {
           alert(response.data.message);
         }
