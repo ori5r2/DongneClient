@@ -227,47 +227,77 @@ const ModalOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 999;
 `;
-const AttendModal = ({ groupIdx, visible, onClick }) => {
-  console.log('Hello');
+const AttendModal = ({ scheduleIdx, visible, onClick }) => {
   const [success, setSuccess] = useState(false);
   const jwtToken = sessionStorage.getItem('jwtToken');
   const adminIdx2 = sessionStorage.getItem('adminIdx');
+  const [scheduleTitle, setScheduleTitle] = useState('');
+  const [scheduleDate, setScheduleDate] = useState('');
+  const [scheduleCode, setScheduleCode] = useState('');
+  const [scheduleStartTime, setScheduleStartTime] = useState('');
+  const [scheduleEndTime, setScheduleEndTime] = useState('');
+  const [scheduleDescription, setScheduleDescription] = useState('');
+  const [scheduleEtc, setScheduleEtc] = useState('');
+  const [schedulePlace, setSchedulePlace] = useState('');
   console.log(jwtToken, adminIdx2);
-  const [groupDetail, setgroupDetail] = useState({});
+  const [scheduleDetail, setScheduleDetail] = useState({});
 
   useEffect(() => {
-    const fetchGroupDetail = async (jwt, adminIdx) => {
+    const fetchScheduleDetail = async (jwt, adminIdx) => {
       await client
-        .get('/admin/group/info', {
+        .get('/admin/schedule', {
           headers: {
             'x-access-token': jwt,
           },
           params: {
             adminIdx: adminIdx,
-            groupIdx: groupIdx,
+            scheduleIdx: scheduleIdx,
           },
         })
         .then(function (response) {
-          setgroupDetail(response.data.result);
-          setSuccess(true);
+          setScheduleDetail(response.data.result[0]);
+          console.log('result: ', response);
           if (!response.data.isSuccess) {
             alert(response.data.message);
           }
         })
         .catch(function (error) {
-          console.log(error);
+          alert(error);
         });
     };
-    fetchGroupDetail(jwtToken, adminIdx2);
-  }, []);
+    if (success) {
+      //디테일한 정보 여기서 set
+      setScheduleTitle(scheduleDetail.scheduleName);
+      setScheduleDate(scheduleDetail.scheduleDate);
+      setScheduleCode(scheduleDetail.attendanceCode);
+      setScheduleStartTime(scheduleDetail.init_time);
+      setScheduleEndTime(scheduleDetail.end_time);
+      setScheduleDescription(scheduleDetail.introduction);
+      setSchedulePlace(scheduleDetail.place);
+      setScheduleEtc(scheduleDetail.etc);
+    } else {
+      fetchScheduleDetail(jwtToken, adminIdx2);
+      setSuccess(true);
+    }
+  }, [scheduleDetail]);
+  const onChangeScheduleTitle = (e) => setScheduleTitle(e.target.value);
+  const onChangeScheduleDate = (e) => setScheduleDate(e.target.value);
+  const onChangeScheduleCode = (e) => setScheduleCode(e.target.value);
+  const onChangeScheduleStartTime = (e) => setScheduleStartTime(e.target.value);
+  const onChangeScheduleEndTime = (e) => setScheduleEndTime(e.target.value);
+  const onChangeScheduleDescription = (e) =>
+    setScheduleDescription(e.target.value);
+  const onChangeEtc = (e) => setScheduleEtc(e.target.value);
 
+  const onChangeSchedulePlace = (e) => setSchedulePlace(e.target.value);
+  console.log('res', scheduleDetail);
   return (
     <>
       <ModalOverlay visible={visible} />
       <StyledModal>
         <div className="content-area">
           <div className="header">
-            <div>{success ? groupDetail[0].groupName : null}</div>
+            <div>{success ? scheduleDetail.scheduleName : ''}</div>
             <TextBtn onClick={onClick}>
               <img src={importImg.modalClose} />
             </TextBtn>
@@ -276,7 +306,12 @@ const AttendModal = ({ groupIdx, visible, onClick }) => {
             <form className="body__left">
               <div className="name_input_form">
                 <span>출결 코드</span>
-                <input type="text" className="code__input" />
+                <input
+                  type="text"
+                  onChange={onChangeScheduleCode}
+                  value={success ? scheduleCode : ''}
+                  className="code__input"
+                />
                 <button className="codeButton" type="button">
                   코드 복사
                 </button>
@@ -284,34 +319,65 @@ const AttendModal = ({ groupIdx, visible, onClick }) => {
               <div className="name_input_formGroup">
                 <div className="name_input_form">
                   <span>일자</span>
-                  <input type="text" />
+                  <input
+                    onChange={onChangeScheduleDate}
+                    value={success ? scheduleDate : ''}
+                    type="text"
+                  />
                 </div>
                 <div className="name_input_form ">
                   <span>항목</span>
-                  <input type="text" />
+                  <input
+                    onChange={onChangeScheduleTitle}
+                    value={success ? scheduleTitle : ''}
+                    type="text"
+                  />
                 </div>
               </div>
               <div className="name_input_formGroup">
                 <div className="name_input_form">
                   <span>시작 시간</span>
-                  <input type="text" />
+                  <input
+                    onChange={onChangeScheduleStartTime}
+                    value={success ? scheduleStartTime : ''}
+                    type="text"
+                  />
                 </div>
                 <div className="name_input_form">
                   <span>종료 시간</span>
-                  <input type="text" />
+                  <input
+                    onChange={onChangeScheduleEndTime}
+                    value={success ? scheduleEndTime : ''}
+                    type="text"
+                  />
                 </div>
               </div>
               <div className="name_input_form">
                 <span>내용</span>
-                <input type="text" className="long__input" />
+                <input
+                  type="text"
+                  onChange={onChangeScheduleDescription}
+                  value={success ? scheduleDescription : ''}
+                  className="long__input"
+                />
               </div>
               <div className="name_input_form">
                 <span>장소</span>
-                <input type="text" className="long__input" />
+                <input
+                  type="text"
+                  onChange={onChangeSchedulePlace}
+                  value={success ? schedulePlace : ''}
+                  className="long__input"
+                />
               </div>
               <div className="name_input_form">
                 <span>비고</span>
-                <textarea maxLength="300" className="long_long_input" />
+                <textarea
+                  maxLength="300"
+                  onChange={onChangeEtc}
+                  value={success ? scheduleEtc : ''}
+                  className="long_long_input"
+                />
               </div>
               <div className="eventButton">
                 <EventButton text={'수정하기'} />

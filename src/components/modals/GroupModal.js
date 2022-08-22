@@ -263,8 +263,6 @@ const GroupModal = ({ groupIdx, visible, onClick }) => {
           },
         })
         .then((response) => {
-          console.log(response);
-          console.log(response.data.result);
           setGroupMembers(
             response.data.result.pagingRetrieveGroupMembersResult,
           );
@@ -296,10 +294,7 @@ const GroupModal = ({ groupIdx, visible, onClick }) => {
           },
         })
         .then((response) => {
-          console.log('asdkn', response);
-          console.log('two', response.data.result);
           setgroupDetail(response.data.result);
-          console.log(success, groupIntroduction, groupCategory, groupTitle);
           if (!response.data.isSuccess) {
             alert(response.data.message);
           }

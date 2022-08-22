@@ -218,7 +218,7 @@ const GroupSchedules = () => {
 
       {
         modal === true ? (
-          <AttendModal groupIdx={scheduleIdx} onClick={onClickForModal} />
+          <AttendModal scheduleIdx={scheduleIdx} onClick={onClickForModal} />
         ) : null //기계역할
       }
     </StyledAttendanceBody>
