@@ -6,6 +6,7 @@ import AdminRegister2 from '../../components/AdminRegister2';
 import ArrowBackIcon from '../../styles/imgs/icon/Arrow_back.png';
 import register3 from '../../styles/imgs/icon/3.png';
 import { Link } from 'react-router-dom';
+import axios from '../../../node_modules/axios/index';
 
 const WhiteBox = styled.div`
   position: relative;
