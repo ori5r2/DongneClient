@@ -92,7 +92,10 @@ const GroupSchedules = () => {
   const jwtToken = sessionStorage.getItem('jwtToken');
   const adminIdx2 = sessionStorage.getItem('adminIdx');
   const [success, setSuccess] = useState(false);
-  const [schedules, setSchedules] = useState([]);
+  const [grouoSuccess, setgrouoSuccess] = useState(false);
+  const [schedules, setSchedules] = useState(false);
+  const [groupTitle, setGroupTitle] = useState('');
+  const [groupDetail, setgroupDetail] = useState({});
 
   const onClickBack = () => {
     history.goBack();
@@ -100,6 +103,37 @@ const GroupSchedules = () => {
   const onClickForModal = () => {
     setModal((current) => !current);
   };
+
+  useEffect(() => {
+    const fetchGroupDetail = async (jwt, adminIdx) => {
+      await client
+        .get('/admin/group/info', {
+          headers: {
+            'x-access-token': jwt,
+          },
+          params: {
+            adminIdx: adminIdx,
+            groupIdx: groupIdx,
+          },
+        })
+        .then((response) => {
+          setgroupDetail(response.data.result);
+          if (!response.data.isSuccess) {
+            alert(response.data.message);
+          }
+        })
+        .catch(function (error) {
+          alert(error);
+        });
+    };
+    if (grouoSuccess) {
+      setGroupTitle(groupDetail[0].groupName);
+    } else {
+      fetchGroupDetail(jwtToken, adminIdx2);
+      setgrouoSuccess(true);
+    }
+  }, [groupDetail]);
+
   useEffect(() => {
     const fetchSchedule = async (jwt, adminIdx) => {
       await client
@@ -115,7 +149,7 @@ const GroupSchedules = () => {
         })
         .then(function (response) {
           setSchedules(response.data.result);
-          setSuccess(true);
+          console.log('HI::', response);
           if (!response.data.isSuccess) {
             alert(response.data.message);
           }
@@ -124,10 +158,24 @@ const GroupSchedules = () => {
           console.log(error);
         });
     };
-    fetchSchedule(jwtToken, adminIdx2);
-  }, []);
-  console.log('hi', schedules);
 
+    if (success) {
+      console.log(schedules);
+    } else {
+      fetchSchedule(jwtToken, adminIdx2);
+      if (!schedules.schedule) {
+        setSuccess(false);
+      } else {
+        console.log('hi world');
+        if (schedules.schedule.length === 0) {
+          setSuccess(false);
+        } else {
+          console.log('hi world');
+          setSuccess(true);
+        }
+      }
+    }
+  }, [schedules]);
   return (
     <StyledAttendanceBody>
       <div className="attend_header">
@@ -136,9 +184,7 @@ const GroupSchedules = () => {
             <img src={importImg.attendBackChevron}></img>
           </TextBtn>
           <img src={importImg.attendCheck} />
-          <div>
-            {success ? `${schedules.schedule[0].groupName} - 출결관리` : null}
-          </div>
+          <div>{grouoSuccess ? `${groupTitle} - 출결관리` : '- 출결관리'}</div>
         </div>
         <div className="attend_header__right">
           <TextBtn>카드로 보기</TextBtn>
@@ -151,15 +197,17 @@ const GroupSchedules = () => {
       </div>
       <div className="attend_body">
         {success ? (
-          <Card
-            key={schedules.schedule[0].scheduleIdx}
-            className="eachCard"
-            subTitle={schedules.schedule[0].scheduleDate}
-            title={schedules.schedule[0].scheduleName}
-            onClickForDetail={onClickForModal}
-            isGroupDetail={false}
-            onClickForGroup={null}
-          />
+          schedules.schedule.map((elem) => (
+            <Card
+              key={elem.scheduleIdx}
+              className="eachCard"
+              subTitle={elem.scheduleDate}
+              title={elem.scheduleName}
+              onClickForDetail={onClickForModal}
+              isGroupDetail={false}
+              onClickForGroup={null}
+            />
+          ))
         ) : (
           <div>출결 목록이 존재하지 않습니다.</div>
         )}
