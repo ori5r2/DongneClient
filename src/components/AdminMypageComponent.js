@@ -133,6 +133,7 @@ function Mypage(props) {
     const [area, setArea] = useState("");
     const [url, setUrl] = useState("");
     const [intro, setIntro] = useState("");
+    const[change, setChange] = useState(false);
 
     // useEffect(() => {
     // }, [name, birth, school, phone, address, selfintro]);
@@ -146,7 +147,17 @@ function Mypage(props) {
             "area: " + area,
             "url: " + url, 
             "intro: " + intro);
+            
+            if(change){
+                // 수정하기 api가 작동되야돼
+                
+                setChange(false);
+            } else {
+                // api가 작동 안 함
+                setChange(true);
+            }
     }
+
 
    const memberName = props.memberName;
 
@@ -175,6 +186,7 @@ function Mypage(props) {
                                             setEmail(e.target.value);
                                         }}
 
+                                        disabled
                                         value={email}
                                         type={"text"} 
                                         className="information" 
@@ -197,6 +209,7 @@ function Mypage(props) {
                                         setName(e.target.value);
                                     }}
 
+                                    disabled={!change}
                                     value={name}
                                     type={"text"} 
                                     className="information" 
@@ -219,6 +232,7 @@ function Mypage(props) {
                                         setPw(e.target.value);
                                     }}
 
+                                    disabled
                                     value={pw}
                                     type={"password"} 
                                     className="information" 
@@ -249,6 +263,8 @@ function Mypage(props) {
                                 onChange={(e)=>{
                                     setYear(e.target.value);
                                 }}
+
+                                disabled={!change}
                                 value={year}
                                 type={"number"} 
                                 className="information" 
@@ -267,6 +283,8 @@ function Mypage(props) {
                                 onChange={(e)=>{
                                     setArea(e.target.value);
                                 }}
+
+                                disabled={!change}
                                 value={area}
                                 type={"text"} 
                                 className="information" 
@@ -285,6 +303,8 @@ function Mypage(props) {
                                 onChange={(e)=>{
                                     setUrl(e.target.value);
                                 }}
+
+                                disabled={!change}
                                 value={url}
                                 type={"text"} 
                                 className="information" 
@@ -304,6 +324,7 @@ function Mypage(props) {
                                     setIntro(e.target.value);
                                 }}
 
+                                disabled={!change}
                                 value={intro}
                                 type={"text"} 
                                 style={{width: "41rem", 
@@ -324,7 +345,7 @@ function Mypage(props) {
                             handleApi();
                         }}>
                             <Button 
-                                text="단체 정보 수정하기"
+                                text={change? "저장하기" : "개인 정보 수정하기"}
                                 style={{
                                     borderRadius:"4px",
                                     width:"49.3rem",
