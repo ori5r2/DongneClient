@@ -36,8 +36,8 @@ const StyleldMembersBody = styled.div`
     display: flex;
     align-items: center;
     font-size: 1.25rem;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
   }
   .members_header_textBtn_bar {
     margin: 0rem 1.25rem;
