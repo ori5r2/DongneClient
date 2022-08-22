@@ -49,7 +49,7 @@ function Enterlist(props) {
             <Button 
               className="btn"
               text={"입장하기"}
-              href={link}
+              to={link}
               style={{height: "3.14rem", width: "7rem"}}
               // 왜3rem은 안되지
             />

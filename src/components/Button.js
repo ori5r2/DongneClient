@@ -41,14 +41,8 @@ const StyledButton = styled.button`
     `}
 `;
 
-const Button = ({ text, img_src, to, history, props, href, ...rest }) => {
+const Button = ({ text, img_src, to, history, props, ...rest }) => {
   const onClick = (e) => {
-    console.log(href);
-    if(href){
-      window.open(href);
-      return;
-    }
-    else{
       if (to) {
         if(props){
           history.push({
@@ -62,7 +56,7 @@ const Button = ({ text, img_src, to, history, props, href, ...rest }) => {
       } else {
         history.push('/');
       }
-    };
+  
   }
 
   return (
