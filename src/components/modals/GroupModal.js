@@ -240,6 +240,9 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
   const [changedNumber, setChangedNumber] = useState(null);
   const [changedNumber2, setChangedNumber2] = useState(null);
 
+  const [settingSuccess, setSettingSuccess] = useState(false);
+  const [settingSuccess2, setSettingSuccess2] = useState(false);
+
   const [addedMembers, setAddedMembers] = useState([]);
   const [minusedMembers, setMinusedMembers] = useState([]);
 
@@ -256,13 +259,14 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
     if (changedNumber) {
       setAddedMembers(changedNumber);
       setButtonSuccess2(true);
+      setSettingSuccess(true);
     }
   }, [changedNumber]);
 
   useEffect(() => {
     if (changedNumber2) {
-      console.log('hi');
       setMinusedMembers(changedNumber2);
+      setSettingSuccess2(true);
     }
   }, [changedNumber2]);
   // 1. 추가된 멤버: 결과 애들 중에 initMemberSuccess에 있던 애들이 아닌 애들
@@ -270,7 +274,6 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
     const arr = [];
     const arr2 = [];
     const initKeys = Object.keys(initMemberSuccess);
-    console.log(initKeys);
     if (buttonSuccess) {
       for (var key in allMemberSuccess) {
         if (allMemberSuccess[key] === true && !initKeys.includes(key)) {
@@ -286,13 +289,10 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
   useEffect(() => {
     const arr2 = [];
     const initKeys = Object.keys(initMemberSuccess);
-    console.log(initKeys);
     if (buttonSuccess2) {
       for (var item of initKeys) {
-        console.log('hi', item, allMemberSuccess);
         if (allMemberSuccess[item] === false) {
           arr2.push(item);
-          console.log('가보자', arr2);
         }
       }
       setChangedNumber2(arr2);
@@ -305,6 +305,71 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
     setButtonSuccess(true);
     //2. 해제된 멤버: 있던 애들중에 현재 false인 애들
     await patchGroupData(jwtToken, adminIdx2);
+  };
+
+  useEffect(() => {
+    if (settingSuccess) {
+      insertGroupMembers(jwtToken, adminIdx2);
+    }
+  }, [settingSuccess]);
+  useEffect(() => {
+    if (settingSuccess2) {
+      deleteGroupMembers(jwtToken, adminIdx2);
+    }
+  }, [settingSuccess2]);
+  const insertGroupMembers = async (jwt, adminIdx) => {
+    await client
+      .post(
+        '/admin/group/insertMembers',
+        {
+          userIdx: addedMembers,
+        },
+        {
+          headers: {
+            'x-access-token': jwt,
+          },
+          params: {
+            adminIdx: adminIdx,
+            groupIdx: groupIdx,
+          },
+        },
+      )
+      .then((response) => {
+        if (!response.data.isSuccess) {
+          alert(response.data.message);
+        } else {
+        }
+      })
+      .catch(function (error) {
+        alert(error);
+      });
+  };
+
+  const deleteGroupMembers = async (jwt, adminIdx) => {
+    await client
+      .patch(
+        '/admin/group/deleteMembers',
+        {
+          userIdx: minusedMembers,
+        },
+        {
+          headers: {
+            'x-access-token': jwt,
+          },
+          params: {
+            adminIdx: adminIdx,
+            groupIdx: groupIdx,
+          },
+        },
+      )
+      .then((response) => {
+        if (!response.data.isSuccess) {
+          alert(response.data.message);
+        }
+      })
+      .catch(function (error) {
+        alert(error);
+      });
   };
 
   const patchGroupData = async (jwt, adminIdx) => {
@@ -330,7 +395,6 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
         if (!response.data.isSuccess) {
           alert(response.data.message);
         } else {
-          console.log('k!', allMemberSuccess, initMemberSuccess);
           alert('그룹 정보 수정에 성공했습니다.');
         }
       })
@@ -346,9 +410,7 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
   };
 
   const onClickAvatar = (e, userId) => {
-    console.log(userId, 'hi');
     setAllMemberSuccess((state) => {
-      console.log(state);
       return { ...state, [userId]: !state[userId] };
     });
   };
@@ -426,9 +488,7 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
         });
     };
     if (memberSuccess) {
-      console.log('why', groupMembers);
       groupMembers.map((elem) => {
-        console.log('HOOS', elem);
         updateInitState(elem.userIdx);
         return updateGroupCheck(elem.userIdx);
       });
@@ -469,9 +529,6 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
       setSuccess(true);
     }
   }, [groupDetail]);
-  console.log('kkk', initMemberSuccess);
-  console.log('123', addedMembers);
-  console.log('456', minusedMembers);
   return (
     <>
       <ModalOverlay visible={visible} />
