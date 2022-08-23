@@ -90,11 +90,11 @@ const AdminMembersPage = () => {
   const adminIdx = sessionStorage.getItem('adminIdx');
   const [MembersData, setMembersData] = useState([]);
 
-  const fetchMembers = async (jwt, adminIdx, page, pageSize) => {
+  const fetchMembers = async (jwtToken, adminIdx, page, pageSize) => {
     await client
       .get('/admin/member', {
         headers: {
-          'x-access-token': jwt,
+          'x-access-token': jwtToken,
         },
         params: {
           adminIdx: adminIdx,
