@@ -5,9 +5,9 @@ import cluvmLogo from './styles/imgs/icon/cluvmLogo.png';
 
 const clubsData ={
     Data: [
-        {img: umcLogo, name: "umc", link: "1"},
-        {img: cluvmLogo, name: "cluvm", link: "2"},
-        {img: Logo, name: "Dongne", link: "3"},
+        {img: umcLogo, name: "umc", link: "11"},
+        {img: cluvmLogo, name: "cluvm", link: "12"},
+        {img: Logo, name: "Dongne", link: "13"},
     ]
 };
 

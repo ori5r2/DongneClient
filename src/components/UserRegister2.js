@@ -119,7 +119,7 @@ function UserRegister2(props) {
         console.log(result);
         const value = result.data;
         if(value.isSuccess){
-            console.log("페이지가 이동해야함");
+            alert("회원가입이 완료되었습니다!")
         } else {
             alert(value.message);
         }
@@ -167,7 +167,6 @@ function UserRegister2(props) {
                                     }}
 
                                     value={birth}
-                                    type={"number"} 
                                     className="information" 
                                     placeholder="ex) 2001-01-01"
                                     style={{width: '21.2rem',
@@ -309,28 +308,10 @@ function UserRegister2(props) {
                         text="가입 완료하기"
                         fullWidth
                         history={history}
-                        to={presentpage}
+                        to="/"
                         props={{id: location.state.props.id, pw: location.state.props.pw}}
                         style={{height: "2.7rem", borderRadius: "3px"}}
                     />
-                {/* {Ok ? (
-                    <Button
-                        text="가입 완료하기"
-                        fullWidth
-                        history={history}
-                        to={nextpage}
-                        props={{name: name, birth: birth, school: school, phone:phone, address:address, selfintro:selfintro}}
-                        style={{height: "2.7rem", borderRadius: "3px"}}
-                    />
-                ) : ( 
-                    <Button
-                        text="가입 완료하기"
-                        fullWidth
-                        history={history}
-                        to={presentpage}
-                        style={{height: "2.7rem", borderRadius: "3px"}}
-                    />
-                ) } */}
             </div>
             
         </div>

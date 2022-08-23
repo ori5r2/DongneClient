@@ -7,6 +7,8 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import line from '../styles/imgs/icon/line.png';
 import setting from '../styles/imgs/icon/setting.png';
+import axios from 'axios';
+import { API } from '../axiosConfig';
 
 const WhiteBox = styled.div`
     width: 65rem;

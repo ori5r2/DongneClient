@@ -35,6 +35,7 @@ const WhiteBox = styled.div`
 
 
 function Enterlist(props) {
+    const history  = useHistory();
     const name = props.name;
     const img = props.img;
     const link = props.link;
@@ -49,7 +50,8 @@ function Enterlist(props) {
             <Button 
               className="btn"
               text={"입장하기"}
-              to={link}
+              history={history}
+              to={"/user/home/"+link}
               style={{height: "3.14rem", width: "7rem"}}
               // 왜3rem은 안되지
             />

@@ -1,16 +1,18 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import BackgroundTemplate from '../template/BackgroundTemplate';
 import palette from '../styles/pallete';
-import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import Logo from '../styles/imgs/icon/Logo.png';
 import Enterlist from "./Enterlist";
 import blueline from "../styles/imgs/icon/blueline.png";
-import umcLogo from '../styles/imgs/icon/umcLogo.png';
-import cluvmLogo from '../styles/imgs/icon/cluvmLogo.png';
 import clubsData from '../clubsData';
+import axios from 'axios';
+import { API } from '../axiosConfig';
+import getValue from '../../node_modules/lodash/_getValue';
+import umcLogo from '../styles/imgs/icon/umcLogo.png';
+
+
 
 const WhiteBox = styled.div`
   position: relative;
@@ -49,6 +51,27 @@ const UserMainPageComponent = (props) => {
   const history = useHistory();
   const name = props.name;
 
+  const jwtToken = sessionStorage.getItem('jwtToken');
+  const userIdx = sessionStorage.getItem('userIdx');
+  const [clubs,setClubs] = useState([]);
+
+  useEffect(async () => {
+    const result = await axios.get(`${API}/user/member/home?userIdx=${userIdx}`,{
+      headers: {
+        'x-access-token': jwtToken,
+      }}
+     )
+    const value = result.data;
+      if(value.isSuccess){
+        console.log("API 적용 성공")
+        setClubs(value.result);
+      } else {
+        alert(value.message);
+      }
+  },[]);
+
+  
+
   return (
     <BackgroundTemplate style={{ zindex: 0 }}>
       <WhiteBox style={{ zIndex: 1 }}>
@@ -57,15 +80,16 @@ const UserMainPageComponent = (props) => {
           동아리 관리를 더욱 간편하게, 동네
         </div>
         <div className="ExtraBold" style={{ margin: '2rem' }}>
-          {name} 님의 워크스페이스
+          {name} 님의 워크스페이스 
+          추후에 이름부분 sesstionstrog
         </div>
         <div className='outline'>
-          {clubsData.Data.map((elem) => (
+          {clubs.length>0 && clubs.map((elem) => (
             <div>
               <Enterlist
-                img={elem.img}
-                name={elem.name}
-                link={elem.link}
+                img={umcLogo}
+                name={elem.clubName}
+                link={elem.adminIdx}
               />
             </div>
           ))}

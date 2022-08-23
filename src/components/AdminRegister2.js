@@ -105,7 +105,7 @@ function AdminRegister2(props) {
     console.log(result);
     const value = result.data;
     if(value.isSuccess){
-      console.log("페이지가 이동해야함");
+      alert("회원가입이 완료되었습니다!")
     }else{
       alert(value.message);
     }
@@ -172,7 +172,6 @@ function AdminRegister2(props) {
                   setYear(e.target.value);
                 }}
                 value={year}
-                type={'number'}
                 className="information"
                 placeholder="ex) 2022-02-02"
                 style={{
@@ -280,7 +279,7 @@ function AdminRegister2(props) {
               text="가입 완료하기"
               fullWidth
               history={history}
-              to={presentpage}
+              to="/"
               props={{ id: location.state.props.id, pw: location.state.props.pw }}
               style={{ height: '2.7rem', borderRadius: '3px' }}
               
