@@ -233,8 +233,12 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
 
   const [allMembers, setAllMembers] = useState([]);
   const [allMemberSuccess, setAllMemberSuccess] = useState(false);
-  const [initMemberSuccess, setInitMemberSuccess] = useState([]);
+  const [initMemberSuccess, setInitMemberSuccess] = useState({});
   const [groupDetail, setgroupDetail] = useState({});
+  const [buttonSuccess, setButtonSuccess] = useState(false);
+  const [buttonSuccess2, setButtonSuccess2] = useState(false);
+  const [changedNumber, setChangedNumber] = useState(null);
+  const [changedNumber2, setChangedNumber2] = useState(null);
 
   const [addedMembers, setAddedMembers] = useState([]);
   const [minusedMembers, setMinusedMembers] = useState([]);
@@ -248,26 +252,59 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
   const onClickUpdate = () => {
     setIsAbled((cur) => true);
   };
+  useEffect(() => {
+    if (changedNumber) {
+      setAddedMembers(changedNumber);
+      setButtonSuccess2(true);
+    }
+  }, [changedNumber]);
 
-  const onClickSave = () => {
-    patchGroupData(jwtToken, adminIdx2);
-    //1. 추가된 멤버: 결과 애들 중에 initMemberSuccess에 있던 애들이 아닌 애들
-    for (var key in allMemberSuccess) {
-      if (!initMemberSuccess.includes(allMemberSuccess[key])) {
-        setAddedMembers((state) => [...state, key]);
-      }
+  useEffect(() => {
+    if (changedNumber2) {
+      console.log('hi');
+      setMinusedMembers(changedNumber2);
     }
+  }, [changedNumber2]);
+  // 1. 추가된 멤버: 결과 애들 중에 initMemberSuccess에 있던 애들이 아닌 애들
+  useEffect(() => {
+    const arr = [];
+    const arr2 = [];
+    const initKeys = Object.keys(initMemberSuccess);
+    console.log(initKeys);
+    if (buttonSuccess) {
+      for (var key in allMemberSuccess) {
+        if (allMemberSuccess[key] === true && !initKeys.includes(key)) {
+          arr.push(key);
+        }
+      }
+      setChangedNumber(arr);
+      setButtonSuccess(false);
+    } else {
+    }
+  }, [buttonSuccess]);
+
+  useEffect(() => {
+    const arr2 = [];
+    const initKeys = Object.keys(initMemberSuccess);
+    console.log(initKeys);
+    if (buttonSuccess2) {
+      for (var item of initKeys) {
+        console.log('hi', item, allMemberSuccess);
+        if (allMemberSuccess[item] === false) {
+          arr2.push(item);
+          console.log('가보자', arr2);
+        }
+      }
+      setChangedNumber2(arr2);
+      setButtonSuccess2(false);
+    } else {
+    }
+  }, [buttonSuccess2]);
+
+  const onClickSave = async () => {
+    setButtonSuccess(true);
     //2. 해제된 멤버: 있던 애들중에 현재 false인 애들
-    console.log(initMemberSuccess, allMemberSuccess);
-    for (var key in initMemberSuccess) {
-      if (allMemberSuccess[key] === false) {
-        setMinusedMembers((state) => [...state, key]);
-      }
-    }
-    console.log('k!', allMemberSuccess, initMemberSuccess);
-    console.log('add:', addedMembers, 'minus:', minusedMembers);
-    setAddedMembers([]);
-    setMinusedMembers([]);
+    await patchGroupData(jwtToken, adminIdx2);
   };
 
   const patchGroupData = async (jwt, adminIdx) => {
@@ -293,6 +330,7 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
         if (!response.data.isSuccess) {
           alert(response.data.message);
         } else {
+          console.log('k!', allMemberSuccess, initMemberSuccess);
           alert('그룹 정보 수정에 성공했습니다.');
         }
       })
@@ -323,7 +361,7 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
 
   const updateInitState = (userIdx) => {
     setInitMemberSuccess((state) => {
-      return [...state, userIdx];
+      return { ...state, [userIdx]: true };
     });
   };
 
@@ -432,7 +470,8 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
     }
   }, [groupDetail]);
   console.log('kkk', initMemberSuccess);
-
+  console.log('123', addedMembers);
+  console.log('456', minusedMembers);
   return (
     <>
       <ModalOverlay visible={visible} />
