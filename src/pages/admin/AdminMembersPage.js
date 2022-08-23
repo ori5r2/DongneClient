@@ -8,6 +8,7 @@ import { useState } from 'react';
 import MembersModal from '../../components/MembersModal';
 import importImg from '../../styles/importImg';
 import EventButton from '../../components/EventButton';
+import client from '../axiosConfig';
 
 const StyleldMembersBody = styled.div`
   position: relative;
@@ -82,9 +83,50 @@ const TextBtn = styled.button`
   font-weight: 800;
 `;
 const AdminMembersPage = () => {
+  // const [groupId, setgroupId] = useState('');
+  const location = useLocation();
   const [modal, setModal] = useState(false);
-  const onClickForModal = () => {
+  const jwtToken = sessionStorage.getItem('jwtToken');
+  const adminIdx = sessionStorage.getItem('adminIdx');
+  // const [groupData, setGroupData] = useState([]);
+
+  const fetchMembers = async (jwt, adminIdx, page, pageSize) => {
+    await client
+      .get('/admin/member', {
+        headers: {
+          'x-access-token': jwt,
+        },
+        params: {
+          adminIdx: adminIdx,
+          page: page,
+          pageSize: pageSize,
+        },
+      })
+      .then(function (response) {
+        console.log(response.data);
+        setMembersData(response.data.result.pagingRetrieveGroupListResult); //d?
+        if (!response.data.isSuccess) {
+          alert(response.data.message);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchMembers(jwtToken, adminIdx, 1, 32);
+  }, []);
+
+
+  const onClickForModal = (idx) => {
     setModal((current) => !current);
+    console.log(idx);
+    if (!modal) {
+      setuserId(idx);
+      console.log(idx);
+    }
+
   };
   return (
     <SidebarTemplate pageNum={1} isMembers={true}>
@@ -104,19 +146,20 @@ const AdminMembersPage = () => {
           </div>
         </div>
         <div className="members_body">
-          {membersData.Data.map((elem) => (
+          {membersData.Data.map((elem) => {
+            return (
             <div className="eachCard">
               <MembersCard
                 UserName={elem.UserName}
-                UserCode={elem.UserCode}
                 UserTeam={elem.UserTeam}
-                onClick={onClickForModal}
+                onClick={onClickForModal(elem.userIdx)}
               />
             </div>
-          ))}
+            )})
+          }
         </div>
 
-        {modal == true ? <MembersModal onClick={onClickForModal} /> : null}
+        {modal == true ? <MembersModal userIdx={userId} onClick={onClickForModal} /> : null}
       </StyleldMembersBody>
     </SidebarTemplate>
   );
