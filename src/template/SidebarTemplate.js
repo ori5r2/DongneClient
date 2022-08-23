@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import copy from '../styles/imgs/icon/home_file-copy.png';
 import importImg from '../styles/importImg';
 import { useHistory, useLocation } from 'react-router-dom';
+import ProfileImg from '../styles/imgs/icon/ProfileImg.png'; 
 
 const StyledTag = styled.div`
   background-color: #2b78ff;
@@ -29,6 +30,11 @@ const StyledDiv = styled.div`
 `;
 
 const StyledAvatar = styled.div`
+& img{
+  object-fit: cover;
+  height: 6rem;
+  width: 6rem;
+}
   display: flex;
   align-items: center;
   justify-content: center;
@@ -149,7 +155,7 @@ const SidebarTemplate = ({ isAttendance, pageNum, children }) => {
           <div className="sidebar__contentArea">
             <StyledAvatar>
               {/* todo: 프로필 사진 */}
-              프로필 사진 영역
+              <img src={ProfileImg} alt="profile" />
             </StyledAvatar>
             <div>
               <div className="greeting">

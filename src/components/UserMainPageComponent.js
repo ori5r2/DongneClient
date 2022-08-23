@@ -73,9 +73,10 @@ const UserMainPageComponent = (props) => {
   },[]);
 
   const getData = async() =>{
-    const result = await axios.get(`${API}/user/member/home?userIdx=${16}`,{
+    const result = await axios.get(`${API}/user/member/home?userIdx=${userIdx}`,{
       headers: {
-        'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoxNiwiaWF0IjoxNjYwODYwMzc2LCJleHAiOjE2OTIzOTYzNzYsInN1YiI6IkFkbWluIn0.ebitK_QPLpMABjAiPpFa_IjSm0fcrHQz4l34lYZhtr4",
+        // 'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoxNiwiaWF0IjoxNjYwODYwMzc2LCJleHAiOjE2OTIzOTYzNzYsInN1YiI6IkFkbWluIn0.ebitK_QPLpMABjAiPpFa_IjSm0fcrHQz4l34lYZhtr4",
+        'x-access-token' : jwtToken,
       }}
      )
     const value = result.data;
