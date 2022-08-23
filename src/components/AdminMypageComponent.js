@@ -364,7 +364,7 @@ function Mypage(props) {
                                 disabled={!change}
                                 value={intro}
                                 type={"text"} 
-                                style={{width: "40rem", 
+                                style={{width: "39.65rem", 
                                         height: "5rem",
                                         paddingRight:' 1rem',
                                         backgroundColor: "#F3F3F3",

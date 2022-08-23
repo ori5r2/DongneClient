@@ -47,30 +47,61 @@ const WhiteBox = styled.div`
   }
 `;
 
+const ClubCodeInput = styled.input`
+  background-color: transparent;
+  border: none;
+  color: #2B78FF;
+  outline: none;
+  ::placeholder{
+          padding: 0.5rem;
+          color: #2B78FF;
+      }
+`
+
 const UserMainPageComponent = (props) => {
   const history = useHistory();
-  const name = props.name;
+  // const name = props.name;
 
   const jwtToken = sessionStorage.getItem('jwtToken');
   const userIdx = sessionStorage.getItem('userIdx');
   const [clubs,setClubs] = useState([]);
+  const [clubeCOde, setClubeCOde] = useState("")
+  const [name, setName] = useState("")
 
   useEffect(async () => {
-    const result = await axios.get(`${API}/user/member/home?userIdx=${userIdx}`,{
+    getData();
+  },[]);
+
+  const getData = async() =>{
+    const result = await axios.get(`${API}/user/member/home?userIdx=${16}`,{
       headers: {
-        'x-access-token': jwtToken,
+        'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoxNiwiaWF0IjoxNjYwODYwMzc2LCJleHAiOjE2OTIzOTYzNzYsInN1YiI6IkFkbWluIn0.ebitK_QPLpMABjAiPpFa_IjSm0fcrHQz4l34lYZhtr4",
       }}
      )
     const value = result.data;
       if(value.isSuccess){
+        console.log(value.result);
         console.log("API 적용 성공")
-        setClubs(value.result);
+        setClubs(value.result.clubList);
+        setName(value.result.userName[0].name)
       } else {
         alert(value.message);
       }
-  },[]);
+  }
 
   
+  const handleApi = async()=>{
+    const data = await axios.post(`${API}/user/auth/joinClub?userIdx=${userIdx}`,
+    {
+      clubCode: clubeCOde
+    })
+    if(data.data.isSuccess){
+      alert('가입성공')
+      getData();
+    }else{
+      alert(data.data.message)
+    }
+  }
 
   return (
     <BackgroundTemplate style={{ zindex: 0 }}>
@@ -80,10 +111,12 @@ const UserMainPageComponent = (props) => {
           동아리 관리를 더욱 간편하게, 동네
         </div>
         <div className="ExtraBold" style={{ margin: '2rem' }}>
-          {name} 님의 워크스페이스          {/* 추후에 이름부분 sesstionstrog */}
+          {name} 님의 워크스페이스          
         </div>
         <div className='outline'>
-          {clubs.length>0 && clubs.map((elem) => (
+          {clubs.length>0 && clubs.map((elem) => {
+            console.log(elem);
+            return (
             <div>
               <Enterlist
                 img={umcLogo}
@@ -91,12 +124,20 @@ const UserMainPageComponent = (props) => {
                 link={elem.adminIdx}
               />
             </div>
-          ))}
+          )})}
         </div>
 
         <div className='ClubCode'>
-          <div>단체 코드를 받으셨나요?</div>
-          <div style={{ fontWeight:"bold"}}>가입하기</div>
+          <ClubCodeInput
+          value={clubeCOde}
+          placeholder="단체 코드를 받으셨나요?"
+          onChange={(e)=>{
+            setClubeCOde(e.target.value)
+          }}/>
+          {/* <div></div> */}
+          <div style={{ fontWeight:"bold"}} onClick={()=>{
+            handleApi();
+          }}>가입하기</div>
         </div>
         <img src={blueline} alt="" style={{width:"34rem"}} />
       </WhiteBox>

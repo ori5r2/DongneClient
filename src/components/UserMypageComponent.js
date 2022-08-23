@@ -206,7 +206,7 @@ function Mypage(props) {
             setBirth(value.result[0].birth.slice(0,10));
             setAddress(value.result[0].address);
             setIntro(value.result[0].introduction);
-            setTime(value.result.adminMypageInfo[0].updatedAt.slice(0,10));
+            setTime(value.result[0].updatedAt.slice(0,10));
           } else {
             alert(value.message);
           }
@@ -308,7 +308,7 @@ function Mypage(props) {
                                         value={school}
                                         type={"text"} 
                                         className="information" 
-                                        style={{width: "16rem", 
+                                        style={{width: "15.5rem", 
                                                 height: "2.5rem",
                                                 backgroundColor:"#F3F3F3",
                                                 border: "none",
@@ -331,7 +331,7 @@ function Mypage(props) {
                                         value={number}
                                         type={"number"} 
                                         className="information" 
-                                        style={{width: "16rem", 
+                                        style={{width: "15.5rem", 
                                                 height: "2.5rem",
                                                 backgroundColor:"#F3F3F3",
                                                 border: "none",
@@ -352,7 +352,7 @@ function Mypage(props) {
                                 disabled={!change}
                                 value={birth}
                                 className="information" 
-                                style={{width: "16rem", 
+                                style={{width: "15.5rem", 
                                         height: "2.5rem",
                                         backgroundColor:"#F3F3F3",
                                         border: "none",
@@ -372,7 +372,7 @@ function Mypage(props) {
                                 value={address}
                                 type={"text"} 
                                 className="information" 
-                                style={{width: "41.5rem", 
+                                style={{width: "40.5rem", 
                                         height: "2.5rem",
                                         backgroundColor:"#F3F3F3",
                                         border: "none",
@@ -392,7 +392,7 @@ function Mypage(props) {
                                 value={intro}
                                 type={"text"} 
                                 className="information" 
-                                style={{width: "41rem", 
+                                style={{width: "39.65rem", 
                                         height: "7rem",
                                         paddingRight:' 1rem',
                                         backgroundColor: "#F3F3F3",
@@ -413,7 +413,7 @@ function Mypage(props) {
                                 text={change? "저장하기" : "개인 정보 수정하기"}
                                 style={{
                                     borderRadius:"4px",
-                                    width:"49.3rem",
+                                    width:"48.8rem",
                                     marginTop:"1.5rem"
                                 }}
                             />
