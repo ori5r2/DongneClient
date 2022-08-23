@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import MembersCard from '../../components/MembersCard';
 import palette from '../../styles/pallete';
 import SidebarTemplate from '../../template/SidebarTemplate';
-import membersData from '../../membersData';
+// import membersData from '../../membersData';
 import { useState } from 'react';
 import MembersModal from '../../components/MembersModal';
 import importImg from '../../styles/importImg';
@@ -83,12 +83,12 @@ const TextBtn = styled.button`
   font-weight: 800;
 `;
 const AdminMembersPage = () => {
-  // const [groupId, setgroupId] = useState('');
-  const location = useLocation();
+  const [userId, setuserId] = useState('');
+  // const location = useLocation();
   const [modal, setModal] = useState(false);
   const jwtToken = sessionStorage.getItem('jwtToken');
   const adminIdx = sessionStorage.getItem('adminIdx');
-  // const [groupData, setGroupData] = useState([]);
+  const [MembersData, setMembersData] = useState([]);
 
   const fetchMembers = async (jwt, adminIdx, page, pageSize) => {
     await client
@@ -146,7 +146,7 @@ const AdminMembersPage = () => {
           </div>
         </div>
         <div className="members_body">
-          {membersData.Data.map((elem) => {
+          {MembersData.map((elem) => {
             return (
             <div className="eachCard">
               <MembersCard
