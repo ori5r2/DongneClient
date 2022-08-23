@@ -108,6 +108,13 @@ const WhiteBox = styled.div`
     .btnStlye{
         padding-left: 5rem;
     }
+
+    .timeCheck{
+        font-size: 0.8rem;
+        position: absolute;
+        right: 24rem;
+        top: 4rem;
+    }
 `
 const StyledAvatar = styled.div`
   display: flex;
@@ -124,35 +131,42 @@ const StyledAvatar = styled.div`
 function Mypage(props) {
     const history  = useHistory();
 
-    const [email, setEmail] = useState("");
     const [name, setName] = useState("");
-    const [pw, setPw] = useState("");
     const [year, setYear] = useState("");
     const [area, setArea] = useState("");
     const [url, setUrl] = useState("");
     const [intro, setIntro] = useState("");
-    const[change, setChange] = useState(false);
+    const [change, setChange] = useState(false);
     const [storage, setStorage] = useState(false);
-    const[clubs, setClubs] = useState("");
-    // useEffect(() => {
-    // }, [name, birth, school, phone, address, selfintro]);
+    const [clubs, setClubs] = useState("");
+    const [time, setTime] = useState("");
     
     const handleApi= async() =>{
-        console.log(
-            // "email: " + email, 
-            "name: " + name, 
-            // "pw: " + pw, 
-            "year: " + year,
-            "area: " + area,
-            "url: " + url, 
-            "intro: " + intro);
-            
+
             if(change){
-                // 수정하기 api가 작동되야돼
+                const result = await axios.patch(`${API}/admin/member/mypage?adminIdx=${adminIdx}`,{
+                    clubName: name,
+                    establishmentYear: year,
+                    clubRegion: area,
+                    clubWebLink: url,
+                    clubIntroduction: intro,
+                    clubCategoryIdx: 1
+                    },
+                    {headers: {
+                        'x-access-token': jwtToken,
+                    }})
+                    
+                  console.log(result);
+    
+                  const value = result.data;
+                    if(value.isSuccess){
+                        alert("수정이 완료되었습니다!")
+                    }else{
+                        alert(value.message);
+                    }
                 
                 setChange(false);
             } else {
-                // api가 작동 안 함
                 setChange(true);
             }
     }
@@ -160,7 +174,6 @@ function Mypage(props) {
     const jwtToken = sessionStorage.getItem('jwtToken');
     const adminIdx = sessionStorage.getItem('adminIdx');
     const memberName = props.memberName;
-    const groupCategory = props.groupCategory;
 
     useEffect(async () => {
         const result = await axios.get(`${API}/admin/member/mypage?adminIdx=${adminIdx}`,{
@@ -175,15 +188,17 @@ function Mypage(props) {
             console.log(value.result);
             setStorage(value.result.adminMypageInfo[0]);
             setName(value.result.adminMypageInfo[0].clubName);
-            setYear(value.result.adminMypageInfo[0].establishmentYear);
+            setYear(value.result.adminMypageInfo[0].establishmentYear.slice(0,10));
             setArea(value.result.adminMypageInfo[0].clubRegion);
             setUrl(value.result.adminMypageInfo[0].clubWebLink);
             setIntro(value.result.adminMypageInfo[0].clubIntroduction);
             setClubs(value.result.adminMypageInfo[0].categoryName);
+            setTime(value.result.adminMypageInfo[0].updatedAt.slice(0,10));
           } else {
             alert(value.message);
           }
       }, []);
+
 
     return (
         <>
@@ -193,7 +208,7 @@ function Mypage(props) {
                 <div className="text"style={{ marginBottom: '0.5rem' }}>
                     <span className='name'>{memberName}</span>님의 마이페이지
                 </div>
-
+                <div className='timeCheck'>마지막 업데이트({time})</div>
                 <div className='content'>
                     <div className='part1'>
                         <StyledAvatar style={{color:"#2B78FF", fontSize:"1.5rem", textAlign:"center"}}>

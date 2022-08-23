@@ -280,7 +280,6 @@ function AdminRegister2(props) {
               fullWidth
               history={history}
               to="/"
-              props={{ id: location.state.props.id, pw: location.state.props.pw }}
               style={{ height: '2.7rem', borderRadius: '3px' }}
               
             />

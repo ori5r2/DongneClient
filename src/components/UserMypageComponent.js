@@ -121,6 +121,13 @@ const WhiteBox = styled.div`
         display: flex;
         flex-direction: row;
     }
+
+    .timeCheck{
+        font-size: 0.8rem;
+        position: absolute;
+        right: 24rem;
+        top: 4rem;
+    }
 `
 const StyledAvatar = styled.div`
   display: flex;
@@ -145,25 +152,37 @@ function Mypage(props) {
     const [intro, setIntro] = useState("");
     const [change, setChange] = useState(false);
     const [storage, setStorage] = useState(false);
+    const [time, setTime] = useState("");
 
     // useEffect(() => {
     // }, [name, birth, school, phone, address, selfintro]);
     
     const handleApi= async() =>{
-        console.log(
-            // "email: " + email, 
-            "name: " + name, 
-            "school: " + school,
-            // "number: " + number,
-            "birth: " + birth,
-            "address: " + address, 
-            "intro: " + intro);
-
         if(change){
-            // 수정하기 api가 작동되야돼
+            const result = await axios.patch(`${API}/user/member/mypage?userIdx=${userIdx}`,{
+                name: name,
+                school: school,
+                phoneNum: number,
+                birth: birth,
+                address: address,
+                introduction: intro,
+                clubIntroduction: intro,
+                },
+                {headers: {
+                    'x-access-token': jwtToken,
+                }})
+                
+              console.log(result);
+
+              const value = result.data;
+              if(value.isSuccess){
+                alert("수정이 완료되었습니다!")
+              }else{
+                alert(value.message);
+            }
+            
             setChange(false);
         } else {
-            // api가 작동 안 함
             setChange(true);
         }
     }
@@ -184,9 +203,10 @@ function Mypage(props) {
             setName(value.result[0].name);
             setSchool(value.result[0].school);
             setNumber(value.result[0].phoneNum);
-            setBirth(value.result[0].birth);
+            setBirth(value.result[0].birth.slice(0,10));
             setAddress(value.result[0].address);
             setIntro(value.result[0].introduction);
+            setTime(value.result.adminMypageInfo[0].updatedAt.slice(0,10));
           } else {
             alert(value.message);
           }
@@ -202,7 +222,7 @@ function Mypage(props) {
                 <div className="text"style={{ marginBottom: '0.5rem' }}>
                     <span className='name'>{memberName}</span>님의 마이페이지
                 </div>
-
+                <div className='timeCheck'>마지막 업데이트({time})</div>
                 <div className='content'>
                     <div className='part1'>
                         <StyledAvatar style={{color:"#2B78FF", fontSize:"1.5rem", textAlign:"center"}}>
