@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../styles/pallete';
-// import data from '../data';
 import EventButton from '../EventButton';
 import importImg from '../../styles/importImg';
 import membersData from '../../membersData';
 import Avatar from './Avatar';
 import client from '../../axiosConfig';
-// import membersData from '../../src/membersData';
-// import MembersCard from './MembersCard';
-// import Avatar from '../../modals/Avatar';
-// import client from '../axiosConfig';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const StyledModal = styled.div`
   position: fixed;
@@ -28,8 +24,9 @@ const StyledModal = styled.div`
   justify-content: center;
 
   .content-area {
+    position: relative;
     color: ${palette[5]};
-    width: inherit;
+    width: 68.75rem;
     height: 32.75rem;
     margin: 3rem 3.875rem;
   }
@@ -55,12 +52,6 @@ const StyledModal = styled.div`
     // position: relative;
   }
 
-  .button {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: -0.75rem;
-  }
   .body__left {
     display: flex;
     flex-direction: column;
@@ -122,24 +113,19 @@ const StyledModal = styled.div`
   .name_input_formGroup > .name_input_form:nth-child(2) {
     margin-left: 1rem;
   }
-  .codeButton {
-    box-sizing: border-box;
-    width: 6.4375rem;
-    height: 2.5rem;
-    border: 0.1875rem solid #2b78ff;
-    border-radius: 0.25rem;
-    background-color: ${palette[0]};
-    color: ${palette[3]};
-    font-family: 'Pretendard Bold';
-    cursor: pointer;
-    margin-left: 0.625rem;
+
+  .buttons {
+    margin-top: 2rem;
+    display: flex;
+    width: 100%;
+    height: 3.5rem;
+    gap: 1rem;
+    justify-content: space-between;
   }
   .eventButton {
-    width: 33.1875rem;
+    position: relative;
+    width: 100%;
     height: 3.5rem;
-    position: absolute;
-    bottom: 3rem;
-    /* margin-top: 2rem; */
   }
   .code__input {
     width: 21rem;
@@ -230,7 +216,10 @@ const ModalOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 999;
 `;
-const GroupModal = ({ groupIdx, visible, onClick }) => {
+const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
+  const history = useHistory();
+  const location = useLocation();
+  const [isAbled, setIsAbled] = useState(false);
   const [success, setSuccess] = useState(false);
   const [memberSuccess, setMemberSuccess] = useState(false);
   const jwtToken = sessionStorage.getItem('jwtToken');
@@ -239,7 +228,12 @@ const GroupModal = ({ groupIdx, visible, onClick }) => {
   const [groupCategory, setGroupCategory] = useState('');
   const [groupIntroduction, setGroupIntroduction] = useState('');
   const [groupMembers, setGroupMembers] = useState([]);
+  const [che, setChe] = useState(false);
   console.log(jwtToken, adminIdx2);
+
+  const [allMembers, setAllMembers] = useState([]);
+  const [allMemberSuccess, setAllMemberSuccess] = useState(false);
+  const [initMemberSuccess, setInitMemberSuccess] = useState([]);
   const [groupDetail, setgroupDetail] = useState({});
 
   const onChangeIntroduction = (e) => {
@@ -247,6 +241,105 @@ const GroupModal = ({ groupIdx, visible, onClick }) => {
   };
   const onChangeCategory = (e) => setGroupCategory(e.target.value);
   const onChangeName = (e) => setGroupTitle(e.target.value);
+
+  const onClickUpdate = () => {
+    setIsAbled((cur) => true);
+  };
+
+  const onClickSave = () => {
+    patchGroupData(jwtToken, adminIdx2);
+  };
+
+  const patchGroupData = async (jwt, adminIdx) => {
+    await client
+      .patch(
+        '/admin/group/info',
+        {
+          groupName: groupTitle,
+          groupIntroduction: groupIntroduction,
+          groupCategory: groupCategory,
+        },
+        {
+          headers: {
+            'x-access-token': jwt,
+          },
+          params: {
+            adminIdx: adminIdx,
+            groupIdx: groupIdx,
+          },
+        },
+      )
+      .then((response) => {
+        if (!response.data.isSuccess) {
+          alert(response.data.message);
+        } else {
+          alert('그룹 정보 수정에 성공했습니다.');
+        }
+      })
+      .catch(function (error) {
+        alert(error);
+      });
+  };
+
+  const updateMembers = (idx) => {
+    setAllMemberSuccess((state) => {
+      return { ...state, [idx]: false };
+    });
+  };
+
+  const onClickAvatar = (e, userId) => {
+    console.log(userId, 'hi');
+    setAllMemberSuccess((state) => {
+      console.log(state);
+      return { ...state, [userId]: !state[userId] };
+    });
+  };
+
+  const updateGroupCheck = (userIdx) => {
+    setAllMemberSuccess((state) => {
+      return { ...state, [userIdx]: true };
+    });
+  };
+
+  const updateInitState = (userIdx) => {
+    setInitMemberSuccess((state) => {
+      return [...state, userIdx];
+    });
+  };
+
+  useEffect(() => {
+    const fetchGroupMembers = async (jwt, adminIdx) => {
+      await client
+        .get('/admin/member', {
+          headers: {
+            'x-access-token': jwt,
+          },
+          params: {
+            adminIdx: adminIdx,
+            groupIdx: groupIdx,
+            page: 1,
+            pageSize: 100,
+          },
+        })
+        .then((response) => {
+          setAllMembers(response.data.result.pagingRetrieveMemberListResult);
+          if (!response.data.isSuccess) {
+            alert(response.data.message);
+          }
+        })
+        .catch(function (error) {
+          alert(error);
+        });
+    };
+    if (allMemberSuccess) {
+      allMembers.map((elem) => {
+        return updateMembers(elem.userIdx);
+      });
+    } else {
+      fetchGroupMembers(jwtToken, adminIdx2);
+      setAllMemberSuccess(true);
+    }
+  }, [allMembers]);
 
   useEffect(() => {
     const fetchGroupMembers = async (jwt, adminIdx) => {
@@ -275,11 +368,17 @@ const GroupModal = ({ groupIdx, visible, onClick }) => {
         });
     };
     if (memberSuccess) {
+      console.log('why', groupMembers);
+      groupMembers.map((elem) => {
+        console.log('HOOS', elem);
+        updateInitState(elem.userIdx);
+        return updateGroupCheck(elem.userIdx);
+      });
     } else {
       fetchGroupMembers(jwtToken, adminIdx2);
       setMemberSuccess(true);
     }
-  }, [groupDetail]);
+  }, [groupMembers]);
 
   useEffect(() => {
     const fetchGroupDetail = async (jwt, adminIdx) => {
@@ -312,6 +411,7 @@ const GroupModal = ({ groupIdx, visible, onClick }) => {
       setSuccess(true);
     }
   }, [groupDetail]);
+  console.log('kkk', initMemberSuccess);
 
   return (
     <>
@@ -329,6 +429,7 @@ const GroupModal = ({ groupIdx, visible, onClick }) => {
               <div className="name_input_form">
                 <span>카테고리</span>
                 <input
+                  disabled={!isAbled}
                   type="text"
                   onChange={onChangeCategory}
                   value={success ? groupCategory : ''}
@@ -338,6 +439,7 @@ const GroupModal = ({ groupIdx, visible, onClick }) => {
               <div className="name_input_form">
                 <span>항목</span>
                 <input
+                  disabled={!isAbled}
                   type="text"
                   onChange={onChangeName}
                   value={success ? groupTitle : ''}
@@ -347,38 +449,60 @@ const GroupModal = ({ groupIdx, visible, onClick }) => {
               <div className="name_input_form">
                 <span>내용</span>
                 <textarea
+                  disabled={!isAbled}
                   maxLength="300"
                   onChange={onChangeIntroduction}
                   value={success ? groupIntroduction : ''}
                   className="long_long_input"
                 />
               </div>
-              <div className="eventButton">
-                <EventButton text={'수정하기'} />
-              </div>
             </form>
             <form className="body__right">
               <div className="attended_members">
                 <div className="span">참여 회원</div>
                 <div className="members_body">
-                  {groupMembers.map((elem) => (
-                    <div key={elem.userIdx} className="eachCard">
-                      <Avatar
-                        UserName={elem.name}
-                        UserCode={elem.school}
-                        UserTeam={elem.teamName}
-                        // onClick={onClickForModal}
-                      />
-                    </div>
-                  ))}
+                  {!isAbled
+                    ? groupMembers.map((elem) => (
+                        <div key={elem.userIdx} className="eachCard">
+                          <Avatar
+                            UserName={elem.name}
+                            UserCode={elem.school}
+                            UserTeam={elem.teamName}
+                          />
+                        </div>
+                      ))
+                    : allMembers.map((elem) => (
+                        <div
+                          key={elem.userIdx}
+                          onClick={(e) => onClickAvatar(e, elem.userIdx)}
+                          className="eachCard"
+                        >
+                          <Avatar
+                            UserName={elem.name}
+                            UserCode={elem.school}
+                            UserTeam={elem.teamName}
+                            checked={allMemberSuccess[elem.userIdx]}
+                          />
+                        </div>
+                      ))}
                 </div>
                 <SmokeBar></SmokeBar>
               </div>
+            </form>
+          </div>
+          <div className="buttons">
+            <div className="eventButton">
+              <EventButton
+                text={isAbled ? '저장하기' : '수정하기'}
+                onClick={isAbled ? onClickSave : onClickUpdate}
+              />
+            </div>
 
+            {isAbled ? null : (
               <div className="eventButton">
                 <EventButton text={'삭제하기'} />
               </div>
-            </form>
+            )}
           </div>
         </div>
       </StyledModal>

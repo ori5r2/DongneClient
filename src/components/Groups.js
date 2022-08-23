@@ -111,7 +111,7 @@ const Groups = () => {
 
   useEffect(() => {
     fetchGroups(jwtToken, adminIdx, 1, 10);
-  }, []);
+  }, [modal]);
 
   const onClickForModal = (idx) => {
     setModal((current) => !current);
@@ -162,7 +162,11 @@ const Groups = () => {
       {
         modal && (
           // <div>Hi</div>
-          <GroupModal groupIdx={groupId} onClick={onClickForModal} />
+          <GroupModal
+            groupIdx={groupId}
+            onClick={onClickForModal}
+            isUpdate={false}
+          />
         ) //기계역할
       }
     </StyledAttendanceBody>
