@@ -245,7 +245,7 @@ const ModalOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 999;
 `;
-const AttendModal = ({
+const ScheduleCreateModal = ({
   groupIdx,
   groupTitle,
   scheduleIdx,
@@ -559,4 +559,4 @@ const AttendModal = ({
   );
 };
 
-export default AttendModal;
+export default ScheduleCreateModal;
