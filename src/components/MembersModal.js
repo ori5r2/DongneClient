@@ -4,6 +4,8 @@ import palette from '../styles/pallete';
 import EventButton from './EventButton';
 import PropTypes from 'prop-types';
 import importImg from '../styles/importImg';
+import client from '../axiosConfig';
+import { useEffect, useState } from 'react';
 
 const StyledModal = styled.div`
   position: fixed;
@@ -167,7 +169,57 @@ const ModalOverlay = styled.div`
   z-index: 999;
 `;
 
-const MembersModal = ({ visible, onClick }) => {
+const MembersModal = ({ userIdx, visible, onClick }) => {
+  const [success, setSuccess] = useState(false);
+  const jwtToken = sessionStorage.getItem('jwtToken');
+  const adminIdx = sessionStorage.getItem('adminIdx');
+  const [userId, setuserId] = useState('');
+  const [name, setName] = useState('');
+  const [phoneNum, setPhoneNum] = useState('');
+  const [school, setSchool] = useState('');
+  const [birth, setBirth] = useState('');
+  const [address, setAddress] = useState('');
+  const [introduction, setIntroduction] = useState('');
+  const [teamName, setTeamName] = useState('');
+
+  const [MemberDetail, setMemberDetail] = useState({});
+
+  const onChangeName = (e) => setName(e.target.value);
+  const onChangePhoneNum = (e) => setPhoneNum(e.target.value);
+  const onChangeSchool = (e) => setSchool(e.target.value);
+  const onChangeBirth = (e) => setBirth(e.target.value);
+  const onChangeAddress = (e) => setAddress(e.target.value);
+  const onChangeIntroduction = (e) => setIntroduction(e.target.value);
+  const onChangeTeamName = (e) => setTeamName(e.target.value);
+
+
+  const fetchMembersInfo = async (jwtToken, userIdx, adminIdx) => {
+    await client
+      .get('/admin/member/info', {
+        headers: {
+          'x-access-token': jwtToken,
+        },
+        params: {
+          userIdx: userIdx,
+          adminIdx: adminIdx,
+        },
+      })
+      .then(function (response) {
+        console.log(response.data);
+        setMemberDetail(response.data.result.memberInfo);
+        if (!response.data.isSuccess) {
+          alert(response.data.message);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchMembersInfo(jwtToken, userIdx, adminIdx);
+  }, []);
+
   return (
     <>
       <ModalOverlay visible={visible} />
@@ -183,29 +235,59 @@ const MembersModal = ({ visible, onClick }) => {
             <form className="body__left">
               <div className="body__left__elem">
                 <div>이름</div>
-                <input type="text"></input>
+                <input 
+                type="text"
+                onChange={onChangeName}
+                value={success ? name :''}
+                disabled
+                />
               </div>
               <div className="body__left__elem">
                 <div>전화번호</div>
-                <input type="text"></input>
+                <input 
+                type="text"
+                onChange={onChangePhoneNum}
+                value={success ? phoneNum :''}
+                disabled
+                />
               </div>
               <div className="body__left__elem">
                 <div>생년월일</div>
-                <input type="text"></input>
+                <input 
+                type="text"
+                onChange={onChangeBirth}
+                value={success ? birth :''}
+                disabled
+                />
               </div>
             </form>
             <form className="body__right">
               <div className="body__right__elem">
                 <div>팀/조</div>
-                <input type="text"></input>
+                <input 
+                type="text"
+                onChange={onChangeTeamName}
+                value={success ? teamName :''}
+                disabled
+                />
               </div>
               <div className="body__right__elem">
                 <div>학교/소속</div>
-                <input type="text"></input>
+                <input 
+                type="text"
+                onChange={onChangeSchool}
+                value={success ? school :''}
+                disabled
+                />
               </div>
               <div className="body__right__elem">
                 <div>주소</div>
-                <input type="text"></input>
+                <input 
+                type="text"
+                onChange={onChangeAddress}
+                value={success ? address :''}
+                disabled
+                />
               </div>
             </form>
           </div>
@@ -213,11 +295,20 @@ const MembersModal = ({ visible, onClick }) => {
             <form className="body__bottom">
               <div className="body__bottom__elem">
                 <div>한줄 소개</div>
-                <input type="text"></input>
+                <input 
+                type="text"
+                onChange={onChangeIntroduction}
+                value={success ? introduction :''}
+                disabled
+                />
               </div>
               <div className="body__bottom__elem">
                 <div>비고</div>
-                <input type="text" style={{ height: 5 + 'rem' }}></input>
+                <input 
+                type="text" 
+                style={{ height: 5 + 'rem' }} 
+                disabled
+                />
               </div>
             </form>
           </div>

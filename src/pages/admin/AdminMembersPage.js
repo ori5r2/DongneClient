@@ -85,7 +85,7 @@ const TextBtn = styled.button`
 const AdminMembersPage = () => {
   const [userId, setuserId] = useState('');
   // const location = useLocation();
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(true);
   const jwtToken = sessionStorage.getItem('jwtToken');
   const adminIdx = sessionStorage.getItem('adminIdx');
   const [MembersData, setMembersData] = useState([]);
@@ -118,7 +118,6 @@ const AdminMembersPage = () => {
     fetchMembers(jwtToken, adminIdx, 1, 32);
   }, []);
 
-
   const onClickForModal = (idx) => {
     setModal((current) => !current);
     console.log(idx);
@@ -128,6 +127,7 @@ const AdminMembersPage = () => {
     }
 
   };
+
   return (
     <SidebarTemplate pageNum={1} isMembers={true}>
       <StyleldMembersBody>
