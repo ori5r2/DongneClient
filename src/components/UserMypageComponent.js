@@ -9,7 +9,7 @@ import line from '../styles/imgs/icon/line.png';
 import setting from '../styles/imgs/icon/setting.png';
 import axios from 'axios';
 import { API } from '../axiosConfig';
-
+import ProfileImg from '../styles/imgs/icon/ProfileImg.png'; 
 
 const WhiteBox = styled.div`
     width: 65rem;
@@ -130,6 +130,11 @@ const WhiteBox = styled.div`
     }
 `
 const StyledAvatar = styled.div`
+& img{
+  object-fit: cover;
+  height: 6rem;
+  width: 6rem;
+}
   display: flex;
   align-items: center;
   justify-content: center;
@@ -227,7 +232,7 @@ function Mypage(props) {
                     <div className='part1'>
                         <StyledAvatar style={{color:"#2B78FF", fontSize:"1.5rem", textAlign:"center"}}>
                             {/* todo: 프로필 사진 */}
-                            프로필<br />사진영역
+                            <img src={ProfileImg} alt="profile" />
                         </StyledAvatar>
                         <img className="settingIcon" src={setting} alt="" />
                     </div>
