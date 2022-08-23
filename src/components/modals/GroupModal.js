@@ -236,6 +236,9 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
   const [initMemberSuccess, setInitMemberSuccess] = useState([]);
   const [groupDetail, setgroupDetail] = useState({});
 
+  const [addedMembers, setAddedMembers] = useState([]);
+  const [minusedMembers, setMinusedMembers] = useState([]);
+
   const onChangeIntroduction = (e) => {
     setGroupIntroduction(e.target.value);
   };
@@ -248,6 +251,23 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
 
   const onClickSave = () => {
     patchGroupData(jwtToken, adminIdx2);
+    //1. 추가된 멤버: 결과 애들 중에 initMemberSuccess에 있던 애들이 아닌 애들
+    for (var key in allMemberSuccess) {
+      if (!initMemberSuccess.includes(allMemberSuccess[key])) {
+        setAddedMembers((state) => [...state, key]);
+      }
+    }
+    //2. 해제된 멤버: 있던 애들중에 현재 false인 애들
+    console.log(initMemberSuccess, allMemberSuccess);
+    for (var key in initMemberSuccess) {
+      if (allMemberSuccess[key] === false) {
+        setMinusedMembers((state) => [...state, key]);
+      }
+    }
+    console.log('k!', allMemberSuccess, initMemberSuccess);
+    console.log('add:', addedMembers, 'minus:', minusedMembers);
+    setAddedMembers([]);
+    setMinusedMembers([]);
   };
 
   const patchGroupData = async (jwt, adminIdx) => {
