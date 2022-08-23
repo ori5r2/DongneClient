@@ -133,6 +133,7 @@ function Mypage(props) {
     const [intro, setIntro] = useState("");
     const[change, setChange] = useState(false);
     const [storage, setStorage] = useState(false);
+    const[clubs, setClubs] = useState("");
     // useEffect(() => {
     // }, [name, birth, school, phone, address, selfintro]);
     
@@ -158,6 +159,8 @@ function Mypage(props) {
 
     const jwtToken = sessionStorage.getItem('jwtToken');
     const adminIdx = sessionStorage.getItem('adminIdx');
+    const memberName = props.memberName;
+    const groupCategory = props.groupCategory;
 
     useEffect(async () => {
         const result = await axios.get(`${API}/admin/member/mypage?adminIdx=${adminIdx}`,{
@@ -166,22 +169,25 @@ function Mypage(props) {
           }}
          )
         const value = result.data;
+        console.log(value);
           if(value.isSuccess){
             console.log("API 적용 성공")
-            setStorage(value.result[0]);
-            setName(value.result[0].clubName);
-            setYear(value.result[0].establishmentYear);
-            setArea(value.result[0].clubRegion);
-            setUrl(value.result[0].clubWebLink);
-            setIntro(value.result[0].clubIntroduction);
+            console.log(value.result);
+            setStorage(value.result.adminMypageInfo[0]);
+            setName(value.result.adminMypageInfo[0].clubName);
+            setYear(value.result.adminMypageInfo[0].establishmentYear);
+            setArea(value.result.adminMypageInfo[0].clubRegion);
+            setUrl(value.result.adminMypageInfo[0].clubWebLink);
+            setIntro(value.result.adminMypageInfo[0].clubIntroduction);
+            setClubs(value.result.adminMypageInfo[0].categoryName);
           } else {
             alert(value.message);
           }
-      },[]);
-
-   const memberName = props.memberName;
+      }, []);
 
     return (
+        <>
+        {storage && 
         <WhiteBox>
             <div className='frame'>
                 <div className="text"style={{ marginBottom: '0.5rem' }}>
@@ -229,7 +235,6 @@ function Mypage(props) {
                                     value={name}
                                     type={"text"} 
                                     className="information" 
-                                    placeholder="동네"
                                     style={{width: "40.5rem", 
                                             height: "2.5rem",
                                             backgroundColor:"#F3F3F3",
@@ -264,8 +269,13 @@ function Mypage(props) {
 
                         <div className='Basic'>
                             <span className="category">단체 카테고리</span>
-                            <div className='categoryItem'>#IT</div>
-                            <div className='categoryItem'>연합동아리</div>
+                                
+                            <div className='categoryItem'>
+                                    <div>
+                                        {clubs}
+                                    </div>
+                            </div>
+                                
                         </div>
 
                         < div className='Basic'>
@@ -277,7 +287,7 @@ function Mypage(props) {
 
                                 disabled={!change}
                                 value={year}
-                                type={"number"} 
+                                type={"text"} 
                                 className="information" 
                                 style={{width: "40.5rem", 
                                         height: "2.5rem",
@@ -335,6 +345,7 @@ function Mypage(props) {
                                     setIntro(e.target.value);
                                 }}
 
+                                className="information"
                                 disabled={!change}
                                 value={intro}
                                 type={"text"} 
@@ -347,7 +358,7 @@ function Mypage(props) {
                                         fontFamily: "Pretendard Regular",
                                         fontSize: "0.9rem",
                                         resize: "none",
-                                        outline: "none"
+                                        outline: "none",
                                 }}
                             />
                         </div>
@@ -369,6 +380,7 @@ function Mypage(props) {
             </div>
             
         </WhiteBox>
+        }</>
     );
   }
   
