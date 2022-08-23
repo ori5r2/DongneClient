@@ -4,11 +4,11 @@ import MembersCard from '../../components/MembersCard';
 import palette from '../../styles/pallete';
 import SidebarTemplate from '../../template/SidebarTemplate';
 // import membersData from '../../membersData';
-import { useState } from 'react';
 import MembersModal from '../../components/MembersModal';
 import importImg from '../../styles/importImg';
 import EventButton from '../../components/EventButton';
-import client from '../axiosConfig';
+import client from '../../axiosConfig';
+import { useEffect, useState } from 'react';
 
 const StyleldMembersBody = styled.div`
   position: relative;
@@ -104,7 +104,7 @@ const AdminMembersPage = () => {
       })
       .then(function (response) {
         console.log(response.data);
-        setMembersData(response.data.result.pagingRetrieveGroupListResult); //d?
+        setMembersData(response.data.result.pagingRetrieveMemberListResult); //d?
         if (!response.data.isSuccess) {
           alert(response.data.message);
         }
