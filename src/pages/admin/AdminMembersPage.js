@@ -84,7 +84,7 @@ const TextBtn = styled.button`
 `;
 const AdminMembersPage = () => {
   const [userId, setuserId] = useState('');
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
   const jwtToken = sessionStorage.getItem('jwtToken');
   const adminIdx = sessionStorage.getItem('adminIdx');
   const [MembersData, setMembersData] = useState([]);
@@ -147,20 +147,35 @@ const AdminMembersPage = () => {
         <div className="members_body">
           {MembersData.map((elem) => {
             return (
-            <div className="eachCard">
+            <div key={elem.userIdx} className="eachCard">
               <MembersCard
                 UserImg={elem.userImgUrl}
                 UserName={elem.name}
                 UserTeam={elem.teamName}
-                onClick={onClickForModal(elem.userIdx)}
+
+                onClick={() => {
+                  console.log('hi');
+                  return onClickForModal(elem.userIdx);
+                }}
+                // onClickForMember={null}
+                key={elem.userIdx}
+                userId={elem.userIdx}
+                // isMemberDetail={true}
+                to={`/admin/members/${elem.userIdx}`}
+
+                // onClick={onClickForModal(elem.userIdx)}
               />
             </div>
             )})
           }
         </div>
 
-        {modal == true ? <MembersModal userIdx={userId} onClick={onClickForModal} /> : null}
-      </StyleldMembersBody>
+        {
+          modal && (
+          <MembersModal userIdx={userId} onClick={onClickForModal} /> 
+          )
+        }
+        </StyleldMembersBody>
     </SidebarTemplate>
   );
 };

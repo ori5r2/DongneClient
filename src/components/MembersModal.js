@@ -92,6 +92,14 @@ const StyledModal = styled.div`
     height: 2.5rem;
     border: none;
     margin-left: 1.375rem;
+    padding-left:1rem;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
   }
 
   .body__right {
@@ -118,6 +126,14 @@ const StyledModal = styled.div`
     height: 2.5rem;
     border: none;
     margin-left: 1.375rem;
+    padding-left:1rem;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
   }
 
   .body__bottom {
@@ -144,6 +160,14 @@ const StyledModal = styled.div`
     width: 37.0625rem;
     height: 2.5rem;
     margin-left: 1.125rem;
+    padding-left:1rem;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
   }
 `;
 
@@ -172,7 +196,7 @@ const ModalOverlay = styled.div`
 const MembersModal = ({ userIdx, visible, onClick }) => {
   const [success, setSuccess] = useState(false);
   const jwtToken = sessionStorage.getItem('jwtToken');
-  const adminIdx = sessionStorage.getItem('adminIdx');
+  const adminIdx2 = sessionStorage.getItem('adminIdx');
   const [userId, setuserId] = useState('');
   const [name, setName] = useState('');
   const [phoneNum, setPhoneNum] = useState('');
@@ -193,40 +217,51 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
   const onChangeIntroduction = (e) => setIntroduction(e.target.value);
   const onChangeTeamName = (e) => setTeamName(e.target.value);
 
-
-  const fetchMembersInfo = async (jwtToken, userIdx, adminIdx) => {
-    await client
-      .get('/admin/member/info', {
-        headers: {
-          'x-access-token': jwtToken,
-        },
-        params: {
-          userIdx: userIdx,
-          adminIdx: adminIdx,
-        },
-      })
-      .then(function (response) {
-        console.log(response.data);
-        setMemberDetail(response.data.result.memberInfo);
-        if (!response.data.isSuccess) {
-          alert(response.data.message);
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-      if(change){
-        setChange(false);
-      } else {
-        setChange(true);
-      }
-
-  };
-
   useEffect(() => {
-    fetchMembersInfo(jwtToken, userIdx, adminIdx);
-  }, []);
+    const fetchMemberDetail = async (jwtToken, adminIdx) => {
+      await client
+        .get('/admin/member/info', {
+          headers: {
+            'x-access-token': jwtToken,
+          },
+          params: {
+            userIdx: userIdx,
+            adminIdx: adminIdx,
+          },
+        })
+        .then((response) => {
+          setMemberDetail(response.data.result.memberInfo);
+          if (!response.data.isSuccess) {
+            alert(response.data.message);
+          }
+        })
+        .catch(function (error) {
+          alert(error);
+        });
+
+        if(change){
+          setChange(false);
+        } else {
+          setChange(true);
+        }
+    }
+    if (success) {
+      setName(MemberDetail[0].name);
+      setPhoneNum(MemberDetail[0].phoneNum);
+      setSchool(MemberDetail[0].school);
+      setBirth(MemberDetail[0].birth);
+      setAddress(MemberDetail[0].address);
+      setIntroduction(MemberDetail[0].introduction);
+      setTeamName(MemberDetail[0].teamName);
+    } else {
+      fetchMemberDetail(jwtToken, adminIdx2);
+      setSuccess(true);
+    }
+  }, [MemberDetail]);
+
+  // useEffect(() => {
+  //   fetchMembersInfo(jwtToken, userIdx, adminIdx);
+  // }, []);
 
   return (
     <>
@@ -253,7 +288,7 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
               <div className="body__left__elem">
                 <div>전화번호</div>
                 <input 
-                type="text"
+                type="number"
                 onChange={onChangePhoneNum}
                 value={success ? phoneNum :''}
                 disabled={!change}
@@ -262,7 +297,7 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
               <div className="body__left__elem">
                 <div>생년월일</div>
                 <input 
-                type="text"
+                // type="date"
                 onChange={onChangeBirth}
                 value={success ? birth :''}
                 disabled={!change}
@@ -322,7 +357,7 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
             </form>
           </div>
           <div className="button">
-          <div onClick={()=> {fetchMembersInfo(jwtToken, userIdx, adminIdx);}}/>
+          {/* <div onClick={()=> {fetchMemberDetail(jwtToken, userIdx, adminIdx);}}/> */}
             <EventButton 
               text={change ? '저장하기' : '수정하기'} 
               className="modalBtn"
