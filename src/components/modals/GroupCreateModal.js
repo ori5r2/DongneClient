@@ -349,7 +349,6 @@ const GroupCreaateModal = ({ groupIdx, visible, onClick, isUpdate }) => {
   }, [allMembers]);
   //2. 체크 된 userIdx로 배열 만들기
 
-  console.log(clubMembersCheckList);
   return (
     <>
       <ModalOverlay visible={visible} />

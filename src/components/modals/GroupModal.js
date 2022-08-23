@@ -237,6 +237,7 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
   const [groupDetail, setgroupDetail] = useState({});
   const [buttonSuccess, setButtonSuccess] = useState(false);
   const [buttonSuccess2, setButtonSuccess2] = useState(false);
+  const [deleteBS, setDeleteBS] = useState(false);
   const [changedNumber, setChangedNumber] = useState(null);
   const [changedNumber2, setChangedNumber2] = useState(null);
 
@@ -246,6 +247,7 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
   const [addedMembers, setAddedMembers] = useState([]);
   const [minusedMembers, setMinusedMembers] = useState([]);
 
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
   const onChangeIntroduction = (e) => {
     setGroupIntroduction(e.target.value);
   };
@@ -255,6 +257,44 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
   const onClickUpdate = () => {
     setIsAbled((cur) => true);
   };
+
+  const deleteGroup = async (jwt, adminIdx) => {
+    await client
+      .patch(
+        '/admin/group/delete',
+        {},
+        {
+          headers: {
+            'x-access-token': jwt,
+          },
+          params: {
+            adminIdx: adminIdx,
+            groupIdx: groupIdx,
+          },
+        },
+      )
+      .then((response) => {
+        if (!response.data.isSuccess) {
+          alert(response.data.message);
+        } else {
+          setDeleteSuccess(true);
+          alert('그룹 삭제에 성공했습니다.');
+        }
+      })
+      .catch(function (error) {
+        alert(error);
+      });
+  };
+  const onClickDelete = () => {
+    setDeleteBS(true);
+  };
+
+  useEffect(() => {
+    if (!deleteSuccess && deleteBS) {
+      deleteGroup(jwtToken, adminIdx2);
+    }
+  }, [deleteBS, deleteSuccess]);
+
   useEffect(() => {
     if (changedNumber) {
       setAddedMembers(changedNumber);
@@ -619,7 +659,7 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
 
             {isAbled ? null : (
               <div className="eventButton">
-                <EventButton text={'삭제하기'} />
+                <EventButton text={'삭제하기'} onClick={onClickDelete} />
               </div>
             )}
           </div>
