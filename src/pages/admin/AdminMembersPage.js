@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import MembersCard from '../../components/MembersCard';
 import palette from '../../styles/pallete';
 import SidebarTemplate from '../../template/SidebarTemplate';
-import membersData from '../../membersData';
-import { useState } from 'react';
+// import membersData from '../../membersData';
 import MembersModal from '../../components/MembersModal';
 import importImg from '../../styles/importImg';
 import EventButton from '../../components/EventButton';
+import client from '../../axiosConfig';
+import { useEffect, useState } from 'react';
 
 const StyleldMembersBody = styled.div`
   position: relative;
@@ -36,8 +37,8 @@ const StyleldMembersBody = styled.div`
     display: flex;
     align-items: center;
     font-size: 1.25rem;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
   }
   .members_header_textBtn_bar {
     margin: 0rem 1.25rem;
@@ -82,10 +83,50 @@ const TextBtn = styled.button`
   font-weight: 800;
 `;
 const AdminMembersPage = () => {
-  const [modal, setModal] = useState(false);
-  const onClickForModal = () => {
-    setModal((current) => !current);
+  const [userId, setuserId] = useState('');
+  const [modal, setModal] = useState(true);
+  const jwtToken = sessionStorage.getItem('jwtToken');
+  const adminIdx = sessionStorage.getItem('adminIdx');
+  const [MembersData, setMembersData] = useState([]);
+
+  const fetchMembers = async (jwtToken, adminIdx, page, pageSize) => {
+    await client
+      .get('/admin/member', {
+        headers: {
+          'x-access-token': jwtToken,
+        },
+        params: {
+          adminIdx: adminIdx,
+          page: page,
+          pageSize: pageSize,
+        },
+      })
+      .then(function (response) {
+        console.log(response.data);
+        setMembersData(response.data.result.pagingRetrieveMemberListResult); //d?
+        if (!response.data.isSuccess) {
+          alert(response.data.message);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
+
+  useEffect(() => {
+    fetchMembers(jwtToken, adminIdx, 1, 32);
+  }, []);
+
+  const onClickForModal = (idx) => {
+    setModal((current) => !current);
+    console.log(idx);
+    if (!modal) {
+      setuserId(idx);
+      console.log(idx);
+    }
+
+  };
+
   return (
     <SidebarTemplate pageNum={1} isMembers={true}>
       <StyleldMembersBody>
@@ -104,19 +145,21 @@ const AdminMembersPage = () => {
           </div>
         </div>
         <div className="members_body">
-          {membersData.Data.map((elem) => (
+          {MembersData.map((elem) => {
+            return (
             <div className="eachCard">
               <MembersCard
-                UserName={elem.UserName}
-                UserCode={elem.UserCode}
-                UserTeam={elem.UserTeam}
-                onClick={onClickForModal}
+                UserImg={elem.userImgUrl}
+                UserName={elem.name}
+                UserTeam={elem.teamName}
+                onClick={onClickForModal(elem.userIdx)}
               />
             </div>
-          ))}
+            )})
+          }
         </div>
 
-        {modal == true ? <MembersModal onClick={onClickForModal} /> : null}
+        {modal == true ? <MembersModal userIdx={userId} onClick={onClickForModal} /> : null}
       </StyleldMembersBody>
     </SidebarTemplate>
   );

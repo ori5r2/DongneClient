@@ -14,7 +14,7 @@ const WhiteBox = styled.div`
   width: 50vh;
 
   text-align: center;
-  font-family: 'Pretendard Regular';
+  font-family: 'Pretendard Medium';
   font-size: 1rem;
   color: ${palette[3]};
   //width: 33%;

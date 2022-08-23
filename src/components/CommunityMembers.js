@@ -17,7 +17,7 @@ const StyledCard = styled.button`
   width: 10.5rem;
   height: 12.5rem;
 
-  font-family: 'Pretendard Regular';
+  font-family: 'Pretendard Medium';
   // font-size: 1rem;
   color: ${palette[5]};
 
@@ -59,14 +59,14 @@ const StyledCard = styled.button`
     /* position: relative; */
     display: flex;
     justify-content: center;
-    font-family: "Pretendard Regular";
+    font-family: "Pretendard Medium";
   }
 
   .GroupPeople{
     /* position: relative; */
     display: flex;
     justify-content: center;
-    font-family: "Pretendard Regular";
+    font-family: "Pretendard Medium";
   }
 
 `;

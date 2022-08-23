@@ -150,7 +150,7 @@ const StyledModal = styled.div`
   }
   .members_body {
     width: 28rem;
-    gap: 1px;
+    gap: 0.0625rem;
     height: 10.625rem;
     margin-left: 1.125rem;
     display: flex;
@@ -164,14 +164,14 @@ const StyledModal = styled.div`
 
   .members_body::-webkit-scrollbar,
   .members_body::-webkit-scrollbar-thumb {
-    width: 26px;
-    border-radius: 13px;
+    width: 1.625rem;
+    border-radius: 0.8125rem;
     background-clip: padding-box;
-    border: 10px solid transparent;
+    border: 0.625rem solid transparent;
   }
 
   .members_body::-webkit-scrollbar-thumb {
-    box-shadow: inset 0 0 0 10px;
+    box-shadow: inset 0 0 0 0.625rem;
   }
   .members_body:hover {
     color: rgba(0, 0, 0, 0.3);

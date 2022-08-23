@@ -19,13 +19,13 @@ const StyledButton = styled.button`
   align-items: center;
 
   border: none;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   outline: none;
   cursor: pointer;
 
   margin-bottom: 1rem;
 
-  width: 650px;
+  width: 40.625rem;
   height: 3rem;
 
   font-family: 'Pretendard Bold';

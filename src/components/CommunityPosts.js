@@ -9,9 +9,9 @@ const WhitBox = styled.div`
     height: 3.5rem;
     background-color: black;
     background: linear-gradient(180deg, #FBFBFB 0%, rgba(251, 251, 251, 0) 100%);
-    backdrop-filter: blur(100px);
+    backdrop-filter: blur(6.25rem);
     /* Note: backdrop-filter has minimal browser support */
-    border-radius: 10px;
+    border-radius: 0.625rem;
 
     display: flex;
     align-items: center;
@@ -32,7 +32,7 @@ const WhitBox = styled.div`
         width: 4rem;
         height: 2rem;
         background: #E1F0FF;
-        border-radius: 4px;
+        border-radius: 0.25rem;
         color:#2B78FF;
         font-family: 'Pretendard Bold';
     }

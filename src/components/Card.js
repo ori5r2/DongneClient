@@ -9,11 +9,11 @@ const StyledCard = styled.div`
   width: 20rem;
   height: 13.75rem;
   background-color: wheat;
-  border-radius: 1rem;
+  border-radius: 0.7813rem;
   font-family: 'Pretendard Bold';
   color: #ffffff;
   font-size: 1.125rem;
-  filter: drop-shadow(0px 0px 20px rgba(34, 42, 63, 0.25));
+  filter: drop-shadow(0rem 0rem 1.25rem rgba(34, 42, 63, 0.25));
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url(${importImg.cardBack});
   background-size: cover;

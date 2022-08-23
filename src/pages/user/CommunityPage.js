@@ -161,7 +161,7 @@ const Community = () => {
                         <div className='list'>▶ 운영진 게시판</div>
                     </div>
                     <div>
-                        <Button text="글 작성하기 +" style={{width:"15rem", borderRadius:"4px"}}/>
+                        <Button text="글 작성하기 +" style={{width:"15rem", borderRadius:"0.25rem"}}/>
                     </div>
                 </div>
 
@@ -197,7 +197,7 @@ const Community = () => {
                         <CommunityPosts type="모집" title="UMC 3기 - IT 연합 동아리 회원 모집 (!22.08.26)" goodPoint="123" chatPoint="222" tagPoint="36"/>
                         <CommunityPosts type="정보" title="동네 회계 장부 정리 꿀팁" goodPoint="123" chatPoint="222" tagPoint="36"/>
                     </div>
-                    <Button text="더보기" style={{width: "58rem", height:"2.5rem", borderRadius:"4px", marginTop: "1rem"}} />
+                    <Button text="더보기" style={{width: "58rem", height:"2.5rem", borderRadius:"0.25rem", marginTop: "1rem"}} />
                 </div>
             </div>
         </WhitBox>

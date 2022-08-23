@@ -10,7 +10,7 @@ const RegisterSelect = (props) => {
         width: 20rem;
         height: 22rem;
         background-color: #ffffff;
-        border-radius: 10px;
+        border-radius: 0.625rem;
         outline: none;
         margin-bottom: 1rem;
         margin-top: -0.625rem;

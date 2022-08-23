@@ -10,14 +10,14 @@ import { API } from '../axiosConfig';
 const WhiteBox = styled.div`
   width: 45rem;
   height: 35rem;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   padding-left: 3rem;
   padding-right: 3rem;
   font-size: 1rem;
 
   background: linear-gradient(180deg, #ffffff 0%, rgba(251, 251, 251, 0) 100%);
-  border: 2px solid rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(40px);
+  border: 0.125rem solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(2.5rem);
 
   color: #2d3b5c;
 
@@ -33,13 +33,13 @@ const WhiteBox = styled.div`
     padding-bottom: 0.8rem;
   }
 
-  .information{
+  .information {
     font-size: 0.8rem;
     outline: none;
-      ::placeholder{
-          padding: 0.3rem;
-          color: #AAAAAA;
-      }
+    ::placeholder {
+      padding: 0.3rem;
+      color: #aaaaaa;
+    }
   }
 
   .outline {
@@ -67,7 +67,7 @@ function AdminRegister2(props) {
   const nextlink = props.nextlink;
   const location = useLocation();
 
-  const [group, setGroup] = useState('')
+  const [group, setGroup] = useState('');
   const [year, setYear] = useState('');
   const [area, setArea] = useState('');
   const [introduce, setIntroduce] = useState('');
@@ -92,7 +92,7 @@ function AdminRegister2(props) {
   }, [group, year, area, introduce, url]);
 
   const handleApi = async () => {
-    const result = await axios.post(`${API}/admin/auth/register`,{
+    const result = await axios.post(`${API}/admin/auth/register`, {
       clubName: group,
       adminEmail: location.state.props.id,
       adminPwd: location.state.props.pw,
@@ -100,13 +100,13 @@ function AdminRegister2(props) {
       clubRegion: area,
       clubIntroduction: introduce,
       clubWebLink: url,
-      clubImgUrl: "img"
-    })
+      clubImgUrl: 'img',
+    });
     console.log(result);
     const value = result.data;
-    if(value.isSuccess){
-      console.log("페이지가 이동해야함");
-    }else{
+    if (value.isSuccess) {
+      console.log('페이지가 이동해야함');
+    } else {
       alert(value.message);
     }
     // const res  = await  Axios.post({
@@ -139,7 +139,7 @@ function AdminRegister2(props) {
                   height: '2.5rem',
                   backgroundColor: '#F3F3F3',
                   border: 'none',
-                  borderRadius: '3px',
+                  borderRadius: '0.1875rem',
                 }}
               />
             </div>
@@ -153,7 +153,11 @@ function AdminRegister2(props) {
               </div>
             </div>
             <div>
-              <img src={category} alt="" style={{ width: '5rem', paddingBottom:"1rem"}} />
+              <img
+                src={category}
+                alt=""
+                style={{ width: '5rem', paddingBottom: '1rem' }}
+              />
             </div>
           </div>
         </div>
@@ -180,7 +184,7 @@ function AdminRegister2(props) {
                   height: '2.5rem',
                   backgroundColor: '#F3F3F3',
                   border: 'none',
-                  borderRadius: '3px',
+                  borderRadius: '0.1875rem',
                 }}
               />
             </div>
@@ -207,7 +211,7 @@ function AdminRegister2(props) {
                   height: '2.5rem',
                   backgroundColor: '#F3F3F3',
                   border: 'none',
-                  borderRadius: '3px',
+                  borderRadius: '0.1875rem',
                 }}
               />
             </div>
@@ -232,7 +236,7 @@ function AdminRegister2(props) {
                 height: '6rem',
                 backgroundColor: '#F3F3F3',
                 border: 'none',
-                borderRadius: '3px',
+                borderRadius: '0.1875rem',
                 resize: 'none',
                 outline: 'none',
               }}
@@ -258,11 +262,11 @@ function AdminRegister2(props) {
               type={'text'}
               className="information"
               style={{
-                width: "44.7rem", 
-                height: "2.5rem",
+                width: '44.7rem',
+                height: '2.5rem',
                 backgroundColor: '#F3F3F3',
                 border: 'none',
-                borderRadius: '3px',
+                borderRadius: '0.1875rem',
               }}
             />
           </div>
@@ -271,21 +275,15 @@ function AdminRegister2(props) {
                     handleApi();
                 }}>가입 완료하기</div> */}
 
-        <div
-          style={{paddingTop: "1rem"}}
-          onClick={handleApi}
-        >
- 
-            <Button
-              text="가입 완료하기"
-              fullWidth
-              history={history}
-              to={presentpage}
-              props={{ id: location.state.props.id, pw: location.state.props.pw }}
-              style={{ height: '2.7rem', borderRadius: '3px' }}
-              
-            />
-          
+        <div style={{ paddingTop: '1rem' }} onClick={handleApi}>
+          <Button
+            text="가입 완료하기"
+            fullWidth
+            history={history}
+            to={presentpage}
+            props={{ id: location.state.props.id, pw: location.state.props.pw }}
+            style={{ height: '2.7rem', borderRadius: '3px' }}
+          />
         </div>
       </div>
     </WhiteBox>
