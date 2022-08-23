@@ -84,7 +84,6 @@ const TextBtn = styled.button`
 `;
 const AdminMembersPage = () => {
   const [userId, setuserId] = useState('');
-  // const location = useLocation();
   const [modal, setModal] = useState(true);
   const jwtToken = sessionStorage.getItem('jwtToken');
   const adminIdx = sessionStorage.getItem('adminIdx');

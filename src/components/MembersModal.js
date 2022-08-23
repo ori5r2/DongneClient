@@ -181,6 +181,7 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
   const [address, setAddress] = useState('');
   const [introduction, setIntroduction] = useState('');
   const [teamName, setTeamName] = useState('');
+  const[change, setChange] = useState(false);
 
   const [MemberDetail, setMemberDetail] = useState({});
 
@@ -214,6 +215,13 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
       .catch(function (error) {
         console.log(error);
       });
+
+      if(change){
+        setChange(false);
+      } else {
+        setChange(true);
+      }
+
   };
 
   useEffect(() => {
@@ -239,7 +247,7 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
                 type="text"
                 onChange={onChangeName}
                 value={success ? name :''}
-                disabled
+                disabled={!change}
                 />
               </div>
               <div className="body__left__elem">
@@ -248,7 +256,7 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
                 type="text"
                 onChange={onChangePhoneNum}
                 value={success ? phoneNum :''}
-                disabled
+                disabled={!change}
                 />
               </div>
               <div className="body__left__elem">
@@ -257,7 +265,7 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
                 type="text"
                 onChange={onChangeBirth}
                 value={success ? birth :''}
-                disabled
+                disabled={!change}
                 />
               </div>
             </form>
@@ -268,7 +276,7 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
                 type="text"
                 onChange={onChangeTeamName}
                 value={success ? teamName :''}
-                disabled
+                disabled={!change}
                 />
               </div>
               <div className="body__right__elem">
@@ -276,8 +284,9 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
                 <input 
                 type="text"
                 onChange={onChangeSchool}
+                
                 value={success ? school :''}
-                disabled
+                disabled={!change}
                 />
               </div>
               <div className="body__right__elem">
@@ -286,7 +295,7 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
                 type="text"
                 onChange={onChangeAddress}
                 value={success ? address :''}
-                disabled
+                disabled={!change}
                 />
               </div>
             </form>
@@ -299,7 +308,7 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
                 type="text"
                 onChange={onChangeIntroduction}
                 value={success ? introduction :''}
-                disabled
+                disabled={!change}
                 />
               </div>
               <div className="body__bottom__elem">
@@ -307,15 +316,24 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
                 <input 
                 type="text" 
                 style={{ height: 5 + 'rem' }} 
-                disabled
+                disabled={!change}
                 />
               </div>
             </form>
           </div>
           <div className="button">
-            <EventButton text={'수정하기'} className="modalBtn"></EventButton>
-            <EventButton text={'삭제하기'} className="modalBtn"></EventButton>
-          </div>
+          <div onClick={()=> {fetchMembersInfo(jwtToken, userIdx, adminIdx);}}/>
+            <EventButton 
+              text={change ? '저장하기' : '수정하기'} 
+              className="modalBtn"
+              
+            />
+            <EventButton 
+              text={'삭제하기'} 
+              className="modalBtn"
+              
+            />
+          </div> 
         </div>
       </StyledModal>
     </>
