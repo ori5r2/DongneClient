@@ -70,7 +70,7 @@ const App = () => {
       <Route component={CommunityPage} path="/community" exact />
       <Route component={AdminFinancePage} path="/admin/finance" exact />
       <Route component={UserHomePage} path="/user/home/:id" exact />
-      <Route component={UserAttendPage} path="/user/attendance" exact />
+      <Route component={UserAttendPage} path="/user/attendance" />
     </Switch>
   );
 };

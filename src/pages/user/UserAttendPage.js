@@ -7,6 +7,7 @@ import Groups from '../../components/Groups';
 import GroupSchedules from '../../components/GroupSchedules';
 import UserGroups from '../../components/user/UserGroups';
 import UserSidebarTemplate from '../../template/UserSidebarTemplate';
+import UserGroupSchedules from '../../components/user/UserGroupSchedules';
 
 const UserAttendPage = () => {
   const match = useRouteMatch();
@@ -14,7 +15,7 @@ const UserAttendPage = () => {
     <UserSidebarTemplate pageNum={1} isAttendance={true}>
       <Switch>
         <Route path={match.path} component={UserGroups} exact />
-        <Route path={`${match.path}/:id`} component={GroupSchedules} />
+        <Route path={`${match.path}/:id`} component={UserGroupSchedules} />
       </Switch>
     </UserSidebarTemplate>
   );

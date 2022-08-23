@@ -227,7 +227,13 @@ const ModalOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 999;
 `;
-const AttendModal = ({ scheduleIdx, visible, onClick }) => {
+const AttendModal = ({
+  groupIdx,
+  groupTitle,
+  scheduleIdx,
+  visible,
+  onClick,
+}) => {
   const [success, setSuccess] = useState(false);
   const jwtToken = sessionStorage.getItem('jwtToken');
   const adminIdx2 = sessionStorage.getItem('adminIdx');
@@ -241,6 +247,42 @@ const AttendModal = ({ scheduleIdx, visible, onClick }) => {
   const [schedulePlace, setSchedulePlace] = useState('');
   console.log(jwtToken, adminIdx2);
   const [scheduleDetail, setScheduleDetail] = useState({});
+
+  const [attendMemberSuccess, setAttendMemberSuccess] = useState(false);
+  const [attendMembers, setAttendMembers] = useState(null);
+
+  //함수 구간
+  useEffect(() => {
+    const fetchGroupMembers = async (jwt, adminIdx) => {
+      await client
+        .get('/admin/attendance', {
+          headers: {
+            'x-access-token': jwt,
+          },
+          params: {
+            adminIdx: adminIdx,
+            scheduleIdx: scheduleIdx,
+            groupIdx: groupIdx,
+            curPage: 1,
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          if (!response.data.isSuccess) {
+            alert(response.data.message);
+          }
+        })
+        .catch(function (error) {
+          alert(error);
+        });
+    };
+    if (attendMemberSuccess) {
+      //여기서 비즈니스
+    } else {
+      fetchGroupMembers(jwtToken, adminIdx2);
+      setAttendMemberSuccess(true);
+    }
+  }, [attendMembers]);
 
   useEffect(() => {
     const fetchScheduleDetail = async (jwt, adminIdx) => {
@@ -280,6 +322,7 @@ const AttendModal = ({ scheduleIdx, visible, onClick }) => {
       setSuccess(true);
     }
   }, [scheduleDetail]);
+
   const onChangeScheduleTitle = (e) => setScheduleTitle(e.target.value);
   const onChangeScheduleDate = (e) => setScheduleDate(e.target.value);
   const onChangeScheduleCode = (e) => setScheduleCode(e.target.value);
@@ -297,7 +340,9 @@ const AttendModal = ({ scheduleIdx, visible, onClick }) => {
       <StyledModal>
         <div className="content-area">
           <div className="header">
-            <div>{success ? scheduleDetail.scheduleName : ''}</div>
+            <div>
+              {success ? `${groupTitle} - ${scheduleDetail.scheduleName}` : ''}
+            </div>
             <TextBtn onClick={onClick}>
               <img src={importImg.modalClose} />
             </TextBtn>
