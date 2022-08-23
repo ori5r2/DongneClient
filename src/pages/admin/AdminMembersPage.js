@@ -139,9 +139,9 @@ const AdminMembersPage = () => {
             <TextBtn>카드로 보기</TextBtn>
             <div className="members_header_textBtn_bar">|</div>
             <TextBtn className="textBtn_off">표로 보기</TextBtn>
-            <div className="addBtn">
+            {/* <div className="addBtn">
               <EventButton text={'추가하기 +'} />
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="members_body">

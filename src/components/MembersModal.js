@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../styles/pallete';
 import EventButton from './EventButton';
-import PropTypes from 'prop-types';
 import importImg from '../styles/importImg';
 import client from '../axiosConfig';
 import { useEffect, useState } from 'react';
@@ -238,12 +237,6 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
         .catch(function (error) {
           alert(error);
         });
-
-        if(change){
-          setChange(false);
-        } else {
-          setChange(true);
-        }
     }
     if (success) {
       setName(MemberDetail[0].name);
@@ -259,9 +252,41 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
     }
   }, [MemberDetail]);
 
-  // useEffect(() => {
-  //   fetchMembersInfo(jwtToken, userIdx, adminIdx);
-  // }, []);
+  const update = async () => {
+    if (change) {
+      setChange(false);
+    } else {
+      setChange(true);
+    }
+  };
+
+  const deleteMember = async (jwtToken, adminIdx) => {
+    await client
+      .patch('/admin/member', {
+        UserName:name,
+        UserTeam:teamName,
+      },
+      {
+        headers: {
+          'x-access-token': jwtToken,
+        },
+        params: {
+          userIdx: userIdx,
+          adminIdx: adminIdx,
+        },
+      })
+
+      .then((response) => {
+        if (!response.data.isSuccess) {
+          alert(response.data.message);
+        }else {
+          alert('회원을 삭제했습니다.');
+        }
+      })
+      .catch(function (error) {
+        alert(error);
+      });
+  }
 
   return (
     <>
@@ -282,16 +307,16 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
                 type="text"
                 onChange={onChangeName}
                 value={success ? name :''}
-                disabled={!change}
+                disabled
                 />
               </div>
               <div className="body__left__elem">
                 <div>전화번호</div>
                 <input 
-                type="number"
+                type="string"
                 onChange={onChangePhoneNum}
-                value={success ? phoneNum :''}
-                disabled={!change}
+                value={success ? phoneNum.substring(0,3)+'-'+phoneNum.substring(3,7)+'-'+phoneNum.substring(7,11) :''}
+                disabled
                 />
               </div>
               <div className="body__left__elem">
@@ -299,8 +324,8 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
                 <input 
                 // type="date"
                 onChange={onChangeBirth}
-                value={success ? birth :''}
-                disabled={!change}
+                value={success ? birth.substring(0,10) :''}
+                disabled
                 />
               </div>
             </form>
@@ -311,7 +336,7 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
                 type="text"
                 onChange={onChangeTeamName}
                 value={success ? teamName :''}
-                disabled={!change}
+                disabled
                 />
               </div>
               <div className="body__right__elem">
@@ -321,7 +346,7 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
                 onChange={onChangeSchool}
                 
                 value={success ? school :''}
-                disabled={!change}
+                disabled
                 />
               </div>
               <div className="body__right__elem">
@@ -330,7 +355,7 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
                 type="text"
                 onChange={onChangeAddress}
                 value={success ? address :''}
-                disabled={!change}
+                disabled
                 />
               </div>
             </form>
@@ -343,7 +368,7 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
                 type="text"
                 onChange={onChangeIntroduction}
                 value={success ? introduction :''}
-                disabled={!change}
+                disabled
                 />
               </div>
               <div className="body__bottom__elem">
@@ -357,17 +382,28 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
             </form>
           </div>
           <div className="button">
-          {/* <div onClick={()=> {fetchMemberDetail(jwtToken, userIdx, adminIdx);}}/> */}
-            <EventButton 
-              text={change ? '저장하기' : '수정하기'} 
-              className="modalBtn"
-              
+            <div
+                onClick={() => {
+                  update();
+                }}
+              >
+                <EventButton 
+                text={change ? '저장하기' : '수정하기'} 
+                className="modalBtn"
+              />
+            </div>
+            {/* 비고 항목 수정 및 저장 api 없음 */}
+            <div
+                onClick={() => {
+                  deleteMember(jwtToken, adminIdx2);
+                }}
+              >
+                <EventButton 
+                text={'삭제하기'} 
+                className="modalBtn"
             />
-            <EventButton 
-              text={'삭제하기'} 
-              className="modalBtn"
-              
-            />
+            </div>
+            
           </div> 
         </div>
       </StyledModal>
