@@ -87,7 +87,7 @@ const MembersCard = ({
   return (
     <StyledCard onClick={onClick} {...rest}>
       <div className="UserImg">
-        <img src={importImg.membersProfile} />
+        <img src={UserImg} />
       </div>
       <div className="card__body">
         <div className="UserName">{UserName}</div>

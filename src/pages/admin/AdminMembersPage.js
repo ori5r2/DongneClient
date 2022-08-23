@@ -150,8 +150,9 @@ const AdminMembersPage = () => {
             return (
             <div className="eachCard">
               <MembersCard
-                UserName={elem.UserName}
-                UserTeam={elem.UserTeam}
+                UserImg={elem.userImgUrl}
+                UserName={elem.name}
+                UserTeam={elem.teamName}
                 onClick={onClickForModal(elem.userIdx)}
               />
             </div>
