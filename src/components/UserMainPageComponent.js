@@ -80,8 +80,7 @@ const UserMainPageComponent = (props) => {
           동아리 관리를 더욱 간편하게, 동네
         </div>
         <div className="ExtraBold" style={{ margin: '2rem' }}>
-          {name} 님의 워크스페이스 
-          추후에 이름부분 sesstionstrog
+          {name} 님의 워크스페이스          {/* 추후에 이름부분 sesstionstrog */}
         </div>
         <div className='outline'>
           {clubs.length>0 && clubs.map((elem) => (

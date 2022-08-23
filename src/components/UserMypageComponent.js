@@ -7,6 +7,8 @@ import styled from 'styled-components';
 import { useHistory, useLocation } from 'react-router-dom';
 import line from '../styles/imgs/icon/line.png';
 import setting from '../styles/imgs/icon/setting.png';
+import axios from 'axios';
+import { API } from '../axiosConfig';
 
 
 const WhiteBox = styled.div`
@@ -102,12 +104,8 @@ const WhiteBox = styled.div`
 
     .information{
         font-size: 0.9rem;
-        padding-right: 0.5rem;
         outline: none;
-        ::placeholder{
-            color: #2D3B5C;
-            padding: 0.5rem 0.8rem;
-        }
+        padding-left: 1rem;
     }
 
     .btnStlye{
@@ -139,33 +137,30 @@ const StyledAvatar = styled.div`
 function Mypage(props) {
     const history  = useHistory();
 
-    const [email, setEmail] = useState("");
     const [name, setName] = useState("");
-    const [pw, setPw] = useState("");
     const [school, setSchool] = useState("");
     const [number, setNumber] = useState("");
     const [birth, setBirth] = useState("");
     const [address, setAddress] = useState("");
     const [intro, setIntro] = useState("");
     const [change, setChange] = useState(false);
+    const [storage, setStorage] = useState(false);
 
     // useEffect(() => {
     // }, [name, birth, school, phone, address, selfintro]);
     
     const handleApi= async() =>{
         console.log(
-            "email: " + email, 
+            // "email: " + email, 
             "name: " + name, 
-            "pw: " + pw, 
             "school: " + school,
-            "number: " + number,
+            // "number: " + number,
             "birth: " + birth,
             "address: " + address, 
             "intro: " + intro);
 
         if(change){
             // 수정하기 api가 작동되야돼
-            
             setChange(false);
         } else {
             // api가 작동 안 함
@@ -173,9 +168,35 @@ function Mypage(props) {
         }
     }
 
+    const jwtToken = sessionStorage.getItem('jwtToken');
+    const userIdx = sessionStorage.getItem('userIdx');
+
+    useEffect(async () => {
+        const result = await axios.get(`${API}/user/member/mypage?userIdx=${userIdx}`,{
+          headers: {
+            'x-access-token': jwtToken,
+          }}
+         )
+        const value = result.data;
+          if(value.isSuccess){
+            console.log("API 적용 성공")
+            setStorage(value.result[0]);
+            setName(value.result[0].name);
+            setSchool(value.result[0].school);
+            setNumber(value.result[0].phoneNum);
+            setBirth(value.result[0].birth);
+            setAddress(value.result[0].address);
+            setIntro(value.result[0].introduction);
+          } else {
+            alert(value.message);
+          }
+      },[]);
+      
     const memberName = props.memberName;
 
     return (
+        <>
+        {storage && 
         <WhiteBox>
             <div className='frame'>
                 <div className="text"style={{ marginBottom: '0.5rem' }}>
@@ -197,15 +218,10 @@ function Mypage(props) {
                             <div className='between'>
                                 <input 
                                         disabled
-                                        onChange={(e)=>{
-                                            setEmail(e.target.value);
-                                        }}
-
-                                        value={email}
+                                        value={storage.userEmail}
                                         type={"text"} 
-                                        className="information" 
-                                        placeholder="abcdef@naver.com"
-                                        style={{width: "41.5rem", 
+                                        className="information"
+                                        style={{width: "40.5rem", 
                                                 height: "2.5rem",
                                                 backgroundColor:"#F3F3F3",
                                                 border: "none",
@@ -227,8 +243,7 @@ function Mypage(props) {
                                     value={name}
                                     type={"text"} 
                                     className="information" 
-                                    placeholder="동네"
-                                    style={{width: "41.5rem", 
+                                    style={{width: "40.5rem", 
                                             height: "2.5rem",
                                             backgroundColor:"#F3F3F3",
                                             border: "none",
@@ -241,17 +256,13 @@ function Mypage(props) {
                         <div className='Basic'>
                             <span  className="category"> <img src={Lock} alt="" className='icon' />비밀번호</span>
                             <div className='between'>
-                                <input 
-                                    onChange={(e)=>{
-                                        setPw(e.target.value);
-                                    }}
+                                <input
 
                                     disabled
-                                    value={pw}
+                                    value="********"
                                     type={"password"} 
                                     className="information" 
-                                    placeholder="******"
-                                    style={{width: "41.5rem", 
+                                    style={{width: "40.5rem", 
                                             height: "2.5rem",
                                             backgroundColor:"#F3F3F3",
                                             border: "none",
@@ -289,6 +300,7 @@ function Mypage(props) {
 
                             <div className='Basic'>
                                 <span className="category">전화번호</span>
+                                {console.log(number)}
                                 <div className='check'>
                                     <input 
                                         onChange={(e)=>{
@@ -319,7 +331,6 @@ function Mypage(props) {
 
                                 disabled={!change}
                                 value={birth}
-                                type={"number"} 
                                 className="information" 
                                 style={{width: "16rem", 
                                         height: "2.5rem",
@@ -360,6 +371,7 @@ function Mypage(props) {
                                 disabled={!change}
                                 value={intro}
                                 type={"text"} 
+                                className="information" 
                                 style={{width: "41rem", 
                                         height: "7rem",
                                         paddingRight:' 1rem',
@@ -377,6 +389,7 @@ function Mypage(props) {
                             handleApi();
                         }}>
                             <Button 
+                                storage="false"
                                 text={change? "저장하기" : "개인 정보 수정하기"}
                                 style={{
                                     borderRadius:"4px",
@@ -390,6 +403,8 @@ function Mypage(props) {
             </div>
             
         </WhiteBox>
+        }
+        </>
     );
   }
   

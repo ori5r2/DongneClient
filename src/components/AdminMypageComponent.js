@@ -101,12 +101,8 @@ const WhiteBox = styled.div`
 
     .information{
         font-size: 0.9rem;
-        padding-right: 0.5rem;
         outline: none;
-        ::placeholder{
-            color: #2D3B5C;
-            padding: 0.5rem 0.8rem;
-        }
+        padding-left: 1rem;
     }
 
     .btnStlye{
@@ -136,15 +132,15 @@ function Mypage(props) {
     const [url, setUrl] = useState("");
     const [intro, setIntro] = useState("");
     const[change, setChange] = useState(false);
-
+    const [storage, setStorage] = useState(false);
     // useEffect(() => {
     // }, [name, birth, school, phone, address, selfintro]);
     
     const handleApi= async() =>{
         console.log(
-            "email: " + email, 
+            // "email: " + email, 
             "name: " + name, 
-            "pw: " + pw, 
+            // "pw: " + pw, 
             "year: " + year,
             "area: " + area,
             "url: " + url, 
@@ -160,6 +156,28 @@ function Mypage(props) {
             }
     }
 
+    const jwtToken = sessionStorage.getItem('jwtToken');
+    const adminIdx = sessionStorage.getItem('adminIdx');
+
+    useEffect(async () => {
+        const result = await axios.get(`${API}/admin/member/mypage?adminIdx=${adminIdx}`,{
+          headers: {
+            'x-access-token': jwtToken,
+          }}
+         )
+        const value = result.data;
+          if(value.isSuccess){
+            console.log("API 적용 성공")
+            setStorage(value.result[0]);
+            setName(value.result[0].clubName);
+            setYear(value.result[0].establishmentYear);
+            setArea(value.result[0].clubRegion);
+            setUrl(value.result[0].clubWebLink);
+            setIntro(value.result[0].clubIntroduction);
+          } else {
+            alert(value.message);
+          }
+      },[]);
 
    const memberName = props.memberName;
 
@@ -184,16 +202,12 @@ function Mypage(props) {
                             <span  className="category"> <img src={person} alt="" className='icon' /> 이메일</span>
                             <div className='between'>
                                 <input 
-                                        onChange={(e)=>{
-                                            setEmail(e.target.value);
-                                        }}
-
                                         disabled
-                                        value={email}
+                                        value={storage.adminEmail}
                                         type={"text"} 
                                         className="information" 
                                         placeholder="abcdef@naver.com"
-                                        style={{width: "41.5rem", 
+                                        style={{width: "40.5rem", 
                                                 height: "2.5rem",
                                                 backgroundColor:"#F3F3F3",
                                                 border: "none",
@@ -216,7 +230,7 @@ function Mypage(props) {
                                     type={"text"} 
                                     className="information" 
                                     placeholder="동네"
-                                    style={{width: "41.5rem", 
+                                    style={{width: "40.5rem", 
                                             height: "2.5rem",
                                             backgroundColor:"#F3F3F3",
                                             border: "none",
@@ -229,17 +243,12 @@ function Mypage(props) {
                         <div className='Basic'>
                             <span  className="category"> <img src={Lock} alt="" className='icon' />비밀번호</span>
                             <div className='between'>
-                                <input 
-                                    onChange={(e)=>{
-                                        setPw(e.target.value);
-                                    }}
+                                <input
 
                                     disabled
-                                    value={pw}
-                                    type={"password"} 
+                                    value="********"
                                     className="information" 
-                                    placeholder="******"
-                                    style={{width: "41.5rem", 
+                                    style={{width: "40.5rem", 
                                             height: "2.5rem",
                                             backgroundColor:"#F3F3F3",
                                             border: "none",
@@ -270,7 +279,7 @@ function Mypage(props) {
                                 value={year}
                                 type={"number"} 
                                 className="information" 
-                                style={{width: "41.5rem", 
+                                style={{width: "40.5rem", 
                                         height: "2.5rem",
                                         backgroundColor:"#F3F3F3",
                                         border: "none",
@@ -290,7 +299,7 @@ function Mypage(props) {
                                 value={area}
                                 type={"text"} 
                                 className="information" 
-                                style={{width: "41.5rem", 
+                                style={{width: "40.5rem", 
                                         height: "2.5rem",
                                         backgroundColor:"#F3F3F3",
                                         border: "none",
@@ -310,7 +319,7 @@ function Mypage(props) {
                                 value={url}
                                 type={"text"} 
                                 className="information" 
-                                style={{width: "41.5rem", 
+                                style={{width: "40.5rem", 
                                         height: "2.5rem",
                                         backgroundColor:"#F3F3F3",
                                         border: "none",
@@ -329,7 +338,7 @@ function Mypage(props) {
                                 disabled={!change}
                                 value={intro}
                                 type={"text"} 
-                                style={{width: "41rem", 
+                                style={{width: "40rem", 
                                         height: "5rem",
                                         paddingRight:' 1rem',
                                         backgroundColor: "#F3F3F3",
