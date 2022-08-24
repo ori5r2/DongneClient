@@ -4,7 +4,8 @@ import palette from '../styles/pallete';
 import EventButton from './EventButton';
 import importImg from '../styles/importImg';
 import client from '../axiosConfig';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
+import { Listbox, Transition } from '@headlessui/react'
 
 const StyledModal = styled.div`
   position: fixed;
@@ -168,6 +169,63 @@ const StyledModal = styled.div`
     display: flex;
     align-items: center;
   }
+
+  .dropdown{
+    position : relative;
+    display : inline-block;
+  }
+  
+  .dropbtn_icon{
+    font-family : 'Material Icons';
+  }
+  .dropbtn{
+    display : block;
+    border : 2px solid rgb(94, 94, 94);
+    border-radius : 4px;
+    background-color: #fcfcfc;
+    font-weight: 400;
+    color : rgb(124, 124, 124);
+    padding : 12px;
+    width :240px;
+    text-align: left;
+    cursor : pointer;
+    font-size : 12px;
+    z-index :1;
+    position : relative;
+  }
+  .dropdown-content{
+    display : none;
+    font-weight: 400;
+    background-color: #fcfcfc;
+    min-width : 240px;
+    border-radius: 8px;
+    height : 160px;
+    overflow : scroll;
+    box-shadow: 0px 0px 10px 3px rgba(190, 190, 190, 0.6);
+  }
+  .dropdown-content::-webkit-scrollbar{
+    width : 5px;
+    height : 10px;
+  }
+  .dropdown-content::-webkit-scrollbar-thumb{
+    border-radius : 2px;
+    background-color :rgb(194, 194, 194)
+  }
+  
+  .dropdown-content div{
+    display : block;
+    text-decoration : none;
+    color : rgb(37, 37, 37);
+    font-size: 12px;
+    padding : 12px 20px;
+  }
+  .dropdown-content div:hover{
+    background-color: rgb(226, 226, 226);
+  }
+  
+  .dropdown-content.show{
+    display : block;
+  }
 `;
 
 const TextBtn = styled.button`
@@ -192,8 +250,12 @@ const ModalOverlay = styled.div`
   z-index: 999;
 `;
 
+
+
 const MembersModal = ({ userIdx, visible, onClick }) => {
   const [success, setSuccess] = useState(false);
+  const [Listsuccess, setListSuccess] = useState(false);
+ 
   const jwtToken = sessionStorage.getItem('jwtToken');
   const adminIdx2 = sessionStorage.getItem('adminIdx');
   const [userId, setuserId] = useState('');
@@ -206,7 +268,11 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
   const [teamName, setTeamName] = useState('');
   const[change, setChange] = useState(false);
 
+  const [clubTeamListIdx, setClubTeamListIdx] = useState('');
+  const [clubTeamListName, setClubTeamListName] = useState('');
+
   const [MemberDetail, setMemberDetail] = useState({});
+  const [clubTeamList, setClubTeamList] = useState({});
 
   const onChangeName = (e) => setName(e.target.value);
   const onChangePhoneNum = (e) => setPhoneNum(e.target.value);
@@ -214,7 +280,7 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
   const onChangeBirth = (e) => setBirth(e.target.value);
   const onChangeAddress = (e) => setAddress(e.target.value);
   const onChangeIntroduction = (e) => setIntroduction(e.target.value);
-  const onChangeTeamName = (e) => setTeamName(e.target.value);
+  const onChangeTeamName = (e) => setClubTeamListName(e.target.value);
 
   useEffect(() => {
     const fetchMemberDetail = async (jwtToken, adminIdx) => {
@@ -230,6 +296,7 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
         })
         .then((response) => {
           setMemberDetail(response.data.result.memberInfo);
+          setClubTeamList(response.data.result.clubTeamList);
           if (!response.data.isSuccess) {
             alert(response.data.message);
           }
@@ -246,10 +313,22 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
       setAddress(MemberDetail[0].address);
       setIntroduction(MemberDetail[0].introduction);
       setTeamName(MemberDetail[0].teamName);
+      setClubTeamListIdx(clubTeamList[0].clubTeamListIdx)
+      setClubTeamListName(clubTeamList[0].teamName)
     } else {
       fetchMemberDetail(jwtToken, adminIdx2);
       setSuccess(true);
     }
+
+    if (Listsuccess) {
+      setClubTeamListIdx(clubTeamList[0].clubTeamListIdx)
+      setClubTeamListName(clubTeamList[0].teamName)
+      
+    } else {
+      fetchMemberDetail(jwtToken, adminIdx2);
+      setListSuccess(true);
+    }
+
   }, [MemberDetail]);
 
   const update = async () => {
@@ -287,7 +366,7 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
         alert(error);
       });
   }
-
+  
   return (
     <>
       <ModalOverlay visible={visible} />
@@ -332,10 +411,9 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
             <form className="body__right">
               <div className="body__right__elem">
                 <div>팀/조</div>
-                <input 
-                type="text"
+                <input className="dropdown"
                 onChange={onChangeTeamName}
-                value={success ? teamName :''}
+                value={Listsuccess ? teamName :''}
                 disabled
                 />
               </div>
@@ -344,7 +422,6 @@ const MembersModal = ({ userIdx, visible, onClick }) => {
                 <input 
                 type="text"
                 onChange={onChangeSchool}
-                
                 value={success ? school :''}
                 disabled
                 />

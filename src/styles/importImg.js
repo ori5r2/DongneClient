@@ -28,7 +28,9 @@ import umcLogo from './imgs/icon/umcLogo.png';
 import character from './imgs/background/character.png';
 import plane from './imgs/background/plane.png';
 import Logo from './imgs/icon/Logo.png';
-
+import home from './imgs/background/VectorHome.png';
+import photo from './imgs/icon/Photo.png';
+import arrowForward from './imgs/icon/Arrow forward.png';
 
 export const importImg = {
   calenderIcon,
@@ -61,6 +63,9 @@ export const importImg = {
   character,
   plane,
   Logo,
+  home,
+  photo,
+  arrowForward
 };
 
 export default importImg;
