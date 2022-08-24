@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import vector from '../../styles/imgs/background/VectorHome.png';
 import palette from '../../styles/pallete';
@@ -12,6 +12,7 @@ import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import UserHomePageTemplate from '../../template/UserHomePageTemplate';
 import UserHomeSideBarTemplate from '../../template/UserHomeSideBarTemplate';
+import client from '../../axiosConfig';
 
 const StyledImg = styled.img`
   position: fixed;
@@ -332,10 +333,54 @@ const Photo = () => {
 };
 
 const UserHomePage = () => {
+  const [name, setName] = useState();
+  const [clubIntroduction, setClubIntroduction] = useState();
+  const [ClubName, setClubName] = useState();
+  const [clubMemberCount, setClubMemberCount] = useState();
+  const [establishmentYear, setEstablishmentYear] = useState();
+  const [clubRegion, setClubRegion] = useState();
+  const [clubWebLink, setClubWebLink] = useState();
+
+  // api 연결
+  const jwt = sessionStorage.getItem('jwtToken');
+  const adminIdx = sessionStorage.getItem('adminIdx');
+  const userIdx = sessionStorage.getItem('userIdx');
+  useEffect(() => {
+    const url =
+      '/user/member/mainhome?userIdx=' + userIdx + '&adminIdx=' + adminIdx;
+    client
+      .get(url, {
+        headers: {
+          'x-access-token': jwt,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setName(res.data.result[0].name);
+        setClubIntroduction(res.data.result[0].clubIntroduction);
+        setClubName(res.data.result[0].ClubName);
+        setClubMemberCount(res.data.result[0].clubMemberCount);
+        setEstablishmentYear(res.data.result[0].establishmentYear);
+        setClubRegion(res.data.result[0].clubRegion);
+        setClubWebLink(res.data.result[0].clubWebLink);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <BackgroundImg>
       <UserHomePageTemplate location={0}>
-        <UserHomeSideBarTemplate>
+        <UserHomeSideBarTemplate
+          name={name}
+          clubIntroduction={clubIntroduction}
+          ClubName={ClubName}
+          clubMemberCount={clubMemberCount}
+          establishmentYear={establishmentYear}
+          clubRegion={clubRegion}
+          clubWebLink={clubWebLink}
+        >
           <div className="homeFlex">
             <CalendarBox />
             <div className="sideBox">

@@ -3,6 +3,8 @@ import palette from '../styles/pallete';
 import styled from 'styled-components';
 import copy from '../styles/imgs/icon/home_file-copy.png';
 import ProfileImg from '../styles/imgs/icon/ProfileImg.png';
+import importImg from '../styles/importImg';
+import moment from 'moment';
 
 const StyledTag = styled.div`
   background-color: #2b78ff;
@@ -88,9 +90,40 @@ const StyledSideBar = styled.div`
   .sidebar__contentArea {
     width: 21.25rem;
   }
+  .properties {
+    margin-top: 30px;
+    font-family: 'Pretendard Regular';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 46px;
+  }
+  .properties > div {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+  }
+  .properties > div > img {
+    width: 28px;
+    height: 28px;
+    margin-right: 18px;
+  }
+  .properties > div > span {
+    height: 28px;
+  }
 `;
 
-const UserHomeSideBarTemplate = ({ children }) => {
+const UserHomeSideBarTemplate = ({
+  children,
+  name,
+  clubIntroduction,
+  ClubName,
+  clubMemberCount,
+  establishmentYear,
+  clubRegion,
+  clubWebLink,
+}) => {
   const [data, setData] = useState('asdlkln123135487as86846');
   const handleClick = (e) => {
     navigator.clipboard.writeText(data);
@@ -107,37 +140,56 @@ const UserHomeSideBarTemplate = ({ children }) => {
           <div>
             <div className="greeting">
               <div>안녕하세요,</div>
-              <span className="name">동네</span>
+              <span className="name">{name}</span>
               <span> 님!</span>
             </div>
             <h4 className="description">
-              University MakeUs Challenge(이하 UMC)는 앱 런칭에 도전하는 대학생
-              IT 연합동아리입니다.
+              {clubIntroduction}
+              {/* University MakeUs Challenge(이하 UMC)는 앱 런칭에 도전하는 대학생
+              IT 연합동아리입니다. */}
             </h4>
 
             <footer>
               <ul className="tags">
-                <StyledTag>#IT</StyledTag>
-                <StyledTag>#연합동아리</StyledTag>
+                {/* <StyledTag>#IT</StyledTag>
+                <StyledTag>#연합동아리</StyledTag> */}
               </ul>
-              <ul className="properties">
-                <li>
-                  {/* todo: icon */}
-                  동네 (총 인원 40명)
-                </li>
-                <li>
-                  {/* todo: icon */}
-                  동네 (총 인원 40명)
-                </li>{' '}
-                <li>
-                  {/* todo: icon */}
-                  동네 (총 인원 40명)
-                </li>{' '}
-                <li>
-                  {/* todo: icon */}
-                  동네 (총 인원 40명)
-                </li>
-              </ul>
+              <div className="properties">
+                <div>
+                  <img src={importImg.clubMemberCount}></img>
+                  <span
+                    className="bold"
+                    style={{ fontFamily: 'Pretendard Bold' }}
+                  >
+                    {ClubName}
+                  </span>
+                  <span>&nbsp;(총 인원 {clubMemberCount}명)</span>
+                </div>
+                <div>
+                  <img src={importImg.clubEstablishment}></img>
+                  <span
+                    className="bold"
+                    style={{ fontFamily: 'Pretendard Bold' }}
+                  >
+                    {moment(establishmentYear).year()}년{' '}
+                    {moment(establishmentYear).month()}월 설립
+                  </span>
+                </div>
+                <div>
+                  <img src={importImg.clubRegion}></img>
+                  <span
+                    className="bold"
+                    style={{ fontFamily: 'Pretendard Bold' }}
+                  >
+                    {clubRegion}
+                  </span>
+                  <span>&nbsp;활동</span>
+                </div>
+                <div>
+                  <img src={importImg.clubWebLink}></img>
+                  <span>{clubWebLink}</span>
+                </div>
+              </div>
             </footer>
           </div>
         </div>
