@@ -29,7 +29,7 @@ const BackgroundImg = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: ${palette[0]};
+  background: transparent;
 
   h1 {
     color: ${palette[5]};
