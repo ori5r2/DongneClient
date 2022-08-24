@@ -17,7 +17,6 @@ const BackgroundImg = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  //padding-top: 10%;
   background: ${palette.background};
 `;
 
