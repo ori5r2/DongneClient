@@ -54,9 +54,10 @@ const FinanceCalandar = () => {
     for (let i = 0; i < arr.length; i++) {
       const event = {
         start: arr[i].finAccountDate,
-        overlap: true,
+        overlap: false,
         display: 'list-item',
         backgroundColor: palette[3],
+        title: arr[i].finAccountDate,
       };
       setMyEventsList((myEventsList) => [...myEventsList, event]);
     }
@@ -66,9 +67,14 @@ const FinanceCalandar = () => {
     setIsOpen(false);
   };
 
-  const handleDateClick = (dateClickInfo: any) => {
+  // const handleDateClick = (dateClickInfo: any) => {
+  //   setIsOpen(true);
+  //   setDate(dateClickInfo.dateStr);
+  // };
+
+  const handleEventClick = (eventClickInfo) => {
     setIsOpen(true);
-    setDate(dateClickInfo.dateStr);
+    setDate(eventClickInfo.event.title);
   };
 
   // 더하기 버튼 이벤트
@@ -112,7 +118,8 @@ const FinanceCalandar = () => {
             end: 'prev title next',
           }}
           events={myEventsList}
-          dateClick={handleDateClick}
+          // dateClick={handleDateClick}
+          eventClick={handleEventClick}
         />
       </div>
       <div className="button">
