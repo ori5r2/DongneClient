@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import palette from '../styles/pallete';
 import styled from 'styled-components';
 import copy from '../styles/imgs/icon/home_file-copy.png';
-import ProfileImg from '../styles/imgs/icon/ProfileImg.png'; 
+import ProfileImg from '../styles/imgs/icon/ProfileImg.png';
 
 const StyledTag = styled.div`
   background-color: #2b78ff;
@@ -25,11 +25,11 @@ const StyledDiv = styled.div`
 `;
 
 const StyledAvatar = styled.div`
-& img{
-  object-fit: cover;
-  height: 6rem;
-  width: 6rem;
-}
+  & img {
+    object-fit: cover;
+    height: 6rem;
+    width: 6rem;
+  }
   display: flex;
   align-items: center;
   justify-content: center;
@@ -114,13 +114,7 @@ const UserHomeSideBarTemplate = ({ children }) => {
               University MakeUs Challenge(이하 UMC)는 앱 런칭에 도전하는 대학생
               IT 연합동아리입니다.
             </h4>
-            <div className="invite">
-              <span className="name">초대코드: </span>
-              <span>{data}</span>
-              <button className="imageBtn2" onClick={handleClick}>
-                <img src={copy}></img>
-              </button>
-            </div>
+
             <footer>
               <ul className="tags">
                 <StyledTag>#IT</StyledTag>
