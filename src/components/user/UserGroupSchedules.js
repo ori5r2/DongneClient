@@ -12,6 +12,7 @@ import {
 } from 'react-router-dom';
 import EventButton from '../EventButton';
 import client from '../../axiosConfig';
+import UserScheduleModal from '../modals/UserScheduleModal';
 const StyledAttendanceBody = styled.div`
   /* position: relative; */
   width: inherit;
@@ -107,7 +108,6 @@ const UserGroupSchedules = () => {
     setModal((current) => !current);
     setScheduleIdx(idx);
   };
-  console.log('hiiiiiiiiiiiiiiiiiiiiiiiiiiii');
   useEffect(() => {
     const fetchGroupDetail = async (jwt, adminIdx) => {
       await client
@@ -151,6 +151,7 @@ const UserGroupSchedules = () => {
             userIdx: userIdx,
             groupIdx: groupIdx,
             curPage: 1,
+            pageSize: 100,
           },
         })
         .then(function (response) {
@@ -210,6 +211,8 @@ const UserGroupSchedules = () => {
               onClickForDetail={() => onClickForModal(elem.scheduleIdx)}
               isGroupDetail={false}
               onClickForGroup={null}
+              isAttend={elem.attendanceStatus === 1}
+              isForUser={true}
             />
           ))
         ) : (
@@ -219,7 +222,7 @@ const UserGroupSchedules = () => {
 
       {
         modal === true ? (
-          <AttendModal
+          <UserScheduleModal
             groupIdx={groupIdx}
             groupTitle={groupTitle}
             scheduleIdx={scheduleIdx}

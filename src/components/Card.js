@@ -59,6 +59,32 @@ const StyledCard = styled.div`
     color: #ffffff;
     background: linear-gradient(0deg, #2b78ff 0%, rgba(43, 120, 255, 0) 50%);
   }
+  .IsAttend {
+    background: #2b78ff;
+    box-shadow: 0rem 0rem 0.625rem rgba(0, 0, 0, 0.25);
+    border-radius: 0.25rem;
+    width: 3.25rem;
+    height: 2.25rem;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 1rem;
+    top: 1rem;
+  }
+  .IsAbsent {
+    background: #ff6363;
+    box-shadow: 0rem 0rem 0.625rem rgba(0, 0, 0, 0.25);
+    border-radius: 0.25rem;
+    width: 3.25rem;
+    height: 2.25rem;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 1rem;
+    top: 1rem;
+  }
 `;
 
 const Card = ({
@@ -69,6 +95,8 @@ const Card = ({
   img_src,
   groupId,
   isGroupDetail,
+  isAttend,
+  isForUser,
   to,
   ...rest
 }) => {
@@ -84,6 +112,11 @@ const Card = ({
 
   return (
     <StyledCard {...rest}>
+      {isForUser ? (
+        <div className={isAttend ? 'IsAttend' : 'IsAbsent'}>
+          {isAttend ? '출석' : '결석'}
+        </div>
+      ) : null}
       <div className="card__header">
         <div className="subTitle">{subTitle}</div>
         <div className="title">{title}</div>
