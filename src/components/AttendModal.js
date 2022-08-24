@@ -272,9 +272,50 @@ const AttendModal = ({
 
   const [absentMemberSuccess, setAbsentMemberSuccess] = useState(false);
   const [absentMembers, setAbsentMembers] = useState([]);
+  const [deleteBS, setDeleteBS] = useState(false);
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
 
   const [saveSuccss, setSaveSuccss] = useState(false);
   //함수 구간
+
+  /**
+   * 스케쥴 삭제
+   *
+   *
+   */
+
+  const deleteSchedule = async (jwt, adminIdx) => {
+    await client
+      .patch(
+        `/admin/schedule/${scheduleIdx}/status`,
+        { adminIdx: adminIdx },
+        {
+          headers: {
+            'x-access-token': jwt,
+          },
+        },
+      )
+      .then((response) => {
+        if (!response.data.isSuccess) {
+          alert(response.data.message);
+        } else {
+          setDeleteSuccess(true);
+          alert('스케줄 삭제에 성공했습니다.');
+        }
+      })
+      .catch(function (error) {
+        alert(error);
+      });
+  };
+  const onClickDelete = () => {
+    setDeleteBS(true);
+  };
+
+  useEffect(() => {
+    if (!deleteSuccess && deleteBS) {
+      deleteSchedule(jwtToken, adminIdx2);
+    }
+  }, [deleteBS, deleteSuccess]);
 
   const onClickUpdate = () => {
     setIsAbled((cur) => true);
@@ -479,7 +520,7 @@ const AttendModal = ({
                     disabled={!isAbled}
                     onChange={onChangeScheduleDate}
                     value={success ? scheduleDate : ''}
-                    type="text"
+                    type="date"
                   />
                 </div>
                 <div className="name_input_form ">
@@ -596,7 +637,7 @@ const AttendModal = ({
 
             {isAbled ? null : (
               <div className="eventButton">
-                <EventButton text={'삭제하기'} />
+                <EventButton onClick={onClickDelete} text={'삭제하기'} />
               </div>
             )}
           </div>

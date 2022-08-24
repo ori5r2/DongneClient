@@ -246,7 +246,7 @@ const ModalOverlay = styled.div`
   z-index: 999;
 `;
 const ScheduleCreateModal = ({ onClick, groupIdx, groupTitle }) => {
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState(true);
   const jwtToken = sessionStorage.getItem('jwtToken');
   const adminIdx2 = sessionStorage.getItem('adminIdx');
   const [isAbled, setIsAbled] = useState(true);
@@ -263,13 +263,54 @@ const ScheduleCreateModal = ({ onClick, groupIdx, groupTitle }) => {
   const [allMembers, setAllMembers] = useState([]);
 
   const [fetchGroupMemberSuccess, setFetchGroupMemberSuccess] = useState(false);
-  const [absentMemberSuccess, setAbsentMemberSuccess] = useState(false);
+  const [btnSuccess, setbtnSuccess] = useState(false);
   const [absentMembers, setAbsentMembers] = useState([]);
 
   //함수 구간
 
-  const onClickSave = () => {
-    // setSaveSuccss(true);
+  /**
+   * 스케쥴 저장
+   */
+  const saveScheduleData = async (jwt, adminIdx) => {
+    await client
+      .post(
+        '/admin/schedule',
+        {
+          groupIdx: groupIdx,
+          scheduleDate: scheduleDate,
+          init_time: scheduleStartTime,
+          end_time: scheduleEndTime,
+          introduction: scheduleDescription,
+          place: schedulePlace,
+          scheduleName: scheduleTitle,
+          adminIdx: adminIdx2,
+        },
+        {
+          headers: {
+            'x-access-token': jwt,
+          },
+        },
+      )
+      .then((response) => {
+        if (!response.data.isSuccess) {
+          alert(response.data.message);
+        } else {
+          alert('스케줄 생성에 성공했습니다.');
+        }
+      })
+      .catch(function (error) {
+        alert(error);
+      });
+  };
+
+  useEffect(() => {
+    if (btnSuccess) {
+      saveScheduleData(jwtToken, adminIdx2);
+    }
+  }, [btnSuccess]);
+
+  const onClickSave = async () => {
+    setbtnSuccess(true);
   };
 
   const onChangeScheduleTitle = (e) => setScheduleTitle(e.target.value);
@@ -353,7 +394,7 @@ const ScheduleCreateModal = ({ onClick, groupIdx, groupTitle }) => {
                     disabled={!isAbled}
                     onChange={onChangeScheduleDate}
                     value={success ? scheduleDate : ''}
-                    type="text"
+                    type="date"
                   />
                 </div>
                 <div className="name_input_form ">

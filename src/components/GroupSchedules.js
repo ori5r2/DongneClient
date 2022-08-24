@@ -159,7 +159,6 @@ const GroupSchedules = () => {
         })
         .then(function (response) {
           setSchedules(response.data.result);
-          console.log('HI::', response);
           if (!response.data.isSuccess) {
             alert(response.data.message);
           }
@@ -185,7 +184,7 @@ const GroupSchedules = () => {
         }
       }
     }
-  }, [schedules]);
+  }, [schedules, createModal, modal]);
   return (
     <StyledAttendanceBody>
       <div className="attend_header">
