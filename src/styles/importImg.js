@@ -19,6 +19,11 @@ import event from './imgs/icon/Event.png';
 import money from './imgs/icon/Money.png';
 import line from './imgs/background/Line 9.png';
 import dongne from './imgs/background/dongne-profile.png';
+import clubMemberCount from './imgs/icon/clubMemberCount.png';
+import clubEstablishment from './imgs/icon/clubEstablishment.png';
+import clubRegion from './imgs/icon/clubRegion.png';
+import clubWebLink from './imgs/icon/clubWebLink.png';
+import blueArrowForward from './imgs/icon/blueArrowForward.png';
 
 export const importImg = {
   calenderIcon,
@@ -42,6 +47,11 @@ export const importImg = {
   modalClose,
   line,
   dongne,
+  clubEstablishment,
+  clubMemberCount,
+  clubRegion,
+  clubWebLink,
+  blueArrowForward,
 };
 
 export default importImg;
