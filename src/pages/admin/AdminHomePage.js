@@ -91,7 +91,7 @@ const BackgroundImg = styled.div`
     font-weight: 300;
     font-size: 18px;
     line-height: 160%;
-    color:  ${palette[5]};
+    color: ${palette[5]};
   }
 `;
 
@@ -150,7 +150,7 @@ const StyledMemo = styled.div`
     font-size: 14px;
     line-height: 160%;
     margin-top: 0.125rem;
-    color:${palette[5]}
+    color: ${palette[5]};
   }
   .memo_body {
     margin-top: 1.5rem;
@@ -177,7 +177,7 @@ const StyledMemo = styled.div`
     line-height: 160%;
     margin-left: 1rem;
     width: 329px;
-    color:${palette[5]}
+    color: ${palette[5]};
   }
   .memoBtn {
     margin-left: 3rem;
@@ -301,12 +301,8 @@ const Memo = () => {
             <div className="li_header__date">2022.07.01</div>
           </div>
           <div className="memo__li__content">
-            <div>
-              1.커스터마이징: 범위가 넓을것 
-            </div>
-            <div>
-              2. 회원관리 대부분 게시판으로
-            </div>
+            <div>1.커스터마이징: 범위가 넓을것</div>
+            <div>2. 회원관리 대부분 게시판으로</div>
           </div>
         </li>
         <li className="memo_body__li">
@@ -315,13 +311,9 @@ const Memo = () => {
             <div className="li_header__date">2022.07.08</div>
           </div>
           <div className="memo__li__content">
-            <div>
-            https://nomadcoders.co/react-for-beginners
-              </div>
-              <div>
-              ReactJS로 영화 웹 서비스 만들기
-              </div>
-            </div>
+            <div>https://nomadcoders.co/react-for-beginners</div>
+            <div>ReactJS로 영화 웹 서비스 만들기</div>
+          </div>
         </li>
         <li className="memo_body__li">
           <div className="memo_li__header">
@@ -330,11 +322,9 @@ const Memo = () => {
           </div>
           <div className="memo__li__content">
             <div>
-            1차 멘토링 기간은 금주 목요일, 금요일에 진행될 예정입니다.
-              </div>
-              <div>
-              각각 iOS는 목요일, AOS는 미정, Web과 Server - Sprin...
-              </div>
+              1차 멘토링 기간은 금주 목요일, 금요일에 진행될 예정입니다.
+            </div>
+            <div>각각 iOS는 목요일, AOS는 미정, Web과 Server - Sprin...</div>
           </div>
         </li>
       </ul>
