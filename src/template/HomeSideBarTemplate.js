@@ -194,6 +194,7 @@ const HomeSideBarTemplate = ({ children }) => {
 
   const goMypage = (e) => {
     <Link to="/admin/myPage"></Link>
+    console.log('gomypage');
   };
 
   return (
