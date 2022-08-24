@@ -28,15 +28,25 @@ const StyledDiv = styled.div`
 
 const StyledAvatar = styled.div`
   display: flex;
-  align-items: center;
+  // align-items: center;
   justify-content: center;
-  height: 10rem;
-  width: 10rem;
+  height: 11.25rem;
+  width: 11.25rem;
   background-color: #f7f7f7;
   border: 0.4rem solid white;
+  // padding: 1rem;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 50% 50% 50% 0%;
-  /* display: inline-block; */
+  .logo {
+    align-items: center;
+    justify-content: center;
+    border-radius: 50% 50% 50% 0%;
+    overflow: hidden;
+  }
+  .logo > img{
+    height: 11.25rem;
+    width: 11.25rem;
+  }
 `;
 
 const StyledSideBar = styled.div`
@@ -191,8 +201,9 @@ const HomeSideBarTemplate = ({ children }) => {
       <StyledSideBar>
         <div className="sidebar__contentArea">
           <StyledAvatar>
-            {/* todo: 프로필 사진 */}
-            프로필 사진 영역
+            <div className='logo'> 
+              <img src={importImg.umcLogo} />
+            </div>
           </StyledAvatar>
           <div key={adminIdx}>
             <div className="greeting">
