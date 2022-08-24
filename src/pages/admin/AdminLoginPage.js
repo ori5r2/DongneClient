@@ -112,7 +112,7 @@ const AdminLoginPage = () => {
       <BackgroundTemplate style={{ zIndex: 0 }}>
         <WhiteBox style={{ zIndex: 1 }}>
           <div className="Logo">
-            <img src={importImg.Logo}/>
+            <img src={importImg.Logo} />
           </div>
           <div style={{ marginBottom: '2rem' }}>
             동아리 관리를 더욱 간편하게, 동네
@@ -159,11 +159,11 @@ const AdminLoginPage = () => {
             </div>
           </div>
         </WhiteBox>
-        <div style={{ position: 'absolute', right: '0' }}>
-        <StyledImg src={importImg.character} />
+        <div style={{ position: 'absolute', top: '-11rem', right: '0' }}>
+          <StyledImg src={importImg.character} />
         </div>
-        <div style={{ position: 'absolute', top: '108px', left: '0' }}>
-        <StyledImg src={importImg.plane} />
+        <div style={{ position: 'absolute', top: '6.75rem', left: '0' }}>
+          <StyledImg src={importImg.plane} />
         </div>
       </BackgroundTemplate>
     </div>

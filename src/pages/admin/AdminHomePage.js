@@ -176,7 +176,7 @@ const StyledMemo = styled.div`
     font-size: 14px;
     line-height: 160%;
     margin-left: 1rem;
-    width: 329px;
+    width: 20.5625rem;
     color: ${palette[5]};
   }
   .memoBtn {
@@ -205,7 +205,7 @@ const StyledGalary = styled.div`
     margin-left: 3rem;
     margin-top: 1.1rem;
     width: 33rem;
-    height: 20rem;
+    height: 17rem;
     background-color: wheat;
     display: flex;
     align-items: center;
@@ -223,7 +223,7 @@ const StyledGalary = styled.div`
     justify-content: center;
     align-items: center;
     width: 14.125rem;
-    height: 17.75rem;
+    height: 15rem;
     background: #f7f7f7;
     opacity: 0.6;
     border-radius: 0.7rem;

@@ -96,7 +96,7 @@ const StyledSideBar = styled.div`
     line-height: 160%;
   }
   .tags {
-    margin-top: 176px;
+    margin-top: 4rem;
     display: flex;
   }
   .properties {
@@ -227,7 +227,7 @@ const HomeSideBarTemplate = ({ children }) => {
             </h4>
             <div className="invite">
               <span className="name">초대 코드 : </span>
-              <span>{clubSuccess ? `${clubCode}` : ''}</span>
+              <span>{clubSuccess && clubCode ? `${clubCode}` : '없음'}</span>
               <button className="imageBtn2" onClick={handleClick}>
                 <img src={copy}></img>
               </button>
