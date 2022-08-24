@@ -25,6 +25,10 @@ import clubRegion from './imgs/icon/clubRegion.png';
 import clubWebLink from './imgs/icon/clubWebLink.png';
 import blueArrowForward from './imgs/icon/blueArrowForward.png';
 import umcLogo from './imgs/icon/umcLogo.png';
+import character from './imgs/background/character.png';
+import plane from './imgs/background/plane.png';
+import Logo from './imgs/icon/Logo.png';
+
 
 export const importImg = {
   calenderIcon,
@@ -54,6 +58,9 @@ export const importImg = {
   clubWebLink,
   blueArrowForward,
   umcLogo,
+  character,
+  plane,
+  Logo,
 };
 
 export default importImg;

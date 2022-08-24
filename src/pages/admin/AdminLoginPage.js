@@ -5,7 +5,13 @@ import palette from '../../styles/pallete';
 import { Link, useHistory } from 'react-router-dom';
 import client from '../../axiosConfig';
 import EventButton from '../../components/EventButton';
+import importImg from '../../styles/importImg';
 
+const StyledImg = styled.img`
+  position: relative;
+  width: 100%;
+  height: 100%;
+`;
 const WhiteBox = styled.div`
   position: relative;
   width: 50vh;
@@ -24,7 +30,7 @@ const WhiteBox = styled.div`
   .Logo {
     font-family: 'Pretendard Medium';
     color: #3333;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
   .Link {
     color: ${palette[3]};
@@ -105,7 +111,9 @@ const AdminLoginPage = () => {
     <div>
       <BackgroundTemplate style={{ zIndex: 0 }}>
         <WhiteBox style={{ zIndex: 1 }}>
-          <div className="Logo">LOGO</div>
+          <div className="Logo">
+            <img src={importImg.Logo}/>
+          </div>
           <div style={{ marginBottom: '2rem' }}>
             동아리 관리를 더욱 간편하게, 동네
           </div>
@@ -151,6 +159,12 @@ const AdminLoginPage = () => {
             </div>
           </div>
         </WhiteBox>
+        <div style={{ position: 'absolute', right: '0' }}>
+        <StyledImg src={importImg.character} />
+        </div>
+        <div style={{ position: 'absolute', top: '108px', left: '0' }}>
+        <StyledImg src={importImg.plane} />
+        </div>
       </BackgroundTemplate>
     </div>
   );
