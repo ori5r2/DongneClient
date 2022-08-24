@@ -89,6 +89,7 @@ const StyledSideBar = styled.div`
     line-height: 160%;
   }
   .invite {
+    display: flex;
     font-family: 'Pretendard Regular';
     font-size: 18px;
     margin-top: 20px;
@@ -138,6 +139,17 @@ const StyledSideBar = styled.div`
   }
   .sidebar__contentArea {
     width: 21.375rem;
+  }
+  .code {
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    width: 10rem;
+
+    height: 2rem;
   }
 `;
 
@@ -227,7 +239,9 @@ const HomeSideBarTemplate = ({ children }) => {
             </h4>
             <div className="invite">
               <span className="name">초대 코드 : </span>
-              <span>{clubSuccess && clubCode ? `${clubCode}` : '없음'}</span>
+              <div className="code">
+                {clubSuccess && clubCode ? `${clubCode}` : '없음'}
+              </div>
               <button className="imageBtn2" onClick={handleClick}>
                 <img src={copy}></img>
               </button>

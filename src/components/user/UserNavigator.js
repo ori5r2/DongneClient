@@ -84,10 +84,7 @@ const UserNavigator = ({ location }) => {
         </li>
 
         <li>
-          <Link
-            to="/user/home/12"
-            className={location === 0 ? 'selected' : null}
-          >
+          <Link to="/user/home" className={location === 0 ? 'selected' : null}>
             홈
           </Link>
         </li>
@@ -102,22 +99,22 @@ const UserNavigator = ({ location }) => {
         </li>
 
         <li>
-          <Link
-            to="/user/home/12"
-            className={location === 2 ? 'selected' : null}
-          >
+          <Link to="/user/home" className={location === 2 ? 'selected' : null}>
             회계 현황
           </Link>
         </li>
         <li>
-          <Link to="/user/community" className={location === 3 ? 'selected' : null}>
+          <Link
+            to="/user/community"
+            className={location === 3 ? 'selected' : null}
+          >
             통합 커뮤니티
           </Link>
         </li>
       </ul>
       <ul className="icons">
         <li>
-          <Link to="/user/home/12" className="Link">
+          <Link to="/user/home" className="Link">
             <StyledImg src={login_bell}></StyledImg>
             알림내역
           </Link>

@@ -106,7 +106,7 @@ const UserLoginPage = () => {
   useEffect(() => {
     if (isLogin) {
       history.push({
-        pathname: '/user/home/12',
+        pathname: '/user/main',
       });
     }
   }, [isLogin]);
@@ -148,7 +148,6 @@ const UserLoginPage = () => {
                   img_src={null}
                   fullWidth
                   history={history}
-                  to="/user/home/12"
                   style={{ marginBottom: '1rem' }}
                 />
               </div>

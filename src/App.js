@@ -73,10 +73,9 @@ const App = () => {
       <Route component={UserCommunityPage} path="/user/community" exact />
       <Route component={AdminCommunityPage} path="/admin/community" exact />
       <Route component={AdminFinancePage} path="/admin/finance" exact />
-      <Route component={UserHomePage} path="/user/home" exact />{' '}
       {/* 추후 로그인 후 넘어가는 페이지 수정시 이건요지워주세요 */}
-      <Route component={UserHomePage} path="/user/home/:idx" exact />
-      <Route component={UserAttendPage} path="/user/attendance" exact />
+      <Route component={UserHomePage} path="/user/home" exact />
+      <Route component={UserAttendPage} path="/user/attendance" />
     </Switch>
   );
 };
