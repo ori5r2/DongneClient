@@ -21,10 +21,12 @@ import AdminFinancePage from './pages/admin/AdminFinancePage';
 
 import AdminMyPage from './pages/admin/AdminMyPage';
 import CommunityPage from './pages/user/CommunityPage';
+import TestPage from './pages/TestPage';
 
 const App = () => {
   return (
     <Switch>
+      <Route component={TestPage} path="/test" />
       <Route component={LoginLandingPage} path="/" exact />
       <Route component={AdminLoginPage} path="/admin/login" exact />
       <Route component={AdminHomePage} path="/admin/home" exact />

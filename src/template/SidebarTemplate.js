@@ -56,10 +56,9 @@ const StyledButton = styled.button`
   .buttonLeft {
     display: flex;
     align-items: center;
-    
   }
-  .buttonLeft >img {
-    margin-right:0.75rem;
+  .buttonLeft > img {
+    margin-right: 0.75rem;
   }
   .on {
     color: ${palette[3]};
@@ -98,7 +97,7 @@ const StyledSideBar = styled.div`
   position: fixed;
   left: 0;
   top: 0;
-  
+
   width: 17.8125rem;
   height: 100vh;
 
@@ -113,12 +112,12 @@ const StyledSideBar = styled.div`
   .name {
     font-family: 'Pretendard Bold';
     color: ${palette[3]};
-    margin-bottom:1rem;
+    margin-bottom: 1rem;
   }
   .description {
     font-size: 1.125rem;
     margin-top: 2.5rem;
-    margin-left:0.1875rem;
+    margin-left: 0.1875rem;
   }
   .invite {
     font-size: 1.125rem;
@@ -168,7 +167,8 @@ const SidebarTemplate = ({ isAttendance, pageNum, children }) => {
 
             <footer>
               <div className="buttons">
-                <TokenImageButton className="upsidebtn"
+                <TokenImageButton
+                  className="upsidebtn"
                   isOn={!isAttendance}
                   text={'회원 명단'}
                   img_src={
