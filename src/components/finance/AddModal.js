@@ -91,8 +91,8 @@ const AddModal = ({ isOpen, onCancel }) => {
       onCancel();
     } else {
       // api 연결
-      const jwt =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoxMiwiaWF0IjoxNjYwODM2ODIzLCJleHAiOjE2OTIzNzI4MjMsInN1YiI6IkFkbWluIn0.6zylPZUFFS7_CN4138mkHfh69ISQ_pqguc0dVGg7bf4';
+      const jwt = sessionStorage.getItem('jwtToken');
+      const adminIdx = parseInt(sessionStorage.getItem('adminIdx'));
       const url = '/admin/finAccount';
       const options = {
         headers: {
@@ -101,7 +101,7 @@ const AddModal = ({ isOpen, onCancel }) => {
       };
       console.log(url);
       const body = {
-        adminIdx: 12,
+        adminIdx: adminIdx,
         finAccountCategoryIdx: editCategoryIdx,
         finAccountItem: editItem,
         isProfit: String(editIsProfit),

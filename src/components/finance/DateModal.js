@@ -112,8 +112,8 @@ const DateModal = ({ isOpen, onCancel, date }) => {
   };
 
   // api 연결 (adminIdx, jwt토큰 필요)
-  const jwt =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoxMiwiaWF0IjoxNjYwODM2ODIzLCJleHAiOjE2OTIzNzI4MjMsInN1YiI6IkFkbWluIn0.6zylPZUFFS7_CN4138mkHfh69ISQ_pqguc0dVGg7bf4';
+  const jwt = sessionStorage.getItem('jwtToken');
+  const adminIdx = parseInt(sessionStorage.getItem('adminIdx'));
 
   useEffect(() => {
     const year = moment(date).year();
@@ -125,7 +125,7 @@ const DateModal = ({ isOpen, onCancel, date }) => {
       .get(url, {
         headers: {
           'x-access-token': jwt,
-          adminIdx: 12,
+          adminIdx: adminIdx,
         },
       })
       .then((res) => {
