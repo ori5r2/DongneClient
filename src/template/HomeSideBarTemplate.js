@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 const StyledTag = styled.div`
   background-color: #2b78ff;
-  padding: 0.8rem 1rem;
+  padding: 0.8rem 1.5rem;
   border-radius: 4rem;
   font-size: 1rem;
   color: ${palette[1][0]};
@@ -127,7 +127,6 @@ const StyledSideBar = styled.div`
 `;
 
 const HomeSideBarTemplate = ({ children }) => {
-  const [data, setData] = useState('asdlkln123135487as86846');
   const [clubSuccess, setSuccess] = useState(false);
   const jwtToken = sessionStorage.getItem('jwtToken');
   const adminIdx = sessionStorage.getItem('adminIdx');
@@ -136,8 +135,11 @@ const HomeSideBarTemplate = ({ children }) => {
   const [establishmentYear, setEstablishmentYear] = useState('');
   const [clubRegion, setClubRegion] = useState('');
   const [clubWebLink, setClubWebLink] = useState('');
+  const [clubIntroduction, setClubIntroduction] = useState('');
+  const [clubCode, setClubCode] = useState('');
+  const [categoryName, setCategoryName] = useState('');
 
-  const [ClubDetail, setClubDetail] = useState({});
+  const [ClubDetail, setClubDetail] = useState([]);
 
   useEffect(() => {
     const fetchClubDetail = async (jwtToken, adminIdx) => {
@@ -159,22 +161,25 @@ const HomeSideBarTemplate = ({ children }) => {
         .catch(function (error) {
           alert(error);
         });
-    }
+    };
     if (clubSuccess) {
       setClubName(ClubDetail[0].ClubName);
       setClubMemberCount(ClubDetail[0].clubMemberCount);
       setEstablishmentYear(ClubDetail[0].establishmentYear);
       setClubRegion(ClubDetail[0].clubRegion);
       setClubWebLink(ClubDetail[0].clubWebLink);
+      setClubIntroduction(ClubDetail[0].clubIntroduction);
+      setClubCode(ClubDetail[0].clubCode);
+      setCategoryName(ClubDetail[0].categoryName);
     } else {
       fetchClubDetail(jwtToken, adminIdx);
       setSuccess(true);
     }
-  }, );
+  }, [ClubDetail]);
 
   const handleClick = (e) => {
-    navigator.clipboard.writeText(data);
-    console.log(data);
+    navigator.clipboard.writeText(clubCode);
+    console.log(clubCode);
   };
 
   const goMypage = (e) => {
@@ -203,21 +208,20 @@ const HomeSideBarTemplate = ({ children }) => {
               <span> 님!</span>
             </div>
             <h4 className="description">
-              University MakeUs Challenge(이하 UMC)는 앱 런칭에 도전하는 대학생
-              IT 연합동아리입니다.
-
+              {clubSuccess ? `${clubIntroduction}` : ''}
             </h4>
             <div className="invite">
               <span className="name">초대 코드 : </span>
-              <span>{data}</span>
+              <span>{clubSuccess ? `${clubCode}` : ''}</span>
               <button className="imageBtn2" onClick={handleClick}>
                 <img src={copy}></img>
               </button>
             </div>
             <footer>
               <ul className="tags">
-                <StyledTag>#IT</StyledTag>
-                <StyledTag>#연합동아리</StyledTag>
+                <StyledTag>
+                  {clubSuccess ? `# ${categoryName}` : ''}
+                </StyledTag>
               </ul>
               <div className="properties">
                 <div>
