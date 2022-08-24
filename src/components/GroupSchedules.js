@@ -13,6 +13,7 @@ import {
 } from 'react-router-dom';
 import EventButton from './EventButton';
 import client from '../axiosConfig';
+import ScheduleCreateModal from './modals/ScheduleCreateModal';
 const StyledAttendanceBody = styled.div`
   /* position: relative; */
   width: inherit;
@@ -89,6 +90,7 @@ const GroupSchedules = () => {
   const groupIdx = match.params.id;
   const location = useLocation();
   const [modal, setModal] = useState(false);
+  const [createModal, setCreateModal] = useState(false);
   const jwtToken = sessionStorage.getItem('jwtToken');
   const adminIdx2 = sessionStorage.getItem('adminIdx');
   const [success, setSuccess] = useState(false);
@@ -105,6 +107,10 @@ const GroupSchedules = () => {
   const onClickForModal = (idx) => {
     setModal((current) => !current);
     setScheduleIdx(idx);
+  };
+
+  const onClickForCreateBtn = () => {
+    setCreateModal((current) => !current);
   };
 
   useEffect(() => {
@@ -148,6 +154,7 @@ const GroupSchedules = () => {
             adminIdx: adminIdx,
             groupIdx: groupIdx,
             curPage: 1,
+            pageSize: 100,
           },
         })
         .then(function (response) {
@@ -194,7 +201,7 @@ const GroupSchedules = () => {
           <div className="attend_header_textBtn_bar">|</div>
           <TextBtn className="textBtn_off">표로 보기</TextBtn>
           <div className="addBtn">
-            <EventButton text={'추가하기 +'} />
+            <EventButton onClick={onClickForCreateBtn} text={'추가하기 +'} />
           </div>
         </div>
       </div>
@@ -223,6 +230,15 @@ const GroupSchedules = () => {
             groupTitle={groupTitle}
             scheduleIdx={scheduleIdx}
             onClick={onClickForModal}
+          />
+        ) : null //기계역할
+      }
+      {
+        createModal === true ? (
+          <ScheduleCreateModal
+            groupIdx={groupIdx}
+            groupTitle={groupTitle}
+            onClick={onClickForCreateBtn}
           />
         ) : null //기계역할
       }

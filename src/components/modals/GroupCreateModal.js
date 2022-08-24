@@ -280,7 +280,6 @@ const GroupCreaateModal = ({ groupIdx, visible, onClick, isUpdate }) => {
   useEffect(() => {
     if (!saveSuccess && checkListUpdateSuccess) {
       saveGroupData(jwtToken, adminIdx2);
-    } else {
     }
   }, [saveSuccess, checkListUpdateSuccess]);
   /**

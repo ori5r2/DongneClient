@@ -273,11 +273,55 @@ const AttendModal = ({
   const [absentMemberSuccess, setAbsentMemberSuccess] = useState(false);
   const [absentMembers, setAbsentMembers] = useState([]);
 
+  const [saveSuccss, setSaveSuccss] = useState(false);
   //함수 구간
 
   const onClickUpdate = () => {
     setIsAbled((cur) => true);
   };
+
+  const onClickSave = () => {
+    setSaveSuccss(true);
+  };
+
+  const patchScheduleData = async (jwt, adminIdx) => {
+    await client
+      .patch(
+        `/admin/schedule/${scheduleIdx}`,
+        {
+          scheduleDate: scheduleDate,
+          init_time: scheduleStartTime,
+          end_time: scheduleEndTime,
+          introduction: scheduleDescription,
+          place: schedulePlace,
+          scheduleName: scheduleTitle,
+          code: scheduleCode,
+          etc: scheduleEtc,
+          adminIdx: adminIdx2,
+        },
+        {
+          headers: {
+            'x-access-token': jwt,
+          },
+        },
+      )
+      .then((response) => {
+        if (!response.data.isSuccess) {
+          alert(response.data.message);
+        } else {
+          alert('스케줄 정보 수정에 성공했습니다.');
+        }
+      })
+      .catch(function (error) {
+        alert(error);
+      });
+  };
+
+  useEffect(() => {
+    if (saveSuccss) {
+      patchScheduleData(jwtToken, adminIdx2);
+    }
+  }, [saveSuccss]);
 
   //출석 멤버 호출
   useEffect(() => {
@@ -292,6 +336,7 @@ const AttendModal = ({
             scheduleIdx: scheduleIdx,
             groupIdx: groupIdx,
             curPage: 1,
+            pageSize: 100,
           },
         })
         .then((response) => {
@@ -326,11 +371,12 @@ const AttendModal = ({
             scheduleIdx: scheduleIdx,
             groupIdx: groupIdx,
             curPage: 1,
+            pageSize: 100,
           },
         })
         .then((response) => {
-          console.log('결석멤버 결과', response.data.result);
-          setAbsentMembers(response.data.result);
+          console.log('결석멤버 결과', response.data.result.absenceList);
+          setAbsentMembers(response.data.result.absenceList);
           if (!response.data.isSuccess) {
             alert(response.data.message);
           }
@@ -397,6 +443,7 @@ const AttendModal = ({
 
   const onChangeSchedulePlace = (e) => setSchedulePlace(e.target.value);
   console.log('res', scheduleDetail);
+  console.log('members', absentMembers);
   return (
     <>
       <ModalOverlay visible={visible} />
@@ -543,7 +590,7 @@ const AttendModal = ({
             <div className="eventButton">
               <EventButton
                 text={isAbled ? '저장하기' : '수정하기'}
-                onClick={isAbled ? null : onClickUpdate}
+                onClick={isAbled ? onClickSave : onClickUpdate}
               />
             </div>
 

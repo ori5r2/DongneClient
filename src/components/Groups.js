@@ -112,7 +112,7 @@ const Groups = () => {
   };
 
   useEffect(() => {
-    fetchGroups(jwtToken, adminIdx, 1, 10);
+    fetchGroups(jwtToken, adminIdx, 1, 100);
   }, [modal, createModal]);
 
   const onClickForModal = (idx) => {
