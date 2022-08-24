@@ -19,7 +19,22 @@ import event from './imgs/icon/Event.png';
 import money from './imgs/icon/Money.png';
 import line from './imgs/background/Line 9.png';
 import dongne from './imgs/background/dongne-profile.png';
+<<<<<<< HEAD
 import attendAvatarCheck from './imgs/icon/attend_avatar_check.png';
+=======
+import clubMemberCount from './imgs/icon/clubMemberCount.png';
+import clubEstablishment from './imgs/icon/clubEstablishment.png';
+import clubRegion from './imgs/icon/clubRegion.png';
+import clubWebLink from './imgs/icon/clubWebLink.png';
+import blueArrowForward from './imgs/icon/blueArrowForward.png';
+import umcLogo from './imgs/icon/umcLogo.png';
+import character from './imgs/background/character.png';
+import plane from './imgs/background/plane.png';
+import Logo from './imgs/icon/Logo.png';
+import home from './imgs/background/VectorHome.png';
+import photo from './imgs/icon/Photo.png';
+import arrowForward from './imgs/icon/Arrow forward.png';
+>>>>>>> feature/members
 
 export const importImg = {
   calenderIcon,
@@ -43,7 +58,22 @@ export const importImg = {
   modalClose,
   line,
   dongne,
+<<<<<<< HEAD
   attendAvatarCheck,
+=======
+  clubEstablishment,
+  clubMemberCount,
+  clubRegion,
+  clubWebLink,
+  blueArrowForward,
+  umcLogo,
+  character,
+  plane,
+  Logo,
+  home,
+  photo,
+  arrowForward
+>>>>>>> feature/members
 };
 
 export default importImg;

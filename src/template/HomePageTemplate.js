@@ -2,6 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import Navigator from '../components/Navigator';
 import palette from '../styles/pallete';
+import importImg from '../styles/importImg';
+
+const StyledImg = styled.img`
+  position: relative;
+  width: 100%;
+  height: 100%;
+`;
 
 const StyledBody = styled.div`
   position: relative;
@@ -32,7 +39,7 @@ const HomePageTemplate = ({ location, children }) => {
       ></Navigator>
       <StyledBox>{children}</StyledBox>
       <footer style={{ position: 'absolute', bottom: '0' }}>
-        {/* <StyledImg src={vector} /> */}
+        {/* <StyledImg src={importImg.home} /> */}
       </footer>
     </StyledBody>
   );
