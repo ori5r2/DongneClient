@@ -1,16 +1,16 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import BackgroundTemplate from '../template/BackgroundTemplate';
 import palette from '../styles/pallete';
-import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import Logo from '../styles/imgs/icon/Logo.png';
 import Enterlist from './Enterlist';
 import blueline from '../styles/imgs/icon/blueline.png';
-import umcLogo from '../styles/imgs/icon/umcLogo.png';
-import cluvmLogo from '../styles/imgs/icon/cluvmLogo.png';
 import clubsData from '../clubsData';
+import axios from 'axios';
+import { API } from '../axiosConfig';
+import getValue from '../../node_modules/lodash/_getValue';
+import umcLogo from '../styles/imgs/icon/umcLogo.png';
 
 const WhiteBox = styled.div`
   position: relative;
@@ -45,9 +45,66 @@ const WhiteBox = styled.div`
   }
 `;
 
+const ClubCodeInput = styled.input`
+  background-color: transparent;
+  border: none;
+  color: #2b78ff;
+  outline: none;
+  ::placeholder {
+    padding: 0.5rem;
+    color: #2b78ff;
+  }
+`;
+
 const UserMainPageComponent = (props) => {
   const history = useHistory();
-  const name = props.name;
+  // const name = props.name;
+
+  const jwtToken = sessionStorage.getItem('jwtToken');
+  const userIdx = sessionStorage.getItem('userIdx');
+  const [clubs, setClubs] = useState([]);
+  const [clubeCOde, setClubeCOde] = useState('');
+  const [name, setName] = useState('');
+
+  useEffect(async () => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const result = await axios.get(
+      `${API}/user/member/home?userIdx=${userIdx}`,
+      {
+        headers: {
+          // 'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoxNiwiaWF0IjoxNjYwODYwMzc2LCJleHAiOjE2OTIzOTYzNzYsInN1YiI6IkFkbWluIn0.ebitK_QPLpMABjAiPpFa_IjSm0fcrHQz4l34lYZhtr4",
+          'x-access-token': jwtToken,
+        },
+      },
+    );
+    const value = result.data;
+    if (value.isSuccess) {
+      console.log(value.result);
+      console.log('API 적용 성공');
+      setClubs(value.result.clubList);
+      setName(value.result.userName[0].name);
+    } else {
+      alert(value.message);
+    }
+  };
+
+  const handleApi = async () => {
+    const data = await axios.post(
+      `${API}/user/auth/joinClub?userIdx=${userIdx}`,
+      {
+        clubCode: clubeCOde,
+      },
+    );
+    if (data.data.isSuccess) {
+      alert('가입성공');
+      getData();
+    } else {
+      alert(data.data.message);
+    }
+  };
 
   return (
     <BackgroundTemplate style={{ zindex: 0 }}>
@@ -62,16 +119,38 @@ const UserMainPageComponent = (props) => {
           {name} 님의 워크스페이스
         </div>
         <div className="outline">
-          {clubsData.Data.map((elem) => (
-            <div>
-              <Enterlist img={elem.img} name={elem.name} link={elem.link} />
-            </div>
-          ))}
+          {clubs.length > 0 &&
+            clubs.map((elem) => {
+              console.log(elem);
+              return (
+                <div>
+                  <Enterlist
+                    img={umcLogo}
+                    name={elem.clubName}
+                    link={elem.adminIdx}
+                  />
+                </div>
+              );
+            })}
         </div>
 
         <div className="ClubCode">
-          <div>단체 코드를 받으셨나요?</div>
-          <div style={{ fontWeight: 'bold' }}>가입하기</div>
+          <ClubCodeInput
+            value={clubeCOde}
+            placeholder="단체 코드를 받으셨나요?"
+            onChange={(e) => {
+              setClubeCOde(e.target.value);
+            }}
+          />
+          {/* <div></div> */}
+          <div
+            style={{ fontWeight: 'bold' }}
+            onClick={() => {
+              handleApi();
+            }}
+          >
+            가입하기
+          </div>
         </div>
         <img src={blueline} alt="" style={{ width: '34rem' }} />
       </WhiteBox>

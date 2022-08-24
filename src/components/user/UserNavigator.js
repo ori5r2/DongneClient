@@ -110,7 +110,7 @@ const UserNavigator = ({ location }) => {
           </Link>
         </li>
         <li>
-          <Link to="/community" className={location === 3 ? 'selected' : null}>
+          <Link to="/user/community" className={location === 3 ? 'selected' : null}>
             통합 커뮤니티
           </Link>
         </li>

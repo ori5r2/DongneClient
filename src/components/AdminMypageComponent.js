@@ -7,6 +7,9 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import line from '../styles/imgs/icon/line.png';
 import setting from '../styles/imgs/icon/setting.png';
+import axios from 'axios';
+import { API } from '../axiosConfig';
+import ProfileImg from '../styles/imgs/icon/ProfileImg.png';
 
 const WhiteBox = styled.div`
   width: 65rem;
@@ -98,19 +101,28 @@ const WhiteBox = styled.div`
 
   .information {
     font-size: 0.9rem;
-    padding-right: 0.5rem;
     outline: none;
-    ::placeholder {
-      color: #2d3b5c;
-      padding: 0.5rem 0.8rem;
-    }
+    padding-left: 1rem;
   }
 
   .btnStlye {
     padding-left: 5rem;
   }
+
+  .timeCheck {
+    font-size: 0.8rem;
+    position: absolute;
+    right: 24rem;
+    top: 4rem;
+  }
 `;
 const StyledAvatar = styled.div`
+  & img {
+    object-fit: cover;
+    height: 6rem;
+    width: 6rem;
+  }
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -125,265 +137,301 @@ const StyledAvatar = styled.div`
 function Mypage(props) {
   const history = useHistory();
 
-  const [email, setEmail] = useState('');
   const [name, setName] = useState('');
-  const [pw, setPw] = useState('');
   const [year, setYear] = useState('');
   const [area, setArea] = useState('');
   const [url, setUrl] = useState('');
   const [intro, setIntro] = useState('');
   const [change, setChange] = useState(false);
-
-  // useEffect(() => {
-  // }, [name, birth, school, phone, address, selfintro]);
+  const [storage, setStorage] = useState(false);
+  const [clubs, setClubs] = useState('');
+  const [time, setTime] = useState('');
 
   const handleApi = async () => {
-    console.log(
-      'email: ' + email,
-      'name: ' + name,
-      'pw: ' + pw,
-      'year: ' + year,
-      'area: ' + area,
-      'url: ' + url,
-      'intro: ' + intro,
-    );
-
     if (change) {
-      // 수정하기 api가 작동되야돼
+      const result = await axios.patch(
+        `${API}/admin/member/mypage?adminIdx=${adminIdx}`,
+        {
+          clubName: name,
+          establishmentYear: year,
+          clubRegion: area,
+          clubWebLink: url,
+          clubIntroduction: intro,
+          clubCategoryIdx: 1,
+        },
+        {
+          headers: {
+            'x-access-token': jwtToken,
+          },
+        },
+      );
+
+      console.log(result);
+
+      const value = result.data;
+      if (value.isSuccess) {
+        alert('수정이 완료되었습니다!');
+      } else {
+        alert(value.message);
+      }
 
       setChange(false);
     } else {
-      // api가 작동 안 함
       setChange(true);
     }
   };
 
+  const jwtToken = sessionStorage.getItem('jwtToken');
+  const adminIdx = sessionStorage.getItem('adminIdx');
   const memberName = props.memberName;
 
+  useEffect(async () => {
+    const result = await axios.get(
+      `${API}/admin/member/mypage?adminIdx=${adminIdx}`,
+      {
+        headers: {
+          'x-access-token': jwtToken,
+        },
+      },
+    );
+    const value = result.data;
+    console.log(value);
+    if (value.isSuccess) {
+      console.log('API 적용 성공');
+      console.log(value.result);
+      setStorage(value.result.adminMypageInfo[0]);
+      setName(value.result.adminMypageInfo[0].clubName);
+      setYear(value.result.adminMypageInfo[0].establishmentYear.slice(0, 10));
+      setArea(value.result.adminMypageInfo[0].clubRegion);
+      setUrl(value.result.adminMypageInfo[0].clubWebLink);
+      setIntro(value.result.adminMypageInfo[0].clubIntroduction);
+      setClubs(value.result.adminMypageInfo[0].categoryName);
+      setTime(value.result.adminMypageInfo[0].updatedAt.slice(0, 10));
+    } else {
+      alert(value.message);
+    }
+  }, []);
+
   return (
-    <WhiteBox>
-      <div className="frame">
-        <div className="text" style={{ marginBottom: '0.5rem' }}>
-          <span className="name">{memberName}</span>님의 마이페이지
-        </div>
-
-        <div className="content">
-          <div className="part1">
-            <StyledAvatar
-              style={{
-                color: '#2B78FF',
-                fontSize: '1.5rem',
-                textAlign: 'center',
-              }}
-            >
-              {/* todo: 프로필 사진 */}
-              프로필
-              <br />
-              사진영역
-            </StyledAvatar>
-            <img className="settingIcon" src={setting} alt="" />
-          </div>
-
-          <div className="part2">
-            <div className="Basic">
-              <span className="category">
-                {' '}
-                <img src={person} alt="" className="icon" /> 이메일
-              </span>
-              <div className="between">
-                <input
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                  disabled
-                  value={email}
-                  type={'text'}
-                  className="information"
-                  placeholder="abcdef@naver.com"
+    <>
+      {storage && (
+        <WhiteBox>
+          <div className="frame">
+            <div className="text" style={{ marginBottom: '0.5rem' }}>
+              <span className="name">{memberName}</span>님의 마이페이지
+            </div>
+            <div className="timeCheck">마지막 업데이트({time})</div>
+            <div className="content">
+              <div className="part1">
+                <StyledAvatar
                   style={{
-                    width: '41.5rem',
-                    height: '2.5rem',
-                    backgroundColor: '#F3F3F3',
-                    border: 'none',
-                    borderRadius: '3px',
+                    color: '#2B78FF',
+                    fontSize: '1.5rem',
+                    textAlign: 'center',
+                  }}
+                >
+                  {/* todo: 프로필 사진 */}
+                  <img src={ProfileImg} alt="profile" />
+                </StyledAvatar>
+                <img className="settingIcon" src={setting} alt="" />
+              </div>
+
+              <div className="part2">
+                <div className="Basic">
+                  <span className="category">
+                    {' '}
+                    <img src={person} alt="" className="icon" /> 이메일
+                  </span>
+                  <div className="between">
+                    <input
+                      disabled
+                      value={storage.adminEmail}
+                      type={'text'}
+                      className="information"
+                      placeholder="abcdef@naver.com"
+                      style={{
+                        width: '40.5rem',
+                        height: '2.5rem',
+                        backgroundColor: '#F3F3F3',
+                        border: 'none',
+                        borderRadius: '3px',
+                      }}
+                    />
+                  </div>
+                </div>
+
+                <div className="Basic">
+                  <span className="category">
+                    {' '}
+                    <img src={profile} alt="" className="icon" />
+                    단체명
+                  </span>
+                  <div className="between">
+                    <input
+                      onChange={(e) => {
+                        setName(e.target.value);
+                      }}
+                      disabled={!change}
+                      value={name}
+                      type={'text'}
+                      className="information"
+                      style={{
+                        width: '40.5rem',
+                        height: '2.5rem',
+                        backgroundColor: '#F3F3F3',
+                        border: 'none',
+                        borderRadius: '3px',
+                      }}
+                    />
+                  </div>
+                </div>
+
+                <div className="Basic">
+                  <span className="category">
+                    {' '}
+                    <img src={Lock} alt="" className="icon" />
+                    비밀번호
+                  </span>
+                  <div className="between">
+                    <input
+                      disabled
+                      value="********"
+                      className="information"
+                      style={{
+                        width: '40.5rem',
+                        height: '2.5rem',
+                        backgroundColor: '#F3F3F3',
+                        border: 'none',
+                        borderRadius: '3px',
+                      }}
+                    />
+                  </div>
+                </div>
+
+                <img
+                  src={line}
+                  alt=""
+                  style={{
+                    width: '50rem',
+                    height: '0.3rem',
+                    paddingTop: '1rem',
+                    paddingBottom: '1rem',
                   }}
                 />
+
+                <div className="Basic">
+                  <span className="category">단체 카테고리</span>
+
+                  <div className="categoryItem">
+                    <div>{clubs}</div>
+                  </div>
+                </div>
+
+                <div className="Basic">
+                  <span className="category">단체 설립 년도</span>
+                  <input
+                    onChange={(e) => {
+                      setYear(e.target.value);
+                    }}
+                    disabled={!change}
+                    value={year}
+                    type={'text'}
+                    className="information"
+                    style={{
+                      width: '40.5rem',
+                      height: '2.5rem',
+                      backgroundColor: '#F3F3F3',
+                      border: 'none',
+                      borderRadius: '3px',
+                    }}
+                  />
+                </div>
+
+                <div className="Basic">
+                  <span className="category">단체 활동 지역</span>
+                  <input
+                    onChange={(e) => {
+                      setArea(e.target.value);
+                    }}
+                    disabled={!change}
+                    value={area}
+                    type={'text'}
+                    className="information"
+                    style={{
+                      width: '40.5rem',
+                      height: '2.5rem',
+                      backgroundColor: '#F3F3F3',
+                      border: 'none',
+                      borderRadius: '3px',
+                    }}
+                  />
+                </div>
+
+                <div className="Basic">
+                  <span className="category">단체 URL</span>
+                  <input
+                    onChange={(e) => {
+                      setUrl(e.target.value);
+                    }}
+                    disabled={!change}
+                    value={url}
+                    type={'text'}
+                    className="information"
+                    style={{
+                      width: '40.5rem',
+                      height: '2.5rem',
+                      backgroundColor: '#F3F3F3',
+                      border: 'none',
+                      borderRadius: '3px',
+                    }}
+                  />
+                </div>
+
+                <div className="Basic">
+                  <span className="category">단체 소개</span>
+                  <textarea
+                    onChange={(e) => {
+                      setIntro(e.target.value);
+                    }}
+                    className="information"
+                    disabled={!change}
+                    value={intro}
+                    type={'text'}
+                    style={{
+                      width: '39.65rem',
+                      height: '5rem',
+                      paddingRight: ' 1rem',
+                      backgroundColor: '#F3F3F3',
+                      border: 'none',
+                      borderRadius: '3px',
+                      fontFamily: 'Pretendard Regular',
+                      fontSize: '0.9rem',
+                      resize: 'none',
+                      outline: 'none',
+                    }}
+                  />
+                </div>
+
+                <div
+                  onClick={() => {
+                    handleApi();
+                  }}
+                >
+                  <Button
+                    text={change ? '저장하기' : '개인 정보 수정하기'}
+                    style={{
+                      borderRadius: '4px',
+                      width: '49.3rem',
+                      marginTop: '1.5rem',
+                    }}
+                  />
+                </div>
               </div>
-            </div>
-
-            <div className="Basic">
-              <span className="category">
-                {' '}
-                <img src={profile} alt="" className="icon" />
-                단체명
-              </span>
-              <div className="between">
-                <input
-                  onChange={(e) => {
-                    setName(e.target.value);
-                  }}
-                  disabled={!change}
-                  value={name}
-                  type={'text'}
-                  className="information"
-                  placeholder="동네"
-                  style={{
-                    width: '41.5rem',
-                    height: '2.5rem',
-                    backgroundColor: '#F3F3F3',
-                    border: 'none',
-                    borderRadius: '0.1875rem',
-                  }}
-                />
-              </div>
-            </div>
-
-            <div className="Basic">
-              <span className="category">
-                {' '}
-                <img src={Lock} alt="" className="icon" />
-                비밀번호
-              </span>
-              <div className="between">
-                <input
-                  onChange={(e) => {
-                    setPw(e.target.value);
-                  }}
-                  disabled
-                  value={pw}
-                  type={'password'}
-                  className="information"
-                  placeholder="******"
-                  style={{
-                    width: '41.5rem',
-                    height: '2.5rem',
-                    backgroundColor: '#F3F3F3',
-                    border: 'none',
-                    borderRadius: '0.1875rem',
-                  }}
-                />
-              </div>
-            </div>
-
-            <img
-              src={line}
-              alt=""
-              style={{
-                width: '50rem',
-                height: '0.3rem',
-                paddingTop: '1rem',
-                paddingBottom: '1rem',
-              }}
-            />
-
-            <div className="Basic">
-              <span className="category">단체 카테고리</span>
-              <div className="categoryItem">#IT</div>
-              <div className="categoryItem">연합동아리</div>
-            </div>
-
-            <div className="Basic">
-              <span className="category">단체 설립 년도</span>
-              <input
-                onChange={(e) => {
-                  setYear(e.target.value);
-                }}
-                disabled={!change}
-                value={year}
-                type={'number'}
-                className="information"
-                style={{
-                  width: '41.5rem',
-                  height: '2.5rem',
-                  backgroundColor: '#F3F3F3',
-                  border: 'none',
-                  borderRadius: '0.1875rem',
-                }}
-              />
-            </div>
-
-            <div className="Basic">
-              <span className="category">단체 활동 지역</span>
-              <input
-                onChange={(e) => {
-                  setArea(e.target.value);
-                }}
-                disabled={!change}
-                value={area}
-                type={'text'}
-                className="information"
-                style={{
-                  width: '41.5rem',
-                  height: '2.5rem',
-                  backgroundColor: '#F3F3F3',
-                  border: 'none',
-                  borderRadius: '0.1875rem',
-                }}
-              />
-            </div>
-
-            <div className="Basic">
-              <span className="category">단체 URL</span>
-              <input
-                onChange={(e) => {
-                  setUrl(e.target.value);
-                }}
-                disabled={!change}
-                value={url}
-                type={'text'}
-                className="information"
-                style={{
-                  width: '41.5rem',
-                  height: '2.5rem',
-                  backgroundColor: '#F3F3F3',
-                  border: 'none',
-                  borderRadius: '0.1875rem',
-                }}
-              />
-            </div>
-
-            <div className="Basic">
-              <span className="category">단체 소개</span>
-              <textarea
-                onChange={(e) => {
-                  setIntro(e.target.value);
-                }}
-                disabled={!change}
-                value={intro}
-                type={'text'}
-                style={{
-                  width: '41rem',
-                  height: '5rem',
-                  paddingRight: ' 1rem',
-                  backgroundColor: '#F3F3F3',
-                  border: 'none',
-                  borderRadius: '0.1875rem',
-                  fontFamily: 'Pretendard Medium',
-                  fontSize: '0.9rem',
-                  resize: 'none',
-                  outline: 'none',
-                }}
-              />
-            </div>
-
-            <div
-              onClick={() => {
-                handleApi();
-              }}
-            >
-              <Button
-                text={change ? '저장하기' : '개인 정보 수정하기'}
-                style={{
-                  borderRadius: '4px',
-                  width: '49.3rem',
-                  marginTop: '1.5rem',
-                }}
-              />
             </div>
           </div>
-        </div>
-      </div>
-    </WhiteBox>
+        </WhiteBox>
+      )}
+    </>
   );
 }
 

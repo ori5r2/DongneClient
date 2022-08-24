@@ -5,6 +5,7 @@ import client from '../axiosConfig';
 import { useEffect, useState } from 'react';
 import importImg from '../styles/importImg';
 import { Link } from 'react-router-dom';
+import ProfileImg from '../styles/imgs/icon/ProfileImg.png';
 
 const StyledTag = styled.div`
   background-color: #2b78ff;
@@ -27,6 +28,11 @@ const StyledDiv = styled.div`
 `;
 
 const StyledAvatar = styled.div`
+  & img {
+    object-fit: cover;
+    height: 6rem;
+    width: 6rem;
+  }
   display: flex;
   // align-items: center;
   justify-content: center;
@@ -43,7 +49,7 @@ const StyledAvatar = styled.div`
     border-radius: 50% 50% 50% 0%;
     overflow: hidden;
   }
-  .logo > img{
+  .logo > img {
     height: 11.25rem;
     width: 11.25rem;
   }
@@ -69,14 +75,13 @@ const StyledSideBar = styled.div`
     line-height: 62px;
   }
   .greeting > div {
-    display:flex;
-    align-items:center;
+    display: flex;
+    align-items: center;
   }
   .name {
     font-family: 'Pretendard Bold';
     color: ${palette[3]};
     margin-top: 0.22px;
-    
   }
   .description {
     font-size: 18px;
@@ -101,30 +106,30 @@ const StyledSideBar = styled.div`
     font-weight: 300;
     font-size: 20px;
     line-height: 24px;
-    margin-bottom:46px;
+    margin-bottom: 46px;
   }
   .properties > div {
     margin-top: 14px;
-    display:flex;
-    align-items:center;
+    display: flex;
+    align-items: center;
   }
   .properties > div > img {
     width: 28px;
-    height: 28px; 
-    margin-right:18px;  
+    height: 28px;
+    margin-right: 18px;
   }
   .properties > div > span {
-    height: 28px;  
+    height: 28px;
   }
   .bold {
     font-weight: 700;
-    margin-right:0.5rem;
+    margin-right: 0.5rem;
   }
   .imageBtn1 {
     border: none;
     background-color: #11ffee00;
     cursor: pointer;
-    margin-left:2.5rem;
+    margin-left: 2.5rem;
   }
   .imageBtn2 {
     border: none;
@@ -193,7 +198,7 @@ const HomeSideBarTemplate = ({ children }) => {
   };
 
   const goMypage = (e) => {
-    <Link to="/admin/myPage"></Link>
+    <Link to="/admin/myPage"></Link>;
     console.log('gomypage');
   };
 
@@ -202,7 +207,7 @@ const HomeSideBarTemplate = ({ children }) => {
       <StyledSideBar>
         <div className="sidebar__contentArea">
           <StyledAvatar>
-            <div className='logo'> 
+            <div className="logo">
               <img src={importImg.umcLogo} />
             </div>
           </StyledAvatar>
@@ -214,9 +219,7 @@ const HomeSideBarTemplate = ({ children }) => {
                   <img src={importImg.blueArrowForward}></img>
                 </button>
               </div>
-              <span className="name">
-                {clubSuccess ? `${ClubName}` : ''}
-              </span>
+              <span className="name">{clubSuccess ? `${ClubName}` : ''}</span>
               <span> 님!</span>
             </div>
             <h4 className="description">
@@ -231,9 +234,7 @@ const HomeSideBarTemplate = ({ children }) => {
             </div>
             <footer>
               <ul className="tags">
-                <StyledTag>
-                  {clubSuccess ? `# ${categoryName}` : ''}
-                </StyledTag>
+                <StyledTag>{clubSuccess ? `# ${categoryName}` : ''}</StyledTag>
               </ul>
               <div className="properties">
                 <div>
@@ -242,29 +243,32 @@ const HomeSideBarTemplate = ({ children }) => {
                     {clubSuccess ? `${ClubName}` : ' '}
                   </span>
                   <span>
-                    {clubSuccess ? `  (총 인원 ${clubMemberCount}명)` : '  (총 인원 명)'}
+                    {clubSuccess
+                      ? `  (총 인원 ${clubMemberCount}명)`
+                      : '  (총 인원 명)'}
                   </span>
                 </div>
                 <div>
                   <img src={importImg.clubEstablishment}></img>
                   <span className="bold">
-                    {clubSuccess ? `${establishmentYear.substring(2,4)}년 ${establishmentYear.substring(5,7)}월 설립` : ' 년 월 설립'}
+                    {clubSuccess
+                      ? `${establishmentYear.substring(
+                          2,
+                          4,
+                        )}년 ${establishmentYear.substring(5, 7)}월 설립`
+                      : ' 년 월 설립'}
                   </span>
                 </div>
-                <div> 
+                <div>
                   <img src={importImg.clubRegion}></img>
                   <span className="bold">
                     {clubSuccess ? `${clubRegion} ` : ' '}
                   </span>
-                  <span>
-                    활동
-                  </span>
+                  <span>활동</span>
                 </div>
                 <div>
                   <img src={importImg.clubWebLink}></img>
-                  <span>
-                    {clubSuccess ? `${clubWebLink}` : ' '}
-                  </span>
+                  <span>{clubSuccess ? `${clubWebLink}` : ' '}</span>
                 </div>
               </div>
             </footer>

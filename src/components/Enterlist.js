@@ -35,10 +35,18 @@ const WhiteBox = styled.div`
 
 
 function Enterlist(props) {
+    const history  = useHistory();
     const name = props.name;
     const img = props.img;
     const link = props.link;
     
+
+
+
+    const handleApi = () =>{
+        sessionStorage.setItem('adminIdx', link);
+    }
+
     return (
         <WhiteBox> 
             <div className='list'>
@@ -46,13 +54,18 @@ function Enterlist(props) {
                 <img src={img} alt="" style={{padding:"0.5rem", height:"2.5rem"}} /> 
                 {name}
             </div>
-            <Button 
-              className="btn"
-              text={"입장하기"}
-              to={link}
-              style={{height: "3.14rem", width: "7rem"}}
-              // 왜3rem은 안되지
-            />
+            <div onClick={()=>{
+                handleApi();
+            }}>
+                <Button
+                className="btn"
+                text={"입장하기"}
+                history={history}
+                to={"/user/home"}
+                style={{height: "3.14rem", width: "7rem"}}
+                // 왜3rem은 안되지
+                />
+            </div>
           </div>
         </WhiteBox>
     );

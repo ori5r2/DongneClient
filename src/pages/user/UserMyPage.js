@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import UserMypageComponent from '../../components/UserMypageComponent';
 import { Link } from 'react-router-dom';
 import HomePageTemplate from '../../template/HomePageTemplate';
-import UserHomePageTemplate from '../../template/UserHomePageTemplate';
+import UserNavigator from '../../components/user/UserNavigator';
 
 const WhitBox = styled.div`
   box-sizing: border-box;
@@ -12,7 +12,7 @@ const WhitBox = styled.div`
   width: 110rem;
   height: 45rem;
   left: 4rem;
-  top: 3rem;
+  top: 8rem;
 
   background: linear-gradient(180deg, #ffffff 0%, rgba(251, 251, 251, 0) 100%);
   border: 2px solid rgba(255, 255, 255, 0.6);
@@ -29,11 +29,10 @@ const WhitBox = styled.div`
 const UserRegisterCheck3 = () => {
   return (
     <BackgroundTemplate style={{ zIndex: 0 }}>
-      <UserHomePageTemplate style={{ zIndex: 1 }}>
+      <UserNavigator style={{ zIndex: 1 }}/>
         <WhitBox style={{ zIndex: 2 }}>
           <UserMypageComponent memberName="가나다" />
         </WhitBox>
-      </UserHomePageTemplate>
     </BackgroundTemplate>
   );
 };

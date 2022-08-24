@@ -120,8 +120,6 @@ function Register1(props) {
                 <Button
                   text="중복확인"
                   fullWidth
-                  history={history}
-                  to={nextlink}
                   style={{
                     height: '2.5rem',
                     width: '6rem',
