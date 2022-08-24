@@ -3,12 +3,9 @@ import importImg from '../../styles/importImg';
 import palette from '../../styles/pallete';
 import Card from '../Card';
 import { useEffect, useState } from 'react';
-import AttendModal from '../AttendModal';
 import { Route, useLocation, useRouteMatch } from 'react-router-dom';
-import Button from '../Button';
-import EventButton from '../EventButton';
 import client from '../../axiosConfig';
-import GroupModal from '../modals/GroupModal';
+import UserGroupModal from '../modals/UserGroupModal';
 const StyledAttendanceBody = styled.div`
   /* position: relative; */
   width: inherit;
@@ -81,36 +78,38 @@ const UserGroups = () => {
   const location = useLocation();
   const [modal, setModal] = useState(false);
   const jwtToken = sessionStorage.getItem('jwtToken');
-  const adminIdx = sessionStorage.getItem('adminIdx');
+  const userIdx = sessionStorage.getItem('userIdx');
   const [groupData, setGroupData] = useState([]);
+  const adminIdx = 12;
 
-  // const fetchGroups = async (jwt, adminIdx, page, pageSize) => {
-  //   await client
-  //     .get('/admin/group', {
-  //       headers: {
-  //         'x-access-token': jwt,
-  //       },
-  //       params: {
-  //         adminIdx: adminIdx,
-  //         page: page,
-  //         pageSize: pageSize,
-  //       },
-  //     })
-  //     .then(function (response) {
-  //       console.log(response.data);
-  //       setGroupData(response.data.result);
-  //       if (!response.data.isSuccess) {
-  //         alert(response.data.message);
-  //       }
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // };
+  const fetchGroups = async (jwt, adminIdx, page, pageSize) => {
+    await client
+      .get('/user/group', {
+        headers: {
+          'x-access-token': jwt,
+        },
+        params: {
+          adminIdx: adminIdx,
+          userIdx: userIdx,
+          page: page,
+          pageSize: pageSize,
+        },
+      })
+      .then(function (response) {
+        console.log(response.data);
+        setGroupData(response.data.result.pagingRetrieveGroupListResult);
+        if (!response.data.isSuccess) {
+          alert(response.data.message);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
-  // useEffect(() => {
-  //   fetchGroups(jwtToken, adminIdx, 1, 10);
-  // }, []);
+  useEffect(() => {
+    fetchGroups(jwtToken, adminIdx, 1, 100);
+  }, [modal]);
 
   const onClickForModal = (idx) => {
     setModal((current) => !current);
@@ -131,9 +130,6 @@ const UserGroups = () => {
           <TextBtn>카드로 보기</TextBtn>
           <div className="attend_header_textBtn_bar">|</div>
           <TextBtn className="textBtn_off">표로 보기</TextBtn>
-          <div className="addBtn">
-            <EventButton text={'추가하기 +'} />
-          </div>
         </div>
       </div>
       <div className="attend_body">
@@ -151,7 +147,7 @@ const UserGroups = () => {
                 key={elem.groupIdx}
                 groupId={elem.groupIdx}
                 isGroupDetail={true}
-                to={`/admin/attendance/${elem.groupIdx}`}
+                to={`/user/attendance/${elem.groupIdx}`}
               />
             </div>
           );
@@ -161,7 +157,7 @@ const UserGroups = () => {
       {
         modal && (
           // <div>Hi</div>
-          <GroupModal groupIdx={groupId} onClick={onClickForModal} />
+          <UserGroupModal groupIdx={groupId} onClick={onClickForModal} />
         ) //기계역할
       }
     </StyledAttendanceBody>

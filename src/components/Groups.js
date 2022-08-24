@@ -10,6 +10,7 @@ import Button from './Button';
 import EventButton from './EventButton';
 import client from '../axiosConfig';
 import GroupModal from './modals/GroupModal';
+import GroupCreaateModal from './modals/GroupCreateModal';
 const StyledAttendanceBody = styled.div`
   /* position: relative; */
   width: inherit;
@@ -81,6 +82,7 @@ const Groups = () => {
   const [groupId, setgroupId] = useState('');
   const location = useLocation();
   const [modal, setModal] = useState(false);
+  const [createModal, setCreateModal] = useState(false);
   const jwtToken = sessionStorage.getItem('jwtToken');
   const adminIdx = sessionStorage.getItem('adminIdx');
   const [groupData, setGroupData] = useState([]);
@@ -110,8 +112,8 @@ const Groups = () => {
   };
 
   useEffect(() => {
-    fetchGroups(jwtToken, adminIdx, 1, 10);
-  }, []);
+    fetchGroups(jwtToken, adminIdx, 1, 100);
+  }, [modal, createModal]);
 
   const onClickForModal = (idx) => {
     setModal((current) => !current);
@@ -121,6 +123,11 @@ const Groups = () => {
       console.log(idx);
     }
   };
+
+  const onClickForCreateModal = () => {
+    setCreateModal((current) => !current);
+  };
+
   return (
     <StyledAttendanceBody>
       <div className="attend_header">
@@ -133,7 +140,7 @@ const Groups = () => {
           <div className="attend_header_textBtn_bar">|</div>
           <TextBtn className="textBtn_off">표로 보기</TextBtn>
           <div className="addBtn">
-            <EventButton text={'추가하기 +'} />
+            <EventButton onClick={onClickForCreateModal} text={'추가하기 +'} />
           </div>
         </div>
       </div>
@@ -145,7 +152,6 @@ const Groups = () => {
                 subTitle={elem.groupCategory}
                 title={elem.groupName}
                 onClickForDetail={() => {
-                  console.log('ho');
                   return onClickForModal(elem.groupIdx);
                 }}
                 onClickForGroup={null}
@@ -162,7 +168,21 @@ const Groups = () => {
       {
         modal && (
           // <div>Hi</div>
-          <GroupModal groupIdx={groupId} onClick={onClickForModal} />
+          <GroupModal
+            groupIdx={groupId}
+            onClick={onClickForModal}
+            isUpdate={false}
+          />
+        ) //기계역할
+      }
+      {
+        createModal && (
+          // <div>Hi</div>
+          <GroupCreaateModal
+            groupIdx={groupId}
+            onClick={onClickForCreateModal}
+            isUpdate={false}
+          />
         ) //기계역할
       }
     </StyledAttendanceBody>

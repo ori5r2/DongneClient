@@ -1,26 +1,25 @@
 import styled from 'styled-components';
-import importImg from '../styles/importImg';
-import palette from '../styles/pallete';
-import Card from './Card';
-import data from '../data';
+import importImg from '../../styles/importImg';
+import palette from '../../styles/pallete';
+import Card from '../Card';
 import { useEffect, useState } from 'react';
-import AttendModal from './AttendModal';
+import AttendModal from '../AttendModal';
 import {
   Route,
   useHistory,
   useLocation,
   useRouteMatch,
 } from 'react-router-dom';
-import EventButton from './EventButton';
-import client from '../axiosConfig';
-import ScheduleCreateModal from './modals/ScheduleCreateModal';
+import EventButton from '../EventButton';
+import client from '../../axiosConfig';
+import UserScheduleModal from '../modals/UserScheduleModal';
 const StyledAttendanceBody = styled.div`
   /* position: relative; */
   width: inherit;
   margin-top: 3.75rem;
   margin-left: 3.25rem;
   margin-right: 3rem;
-  font-family: 'Pretendard Medium';
+  font-family: 'Pretendard Regular';
   .attend_header {
     display: flex;
     align-items: center;
@@ -61,8 +60,7 @@ const StyledAttendanceBody = styled.div`
   }
   .textBtn_off {
     color: ${palette[1][2]};
-    font-family: 'Pretendard Medium
-';
+    font-family: 'Pretendard Regular';
   }
   .addBtn {
     margin-left: 2.5rem;
@@ -85,23 +83,24 @@ const TextBtn = styled.button`
   font-size: 1.25rem;
 `;
 
-const GroupSchedules = () => {
+const UserGroupSchedules = () => {
   const match = useRouteMatch();
   const history = useHistory();
   const groupIdx = match.params.id;
+  const adminIdx2 = 12;
   const location = useLocation();
   const [modal, setModal] = useState(false);
-  const [createModal, setCreateModal] = useState(false);
   const jwtToken = sessionStorage.getItem('jwtToken');
-  const adminIdx2 = sessionStorage.getItem('adminIdx');
+  const userIdx = sessionStorage.getItem('userIdx');
   const [success, setSuccess] = useState(false);
   const [empty, setEmpty] = useState(false);
-  const [grouoSuccess, setgrouoSuccess] = useState(false);
+  const [groupSuccess, setGroupSuccess] = useState(false);
   const [schedules, setSchedules] = useState(false);
   const [scheduleIdx, setScheduleIdx] = useState(false);
   const [groupTitle, setGroupTitle] = useState('');
   const [groupDetail, setgroupDetail] = useState({});
 
+  console.log('나는,', userIdx, jwtToken);
   const onClickBack = () => {
     history.goBack();
   };
@@ -109,50 +108,47 @@ const GroupSchedules = () => {
     setModal((current) => !current);
     setScheduleIdx(idx);
   };
-
-  const onClickForCreateBtn = () => {
-    setCreateModal((current) => !current);
-  };
-
   useEffect(() => {
     const fetchGroupDetail = async (jwt, adminIdx) => {
       await client
-        .get('/admin/group/info', {
+        .get('/user/group/info', {
           headers: {
             'x-access-token': jwt,
           },
           params: {
             adminIdx: adminIdx,
             groupIdx: groupIdx,
+            userIdx: userIdx,
           },
         })
         .then((response) => {
+          console.log('Hi2222', response);
           setgroupDetail(response.data.result);
           if (!response.data.isSuccess) {
-            alert(response.data.message);
+            alert('at1', response.data.message);
           }
         })
         .catch(function (error) {
-          alert(error);
+          alert('at1', error);
         });
     };
-    if (grouoSuccess) {
+    if (groupSuccess) {
       setGroupTitle(groupDetail[0].groupName);
     } else {
       fetchGroupDetail(jwtToken, adminIdx2);
-      setgrouoSuccess(true);
+      setGroupSuccess(true);
     }
   }, [groupDetail]);
 
   useEffect(() => {
-    const fetchSchedule = async (jwt, adminIdx) => {
+    const fetchSchedule = async (jwt, userIdx) => {
       await client
-        .get('/admin/schedule/list', {
+        .get('/user/schedule/list', {
           headers: {
             'x-access-token': jwt,
           },
           params: {
-            adminIdx: adminIdx,
+            userIdx: userIdx,
             groupIdx: groupIdx,
             curPage: 1,
             pageSize: 100,
@@ -160,7 +156,9 @@ const GroupSchedules = () => {
         })
         .then(function (response) {
           setSchedules(response.data.result);
+          console.log('HI!!::', response);
           if (!response.data.isSuccess) {
+            console.log();
             alert(response.data.message);
           }
         })
@@ -172,7 +170,7 @@ const GroupSchedules = () => {
     if (success) {
       console.log(schedules);
     } else {
-      fetchSchedule(jwtToken, adminIdx2);
+      fetchSchedule(jwtToken, userIdx);
 
       if (!schedules.schedule) {
         setSuccess(false);
@@ -185,7 +183,7 @@ const GroupSchedules = () => {
         }
       }
     }
-  }, [schedules, createModal, modal]);
+  }, [schedules]);
   return (
     <StyledAttendanceBody>
       <div className="attend_header">
@@ -194,15 +192,12 @@ const GroupSchedules = () => {
             <img src={importImg.attendBackChevron}></img>
           </TextBtn>
           <img src={importImg.attendCheck} />
-          <div>{grouoSuccess ? `${groupTitle} - 출결관리` : '- 출결관리'}</div>
+          <div>{groupSuccess ? `${groupTitle} - 출결관리` : '- 출결관리'}</div>
         </div>
         <div className="attend_header__right">
           <TextBtn>카드로 보기</TextBtn>
           <div className="attend_header_textBtn_bar">|</div>
           <TextBtn className="textBtn_off">표로 보기</TextBtn>
-          <div className="addBtn">
-            <EventButton onClick={onClickForCreateBtn} text={'추가하기 +'} />
-          </div>
         </div>
       </div>
       <div className="attend_body">
@@ -216,6 +211,8 @@ const GroupSchedules = () => {
               onClickForDetail={() => onClickForModal(elem.scheduleIdx)}
               isGroupDetail={false}
               onClickForGroup={null}
+              isAttend={elem.attendanceStatus === 1}
+              isForUser={true}
             />
           ))
         ) : (
@@ -225,7 +222,7 @@ const GroupSchedules = () => {
 
       {
         modal === true ? (
-          <AttendModal
+          <UserScheduleModal
             groupIdx={groupIdx}
             groupTitle={groupTitle}
             scheduleIdx={scheduleIdx}
@@ -233,17 +230,8 @@ const GroupSchedules = () => {
           />
         ) : null //기계역할
       }
-      {
-        createModal === true ? (
-          <ScheduleCreateModal
-            groupIdx={groupIdx}
-            groupTitle={groupTitle}
-            onClick={onClickForCreateBtn}
-          />
-        ) : null //기계역할
-      }
     </StyledAttendanceBody>
   );
 };
 
-export default GroupSchedules;
+export default UserGroupSchedules;

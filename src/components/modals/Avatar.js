@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../styles/pallete';
 import importImg from '../../styles/importImg';
@@ -7,6 +7,7 @@ const StyledCard = styled.button`
   box-sizing: border-box;
   width: 3.75rem;
   height: 7rem;
+  position: relative;
 
   background-color: transparent;
   border: none;
@@ -27,6 +28,7 @@ const StyledCard = styled.button`
   /* box-shadow: inset 0rem 0rem 0.625rem rgba(200, 200, 200, 0.1); */
 
   .UserImg {
+    position: relative;
     box-sizing: border-box;
     width: 3.75rem;
     height: 3.75rem;
@@ -48,6 +50,35 @@ const StyledCard = styled.button`
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+  .screen {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+    width: inherit;
+    height: inherit;
+    background-color: white;
+    opacity: 1;
+  }
+  .onScreen {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+    width: inherit;
+    height: inherit;
+    background-color: white;
+    opacity: 0.2;
+  }
+  .avatarCheck {
+    position: absolute;
+    top: 20%;
+    left: 25%;
+    border: none;
+    opacity: 1;
+  }
 
   ${(props) =>
     props.fullWidth &&
@@ -63,21 +94,32 @@ const StyledCard = styled.button`
 
 const Avatar = ({
   UserName,
-  onClick,
+  // onClick,
   UserCode,
   UserTeam,
+  checked,
   img_src,
   to,
   history,
   ...rest
 }) => {
+  const [checken, setChecken] = useState(false);
+  useEffect(() => {
+    setChecken((cur) => !cur);
+  }, [checked]);
+
   return (
-    <StyledCard type="button" onClick={onClick} {...rest}>
-      <div className="UserImg">
-        <img src={importImg.membersProfile} />
+    <StyledCard type="button" {...rest}>
+      <div className={checken ? 'screen' : 'onScreen'}>
+        <div className="UserImg">
+          <img src={importImg.membersProfile} />
+        </div>
+        <span className="UserName">{UserName}</span>
+        <span className="UserTeam">{UserTeam}</span>
       </div>
-      <span className="UserName">{UserName}</span>
-      <span className="UserTeam">{UserTeam}</span>
+      {checken ? null : (
+        <img className="avatarCheck" src={importImg.attendAvatarCheck} />
+      )}
     </StyledCard>
   );
 };

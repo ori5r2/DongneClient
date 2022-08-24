@@ -216,309 +216,50 @@ const ModalOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 999;
 `;
-const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
+const UserGroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
   const history = useHistory();
   const location = useLocation();
   const [isAbled, setIsAbled] = useState(false);
   const [success, setSuccess] = useState(false);
   const [memberSuccess, setMemberSuccess] = useState(false);
   const jwtToken = sessionStorage.getItem('jwtToken');
-  const adminIdx2 = sessionStorage.getItem('adminIdx');
+  const userIdx = sessionStorage.getItem('userIdx');
+  const adminIdx = 12;
   const [groupTitle, setGroupTitle] = useState('');
   const [groupCategory, setGroupCategory] = useState('');
   const [groupIntroduction, setGroupIntroduction] = useState('');
   const [groupMembers, setGroupMembers] = useState([]);
-  const [che, setChe] = useState(false);
-  console.log(jwtToken, adminIdx2);
+  console.log(jwtToken, userIdx);
 
-  const [allMembers, setAllMembers] = useState([]);
   const [allMemberSuccess, setAllMemberSuccess] = useState(false);
-  const [initMemberSuccess, setInitMemberSuccess] = useState({});
+
   const [groupDetail, setgroupDetail] = useState({});
-  const [buttonSuccess, setButtonSuccess] = useState(false);
-  const [buttonSuccess2, setButtonSuccess2] = useState(false);
-  const [deleteBS, setDeleteBS] = useState(false);
-  const [changedNumber, setChangedNumber] = useState(null);
-  const [changedNumber2, setChangedNumber2] = useState(null);
 
-  const [settingSuccess, setSettingSuccess] = useState(false);
-  const [settingSuccess2, setSettingSuccess2] = useState(false);
-
-  const [addedMembers, setAddedMembers] = useState([]);
-  const [minusedMembers, setMinusedMembers] = useState([]);
-
-  const [deleteSuccess, setDeleteSuccess] = useState(false);
   const onChangeIntroduction = (e) => {
     setGroupIntroduction(e.target.value);
   };
   const onChangeCategory = (e) => setGroupCategory(e.target.value);
   const onChangeName = (e) => setGroupTitle(e.target.value);
 
-  const onClickUpdate = () => {
-    setIsAbled((cur) => true);
-  };
+  const onClickAvatar = (e, userId) => {};
 
-  const deleteGroup = async (jwt, adminIdx) => {
-    await client
-      .patch(
-        '/admin/group/delete',
-        {},
-        {
-          headers: {
-            'x-access-token': jwt,
-          },
-          params: {
-            adminIdx: adminIdx,
-            groupIdx: groupIdx,
-          },
-        },
-      )
-      .then((response) => {
-        if (!response.data.isSuccess) {
-          alert(response.data.message);
-        } else {
-          setDeleteSuccess(true);
-          alert('그룹 삭제에 성공했습니다.');
-        }
-      })
-      .catch(function (error) {
-        alert(error);
-      });
-  };
-  const onClickDelete = () => {
-    setDeleteBS(true);
-  };
-
-  useEffect(() => {
-    if (!deleteSuccess && deleteBS) {
-      deleteGroup(jwtToken, adminIdx2);
-    }
-  }, [deleteBS, deleteSuccess]);
-
-  useEffect(() => {
-    if (changedNumber) {
-      setAddedMembers(changedNumber);
-      setButtonSuccess2(true);
-      setSettingSuccess(true);
-    }
-  }, [changedNumber]);
-
-  useEffect(() => {
-    if (changedNumber2) {
-      setMinusedMembers(changedNumber2);
-      setSettingSuccess2(true);
-    }
-  }, [changedNumber2]);
-  // 1. 추가된 멤버: 결과 애들 중에 initMemberSuccess에 있던 애들이 아닌 애들
-  useEffect(() => {
-    const arr = [];
-    const arr2 = [];
-    const initKeys = Object.keys(initMemberSuccess);
-    if (buttonSuccess) {
-      for (var key in allMemberSuccess) {
-        if (allMemberSuccess[key] === true && !initKeys.includes(key)) {
-          arr.push(key);
-        }
-      }
-      setChangedNumber(arr);
-      setButtonSuccess(false);
-    } else {
-    }
-  }, [buttonSuccess]);
-
-  useEffect(() => {
-    const arr2 = [];
-    const initKeys = Object.keys(initMemberSuccess);
-    if (buttonSuccess2) {
-      for (var item of initKeys) {
-        if (allMemberSuccess[item] === false) {
-          arr2.push(item);
-        }
-      }
-      setChangedNumber2(arr2);
-      setButtonSuccess2(false);
-    } else {
-    }
-  }, [buttonSuccess2]);
-
-  const onClickSave = async () => {
-    setButtonSuccess(true);
-    //2. 해제된 멤버: 있던 애들중에 현재 false인 애들
-    await patchGroupData(jwtToken, adminIdx2);
-  };
-
-  useEffect(() => {
-    if (settingSuccess) {
-      insertGroupMembers(jwtToken, adminIdx2);
-    }
-  }, [settingSuccess]);
-  useEffect(() => {
-    if (settingSuccess2) {
-      deleteGroupMembers(jwtToken, adminIdx2);
-    }
-  }, [settingSuccess2]);
-  const insertGroupMembers = async (jwt, adminIdx) => {
-    await client
-      .post(
-        '/admin/group/insertMembers',
-        {
-          userIdx: addedMembers,
-        },
-        {
-          headers: {
-            'x-access-token': jwt,
-          },
-          params: {
-            adminIdx: adminIdx,
-            groupIdx: groupIdx,
-          },
-        },
-      )
-      .then((response) => {
-        if (!response.data.isSuccess) {
-          alert(response.data.message);
-        } else {
-        }
-      })
-      .catch(function (error) {
-        alert(error);
-      });
-  };
-
-  const deleteGroupMembers = async (jwt, adminIdx) => {
-    await client
-      .patch(
-        '/admin/group/deleteMembers',
-        {
-          userIdx: minusedMembers,
-        },
-        {
-          headers: {
-            'x-access-token': jwt,
-          },
-          params: {
-            adminIdx: adminIdx,
-            groupIdx: groupIdx,
-          },
-        },
-      )
-      .then((response) => {
-        if (!response.data.isSuccess) {
-          alert(response.data.message);
-        }
-      })
-      .catch(function (error) {
-        alert(error);
-      });
-  };
-
-  const patchGroupData = async (jwt, adminIdx) => {
-    await client
-      .patch(
-        '/admin/group/info',
-        {
-          groupName: groupTitle,
-          groupIntroduction: groupIntroduction,
-          groupCategory: groupCategory,
-        },
-        {
-          headers: {
-            'x-access-token': jwt,
-          },
-          params: {
-            adminIdx: adminIdx,
-            groupIdx: groupIdx,
-          },
-        },
-      )
-      .then((response) => {
-        if (!response.data.isSuccess) {
-          alert(response.data.message);
-        } else {
-          alert('그룹 정보 수정에 성공했습니다.');
-        }
-      })
-      .catch(function (error) {
-        alert(error);
-      });
-  };
-
-  const updateMembers = (idx) => {
-    setAllMemberSuccess((state) => {
-      return { ...state, [idx]: false };
-    });
-  };
-
-  const onClickAvatar = (e, userId) => {
-    setAllMemberSuccess((state) => {
-      return { ...state, [userId]: !state[userId] };
-    });
-  };
-
-  const updateGroupCheck = (userIdx) => {
-    setAllMemberSuccess((state) => {
-      return { ...state, [userIdx]: true };
-    });
-  };
-
-  const updateInitState = (userIdx) => {
-    setInitMemberSuccess((state) => {
-      return { ...state, [userIdx]: true };
-    });
-  };
-
-  /**
-   * 전체 그룹 멤버 호출
-   */
   useEffect(() => {
     const fetchGroupMembers = async (jwt, adminIdx) => {
       await client
-        .get('/admin/member', {
+        .get('/user/group/members', {
           headers: {
             'x-access-token': jwt,
           },
           params: {
             adminIdx: adminIdx,
             groupIdx: groupIdx,
+            userIdx,
             page: 1,
             pageSize: 100,
           },
         })
         .then((response) => {
-          setAllMembers(response.data.result.pagingRetrieveMemberListResult);
-          if (!response.data.isSuccess) {
-            alert(response.data.message);
-          }
-        })
-        .catch(function (error) {
-          alert(error);
-        });
-    };
-    if (allMemberSuccess) {
-      allMembers.map((elem) => {
-        return updateMembers(elem.userIdx);
-      });
-    } else {
-      fetchGroupMembers(jwtToken, adminIdx2);
-      setAllMemberSuccess(true);
-    }
-  }, [allMembers]);
-
-  useEffect(() => {
-    const fetchGroupMembers = async (jwt, adminIdx) => {
-      await client
-        .get('/admin/group/members', {
-          headers: {
-            'x-access-token': jwt,
-          },
-          params: {
-            adminIdx: adminIdx,
-            groupIdx: groupIdx,
-            page: 1,
-            pageSize: 10,
-          },
-        })
-        .then((response) => {
+          console.log('1,', response);
           setGroupMembers(
             response.data.result.pagingRetrieveGroupMembersResult,
           );
@@ -531,12 +272,8 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
         });
     };
     if (memberSuccess) {
-      groupMembers.map((elem) => {
-        updateInitState(elem.userIdx);
-        return updateGroupCheck(elem.userIdx);
-      });
     } else {
-      fetchGroupMembers(jwtToken, adminIdx2);
+      fetchGroupMembers(jwtToken, adminIdx);
       setMemberSuccess(true);
     }
   }, [groupMembers]);
@@ -544,13 +281,15 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
   useEffect(() => {
     const fetchGroupDetail = async (jwt, adminIdx) => {
       await client
-        .get('/admin/group/info', {
+        .get('/user/group/info', {
           headers: {
             'x-access-token': jwt,
           },
           params: {
             adminIdx: adminIdx,
             groupIdx: groupIdx,
+            userIdx: userIdx,
+            adminIdx: adminIdx,
           },
         })
         .then((response) => {
@@ -568,7 +307,7 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
       setGroupCategory(groupDetail[0].groupCategory);
       setGroupTitle(groupDetail[0].groupName);
     } else {
-      fetchGroupDetail(jwtToken, adminIdx2);
+      fetchGroupDetail(jwtToken, adminIdx);
       setSuccess(true);
     }
   }, [groupDetail]);
@@ -630,20 +369,7 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
                           />
                         </div>
                       ))
-                    : allMembers.map((elem) => (
-                        <div
-                          key={elem.userIdx}
-                          onClick={(e) => onClickAvatar(e, elem.userIdx)}
-                          className="eachCard"
-                        >
-                          <Avatar
-                            UserName={elem.name}
-                            UserCode={elem.school}
-                            UserTeam={elem.teamName}
-                            checked={allMemberSuccess[elem.userIdx]}
-                          />
-                        </div>
-                      ))}
+                    : null}
                 </div>
                 <SmokeBar></SmokeBar>
               </div>
@@ -652,16 +378,10 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
           <div className="buttons">
             <div className="eventButton">
               <EventButton
-                text={isAbled ? '저장하기' : '수정하기'}
-                onClick={isAbled ? onClickSave : onClickUpdate}
+                text={isAbled ? '저장하기' : '닫기'}
+                onClick={isAbled ? null : onClick}
               />
             </div>
-
-            {isAbled ? null : (
-              <div className="eventButton">
-                <EventButton text={'삭제하기'} onClick={onClickDelete} />
-              </div>
-            )}
           </div>
         </div>
       </StyledModal>
@@ -669,4 +389,4 @@ const GroupModal = ({ groupIdx, visible, onClick, isUpdate }) => {
   );
 };
 
-export default GroupModal;
+export default UserGroupModal;

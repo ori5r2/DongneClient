@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import palette from '../styles/pallete';
-import data from '../data';
-import EventButton from './EventButton';
-import importImg from '../styles/importImg';
-import membersData from '../../src/membersData';
-import MembersCard from './MembersCard';
-import Avatar from './modals/Avatar';
-import client from '../axiosConfig';
+import palette from '../../styles/pallete';
+import data from '../../data';
+import EventButton from '../EventButton';
+import importImg from '../../styles/importImg';
+import membersData from '../../../src/membersData';
+import MembersCard from '../MembersCard';
+import Avatar from '../modals/Avatar';
+import client from '../../axiosConfig';
 
 const StyledModal = styled.div`
   position: fixed;
@@ -93,8 +93,8 @@ const StyledModal = styled.div`
     width: 4.1875rem;
     white-space: nowrap;
   }
-  .attended_members > span {
-    width: 4.1875rem;
+  .group_members > span {
+    width: 5.8rem;
     white-space: nowrap;
   }
   input {
@@ -151,8 +151,8 @@ const StyledModal = styled.div`
   }
   .members_body {
     width: 28rem;
-    gap: 0.0625rem;
-    height: 10.625rem;
+    gap: 1px;
+    height: 23.1875rem;
     margin-left: 1.125rem;
     display: flex;
     flex-wrap: wrap;
@@ -165,14 +165,14 @@ const StyledModal = styled.div`
 
   .members_body::-webkit-scrollbar,
   .members_body::-webkit-scrollbar-thumb {
-    width: 1.625rem;
-    border-radius: 0.8125rem;
+    width: 26px;
+    border-radius: 13px;
     background-clip: padding-box;
-    border: 0.625rem solid transparent;
+    border: 10px solid transparent;
   }
 
   .members_body::-webkit-scrollbar-thumb {
-    box-shadow: inset 0 0 0 0.625rem;
+    box-shadow: inset 0 0 0 10px;
   }
   .members_body:hover {
     color: rgba(0, 0, 0, 0.3);
@@ -183,7 +183,7 @@ const StyledModal = styled.div`
     /* margin-right: 0.4rem; */
     margin-top: 0rem;
   }
-  .attended_members {
+  .group_members {
     position: relative;
     display: flex;
     width: inherit;
@@ -245,17 +245,11 @@ const ModalOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 999;
 `;
-const AttendModal = ({
-  groupIdx,
-  groupTitle,
-  scheduleIdx,
-  visible,
-  onClick,
-}) => {
-  const [success, setSuccess] = useState(false);
+const ScheduleCreateModal = ({ onClick, groupIdx, groupTitle }) => {
+  const [success, setSuccess] = useState(true);
   const jwtToken = sessionStorage.getItem('jwtToken');
   const adminIdx2 = sessionStorage.getItem('adminIdx');
-  const [isAbled, setIsAbled] = useState(false);
+  const [isAbled, setIsAbled] = useState(true);
   const [scheduleTitle, setScheduleTitle] = useState('');
   const [scheduleDate, setScheduleDate] = useState('');
   const [scheduleCode, setScheduleCode] = useState('');
@@ -266,78 +260,29 @@ const AttendModal = ({
   const [schedulePlace, setSchedulePlace] = useState('');
   console.log(jwtToken, adminIdx2);
   const [scheduleDetail, setScheduleDetail] = useState({});
+  const [allMembers, setAllMembers] = useState([]);
 
-  const [attendMemberSuccess, setAttendMemberSuccess] = useState(false);
-  const [attendMembers, setAttendMembers] = useState([]);
-
-  const [absentMemberSuccess, setAbsentMemberSuccess] = useState(false);
+  const [fetchGroupMemberSuccess, setFetchGroupMemberSuccess] = useState(false);
+  const [btnSuccess, setbtnSuccess] = useState(false);
   const [absentMembers, setAbsentMembers] = useState([]);
-  const [deleteBS, setDeleteBS] = useState(false);
-  const [deleteSuccess, setDeleteSuccess] = useState(false);
 
-  const [saveSuccss, setSaveSuccss] = useState(false);
   //함수 구간
 
   /**
-   * 스케쥴 삭제
-   *
-   *
+   * 스케쥴 저장
    */
-
-  const deleteSchedule = async (jwt, adminIdx) => {
+  const saveScheduleData = async (jwt, adminIdx) => {
     await client
-      .patch(
-        `/admin/schedule/${scheduleIdx}/status`,
-        { adminIdx: adminIdx },
+      .post(
+        '/admin/schedule',
         {
-          headers: {
-            'x-access-token': jwt,
-          },
-        },
-      )
-      .then((response) => {
-        if (!response.data.isSuccess) {
-          alert(response.data.message);
-        } else {
-          setDeleteSuccess(true);
-          alert('스케줄 삭제에 성공했습니다.');
-        }
-      })
-      .catch(function (error) {
-        alert(error);
-      });
-  };
-  const onClickDelete = () => {
-    setDeleteBS(true);
-  };
-
-  useEffect(() => {
-    if (!deleteSuccess && deleteBS) {
-      deleteSchedule(jwtToken, adminIdx2);
-    }
-  }, [deleteBS, deleteSuccess]);
-
-  const onClickUpdate = () => {
-    setIsAbled((cur) => true);
-  };
-
-  const onClickSave = () => {
-    setSaveSuccss(true);
-  };
-
-  const patchScheduleData = async (jwt, adminIdx) => {
-    await client
-      .patch(
-        `/admin/schedule/${scheduleIdx}`,
-        {
+          groupIdx: groupIdx,
           scheduleDate: scheduleDate,
           init_time: scheduleStartTime,
           end_time: scheduleEndTime,
           introduction: scheduleDescription,
           place: schedulePlace,
           scheduleName: scheduleTitle,
-          code: scheduleCode,
-          etc: scheduleEtc,
           adminIdx: adminIdx2,
         },
         {
@@ -350,7 +295,7 @@ const AttendModal = ({
         if (!response.data.isSuccess) {
           alert(response.data.message);
         } else {
-          alert('스케줄 정보 수정에 성공했습니다.');
+          alert('스케줄 생성에 성공했습니다.');
         }
       })
       .catch(function (error) {
@@ -359,119 +304,14 @@ const AttendModal = ({
   };
 
   useEffect(() => {
-    if (saveSuccss) {
-      patchScheduleData(jwtToken, adminIdx2);
+    if (btnSuccess) {
+      saveScheduleData(jwtToken, adminIdx2);
     }
-  }, [saveSuccss]);
+  }, [btnSuccess]);
 
-  //출석 멤버 호출
-  useEffect(() => {
-    const fetchGroupMembers = async (jwt, adminIdx) => {
-      await client
-        .get('/admin/attendance', {
-          headers: {
-            'x-access-token': jwt,
-          },
-          params: {
-            adminIdx: adminIdx,
-            scheduleIdx: scheduleIdx,
-            groupIdx: groupIdx,
-            curPage: 1,
-            pageSize: 100,
-          },
-        })
-        .then((response) => {
-          setAttendMembers(response.data.result.attendList);
-          console.log('출석멤버 결과', response.data.result.attendList);
-          if (!response.data.isSuccess) {
-            alert(response.data.message);
-          }
-        })
-        .catch(function (error) {
-          alert(error);
-        });
-    };
-    if (attendMemberSuccess) {
-      //여기서 비즈니스
-    } else {
-      fetchGroupMembers(jwtToken, adminIdx2);
-      setAttendMemberSuccess(true);
-    }
-  }, [attendMembers]);
-
-  //결석 멤버 호출
-  useEffect(() => {
-    const fetchGroupMembers = async (jwt, adminIdx) => {
-      await client
-        .get('/admin/attendance/absence', {
-          headers: {
-            'x-access-token': jwt,
-          },
-          params: {
-            adminIdx: adminIdx,
-            scheduleIdx: scheduleIdx,
-            groupIdx: groupIdx,
-            curPage: 1,
-            pageSize: 100,
-          },
-        })
-        .then((response) => {
-          console.log('결석멤버 결과', response.data.result.absenceList);
-          setAbsentMembers(response.data.result.absenceList);
-          if (!response.data.isSuccess) {
-            alert(response.data.message);
-          }
-        })
-        .catch(function (error) {
-          alert(error);
-        });
-    };
-    if (absentMemberSuccess) {
-      //여기서 비즈니스
-    } else {
-      fetchGroupMembers(jwtToken, adminIdx2);
-      setAbsentMemberSuccess(true);
-    }
-  }, [absentMembers]);
-
-  useEffect(() => {
-    const fetchScheduleDetail = async (jwt, adminIdx) => {
-      await client
-        .get('/admin/schedule', {
-          headers: {
-            'x-access-token': jwt,
-          },
-          params: {
-            adminIdx: adminIdx,
-            scheduleIdx: scheduleIdx,
-          },
-        })
-        .then(function (response) {
-          setScheduleDetail(response.data.result[0]);
-          console.log('result: ', response);
-          if (!response.data.isSuccess) {
-            alert(response.data.message);
-          }
-        })
-        .catch(function (error) {
-          alert(error);
-        });
-    };
-    if (success) {
-      //디테일한 정보 여기서 set
-      setScheduleTitle(scheduleDetail.scheduleName);
-      setScheduleDate(scheduleDetail.scheduleDate);
-      setScheduleCode(scheduleDetail.attendanceCode);
-      setScheduleStartTime(scheduleDetail.init_time);
-      setScheduleEndTime(scheduleDetail.end_time);
-      setScheduleDescription(scheduleDetail.introduction);
-      setSchedulePlace(scheduleDetail.place);
-      setScheduleEtc(scheduleDetail.etc);
-    } else {
-      fetchScheduleDetail(jwtToken, adminIdx2);
-      setSuccess(true);
-    }
-  }, [scheduleDetail]);
+  const onClickSave = async () => {
+    setbtnSuccess(true);
+  };
 
   const onChangeScheduleTitle = (e) => setScheduleTitle(e.target.value);
   const onChangeScheduleDate = (e) => setScheduleDate(e.target.value);
@@ -485,15 +325,49 @@ const AttendModal = ({
   const onChangeSchedulePlace = (e) => setSchedulePlace(e.target.value);
   console.log('res', scheduleDetail);
   console.log('members', absentMembers);
+
+  /**
+   * 전체 그룹원 호출
+   */
+
+  useEffect(() => {
+    const fetchAllClubMembers = async (jwt, adminIdx) => {
+      await client
+        .get('/admin/group/members', {
+          headers: {
+            'x-access-token': jwt,
+          },
+          params: {
+            groupIdx: groupIdx,
+            adminIdx: adminIdx,
+            page: 1,
+            pageSize: 100,
+          },
+        })
+        .then((response) => {
+          setAllMembers(response.data.result.pagingRetrieveGroupMembersResult);
+          if (!response.data.isSuccess) {
+            alert(response.data.message);
+          }
+        })
+        .catch(function (error) {
+          alert(error);
+        });
+    };
+    if (fetchGroupMemberSuccess) {
+    } else {
+      fetchAllClubMembers(jwtToken, adminIdx2);
+      setFetchGroupMemberSuccess(true);
+    }
+  }, [allMembers]);
+
   return (
     <>
-      <ModalOverlay visible={visible} />
+      <ModalOverlay />
       <StyledModal>
         <div className="content-area">
           <div className="header">
-            <div>
-              {success ? `${groupTitle} - ${scheduleDetail.scheduleName}` : ''}
-            </div>
+            <div>{true ? `${groupTitle} - 일정 생성` : ''}</div>
             <TextBtn onClick={onClick}>
               <img src={importImg.modalClose} />
             </TextBtn>
@@ -591,33 +465,16 @@ const AttendModal = ({
               <div className="eventButton"></div>
             </form>
             <form className="body__right">
-              <div className="attended_members">
-                <span>출석 회원</span>
+              <div className="group_members">
+                <span>그룹 전체 회원</span>
                 <div className="members_body">
-                  {attendMembers.map((elem) => (
-                    <div className="eachCard">
+                  {allMembers.map((elem) => (
+                    <div key={elem.userIdx} className="eachCard">
                       <Avatar
                         UserName={elem.name}
                         UserCode={elem.teamName}
                         UserTeam={elem.teamName}
-                        // onClick={onClickForModal}
-                      />
-                    </div>
-                  ))}
-                </div>
-                <SmokeBar></SmokeBar>
-              </div>
-
-              <div className="not_attended attended_members">
-                <span>결석 회원</span>
-                <div className="members_body">
-                  {absentMembers.map((elem) => (
-                    <div className="eachCard">
-                      <Avatar
-                        UserName={elem.name}
-                        UserCode={elem.teamName}
-                        UserTeam={elem.teamName}
-                        // onClick={onClickForModal}
+                        // checked={!clubMembersStatus[elem.userIdx]}
                       />
                     </div>
                   ))}
@@ -631,13 +488,13 @@ const AttendModal = ({
             <div className="eventButton">
               <EventButton
                 text={isAbled ? '저장하기' : '수정하기'}
-                onClick={isAbled ? onClickSave : onClickUpdate}
+                onClick={isAbled ? onClickSave : null}
               />
             </div>
 
             {isAbled ? null : (
               <div className="eventButton">
-                <EventButton onClick={onClickDelete} text={'삭제하기'} />
+                <EventButton text={'삭제하기'} />
               </div>
             )}
           </div>
@@ -647,4 +504,4 @@ const AttendModal = ({
   );
 };
 
-export default AttendModal;
+export default ScheduleCreateModal;

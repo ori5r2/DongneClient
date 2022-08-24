@@ -19,6 +19,7 @@ import event from './imgs/icon/Event.png';
 import money from './imgs/icon/Money.png';
 import line from './imgs/background/Line 9.png';
 import dongne from './imgs/background/dongne-profile.png';
+import attendAvatarCheck from './imgs/icon/attend_avatar_check.png';
 
 export const importImg = {
   calenderIcon,
@@ -42,6 +43,7 @@ export const importImg = {
   modalClose,
   line,
   dongne,
+  attendAvatarCheck,
 };
 
 export default importImg;
